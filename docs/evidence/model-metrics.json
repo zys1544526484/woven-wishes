@@ -1,0 +1,20 @@
+{
+  "modelVersion": "wish-classifier-1.0.0-20260824",
+  "featureCount": 8192,
+  "trainRows": 1440,
+  "heldOutRows": 360,
+  "intentRows": 300,
+  "fallbackRows": 60,
+  "macroF1": 0.9133,
+  "macroF1Zh": 0.9666,
+  "macroF1En": 0.8597,
+  "fallbackRecallAt050": 1.0,
+  "meanIntentConfidence": 0.6692,
+  "meanFallbackConfidence": 0.3012,
+  "thresholds": {
+    "fallbackBelow": 0.5,
+    "highConfidenceAt": 0.72,
+    "highConfidenceMargin": 0.15
+  },
+  "note": "Template-assisted synthetic draft corpus; rows marked template-reviewed require final human language review before formal submission."
+}

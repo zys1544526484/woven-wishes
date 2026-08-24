@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-share/
+coverage/
+test-results/
+playwright-report/
+.playwright-cli/
+release/
+deliverables/*.zip
+*.log
+*.tsbuildinfo
+.env.local
+.env.production.local

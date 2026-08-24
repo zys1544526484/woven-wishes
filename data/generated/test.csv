@@ -1,0 +1,361 @@
+﻿id,split,locale,label,secondary,is_fallback,text,review_status
+test-001,test-single,zh,safety,,0,下一段旅程，愿有岁岁康宁，让时间见证。,gold-template-reviewed
+test-002,test-single,zh,reunion,,0,把心里的期盼写成与故友重逢。,gold-template-reviewed
+test-003,test-single,en,longevity,,0,Let the road ahead bring growing old together.,gold-template-reviewed
+test-004,test-mixed,zh,reunion,longevity,0,把心里的期盼写成早日回家；更希望美好延续。,gold-template-reviewed
+test-005,test-fallback,zh,,,1,想一想再说 26,gold-template-reviewed
+test-006,test-fallback,zh,,,1,这句话没有明确愿望 17,gold-template-reviewed
+test-007,test-single,zh,longevity,,0,请让未来拥有美好延续。,gold-template-reviewed
+test-008,test-single,en,abundance,,0,"For the next chapter, I choose prosperity through the seasons, and may it arrive in time.",gold-template-reviewed
+test-009,test-single,en,longevity,,0,"For the next chapter, I choose family stories lasting generations.",gold-template-reviewed
+test-010,test-single,en,safety,,0,"I send my loved ones a calm life, a promise to myself.",gold-template-reviewed
+test-011,test-single,zh,joy,,0,若能许愿，我会选择心里明亮。,gold-template-reviewed
+test-012,test-mixed,en,reunion,safety,0,"A wish I carry is seeing those I miss, while carrying a calm life.",gold-template-reviewed
+test-013,test-single,en,reunion,,0,"A wish I carry is a joyful reunion, and may it arrive in time.",gold-template-reviewed
+test-014,test-mixed,zh,safety,longevity,0,我想把祝福留给家人：被温柔守护，还想把祝福送给情谊长久。,gold-template-reviewed
+test-015,test-single,en,safety,,0,"Let the road ahead bring peace at home, a promise to myself.",gold-template-reviewed
+test-016,test-single,en,joy,,0,"If I could make one wish: joy every day, within ordinary days.",gold-template-reviewed
+test-017,test-single,en,abundance,,0,A wish I carry is a plentiful life.,gold-template-reviewed
+test-018,test-mixed,en,reunion,joy,0,Let the road ahead bring meeting old friends again; I also hope for a playful life.,gold-template-reviewed
+test-019,test-mixed,en,reunion,joy,0,If I could make one wish: a festival together; I also hope for finding happiness.,gold-template-reviewed
+test-020,test-single,zh,longevity,,0,下一段旅程，愿有初心长存，在平凡日子里发生。,gold-template-reviewed
+test-021,test-single,en,abundance,,0,"If I could make one wish: abundant inspiration, witnessed by time.",gold-template-reviewed
+test-022,test-single,zh,safety,,0,我想把祝福留给家人：一路顺遂。,gold-template-reviewed
+test-023,test-single,en,courage,,0,"If I could make one wish: growing resilient, and may it arrive in time.",gold-template-reviewed
+test-024,test-fallback,zh,,,1,这句话没有明确愿望 2,gold-template-reviewed
+test-025,test-single,en,longevity,,0,"Let the road ahead bring many meaningful years, and may it arrive in time.",gold-template-reviewed
+test-026,test-single,en,abundance,,0,Let the road ahead bring abundant inspiration.,gold-template-reviewed
+test-027,test-fallback,zh,,,1,这句话没有明确愿望 47,gold-template-reviewed
+test-028,test-single,zh,safety,,0,把心里的期盼写成健康安稳，也是给自己的约定。,gold-template-reviewed
+test-029,test-mixed,zh,joy,reunion,0,请让未来拥有笑容常在，同时盼望再见想念的人。,gold-template-reviewed
+test-030,test-single,zh,longevity,,0,若能许愿，我会选择情谊长久，也是给自己的约定。,gold-template-reviewed
+test-031,test-single,en,reunion,,0,"For the next chapter, I choose our family reunites, and may it arrive in time.",gold-template-reviewed
+test-032,test-single,en,longevity,,0,"Let the road ahead bring a long healthy life, within ordinary days.",gold-template-reviewed
+test-033,test-single,zh,courage,,0,把心里的期盼写成成长得更坚韧，愿它如期而至。,gold-template-reviewed
+test-034,test-single,en,reunion,,0,"A wish I carry is coming home soon, and may it arrive in time.",gold-template-reviewed
+test-035,test-single,zh,joy,,0,把心里的期盼写成遇见好消息，也是给自己的约定。,gold-template-reviewed
+test-036,test-single,zh,safety,,0,若能许愿，我会选择出入平安，愿它如期而至。,gold-template-reviewed
+test-037,test-single,en,reunion,,0,Let the road ahead bring seeing those I miss.,gold-template-reviewed
+test-038,test-single,zh,safety,,0,请让未来拥有家人平安，在平凡日子里发生。,gold-template-reviewed
+test-039,test-single,zh,reunion,,0,把心里的期盼写成一家团圆，在平凡日子里发生。,gold-template-reviewed
+test-040,test-single,zh,abundance,,0,请让未来拥有家业兴旺。,gold-template-reviewed
+test-041,test-single,zh,joy,,0,下一段旅程，愿有笑容常在，也是给自己的约定。,gold-template-reviewed
+test-042,test-fallback,en,,,1,the train leaves at noon 40,gold-template-reviewed
+test-043,test-single,en,courage,,0,"I send my loved ones strength through storms, and may it arrive in time.",gold-template-reviewed
+test-044,test-mixed,en,courage,longevity,0,Let the road ahead bring overcoming this challenge; I also hope for family stories lasting generations.,gold-template-reviewed
+test-045,test-single,zh,abundance,,0,下一段旅程，愿有努力结出果实，愿它如期而至。,gold-template-reviewed
+test-046,test-single,zh,joy,,0,请让未来拥有幸福相伴，让时间见证。,gold-template-reviewed
+test-047,test-single,en,abundance,,0,"If I could make one wish: a thriving home, witnessed by time.",gold-template-reviewed
+test-048,test-mixed,zh,joy,abundance,0,我想把祝福留给家人：收获快乐，还想把祝福送给生活丰足。,gold-template-reviewed
+test-049,test-single,zh,joy,,0,下一段旅程，愿有心里明亮，也是给自己的约定。,gold-template-reviewed
+test-050,test-fallback,zh,,,1,明天可能下雨 50,gold-template-reviewed
+test-051,test-single,zh,joy,,0,若能许愿，我会选择笑容常在。,gold-template-reviewed
+test-052,test-single,en,courage,,0,"If I could make one wish: finding my courage, a promise to myself.",gold-template-reviewed
+test-053,test-single,zh,abundance,,0,请让未来拥有事业有成。,gold-template-reviewed
+test-054,test-single,zh,reunion,,0,请让未来拥有再见想念的人，让时间见证。,gold-template-reviewed
+test-055,test-single,zh,abundance,,0,把心里的期盼写成家业兴旺，让时间见证。,gold-template-reviewed
+test-056,test-single,en,reunion,,0,Let the road ahead bring our family reunites.,gold-template-reviewed
+test-057,test-fallback,zh,,,1,我看见一块灰色石头 19,gold-template-reviewed
+test-058,test-fallback,zh,,,1,今天和昨天不太一样 59,gold-template-reviewed
+test-059,test-single,en,abundance,,0,"For the next chapter, I choose abundant inspiration, and may it arrive in time.",gold-template-reviewed
+test-060,test-single,zh,reunion,,0,我想把祝福留给家人：与故友重逢，让时间见证。,gold-template-reviewed
+test-061,test-fallback,en,,,1,the chair is beside the table 21,gold-template-reviewed
+test-062,test-single,zh,courage,,0,请让未来拥有拥有勇气，愿它如期而至。,gold-template-reviewed
+test-063,test-mixed,en,reunion,abundance,0,"I send my loved ones our family reunites, and also success in my work.",gold-template-reviewed
+test-064,test-fallback,zh,,,1,只是路过这里 30,gold-template-reviewed
+test-065,test-single,en,courage,,0,"Let the road ahead bring courage to move forward, within ordinary days.",gold-template-reviewed
+test-066,test-single,en,safety,,0,"If I could make one wish: my family stays safe, a promise to myself.",gold-template-reviewed
+test-067,test-mixed,en,safety,courage,0,"I send my loved ones my family stays safe, and also standing by my choice.",gold-template-reviewed
+test-068,test-mixed,zh,reunion,abundance,0,若能许愿，我会选择一家团圆，也愿事业有成。,gold-template-reviewed
+test-069,test-single,zh,courage,,0,若能许愿，我会选择内心坚定，让时间见证。,gold-template-reviewed
+test-070,test-mixed,en,courage,longevity,0,If I could make one wish: strength through storms; I also hope for a long healthy life.,gold-template-reviewed
+test-071,test-single,zh,courage,,0,请让未来拥有内心坚定，愿它如期而至。,gold-template-reviewed
+test-072,test-single,zh,reunion,,0,请让未来拥有共度佳节，愿它如期而至。,gold-template-reviewed
+test-073,test-single,zh,joy,,0,若能许愿，我会选择分享喜悦。,gold-template-reviewed
+test-074,test-single,en,safety,,0,"For the next chapter, I choose health and safety, a promise to myself.",gold-template-reviewed
+test-075,test-mixed,en,longevity,reunion,0,"I send my loved ones longevity for my elders, and also coming home soon.",gold-template-reviewed
+test-076,test-single,en,courage,,0,"Let the road ahead bring growing resilient, witnessed by time.",gold-template-reviewed
+test-077,test-single,en,longevity,,0,"If I could make one wish: goodness that continues, and may it arrive in time.",gold-template-reviewed
+test-078,test-single,en,joy,,0,"A wish I carry is a bright heart, and may it arrive in time.",gold-template-reviewed
+test-079,test-single,zh,abundance,,0,我想把祝福留给家人：努力结出果实，让时间见证。,gold-template-reviewed
+test-080,test-single,zh,safety,,0,把心里的期盼写成一路顺遂，也是给自己的约定。,gold-template-reviewed
+test-081,test-mixed,zh,joy,safety,0,若能许愿，我会选择日日欢喜，也愿健康安稳。,gold-template-reviewed
+test-082,test-single,zh,safety,,0,我想把祝福留给家人：健康安稳。,gold-template-reviewed
+test-083,test-single,en,longevity,,0,If I could make one wish: a purpose that endures.,gold-template-reviewed
+test-084,test-fallback,zh,,,1,随便写下一句话 58,gold-template-reviewed
+test-085,test-mixed,zh,courage,safety,0,把心里的期盼写成坚持自己的选择；更希望出入平安。,gold-template-reviewed
+test-086,test-single,en,longevity,,0,"I send my loved ones many meaningful years, witnessed by time.",gold-template-reviewed
+test-087,test-single,en,courage,,0,"If I could make one wish: overcoming this challenge, within ordinary days.",gold-template-reviewed
+test-088,test-single,zh,reunion,,0,我想把祝福留给家人：早日回家，也是给自己的约定。,gold-template-reviewed
+test-089,test-mixed,zh,abundance,reunion,0,把心里的期盼写成事业有成；更希望团聚有期。,gold-template-reviewed
+test-090,test-single,zh,safety,,0,请让未来拥有生活安定，在平凡日子里发生。,gold-template-reviewed
+test-091,test-fallback,zh,,,1,想一想再说 41,gold-template-reviewed
+test-092,test-single,zh,abundance,,0,下一段旅程，愿有四季富足，在平凡日子里发生。,gold-template-reviewed
+test-093,test-single,en,safety,,0,"For the next chapter, I choose a calm life, and may it arrive in time.",gold-template-reviewed
+test-094,test-fallback,en,,,1,the chair is beside the table 36,gold-template-reviewed
+test-095,test-single,en,reunion,,0,"For the next chapter, I choose meeting old friends again, a promise to myself.",gold-template-reviewed
+test-096,test-single,zh,courage,,0,下一段旅程，愿有跨过难关。,gold-template-reviewed
+test-097,test-single,en,safety,,0,A wish I carry is safe travels.,gold-template-reviewed
+test-098,test-fallback,zh,,,1,下午三点去车站 46,gold-template-reviewed
+test-099,test-mixed,en,safety,abundance,0,Let the road ahead bring a peaceful journey; I also hope for prosperity through the seasons.,gold-template-reviewed
+test-100,test-single,en,abundance,,0,"I send my loved ones an abundant harvest, and may it arrive in time.",gold-template-reviewed
+test-101,test-mixed,zh,reunion,joy,0,请让未来拥有与故友重逢，同时盼望生活有趣。,gold-template-reviewed
+test-102,test-mixed,en,safety,longevity,0,"A wish I carry is everyone stays well, while carrying growing old together.",gold-template-reviewed
+test-103,test-mixed,zh,abundance,longevity,0,若能许愿，我会选择五谷丰登，也愿岁月绵长。,gold-template-reviewed
+test-104,test-mixed,zh,abundance,courage,0,我想把祝福留给家人：收获满满，还想把祝福送给跨过难关。,gold-template-reviewed
+test-105,test-single,en,safety,,0,"For the next chapter, I choose gentle protection, a promise to myself.",gold-template-reviewed
+test-106,test-fallback,en,,,1,the chair is beside the table 6,gold-template-reviewed
+test-107,test-single,en,longevity,,0,"I send my loved ones a long healthy life, and may it arrive in time.",gold-template-reviewed
+test-108,test-fallback,zh,,,1,随便写下一句话 43,gold-template-reviewed
+test-109,test-mixed,en,longevity,courage,0,If I could make one wish: growing old together; I also hope for a brave new start.,gold-template-reviewed
+test-110,test-single,en,abundance,,0,"Let the road ahead bring success in my work, witnessed by time.",gold-template-reviewed
+test-111,test-fallback,zh,,,1,铅笔放在第二个抽屉 18,gold-template-reviewed
+test-112,test-single,en,reunion,,0,"I send my loved ones a festival together, a promise to myself.",gold-template-reviewed
+test-113,test-mixed,en,joy,safety,0,"I send my loved ones joy every day, and also health and safety.",gold-template-reviewed
+test-114,test-fallback,zh,,,1,铅笔放在第二个抽屉 3,gold-template-reviewed
+test-115,test-single,zh,abundance,,0,把心里的期盼写成灵感丰沛，让时间见证。,gold-template-reviewed
+test-116,test-fallback,en,,,1,this sentence describes a fact 8,gold-template-reviewed
+test-117,test-single,zh,safety,,0,把心里的期盼写成生活安定，也是给自己的约定。,gold-template-reviewed
+test-118,test-fallback,zh,,,1,明天可能下雨 5,gold-template-reviewed
+test-119,test-single,en,reunion,,0,"If I could make one wish: seeing those I miss, witnessed by time.",gold-template-reviewed
+test-120,test-mixed,zh,longevity,reunion,0,下一段旅程，愿有美好延续，也愿家人围坐。,gold-template-reviewed
+test-121,test-mixed,en,safety,joy,0,"For the next chapter, I choose peace at home, together with joy every day.",gold-template-reviewed
+test-122,test-single,zh,reunion,,0,下一段旅程，愿有团聚有期。,gold-template-reviewed
+test-123,test-single,zh,joy,,0,我想把祝福留给家人：遇见好消息。,gold-template-reviewed
+test-124,test-single,en,longevity,,0,"A wish I carry is longevity for my elders, a promise to myself.",gold-template-reviewed
+test-125,test-fallback,zh,,,1,没有特别的方向 42,gold-template-reviewed
+test-126,test-single,zh,courage,,0,我想把祝福留给家人：勇敢向前，也是给自己的约定。,gold-template-reviewed
+test-127,test-fallback,en,,,1,I counted seven steps 52,gold-template-reviewed
+test-128,test-fallback,zh,,,1,铅笔放在第二个抽屉 33,gold-template-reviewed
+test-129,test-single,zh,reunion,,0,下一段旅程，愿有亲人常相聚，愿它如期而至。,gold-template-reviewed
+test-130,test-single,zh,safety,,0,下一段旅程，愿有被温柔守护，在平凡日子里发生。,gold-template-reviewed
+test-131,test-fallback,en,,,1,the notebook has a green cover 24,gold-template-reviewed
+test-132,test-fallback,en,,,1,the notebook has a green cover 54,gold-template-reviewed
+test-133,test-single,zh,joy,,0,请让未来拥有分享喜悦，让时间见证。,gold-template-reviewed
+test-134,test-single,en,abundance,,0,"A wish I carry is prosperity through the seasons, within ordinary days.",gold-template-reviewed
+test-135,test-single,en,longevity,,0,"For the next chapter, I choose longevity for my elders, within ordinary days.",gold-template-reviewed
+test-136,test-fallback,zh,,,1,没有特别的方向 57,gold-template-reviewed
+test-137,test-single,en,safety,,0,"A wish I carry is peace at home, and may it arrive in time.",gold-template-reviewed
+test-138,test-mixed,zh,courage,joy,0,若能许愿，我会选择勇敢向前，也愿心里明亮。,gold-template-reviewed
+test-139,test-mixed,zh,safety,abundance,0,请让未来拥有一路顺遂，同时盼望四季富足。,gold-template-reviewed
+test-140,test-single,zh,abundance,,0,把心里的期盼写成收获满满，让时间见证。,gold-template-reviewed
+test-141,test-single,zh,joy,,0,请让未来拥有心里明亮，让时间见证。,gold-template-reviewed
+test-142,test-single,en,joy,,0,Let the road ahead bring lasting happiness.,gold-template-reviewed
+test-143,test-single,en,joy,,0,Let the road ahead bring finding happiness.,gold-template-reviewed
+test-144,test-single,zh,courage,,0,若能许愿，我会选择重新出发，让时间见证。,gold-template-reviewed
+test-145,test-single,en,abundance,,0,"If I could make one wish: effort bearing fruit, witnessed by time.",gold-template-reviewed
+test-146,test-fallback,en,,,1,the train leaves at noon 25,gold-template-reviewed
+test-147,test-single,en,abundance,,0,"For the next chapter, I choose effort bearing fruit, and may it arrive in time.",gold-template-reviewed
+test-148,test-single,en,reunion,,0,"I send my loved ones loved ones together, a promise to myself.",gold-template-reviewed
+test-149,test-mixed,en,joy,reunion,0,If I could make one wish: lasting happiness; I also hope for loved ones together.,gold-template-reviewed
+test-150,test-mixed,en,abundance,courage,0,"A wish I carry is prosperity through the seasons, while carrying strength through storms.",gold-template-reviewed
+test-151,test-mixed,en,abundance,longevity,0,"I send my loved ones an abundant harvest, and also many meaningful years.",gold-template-reviewed
+test-152,test-single,en,abundance,,0,"I send my loved ones a plentiful life, witnessed by time.",gold-template-reviewed
+test-153,test-single,en,longevity,,0,I send my loved ones longevity for my elders.,gold-template-reviewed
+test-154,test-single,en,abundance,,0,"I send my loved ones rewarding results, within ordinary days.",gold-template-reviewed
+test-155,test-single,zh,safety,,0,若能许愿，我会选择生活安定，愿它如期而至。,gold-template-reviewed
+test-156,test-single,en,safety,,0,I send my loved ones everyone stays well.,gold-template-reviewed
+test-157,test-mixed,en,longevity,courage,0,Let the road ahead bring a lasting friendship; I also hope for growing resilient.,gold-template-reviewed
+test-158,test-mixed,en,courage,reunion,0,"A wish I carry is growing resilient, while carrying a festival together.",gold-template-reviewed
+test-159,test-single,en,courage,,0,"Let the road ahead bring finding my courage, within ordinary days.",gold-template-reviewed
+test-160,test-fallback,zh,,,1,下午三点去车站 16,gold-template-reviewed
+test-161,test-single,en,courage,,0,I send my loved ones a brave new start.,gold-template-reviewed
+test-162,test-single,en,abundance,,0,"For the next chapter, I choose an abundant harvest.",gold-template-reviewed
+test-163,test-fallback,zh,,,1,今天和昨天不太一样 44,gold-template-reviewed
+test-164,test-fallback,zh,,,1,想一想再说 11,gold-template-reviewed
+test-165,test-single,zh,courage,,0,若能许愿，我会选择不惧风雨，让时间见证。,gold-template-reviewed
+test-166,test-single,en,courage,,0,"For the next chapter, I choose standing by my choice, witnessed by time.",gold-template-reviewed
+test-167,test-single,zh,courage,,0,下一段旅程，愿有重新出发。,gold-template-reviewed
+test-168,test-single,zh,joy,,0,我想把祝福留给家人：生活有趣，在平凡日子里发生。,gold-template-reviewed
+test-169,test-single,en,reunion,,0,"I send my loved ones gathering around one table, within ordinary days.",gold-template-reviewed
+test-170,test-single,en,safety,,0,A wish I carry is gentle protection.,gold-template-reviewed
+test-171,test-single,zh,safety,,0,若能许愿，我会选择旅途顺利，愿它如期而至。,gold-template-reviewed
+test-172,test-fallback,zh,,,1,只是路过这里 60,gold-template-reviewed
+test-173,test-single,zh,joy,,0,我想把祝福留给家人：日日欢喜，在平凡日子里发生。,gold-template-reviewed
+test-174,test-single,en,safety,,0,"Let the road ahead bring my family stays safe, within ordinary days.",gold-template-reviewed
+test-175,test-mixed,zh,longevity,abundance,0,把心里的期盼写成岁月绵长；更希望家业兴旺。,gold-template-reviewed
+test-176,test-fallback,zh,,,1,没有特别的方向 27,gold-template-reviewed
+test-177,test-single,en,reunion,,0,"If I could make one wish: meeting old friends again, within ordinary days.",gold-template-reviewed
+test-178,test-mixed,zh,courage,reunion,0,我想把祝福留给家人：重新出发，还想把祝福送给与故友重逢。,gold-template-reviewed
+test-179,test-single,zh,longevity,,0,请让未来拥有福寿安康。,gold-template-reviewed
+test-180,test-single,zh,longevity,,0,我想把祝福留给家人：家族故事代代相传。,gold-template-reviewed
+test-181,test-single,zh,reunion,,0,我想把祝福留给家人：一家团圆，也是给自己的约定。,gold-template-reviewed
+test-182,test-single,en,joy,,0,"A wish I carry is many reasons to smile, witnessed by time.",gold-template-reviewed
+test-183,test-fallback,zh,,,1,随便写下一句话 13,gold-template-reviewed
+test-184,test-single,zh,longevity,,0,把心里的期盼写成福寿安康，让时间见证。,gold-template-reviewed
+test-185,test-mixed,zh,courage,joy,0,下一段旅程，愿有内心坚定，也愿遇见好消息。,gold-template-reviewed
+test-186,test-mixed,zh,reunion,safety,0,我想把祝福留给家人：亲人常相聚，还想把祝福送给一路顺遂。,gold-template-reviewed
+test-187,test-single,en,abundance,,0,"A wish I carry is effort bearing fruit, within ordinary days.",gold-template-reviewed
+test-188,test-single,en,longevity,,0,"For the next chapter, I choose growing old together, and may it arrive in time.",gold-template-reviewed
+test-189,test-single,zh,abundance,,0,下一段旅程，愿有生活丰足，在平凡日子里发生。,gold-template-reviewed
+test-190,test-single,zh,courage,,0,把心里的期盼写成跨过难关，在平凡日子里发生。,gold-template-reviewed
+test-191,test-single,en,safety,,0,"If I could make one wish: gentle protection, within ordinary days.",gold-template-reviewed
+test-192,test-single,zh,longevity,,0,若能许愿，我会选择岁月绵长，也是给自己的约定。,gold-template-reviewed
+test-193,test-single,zh,joy,,0,把心里的期盼写成分享喜悦，愿它如期而至。,gold-template-reviewed
+test-194,test-single,zh,safety,,0,下一段旅程，愿有出入平安，让时间见证。,gold-template-reviewed
+test-195,test-single,zh,longevity,,0,下一段旅程，愿有家族故事代代相传，让时间见证。,gold-template-reviewed
+test-196,test-single,en,reunion,,0,"For the next chapter, I choose coming home soon, witnessed by time.",gold-template-reviewed
+test-197,test-mixed,en,safety,abundance,0,If I could make one wish: a calm life; I also hope for rewarding results.,gold-template-reviewed
+test-198,test-fallback,zh,,,1,我看见一块灰色石头 34,gold-template-reviewed
+test-199,test-mixed,zh,safety,joy,0,把心里的期盼写成健康安稳；更希望分享喜悦。,gold-template-reviewed
+test-200,test-single,en,safety,,0,"I send my loved ones my family stays safe, and may it arrive in time.",gold-template-reviewed
+test-201,test-single,en,safety,,0,"I send my loved ones peace at home, within ordinary days.",gold-template-reviewed
+test-202,test-single,en,reunion,,0,"I send my loved ones a joyful reunion, within ordinary days.",gold-template-reviewed
+test-203,test-single,zh,safety,,0,若能许愿，我会选择岁岁康宁，愿它如期而至。,gold-template-reviewed
+test-204,test-single,zh,longevity,,0,把心里的期盼写成美好延续，让时间见证。,gold-template-reviewed
+test-205,test-single,zh,courage,,0,把心里的期盼写成拥有勇气，在平凡日子里发生。,gold-template-reviewed
+test-206,test-single,zh,joy,,0,下一段旅程，愿有生活有趣，也是给自己的约定。,gold-template-reviewed
+test-207,test-mixed,zh,safety,courage,0,若能许愿，我会选择家人平安，也愿坚持自己的选择。,gold-template-reviewed
+test-208,test-single,en,joy,,0,"I send my loved ones finding happiness, a promise to myself.",gold-template-reviewed
+test-209,test-single,zh,abundance,,0,请让未来拥有生活丰足。,gold-template-reviewed
+test-210,test-single,zh,longevity,,0,我想把祝福留给家人：美好延续，愿它如期而至。,gold-template-reviewed
+test-211,test-single,zh,reunion,,0,若能许愿，我会选择团聚有期，让时间见证。,gold-template-reviewed
+test-212,test-single,en,courage,,0,"I send my loved ones a steady heart, a promise to myself.",gold-template-reviewed
+test-213,test-single,en,abundance,,0,Let the road ahead bring a thriving home.,gold-template-reviewed
+test-214,test-single,zh,reunion,,0,若能许愿，我会选择共度佳节，让时间见证。,gold-template-reviewed
+test-215,test-single,zh,abundance,,0,下一段旅程，愿有五谷丰登，在平凡日子里发生。,gold-template-reviewed
+test-216,test-fallback,en,,,1,this sentence describes a fact 53,gold-template-reviewed
+test-217,test-single,zh,reunion,,0,请让未来拥有家人围坐，愿它如期而至。,gold-template-reviewed
+test-218,test-single,en,longevity,,0,"I send my loved ones a lasting friendship, a promise to myself.",gold-template-reviewed
+test-219,test-single,en,courage,,0,"For the next chapter, I choose overcoming this challenge, a promise to myself.",gold-template-reviewed
+test-220,test-fallback,en,,,1,the notebook has a green cover 39,gold-template-reviewed
+test-221,test-single,zh,longevity,,0,把心里的期盼写成岁月绵长，让时间见证。,gold-template-reviewed
+test-222,test-single,zh,reunion,,0,若能许愿，我会选择早日回家，让时间见证。,gold-template-reviewed
+test-223,test-single,en,courage,,0,"I send my loved ones finding my courage, and may it arrive in time.",gold-template-reviewed
+test-224,test-mixed,zh,longevity,courage,0,请让未来拥有情谊长久，同时盼望成长得更坚韧。,gold-template-reviewed
+test-225,test-fallback,zh,,,1,今天和昨天不太一样 29,gold-template-reviewed
+test-226,test-single,zh,safety,,0,我想把祝福留给家人：被温柔守护，愿它如期而至。,gold-template-reviewed
+test-227,test-single,zh,reunion,,0,把心里的期盼写成再见想念的人，愿它如期而至。,gold-template-reviewed
+test-228,test-fallback,en,,,1,the train leaves at noon 10,gold-template-reviewed
+test-229,test-single,zh,longevity,,0,我想把祝福留给家人：初心长存，愿它如期而至。,gold-template-reviewed
+test-230,test-fallback,zh,,,1,下午三点去车站 31,gold-template-reviewed
+test-231,test-single,zh,longevity,,0,把心里的期盼写成陪伴到老，让时间见证。,gold-template-reviewed
+test-232,test-mixed,en,reunion,longevity,0,"For the next chapter, I choose gathering around one table, together with longevity for my elders.",gold-template-reviewed
+test-233,test-single,zh,abundance,,0,我想把祝福留给家人：灵感丰沛，愿它如期而至。,gold-template-reviewed
+test-234,test-single,en,longevity,,0,"If I could make one wish: growing old together, witnessed by time.",gold-template-reviewed
+test-235,test-single,zh,safety,,0,我想把祝福留给家人：出入平安。,gold-template-reviewed
+test-236,test-single,zh,abundance,,0,把心里的期盼写成事业有成，让时间见证。,gold-template-reviewed
+test-237,test-mixed,zh,abundance,safety,0,请让未来拥有生活丰足，同时盼望生活安定。,gold-template-reviewed
+test-238,test-single,en,reunion,,0,Let the road ahead bring a festival together.,gold-template-reviewed
+test-239,test-single,en,safety,,0,"If I could make one wish: health and safety, within ordinary days.",gold-template-reviewed
+test-240,test-mixed,en,abundance,reunion,0,"For the next chapter, I choose effort bearing fruit, together with our family reunites.",gold-template-reviewed
+test-241,test-mixed,en,courage,joy,0,"I send my loved ones courage to move forward, and also a bright heart.",gold-template-reviewed
+test-242,test-single,zh,abundance,,0,若能许愿，我会选择事业有成，也是给自己的约定。,gold-template-reviewed
+test-243,test-single,en,abundance,,0,I send my loved ones success in my work.,gold-template-reviewed
+test-244,test-fallback,zh,,,1,只是路过这里 15,gold-template-reviewed
+test-245,test-single,zh,longevity,,0,我想把祝福留给家人：陪伴到老，愿它如期而至。,gold-template-reviewed
+test-246,test-single,en,abundance,,0,"A wish I carry is an abundant harvest, witnessed by time.",gold-template-reviewed
+test-247,test-single,zh,courage,,0,我想把祝福留给家人：成长得更坚韧，在平凡日子里发生。,gold-template-reviewed
+test-248,test-single,zh,safety,,0,请让未来拥有一路顺遂，在平凡日子里发生。,gold-template-reviewed
+test-249,test-fallback,en,,,1,I counted seven steps 22,gold-template-reviewed
+test-250,test-single,zh,reunion,,0,我想把祝福留给家人：再见想念的人，在平凡日子里发生。,gold-template-reviewed
+test-251,test-fallback,zh,,,1,没有特别的方向 12,gold-template-reviewed
+test-252,test-fallback,en,,,1,I counted seven steps 37,gold-template-reviewed
+test-253,test-single,en,joy,,0,"For the next chapter, I choose many reasons to smile.",gold-template-reviewed
+test-254,test-fallback,zh,,,1,随便写下一句话 28,gold-template-reviewed
+test-255,test-single,en,longevity,,0,"A wish I carry is a purpose that endures, and may it arrive in time.",gold-template-reviewed
+test-256,test-single,en,safety,,0,"Let the road ahead bring everyone stays well, witnessed by time.",gold-template-reviewed
+test-257,test-single,en,joy,,0,If I could make one wish: wonderful news.,gold-template-reviewed
+test-258,test-single,zh,courage,,0,我想把祝福留给家人：坚持自己的选择。,gold-template-reviewed
+test-259,test-fallback,zh,,,1,想一想再说 56,gold-template-reviewed
+test-260,test-single,en,joy,,0,"A wish I carry is finding happiness, within ordinary days.",gold-template-reviewed
+test-261,test-single,zh,longevity,,0,下一段旅程，愿有长辈长寿，在平凡日子里发生。,gold-template-reviewed
+test-262,test-single,en,courage,,0,"For the next chapter, I choose a brave new start, within ordinary days.",gold-template-reviewed
+test-263,test-single,en,joy,,0,"I send my loved ones a bright heart, within ordinary days.",gold-template-reviewed
+test-264,test-single,zh,longevity,,0,若能许愿，我会选择家族故事代代相传，愿它如期而至。,gold-template-reviewed
+test-265,test-fallback,zh,,,1,今天和昨天不太一样 14,gold-template-reviewed
+test-266,test-fallback,zh,,,1,明天可能下雨 20,gold-template-reviewed
+test-267,test-fallback,zh,,,1,下午三点去车站 1,gold-template-reviewed
+test-268,test-mixed,zh,safety,courage,0,下一段旅程，愿有出入平安，也愿拥有勇气。,gold-template-reviewed
+test-269,test-mixed,en,longevity,joy,0,"A wish I carry is family stories lasting generations, while carrying lasting happiness.",gold-template-reviewed
+test-270,test-single,en,safety,,0,"Let the road ahead bring a peaceful journey, a promise to myself.",gold-template-reviewed
+test-271,test-mixed,en,courage,safety,0,"For the next chapter, I choose finding my courage, together with my family stays safe.",gold-template-reviewed
+test-272,test-fallback,en,,,1,I counted seven steps 7,gold-template-reviewed
+test-273,test-single,zh,abundance,,0,若能许愿，我会选择四季富足，也是给自己的约定。,gold-template-reviewed
+test-274,test-mixed,zh,joy,courage,0,把心里的期盼写成心里明亮；更希望内心坚定。,gold-template-reviewed
+test-275,test-fallback,zh,,,1,铅笔放在第二个抽屉 48,gold-template-reviewed
+test-276,test-single,en,abundance,,0,"Let the road ahead bring rewarding results, a promise to myself.",gold-template-reviewed
+test-277,test-single,en,courage,,0,"Let the road ahead bring strength through storms, within ordinary days.",gold-template-reviewed
+test-278,test-single,en,joy,,0,"If I could make one wish: lasting happiness, witnessed by time.",gold-template-reviewed
+test-279,test-single,zh,courage,,0,我想把祝福留给家人：跨过难关，也是给自己的约定。,gold-template-reviewed
+test-280,test-single,zh,abundance,,0,我想把祝福留给家人：四季富足，愿它如期而至。,gold-template-reviewed
+test-281,test-mixed,zh,abundance,longevity,0,下一段旅程，愿有家业兴旺，也愿初心长存。,gold-template-reviewed
+test-282,test-fallback,zh,,,1,我看见一块灰色石头 49,gold-template-reviewed
+test-283,test-single,zh,reunion,,0,若能许愿，我会选择亲人常相聚，在平凡日子里发生。,gold-template-reviewed
+test-284,test-single,zh,joy,,0,请让未来拥有收获快乐，让时间见证。,gold-template-reviewed
+test-285,test-single,en,longevity,,0,"A wish I carry is a lasting friendship, within ordinary days.",gold-template-reviewed
+test-286,test-single,en,longevity,,0,"If I could make one wish: a long healthy life, a promise to myself.",gold-template-reviewed
+test-287,test-single,zh,reunion,,0,把心里的期盼写成家人围坐，在平凡日子里发生。,gold-template-reviewed
+test-288,test-single,zh,abundance,,0,请让未来拥有收获满满。,gold-template-reviewed
+test-289,test-mixed,zh,courage,longevity,0,请让未来拥有跨过难关，同时盼望家族故事代代相传。,gold-template-reviewed
+test-290,test-fallback,en,,,1,the chair is beside the table 51,gold-template-reviewed
+test-291,test-single,zh,reunion,,0,下一段旅程，愿有早日回家。,gold-template-reviewed
+test-292,test-single,en,abundance,,0,If I could make one wish: rewarding results.,gold-template-reviewed
+test-293,test-mixed,en,joy,abundance,0,"A wish I carry is a playful life, while carrying abundant inspiration.",gold-template-reviewed
+test-294,test-single,zh,longevity,,0,请让未来拥有情谊长久。,gold-template-reviewed
+test-295,test-fallback,zh,,,1,我看见一块灰色石头 4,gold-template-reviewed
+test-296,test-single,en,courage,,0,"If I could make one wish: courage to move forward, a promise to myself.",gold-template-reviewed
+test-297,test-mixed,zh,joy,safety,0,下一段旅程，愿有分享喜悦，也愿旅途顺利。,gold-template-reviewed
+test-298,test-mixed,zh,longevity,joy,0,我想把祝福留给家人：福寿安康，还想把祝福送给笑容常在。,gold-template-reviewed
+test-299,test-single,en,reunion,,0,"A wish I carry is a festival together, within ordinary days.",gold-template-reviewed
+test-300,test-single,en,joy,,0,"Let the road ahead bring wonderful news, a promise to myself.",gold-template-reviewed
+test-301,test-single,zh,joy,,0,我想把祝福留给家人：笑容常在，在平凡日子里发生。,gold-template-reviewed
+test-302,test-single,en,courage,,0,"A wish I carry is a steady heart, within ordinary days.",gold-template-reviewed
+test-303,test-single,en,joy,,0,A wish I carry is joy every day.,gold-template-reviewed
+test-304,test-single,en,reunion,,0,"Let the road ahead bring gathering around one table, a promise to myself.",gold-template-reviewed
+test-305,test-single,en,joy,,0,"Let the road ahead bring sharing delight, witnessed by time.",gold-template-reviewed
+test-306,test-single,en,joy,,0,"For the next chapter, I choose a playful life, witnessed by time.",gold-template-reviewed
+test-307,test-single,zh,abundance,,0,若能许愿，我会选择五谷丰登，也是给自己的约定。,gold-template-reviewed
+test-308,test-single,zh,courage,,0,请让未来拥有不惧风雨，愿它如期而至。,gold-template-reviewed
+test-309,test-single,zh,joy,,0,把心里的期盼写成幸福相伴，愿它如期而至。,gold-template-reviewed
+test-310,test-single,en,longevity,,0,"Let the road ahead bring goodness that continues, witnessed by time.",gold-template-reviewed
+test-311,test-fallback,en,,,1,this sentence describes a fact 23,gold-template-reviewed
+test-312,test-single,zh,courage,,0,若能许愿，我会选择坚持自己的选择，愿它如期而至。,gold-template-reviewed
+test-313,test-single,zh,courage,,0,请让未来拥有成长得更坚韧，让时间见证。,gold-template-reviewed
+test-314,test-single,zh,longevity,,0,请让未来拥有岁月绵长。,gold-template-reviewed
+test-315,test-fallback,en,,,1,the notebook has a green cover 9,gold-template-reviewed
+test-316,test-single,en,joy,,0,If I could make one wish: a playful life.,gold-template-reviewed
+test-317,test-single,en,longevity,,0,"A wish I carry is family stories lasting generations, witnessed by time.",gold-template-reviewed
+test-318,test-single,zh,safety,,0,把心里的期盼写成家人平安，也是给自己的约定。,gold-template-reviewed
+test-319,test-single,en,safety,,0,If I could make one wish: a peaceful journey.,gold-template-reviewed
+test-320,test-mixed,en,abundance,safety,0,Let the road ahead bring a plentiful life; I also hope for everyone stays well.,gold-template-reviewed
+test-321,test-single,zh,courage,,0,把心里的期盼写成勇敢向前，在平凡日子里发生。,gold-template-reviewed
+test-322,test-mixed,en,joy,courage,0,"For the next chapter, I choose wonderful news, together with courage to move forward.",gold-template-reviewed
+test-323,test-single,en,reunion,,0,"A wish I carry is loved ones together, within ordinary days.",gold-template-reviewed
+test-324,test-single,en,joy,,0,"For the next chapter, I choose wonderful news, witnessed by time.",gold-template-reviewed
+test-325,test-mixed,zh,longevity,reunion,0,若能许愿，我会选择长辈长寿，也愿早日回家。,gold-template-reviewed
+test-326,test-single,zh,longevity,,0,下一段旅程，愿有情谊长久，在平凡日子里发生。,gold-template-reviewed
+test-327,test-single,en,joy,,0,I send my loved ones sharing delight.,gold-template-reviewed
+test-328,test-fallback,en,,,1,this sentence describes a fact 38,gold-template-reviewed
+test-329,test-mixed,en,abundance,safety,0,If I could make one wish: abundant inspiration; I also hope for gentle protection.,gold-template-reviewed
+test-330,test-fallback,zh,,,1,只是路过这里 45,gold-template-reviewed
+test-331,test-single,en,courage,,0,"A wish I carry is strength through storms, witnessed by time.",gold-template-reviewed
+test-332,test-single,zh,abundance,,0,我想把祝福留给家人：家业兴旺，愿它如期而至。,gold-template-reviewed
+test-333,test-single,zh,safety,,0,下一段旅程，愿有健康安稳，让时间见证。,gold-template-reviewed
+test-334,test-single,en,reunion,,0,"For the next chapter, I choose loved ones together, and may it arrive in time.",gold-template-reviewed
+test-335,test-single,en,reunion,,0,"If I could make one wish: our family reunites, witnessed by time.",gold-template-reviewed
+test-336,test-single,en,courage,,0,"A wish I carry is standing by my choice, and may it arrive in time.",gold-template-reviewed
+test-337,test-single,en,safety,,0,"For the next chapter, I choose safe travels, a promise to myself.",gold-template-reviewed
+test-338,test-mixed,en,longevity,abundance,0,"For the next chapter, I choose a purpose that endures, together with an abundant harvest.",gold-template-reviewed
+test-339,test-single,en,joy,,0,"For the next chapter, I choose joy every day, a promise to myself.",gold-template-reviewed
+test-340,test-fallback,zh,,,1,明天可能下雨 35,gold-template-reviewed
+test-341,test-single,zh,joy,,0,下一段旅程，愿有日日欢喜，也是给自己的约定。,gold-template-reviewed
+test-342,test-single,zh,longevity,,0,若能许愿，我会选择长辈长寿，也是给自己的约定。,gold-template-reviewed
+test-343,test-single,zh,joy,,0,若能许愿，我会选择收获快乐。,gold-template-reviewed
+test-344,test-single,zh,safety,,0,请让未来拥有旅途顺利，在平凡日子里发生。,gold-template-reviewed
+test-345,test-single,en,reunion,,0,If I could make one wish: gathering around one table.,gold-template-reviewed
+test-346,test-fallback,zh,,,1,这句话没有明确愿望 32,gold-template-reviewed
+test-347,test-single,en,courage,,0,"For the next chapter, I choose courage to move forward.",gold-template-reviewed
+test-348,test-single,zh,courage,,0,下一段旅程，愿有坚持自己的选择，让时间见证。,gold-template-reviewed
+test-349,test-mixed,en,joy,reunion,0,Let the road ahead bring many reasons to smile; I also hope for seeing those I miss.,gold-template-reviewed
+test-350,test-single,en,courage,,0,"A wish I carry is a brave new start, a promise to myself.",gold-template-reviewed
+test-351,test-single,en,longevity,,0,"For the next chapter, I choose a purpose that endures, witnessed by time.",gold-template-reviewed
+test-352,test-fallback,en,,,1,the train leaves at noon 55,gold-template-reviewed
+test-353,test-single,en,joy,,0,"I send my loved ones lasting happiness, a promise to myself.",gold-template-reviewed
+test-354,test-single,zh,reunion,,0,下一段旅程，愿有与故友重逢，愿它如期而至。,gold-template-reviewed
+test-355,test-single,zh,abundance,,0,若能许愿，我会选择生活丰足，也是给自己的约定。,gold-template-reviewed
+test-356,test-single,zh,joy,,0,把心里的期盼写成生活有趣，愿它如期而至。,gold-template-reviewed
+test-357,test-single,zh,courage,,0,下一段旅程，愿有内心坚定。,gold-template-reviewed
+test-358,test-single,en,safety,,0,"A wish I carry is a calm life, within ordinary days.",gold-template-reviewed
+test-359,test-single,zh,reunion,,0,请让未来拥有团聚有期，愿它如期而至。,gold-template-reviewed
+test-360,test-mixed,zh,reunion,abundance,0,下一段旅程，愿有团聚有期，也愿努力结出果实。,gold-template-reviewed

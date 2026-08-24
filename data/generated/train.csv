@@ -1,0 +1,1441 @@
+﻿id,split,locale,label,secondary,is_fallback,text,review_status
+train-0001,train-single,zh,courage,,0,我希望内心坚定，送给我在意的人。,template-reviewed
+train-0002,train-ambiguous,en,joy,,1,I wrote a short note 2,template-reviewed
+train-0003,train-single,en,courage,,0,Let this wish carry a steady heart starting today.,template-reviewed
+train-0004,train-single,zh,joy,,0,我的愿望是分享喜悦。,template-reviewed
+train-0005,train-single,zh,courage,,0,请替我织下不惧风雨，愿好事慢慢发生。,template-reviewed
+train-0006,train-single,en,longevity,,0,My heart asks for family stories lasting generations with gratitude for this moment.,template-reviewed
+train-0007,train-ambiguous,zh,joy,,1,这是一段普通描述 3,template-reviewed
+train-0008,train-single,en,longevity,,0,I sincerely hope for goodness that continues—this matters deeply to me.,template-reviewed
+train-0009,train-mixed,en,abundance,reunion,0,"This year I hope for prosperity through the seasons, while carrying a festival together.",template-reviewed
+train-0010,train-single,en,courage,,0,I wish for brave new start for the people close to me.,template-reviewed
+train-0011,train-single,en,longevity,,0,My simple wish is growing old together and I will keep it in my heart.,template-reviewed
+train-0012,train-single,en,courage,,0,"For tomorrow, I wish for standing by my choice as good things unfold.",template-reviewed
+train-0013,train-single,zh,reunion,,0,真心期待共度佳节，也送给每一个努力的人。,template-reviewed
+train-0014,train-single,zh,longevity,,0,愿陪伴到老，一直记在心里。,template-reviewed
+train-0015,train-mixed,en,longevity,safety,0,"For tomorrow, I wish for a lasting friendship; I also hope for everyone stays well.",template-reviewed
+train-0016,train-ambiguous,zh,reunion,,1,我在学习一门新语言 2,template-reviewed
+train-0017,train-ambiguous,en,longevity,,1,the window faces east 4,template-reviewed
+train-0018,train-single,zh,longevity,,0,我的愿望是初心长存，在新的日子里。,template-reviewed
+train-0019,train-single,en,courage,,0,I wish for brave new start for the people close to me.,template-reviewed
+train-0020,train-ambiguous,en,longevity,,1,the window faces east 3,template-reviewed
+train-0021,train-single,en,courage,,0,May there be courage to move forward as good things unfold.,template-reviewed
+train-0022,train-single,zh,joy,,0,我的愿望是遇见好消息，也送给每一个努力的人。,template-reviewed
+train-0023,train-single,en,longevity,,0,"For tomorrow, I wish for goodness that continues for everyone I care about.",template-reviewed
+train-0024,train-single,zh,safety,,0,今年最想看到一路顺遂，愿好事慢慢发生。,template-reviewed
+train-0025,train-ambiguous,zh,reunion,,1,窗外有三棵树 3,template-reviewed
+train-0026,train-mixed,zh,longevity,abundance,0,今年最想看到陪伴到老，同时盼望收获满满。,template-reviewed
+train-0027,train-single,zh,courage,,0,想对明天说：内心坚定，从今天开始。,template-reviewed
+train-0028,train-ambiguous,en,courage,,1,the room is quiet 3,template-reviewed
+train-0029,train-single,en,abundance,,0,I wish for rewarding results.,template-reviewed
+train-0030,train-single,zh,abundance,,0,愿生活丰足，一直记在心里。,template-reviewed
+train-0031,train-ambiguous,zh,courage,,1,窗外有三棵树 1,template-reviewed
+train-0032,train-mixed,zh,courage,reunion,0,此刻我盼望跨过难关，同时盼望再见想念的人。,template-reviewed
+train-0033,train-mixed,zh,courage,safety,0,今年最想看到重新出发，还想把祝福送给一路顺遂。,template-reviewed
+train-0034,train-single,en,abundance,,0,May there be a thriving home for everyone I care about.,template-reviewed
+train-0035,train-single,zh,joy,,0,愿幸福相伴，愿好事慢慢发生。,template-reviewed
+train-0036,train-single,en,abundance,,0,I want to see prosperity through the seasons for everyone I care about.,template-reviewed
+train-0037,train-ambiguous,zh,courage,,1,今天穿蓝色衣服 3,template-reviewed
+train-0038,train-single,en,abundance,,0,My heart asks for rewarding results in the days ahead.,template-reviewed
+train-0039,train-single,en,courage,,0,Please weave a wish for overcoming this challenge.,template-reviewed
+train-0040,train-mixed,zh,safety,longevity,0,此刻我盼望一路顺遂，同时盼望家族故事代代相传。,template-reviewed
+train-0041,train-mixed,en,safety,reunion,0,"I wish for safe travels, and also gathering around one table.",template-reviewed
+train-0042,train-single,zh,abundance,,0,今年最想看到努力结出果实，不负每一次等待。,template-reviewed
+train-0043,train-single,en,reunion,,0,I sincerely hope for coming home soon in the days ahead.,template-reviewed
+train-0044,train-mixed,zh,safety,joy,0,今年最想看到岁岁康宁，同时盼望收获快乐。,template-reviewed
+train-0045,train-mixed,zh,courage,abundance,0,我的愿望是成长得更坚韧，还想把祝福送给灵感丰沛。,template-reviewed
+train-0046,train-single,zh,longevity,,0,把这个心愿送给未来：家族故事代代相传，一直记在心里。,template-reviewed
+train-0047,train-single,zh,safety,,0,想对明天说：岁岁康宁，一直记在心里。,template-reviewed
+train-0048,train-mixed,en,abundance,safety,0,Let this wish carry abundant inspiration; I also hope for gentle protection.,template-reviewed
+train-0049,train-single,zh,reunion,,0,把这个心愿送给未来：亲人常相聚。,template-reviewed
+train-0050,train-single,en,joy,,0,I want to see finding happiness for the people close to me.,template-reviewed
+train-0051,train-mixed,zh,abundance,reunion,0,愿望很简单，事业有成；更希望团聚有期。,template-reviewed
+train-0052,train-ambiguous,en,courage,,1,this is an ordinary sentence 1,template-reviewed
+train-0053,train-single,en,safety,,0,Let this wish carry a peaceful journey for everyone I care about.,template-reviewed
+train-0054,train-mixed,zh,reunion,abundance,0,我希望亲人常相聚，还想把祝福送给生活丰足。,template-reviewed
+train-0055,train-single,zh,courage,,0,我的愿望是内心坚定，不负每一次等待。,template-reviewed
+train-0056,train-single,zh,longevity,,0,愿情谊长久，一直记在心里。,template-reviewed
+train-0057,train-single,en,safety,,0,Please weave a wish for my family stays safe after every patient wait.,template-reviewed
+train-0058,train-single,en,longevity,,0,My heart asks for lasting friendship as good things unfold.,template-reviewed
+train-0059,train-single,en,courage,,0,May there be standing by my choice—this matters deeply to me.,template-reviewed
+train-0060,train-single,en,reunion,,0,This year I hope for gathering around one table starting today.,template-reviewed
+train-0061,train-single,zh,joy,,0,愿望很简单，幸福相伴。谢谢此刻的自己。,template-reviewed
+train-0062,train-single,zh,longevity,,0,愿望很简单，福寿安康，也送给每一个努力的人。,template-reviewed
+train-0063,train-mixed,en,abundance,longevity,0,May there be abundant inspiration; I also hope for a long healthy life.,template-reviewed
+train-0064,train-single,zh,abundance,,0,我的愿望是五谷丰登，在新的日子里。,template-reviewed
+train-0065,train-mixed,zh,reunion,safety,0,请替我织下家人围坐；更希望家人平安。,template-reviewed
+train-0066,train-single,en,abundance,,0,I sincerely hope for success in my work after every patient wait.,template-reviewed
+train-0067,train-single,en,reunion,,0,This year I hope for joyful reunion starting today.,template-reviewed
+train-0068,train-single,en,courage,,0,"For tomorrow, I wish for steady heart after every patient wait.",template-reviewed
+train-0069,train-single,zh,reunion,,0,把这个心愿送给未来：共度佳节。谢谢此刻的自己。,template-reviewed
+train-0070,train-mixed,en,abundance,longevity,0,"May there be prosperity through the seasons, while carrying growing old together.",template-reviewed
+train-0071,train-mixed,en,longevity,joy,0,I sincerely hope for growing old together; I also hope for finding happiness.,template-reviewed
+train-0072,train-single,zh,courage,,0,愿重新出发，这是我最珍重的期待。,template-reviewed
+train-0073,train-single,zh,courage,,0,愿重新出发，这是我最珍重的期待。,template-reviewed
+train-0074,train-mixed,zh,reunion,joy,0,想对明天说：与故友重逢，同时盼望生活有趣。,template-reviewed
+train-0075,train-ambiguous,en,abundance,,1,the room is quiet 2,template-reviewed
+train-0076,train-single,en,safety,,0,Please weave a wish for health and safety as good things unfold.,template-reviewed
+train-0077,train-single,zh,abundance,,0,愿望很简单，收获满满，也送给每一个努力的人。,template-reviewed
+train-0078,train-single,zh,safety,,0,愿望很简单，出入平安。,template-reviewed
+train-0079,train-single,en,longevity,,0,I wish for growing old together—this matters deeply to me.,template-reviewed
+train-0080,train-single,en,safety,,0,My simple wish is peace at home with gratitude for this moment.,template-reviewed
+train-0081,train-single,zh,courage,,0,真心期待不惧风雨，也送给每一个努力的人。,template-reviewed
+train-0082,train-single,en,abundance,,0,This year I hope for effort bearing fruit in the days ahead.,template-reviewed
+train-0083,train-single,en,courage,,0,This year I hope for finding my courage for the people close to me.,template-reviewed
+train-0084,train-single,zh,longevity,,0,我希望岁月绵长。,template-reviewed
+train-0085,train-mixed,zh,courage,safety,0,今年最想看到不惧风雨，同时盼望被温柔守护。,template-reviewed
+train-0086,train-mixed,en,abundance,longevity,0,"I want to see a thriving home, and also a purpose that endures.",template-reviewed
+train-0087,train-single,zh,abundance,,0,把这个心愿送给未来：收获满满，这是我最珍重的期待。,template-reviewed
+train-0088,train-single,zh,courage,,0,真心期待重新出发，也送给每一个努力的人。,template-reviewed
+train-0089,train-single,en,courage,,0,My simple wish is strength through storms for the people close to me.,template-reviewed
+train-0090,train-mixed,en,courage,abundance,0,"For tomorrow, I wish for overcoming this challenge; I also hope for prosperity through the seasons.",template-reviewed
+train-0091,train-single,zh,reunion,,0,请替我织下共度佳节，愿好事慢慢发生。,template-reviewed
+train-0092,train-single,zh,joy,,0,愿幸福相伴，愿好事慢慢发生。,template-reviewed
+train-0093,train-single,en,safety,,0,I wish for peace at home as good things unfold.,template-reviewed
+train-0094,train-ambiguous,zh,courage,,1,这是一段普通描述 1,template-reviewed
+train-0095,train-single,zh,safety,,0,我的愿望是生活安定，也送给每一个努力的人。,template-reviewed
+train-0096,train-mixed,zh,abundance,safety,0,把这个心愿送给未来：事业有成；更希望出入平安。,template-reviewed
+train-0097,train-mixed,en,safety,longevity,0,I sincerely hope for a calm life; I also hope for a long healthy life.,template-reviewed
+train-0098,train-mixed,en,safety,courage,0,"I want to see health and safety, together with a steady heart.",template-reviewed
+train-0099,train-single,en,safety,,0,May there be gentle protection in the days ahead.,template-reviewed
+train-0100,train-ambiguous,en,courage,,1,there are three cups 2,template-reviewed
+train-0101,train-single,zh,abundance,,0,请替我织下灵感丰沛。谢谢此刻的自己。,template-reviewed
+train-0102,train-ambiguous,zh,reunion,,1,这是一段普通描述 2,template-reviewed
+train-0103,train-single,zh,courage,,0,今年最想看到拥有勇气，在新的日子里。,template-reviewed
+train-0104,train-single,zh,courage,,0,请替我织下跨过难关，愿好事慢慢发生。,template-reviewed
+train-0105,train-single,en,longevity,,0,May there be many meaningful years and I will keep it in my heart.,template-reviewed
+train-0106,train-single,zh,longevity,,0,把这个心愿送给未来：福寿安康，这是我最珍重的期待。,template-reviewed
+train-0107,train-single,zh,longevity,,0,愿家族故事代代相传，也送给每一个努力的人。,template-reviewed
+train-0108,train-single,en,longevity,,0,My heart asks for growing old together as good things unfold.,template-reviewed
+train-0109,train-ambiguous,zh,abundance,,1,我在学习一门新语言 4,template-reviewed
+train-0110,train-single,en,reunion,,0,Let this wish carry coming home soon for the people close to me.,template-reviewed
+train-0111,train-single,en,abundance,,0,I want to see abundant inspiration for everyone I care about.,template-reviewed
+train-0112,train-mixed,zh,courage,joy,0,我希望跨过难关，同时盼望生活有趣。,template-reviewed
+train-0113,train-single,en,joy,,0,Let this wish carry a bright heart for the people close to me.,template-reviewed
+train-0114,train-single,zh,longevity,,0,我希望初心长存。,template-reviewed
+train-0115,train-single,zh,safety,,0,请替我织下出入平安，不负每一次等待。,template-reviewed
+train-0116,train-single,en,courage,,0,My heart asks for brave new start after every patient wait.,template-reviewed
+train-0117,train-single,zh,safety,,0,愿旅途顺利，送给我在意的人。,template-reviewed
+train-0118,train-single,en,longevity,,0,My heart asks for growing old together as good things unfold.,template-reviewed
+train-0119,train-mixed,en,courage,safety,0,"My simple wish is a steady heart, and also peace at home.",template-reviewed
+train-0120,train-single,zh,longevity,,0,今年最想看到长辈长寿，送给我在意的人。,template-reviewed
+train-0121,train-single,en,courage,,0,Please weave a wish for growing resilient in the days ahead.,template-reviewed
+train-0122,train-single,en,courage,,0,Please weave a wish for brave new start in the days ahead.,template-reviewed
+train-0123,train-single,en,abundance,,0,I wish for plentiful life with gratitude for this moment.,template-reviewed
+train-0124,train-ambiguous,zh,safety,,1,桌上放着一本书 1,template-reviewed
+train-0125,train-single,zh,joy,,0,我希望遇见好消息。谢谢此刻的自己。,template-reviewed
+train-0126,train-mixed,zh,courage,abundance,0,愿勇敢向前，也愿事业有成。,template-reviewed
+train-0127,train-mixed,en,reunion,abundance,0,May there be a festival together; I also hope for rewarding results.,template-reviewed
+train-0128,train-mixed,en,reunion,longevity,0,"My simple wish is gathering around one table, together with longevity for my elders.",template-reviewed
+train-0129,train-single,en,reunion,,0,"For tomorrow, I wish for joyful reunion.",template-reviewed
+train-0130,train-single,en,safety,,0,I wish for health and safety with gratitude for this moment.,template-reviewed
+train-0131,train-single,en,safety,,0,I sincerely hope for calm life.,template-reviewed
+train-0132,train-mixed,en,safety,reunion,0,"For tomorrow, I wish for a peaceful journey; I also hope for seeing those I miss.",template-reviewed
+train-0133,train-single,en,safety,,0,May there be a peaceful journey—this matters deeply to me.,template-reviewed
+train-0134,train-ambiguous,en,joy,,1,there are three cups 2,template-reviewed
+train-0135,train-ambiguous,en,abundance,,1,the room is quiet 4,template-reviewed
+train-0136,train-single,en,abundance,,0,Please weave a wish for prosperity through the seasons with gratitude for this moment.,template-reviewed
+train-0137,train-ambiguous,zh,joy,,1,今天穿蓝色衣服 4,template-reviewed
+train-0138,train-single,en,courage,,0,Let this wish carry courage to move forward—this matters deeply to me.,template-reviewed
+train-0139,train-mixed,zh,joy,longevity,0,愿日日欢喜，也愿岁月绵长。,template-reviewed
+train-0140,train-single,en,abundance,,0,Please weave a wish for plentiful life as good things unfold.,template-reviewed
+train-0141,train-single,en,courage,,0,May there be standing by my choice—this matters deeply to me.,template-reviewed
+train-0142,train-single,zh,courage,,0,愿不惧风雨，这是我最珍重的期待。,template-reviewed
+train-0143,train-single,zh,longevity,,0,愿望很简单，情谊长久，也送给每一个努力的人。,template-reviewed
+train-0144,train-single,zh,joy,,0,真心期待笑容常在，这是我最珍重的期待。,template-reviewed
+train-0145,train-single,en,abundance,,0,"For tomorrow, I wish for abundant harvest and I will keep it in my heart.",template-reviewed
+train-0146,train-single,zh,safety,,0,愿家人平安，送给我在意的人。,template-reviewed
+train-0147,train-single,en,courage,,0,Let this wish carry standing by my choice for everyone I care about.,template-reviewed
+train-0148,train-ambiguous,zh,abundance,,1,桌上放着一本书 4,template-reviewed
+train-0149,train-single,zh,reunion,,0,愿望很简单，与故友重逢，不负每一次等待。,template-reviewed
+train-0150,train-single,zh,courage,,0,把这个心愿送给未来：不惧风雨。谢谢此刻的自己。,template-reviewed
+train-0151,train-mixed,zh,safety,reunion,0,愿家人平安，也愿早日回家。,template-reviewed
+train-0152,train-ambiguous,en,reunion,,1,the window faces east 3,template-reviewed
+train-0153,train-single,zh,reunion,,0,想对明天说：早日回家，从今天开始。,template-reviewed
+train-0154,train-single,zh,courage,,0,请替我织下成长得更坚韧，一直记在心里。,template-reviewed
+train-0155,train-single,zh,courage,,0,愿望很简单，成长得更坚韧。谢谢此刻的自己。,template-reviewed
+train-0156,train-single,en,abundance,,0,May there be success in my work starting today.,template-reviewed
+train-0157,train-mixed,en,reunion,courage,0,"I wish for gathering around one table, together with courage to move forward.",template-reviewed
+train-0158,train-mixed,zh,joy,abundance,0,请替我织下遇见好消息；更希望五谷丰登。,template-reviewed
+train-0159,train-single,zh,reunion,,0,今年最想看到早日回家，在新的日子里。,template-reviewed
+train-0160,train-single,zh,longevity,,0,今年最想看到美好延续，送给我在意的人。,template-reviewed
+train-0161,train-single,en,abundance,,0,I want to see prosperity through the seasons for everyone I care about.,template-reviewed
+train-0162,train-mixed,en,joy,courage,0,This year I hope for many reasons to smile; I also hope for growing resilient.,template-reviewed
+train-0163,train-single,zh,courage,,0,今年最想看到坚持自己的选择，愿好事慢慢发生。,template-reviewed
+train-0164,train-single,en,reunion,,0,My simple wish is meeting old friends again after every patient wait.,template-reviewed
+train-0165,train-single,en,joy,,0,Please weave a wish for lasting happiness starting today.,template-reviewed
+train-0166,train-single,zh,longevity,,0,我希望初心长存。,template-reviewed
+train-0167,train-single,en,courage,,0,My simple wish is overcoming this challenge after every patient wait.,template-reviewed
+train-0168,train-mixed,zh,joy,safety,0,我希望笑容常在，同时盼望生活安定。,template-reviewed
+train-0169,train-ambiguous,zh,reunion,,1,窗外有三棵树 2,template-reviewed
+train-0170,train-mixed,en,safety,longevity,0,"My heart asks for health and safety, together with goodness that continues.",template-reviewed
+train-0171,train-single,zh,safety,,0,愿望很简单，旅途顺利。,template-reviewed
+train-0172,train-single,en,joy,,0,"For tomorrow, I wish for joy every day with gratitude for this moment.",template-reviewed
+train-0173,train-single,zh,courage,,0,我的愿望是拥有勇气，不负每一次等待。,template-reviewed
+train-0174,train-single,en,abundance,,0,My heart asks for abundant inspiration as good things unfold.,template-reviewed
+train-0175,train-mixed,zh,abundance,reunion,0,今年最想看到收获满满，还想把祝福送给与故友重逢。,template-reviewed
+train-0176,train-ambiguous,zh,reunion,,1,桌上放着一本书 4,template-reviewed
+train-0177,train-single,en,courage,,0,My simple wish is growing resilient.,template-reviewed
+train-0178,train-single,en,joy,,0,Let this wish carry joy every day as good things unfold.,template-reviewed
+train-0179,train-single,en,reunion,,0,My simple wish is loved ones together in the days ahead.,template-reviewed
+train-0180,train-mixed,zh,abundance,reunion,0,愿望很简单，五谷丰登，也愿早日回家。,template-reviewed
+train-0181,train-single,en,reunion,,0,Please weave a wish for seeing those I miss starting today.,template-reviewed
+train-0182,train-single,zh,joy,,0,真心期待笑容常在，这是我最珍重的期待。,template-reviewed
+train-0183,train-single,zh,safety,,0,我的愿望是岁岁康宁，也送给每一个努力的人。,template-reviewed
+train-0184,train-single,zh,safety,,0,愿健康安稳，送给我在意的人。,template-reviewed
+train-0185,train-single,zh,joy,,0,愿生活有趣，愿好事慢慢发生。,template-reviewed
+train-0186,train-mixed,en,joy,reunion,0,"Please weave a wish for joy every day, and also coming home soon.",template-reviewed
+train-0187,train-single,zh,joy,,0,今年最想看到日日欢喜，从今天开始。,template-reviewed
+train-0188,train-single,en,joy,,0,Let this wish carry wonderful news for the people close to me.,template-reviewed
+train-0189,train-ambiguous,en,reunion,,1,there are three cups 3,template-reviewed
+train-0190,train-single,en,joy,,0,I sincerely hope for bright heart in the days ahead.,template-reviewed
+train-0191,train-single,en,reunion,,0,May there be our family reunites for everyone I care about.,template-reviewed
+train-0192,train-mixed,zh,courage,longevity,0,想对明天说：成长得更坚韧，还想把祝福送给陪伴到老。,template-reviewed
+train-0193,train-mixed,zh,safety,abundance,0,把这个心愿送给未来：健康安稳；更希望家业兴旺。,template-reviewed
+train-0194,train-single,en,abundance,,0,This year I hope for success in my work.,template-reviewed
+train-0195,train-single,zh,safety,,0,今年最想看到一路顺遂，愿好事慢慢发生。,template-reviewed
+train-0196,train-ambiguous,zh,abundance,,1,窗外有三棵树 3,template-reviewed
+train-0197,train-single,en,joy,,0,"For tomorrow, I wish for sharing delight for everyone I care about.",template-reviewed
+train-0198,train-single,zh,abundance,,0,我希望努力结出果实，在新的日子里。,template-reviewed
+train-0199,train-single,en,longevity,,0,"For tomorrow, I wish for goodness that continues for everyone I care about.",template-reviewed
+train-0200,train-single,zh,joy,,0,请替我织下幸福相伴，一直记在心里。,template-reviewed
+train-0201,train-ambiguous,en,abundance,,1,I wrote a short note 2,template-reviewed
+train-0202,train-single,zh,courage,,0,想对明天说：坚持自己的选择，一直记在心里。,template-reviewed
+train-0203,train-single,zh,reunion,,0,愿望很简单，再见想念的人。谢谢此刻的自己。,template-reviewed
+train-0204,train-single,zh,longevity,,0,愿情谊长久，一直记在心里。,template-reviewed
+train-0205,train-ambiguous,en,reunion,,1,this is an ordinary sentence 2,template-reviewed
+train-0206,train-single,en,safety,,0,I want to see peace at home—this matters deeply to me.,template-reviewed
+train-0207,train-single,zh,safety,,0,真心期待健康安稳，从今天开始。,template-reviewed
+train-0208,train-single,en,joy,,0,"For tomorrow, I wish for wonderful news.",template-reviewed
+train-0209,train-single,zh,courage,,0,真心期待不惧风雨，也送给每一个努力的人。,template-reviewed
+train-0210,train-ambiguous,zh,longevity,,1,这是一段普通描述 4,template-reviewed
+train-0211,train-single,en,abundance,,0,My simple wish is a plentiful life—this matters deeply to me.,template-reviewed
+train-0212,train-single,zh,courage,,0,我的愿望是拥有勇气，不负每一次等待。,template-reviewed
+train-0213,train-single,en,joy,,0,I want to see lasting happiness for the people close to me.,template-reviewed
+train-0214,train-ambiguous,en,safety,,1,there are three cups 1,template-reviewed
+train-0215,train-single,zh,joy,,0,我希望日日欢喜，不负每一次等待。,template-reviewed
+train-0216,train-single,zh,courage,,0,此刻我盼望坚持自己的选择，这是我最珍重的期待。,template-reviewed
+train-0217,train-mixed,en,joy,abundance,0,I sincerely hope for lasting happiness; I also hope for rewarding results.,template-reviewed
+train-0218,train-single,en,safety,,0,I sincerely hope for everyone stays well after every patient wait.,template-reviewed
+train-0219,train-single,zh,joy,,0,今年最想看到日日欢喜，从今天开始。,template-reviewed
+train-0220,train-single,en,abundance,,0,My heart asks for prosperity through the seasons as good things unfold.,template-reviewed
+train-0221,train-single,zh,abundance,,0,想对明天说：五谷丰登，不负每一次等待。,template-reviewed
+train-0222,train-single,en,courage,,0,I want to see strength through storms.,template-reviewed
+train-0223,train-ambiguous,zh,joy,,1,窗外有三棵树 4,template-reviewed
+train-0224,train-single,zh,safety,,0,我的愿望是一路顺遂，也送给每一个努力的人。,template-reviewed
+train-0225,train-single,zh,abundance,,0,此刻我盼望家业兴旺，从今天开始。,template-reviewed
+train-0226,train-single,en,longevity,,0,I want to see a long healthy life.,template-reviewed
+train-0227,train-single,zh,joy,,0,愿笑容常在，愿好事慢慢发生。,template-reviewed
+train-0228,train-single,en,reunion,,0,I wish for meeting old friends again starting today.,template-reviewed
+train-0229,train-single,en,safety,,0,I want to see health and safety and I will keep it in my heart.,template-reviewed
+train-0230,train-mixed,en,abundance,reunion,0,This year I hope for a plentiful life; I also hope for seeing those I miss.,template-reviewed
+train-0231,train-single,zh,courage,,0,请替我织下成长得更坚韧，一直记在心里。,template-reviewed
+train-0232,train-single,en,joy,,0,Please weave a wish for many reasons to smile after every patient wait.,template-reviewed
+train-0233,train-single,en,abundance,,0,I want to see a plentiful life and I will keep it in my heart.,template-reviewed
+train-0234,train-single,zh,joy,,0,真心期待收获快乐，这是我最珍重的期待。,template-reviewed
+train-0235,train-mixed,en,longevity,courage,0,"Let this wish carry a long healthy life, while carrying overcoming this challenge.",template-reviewed
+train-0236,train-single,zh,safety,,0,把这个心愿送给未来：出入平安，在新的日子里。,template-reviewed
+train-0237,train-single,zh,abundance,,0,我的愿望是五谷丰登，在新的日子里。,template-reviewed
+train-0238,train-ambiguous,zh,reunion,,1,窗外有三棵树 1,template-reviewed
+train-0239,train-single,zh,courage,,0,我的愿望是坚持自己的选择，也送给每一个努力的人。,template-reviewed
+train-0240,train-single,zh,safety,,0,我的愿望是被温柔守护，在新的日子里。,template-reviewed
+train-0241,train-single,zh,longevity,,0,今年最想看到美好延续，送给我在意的人。,template-reviewed
+train-0242,train-single,en,longevity,,0,I sincerely hope for purpose that endures in the days ahead.,template-reviewed
+train-0243,train-single,en,courage,,0,I want to see overcoming this challenge in the days ahead.,template-reviewed
+train-0244,train-mixed,en,abundance,courage,0,"I sincerely hope for prosperity through the seasons, while carrying strength through storms.",template-reviewed
+train-0245,train-ambiguous,en,longevity,,1,this is an ordinary sentence 1,template-reviewed
+train-0246,train-single,zh,reunion,,0,把这个心愿送给未来：与故友重逢。,template-reviewed
+train-0247,train-ambiguous,en,reunion,,1,the window faces east 4,template-reviewed
+train-0248,train-single,zh,joy,,0,真心期待收获快乐，这是我最珍重的期待。,template-reviewed
+train-0249,train-ambiguous,zh,reunion,,1,这是一段普通描述 3,template-reviewed
+train-0250,train-single,en,abundance,,0,Please weave a wish for prosperity through the seasons with gratitude for this moment.,template-reviewed
+train-0251,train-mixed,en,reunion,joy,0,"Please weave a wish for gathering around one table, together with joy every day.",template-reviewed
+train-0252,train-single,zh,safety,,0,真心期待家人平安，从今天开始。,template-reviewed
+train-0253,train-single,zh,joy,,0,此刻我盼望遇见好消息，这是我最珍重的期待。,template-reviewed
+train-0254,train-single,zh,safety,,0,我希望被温柔守护。,template-reviewed
+train-0255,train-single,en,abundance,,0,I sincerely hope for abundant harvest with gratitude for this moment.,template-reviewed
+train-0256,train-mixed,en,joy,abundance,0,"My heart asks for joy every day, and also success in my work.",template-reviewed
+train-0257,train-single,en,courage,,0,Please weave a wish for strength through storms after every patient wait.,template-reviewed
+train-0258,train-ambiguous,en,joy,,1,there are three cups 4,template-reviewed
+train-0259,train-single,en,abundance,,0,I wish for prosperity through the seasons—this matters deeply to me.,template-reviewed
+train-0260,train-single,en,longevity,,0,Please weave a wish for long healthy life after every patient wait.,template-reviewed
+train-0261,train-single,en,courage,,0,I want to see growing resilient starting today.,template-reviewed
+train-0262,train-mixed,en,longevity,abundance,0,"This year I hope for family stories lasting generations, while carrying abundant inspiration.",template-reviewed
+train-0263,train-ambiguous,en,joy,,1,I wrote a short note 1,template-reviewed
+train-0264,train-single,zh,reunion,,0,真心期待亲人常相聚，在新的日子里。,template-reviewed
+train-0265,train-mixed,zh,reunion,joy,0,把这个心愿送给未来：早日回家；更希望分享喜悦。,template-reviewed
+train-0266,train-single,en,safety,,0,"For tomorrow, I wish for peaceful journey as good things unfold.",template-reviewed
+train-0267,train-mixed,en,courage,longevity,0,Let this wish carry strength through storms; I also hope for a long healthy life.,template-reviewed
+train-0268,train-mixed,en,longevity,safety,0,"For tomorrow, I wish for a long healthy life, while carrying a peaceful journey.",template-reviewed
+train-0269,train-ambiguous,en,courage,,1,the window faces east 2,template-reviewed
+train-0270,train-single,en,longevity,,0,This year I hope for goodness that continues as good things unfold.,template-reviewed
+train-0271,train-single,en,safety,,0,Let this wish carry gentle protection.,template-reviewed
+train-0272,train-mixed,zh,longevity,safety,0,我的愿望是家族故事代代相传，还想把祝福送给岁岁康宁。,template-reviewed
+train-0273,train-ambiguous,zh,joy,,1,窗外有三棵树 3,template-reviewed
+train-0274,train-single,en,safety,,0,This year I hope for gentle protection after every patient wait.,template-reviewed
+train-0275,train-single,zh,courage,,0,把这个心愿送给未来：成长得更坚韧，也送给每一个努力的人。,template-reviewed
+train-0276,train-single,zh,reunion,,0,我的愿望是团聚有期，不负每一次等待。,template-reviewed
+train-0277,train-ambiguous,en,courage,,1,the room is quiet 4,template-reviewed
+train-0278,train-mixed,en,courage,joy,0,"I want to see a steady heart, and also wonderful news.",template-reviewed
+train-0279,train-single,zh,safety,,0,想对明天说：生活安定，一直记在心里。,template-reviewed
+train-0280,train-ambiguous,zh,safety,,1,窗外有三棵树 2,template-reviewed
+train-0281,train-single,zh,reunion,,0,请替我织下再见想念的人，一直记在心里。,template-reviewed
+train-0282,train-single,en,reunion,,0,My heart asks for festival together.,template-reviewed
+train-0283,train-single,en,courage,,0,My simple wish is a brave new start.,template-reviewed
+train-0284,train-single,zh,joy,,0,真心期待生活有趣，这是我最珍重的期待。,template-reviewed
+train-0285,train-single,en,joy,,0,I wish for playful life as good things unfold.,template-reviewed
+train-0286,train-single,en,courage,,0,May there be a steady heart for the people close to me.,template-reviewed
+train-0287,train-single,zh,safety,,0,此刻我盼望被温柔守护，从今天开始。,template-reviewed
+train-0288,train-ambiguous,zh,safety,,1,桌上放着一本书 2,template-reviewed
+train-0289,train-ambiguous,zh,abundance,,1,窗外有三棵树 1,template-reviewed
+train-0290,train-ambiguous,zh,longevity,,1,今天穿蓝色衣服 3,template-reviewed
+train-0291,train-ambiguous,zh,abundance,,1,桌上放着一本书 3,template-reviewed
+train-0292,train-single,en,longevity,,0,I sincerely hope for many meaningful years for everyone I care about.,template-reviewed
+train-0293,train-single,en,courage,,0,This year I hope for steady heart in the days ahead.,template-reviewed
+train-0294,train-single,en,safety,,0,"For tomorrow, I wish for everyone stays well for the people close to me.",template-reviewed
+train-0295,train-single,en,joy,,0,This year I hope for joy every day—this matters deeply to me.,template-reviewed
+train-0296,train-single,zh,abundance,,0,今年最想看到五谷丰登，送给我在意的人。,template-reviewed
+train-0297,train-mixed,zh,longevity,abundance,0,愿望很简单，长辈长寿，也愿事业有成。,template-reviewed
+train-0298,train-ambiguous,en,joy,,1,this is an ordinary sentence 1,template-reviewed
+train-0299,train-ambiguous,zh,abundance,,1,桌上放着一本书 2,template-reviewed
+train-0300,train-single,zh,reunion,,0,想对明天说：家人围坐，从今天开始。,template-reviewed
+train-0301,train-ambiguous,zh,longevity,,1,我在学习一门新语言 4,template-reviewed
+train-0302,train-single,zh,safety,,0,愿出入平安，送给我在意的人。,template-reviewed
+train-0303,train-single,zh,safety,,0,愿望很简单，旅途顺利。,template-reviewed
+train-0304,train-single,zh,safety,,0,愿健康安稳，送给我在意的人。,template-reviewed
+train-0305,train-single,zh,abundance,,0,我的愿望是事业有成，在新的日子里。,template-reviewed
+train-0306,train-single,en,reunion,,0,I want to see a festival together for the people close to me.,template-reviewed
+train-0307,train-single,en,reunion,,0,I sincerely hope for joyful reunion in the days ahead.,template-reviewed
+train-0308,train-single,zh,abundance,,0,愿收获满满，一直记在心里。,template-reviewed
+train-0309,train-ambiguous,zh,abundance,,1,窗外有三棵树 2,template-reviewed
+train-0310,train-mixed,zh,abundance,joy,0,愿事业有成；更希望分享喜悦。,template-reviewed
+train-0311,train-ambiguous,en,reunion,,1,there are three cups 4,template-reviewed
+train-0312,train-single,zh,reunion,,0,此刻我盼望早日回家。,template-reviewed
+train-0313,train-single,en,longevity,,0,Let this wish carry goodness that continues and I will keep it in my heart.,template-reviewed
+train-0314,train-ambiguous,zh,joy,,1,窗外有三棵树 2,template-reviewed
+train-0315,train-single,zh,reunion,,0,想对明天说：一家团圆，从今天开始。,template-reviewed
+train-0316,train-ambiguous,en,courage,,1,I wrote a short note 3,template-reviewed
+train-0317,train-ambiguous,en,joy,,1,there are three cups 3,template-reviewed
+train-0318,train-single,zh,reunion,,0,愿望很简单，共度佳节，一直记在心里。,template-reviewed
+train-0319,train-single,en,courage,,0,Please weave a wish for brave new start in the days ahead.,template-reviewed
+train-0320,train-single,en,abundance,,0,Let this wish carry success in my work in the days ahead.,template-reviewed
+train-0321,train-single,zh,reunion,,0,我希望早日回家，送给我在意的人。,template-reviewed
+train-0322,train-single,zh,reunion,,0,真心期待与故友重逢，在新的日子里。,template-reviewed
+train-0323,train-single,zh,safety,,0,请替我织下家人平安，不负每一次等待。,template-reviewed
+train-0324,train-single,zh,courage,,0,今年最想看到勇敢向前，在新的日子里。,template-reviewed
+train-0325,train-ambiguous,en,longevity,,1,I wrote a short note 1,template-reviewed
+train-0326,train-single,en,longevity,,0,I want to see family stories lasting generations as good things unfold.,template-reviewed
+train-0327,train-ambiguous,zh,safety,,1,今天穿蓝色衣服 4,template-reviewed
+train-0328,train-ambiguous,en,courage,,1,I wrote a short note 1,template-reviewed
+train-0329,train-ambiguous,en,abundance,,1,the window faces east 2,template-reviewed
+train-0330,train-single,zh,courage,,0,请替我织下跨过难关，愿好事慢慢发生。,template-reviewed
+train-0331,train-mixed,en,abundance,joy,0,"I wish for a thriving home, and also wonderful news.",template-reviewed
+train-0332,train-ambiguous,en,safety,,1,this is an ordinary sentence 3,template-reviewed
+train-0333,train-mixed,en,joy,safety,0,May there be lasting happiness; I also hope for gentle protection.,template-reviewed
+train-0334,train-single,zh,joy,,0,今年最想看到心里明亮，从今天开始。,template-reviewed
+train-0335,train-single,zh,longevity,,0,请替我织下情谊长久。谢谢此刻的自己。,template-reviewed
+train-0336,train-single,en,courage,,0,My heart asks for brave new start after every patient wait.,template-reviewed
+train-0337,train-single,en,joy,,0,"For tomorrow, I wish for sharing delight for everyone I care about.",template-reviewed
+train-0338,train-single,en,joy,,0,"For tomorrow, I wish for bright heart.",template-reviewed
+train-0339,train-mixed,zh,courage,joy,0,真心期待勇敢向前，也愿心里明亮。,template-reviewed
+train-0340,train-ambiguous,zh,reunion,,1,这是一段普通描述 1,template-reviewed
+train-0341,train-ambiguous,zh,safety,,1,我在学习一门新语言 2,template-reviewed
+train-0342,train-ambiguous,en,abundance,,1,the room is quiet 3,template-reviewed
+train-0343,train-single,zh,reunion,,0,愿再见想念的人，愿好事慢慢发生。,template-reviewed
+train-0344,train-single,zh,abundance,,0,我希望事业有成。,template-reviewed
+train-0345,train-single,en,joy,,0,I wish for finding happiness after every patient wait.,template-reviewed
+train-0346,train-mixed,en,safety,reunion,0,"For tomorrow, I wish for gentle protection, while carrying meeting old friends again.",template-reviewed
+train-0347,train-ambiguous,en,reunion,,1,the room is quiet 1,template-reviewed
+train-0348,train-single,zh,longevity,,0,我的愿望是岁月绵长，在新的日子里。,template-reviewed
+train-0349,train-ambiguous,zh,reunion,,1,今天穿蓝色衣服 3,template-reviewed
+train-0350,train-single,zh,longevity,,0,我希望长辈长寿。,template-reviewed
+train-0351,train-mixed,en,abundance,reunion,0,"My simple wish is a thriving home, and also gathering around one table.",template-reviewed
+train-0352,train-ambiguous,zh,courage,,1,桌上放着一本书 4,template-reviewed
+train-0353,train-single,zh,safety,,0,请替我织下家人平安，不负每一次等待。,template-reviewed
+train-0354,train-single,en,longevity,,0,My simple wish is a long healthy life for the people close to me.,template-reviewed
+train-0355,train-single,zh,safety,,0,把这个心愿送给未来：健康安稳，在新的日子里。,template-reviewed
+train-0356,train-ambiguous,en,joy,,1,this is an ordinary sentence 2,template-reviewed
+train-0357,train-ambiguous,en,longevity,,1,the window faces east 1,template-reviewed
+train-0358,train-single,zh,safety,,0,把这个心愿送给未来：健康安稳，在新的日子里。,template-reviewed
+train-0359,train-single,en,abundance,,0,I wish for prosperity through the seasons—this matters deeply to me.,template-reviewed
+train-0360,train-mixed,en,safety,abundance,0,"Let this wish carry gentle protection, while carrying a plentiful life.",template-reviewed
+train-0361,train-single,en,abundance,,0,Let this wish carry an abundant harvest—this matters deeply to me.,template-reviewed
+train-0362,train-single,zh,reunion,,0,真心期待再见想念的人，这是我最珍重的期待。,template-reviewed
+train-0363,train-ambiguous,zh,longevity,,1,这是一段普通描述 3,template-reviewed
+train-0364,train-single,zh,courage,,0,今年最想看到拥有勇气，在新的日子里。,template-reviewed
+train-0365,train-single,en,safety,,0,May there be gentle protection in the days ahead.,template-reviewed
+train-0366,train-ambiguous,en,courage,,1,I wrote a short note 2,template-reviewed
+train-0367,train-single,en,joy,,0,I want to see a playful life—this matters deeply to me.,template-reviewed
+train-0368,train-single,zh,courage,,0,把这个心愿送给未来：不惧风雨。谢谢此刻的自己。,template-reviewed
+train-0369,train-ambiguous,zh,safety,,1,我在学习一门新语言 3,template-reviewed
+train-0370,train-mixed,en,reunion,longevity,0,"This year I hope for seeing those I miss, while carrying growing old together.",template-reviewed
+train-0371,train-single,en,joy,,0,I want to see lasting happiness for the people close to me.,template-reviewed
+train-0372,train-single,zh,courage,,0,真心期待跨过难关，也送给每一个努力的人。,template-reviewed
+train-0373,train-single,en,reunion,,0,Let this wish carry coming home soon for the people close to me.,template-reviewed
+train-0374,train-ambiguous,zh,joy,,1,窗外有三棵树 1,template-reviewed
+train-0375,train-single,en,joy,,0,I sincerely hope for joy every day for everyone I care about.,template-reviewed
+train-0376,train-mixed,zh,safety,reunion,0,我的愿望是生活安定，还想把祝福送给共度佳节。,template-reviewed
+train-0377,train-single,zh,longevity,,0,请替我织下家族故事代代相传，这是我最珍重的期待。,template-reviewed
+train-0378,train-ambiguous,zh,joy,,1,今天穿蓝色衣服 2,template-reviewed
+train-0379,train-single,zh,longevity,,0,请替我织下福寿安康。谢谢此刻的自己。,template-reviewed
+train-0380,train-single,zh,longevity,,0,愿家族故事代代相传，也送给每一个努力的人。,template-reviewed
+train-0381,train-ambiguous,zh,safety,,1,这是一段普通描述 4,template-reviewed
+train-0382,train-ambiguous,zh,abundance,,1,今天穿蓝色衣服 4,template-reviewed
+train-0383,train-single,en,reunion,,0,I sincerely hope for our family reunites as good things unfold.,template-reviewed
+train-0384,train-ambiguous,zh,courage,,1,窗外有三棵树 4,template-reviewed
+train-0385,train-single,zh,joy,,0,此刻我盼望日日欢喜，在新的日子里。,template-reviewed
+train-0386,train-single,en,reunion,,0,My heart asks for seeing those I miss.,template-reviewed
+train-0387,train-mixed,zh,joy,reunion,0,把这个心愿送给未来：分享喜悦，也愿家人围坐。,template-reviewed
+train-0388,train-single,zh,reunion,,0,我的愿望是团聚有期，不负每一次等待。,template-reviewed
+train-0389,train-single,zh,courage,,0,把这个心愿送给未来：重新出发。谢谢此刻的自己。,template-reviewed
+train-0390,train-single,en,safety,,0,My heart asks for peace at home and I will keep it in my heart.,template-reviewed
+train-0391,train-single,zh,longevity,,0,愿陪伴到老，一直记在心里。,template-reviewed
+train-0392,train-mixed,en,reunion,safety,0,"My heart asks for coming home soon, together with safe travels.",template-reviewed
+train-0393,train-mixed,zh,longevity,reunion,0,我希望福寿安康，还想把祝福送给与故友重逢。,template-reviewed
+train-0394,train-ambiguous,en,longevity,,1,there are three cups 3,template-reviewed
+train-0395,train-single,zh,reunion,,0,我希望家人围坐，送给我在意的人。,template-reviewed
+train-0396,train-single,zh,courage,,0,愿望很简单，重新出发，一直记在心里。,template-reviewed
+train-0397,train-single,en,longevity,,0,"For tomorrow, I wish for purpose that endures.",template-reviewed
+train-0398,train-single,zh,abundance,,0,我希望五谷丰登。,template-reviewed
+train-0399,train-single,zh,longevity,,0,今年最想看到初心长存，送给我在意的人。,template-reviewed
+train-0400,train-single,en,safety,,0,May there be a calm life for the people close to me.,template-reviewed
+train-0401,train-single,zh,joy,,0,请替我织下笑容常在，一直记在心里。,template-reviewed
+train-0402,train-mixed,en,reunion,courage,0,"I wish for a joyful reunion, and also finding my courage.",template-reviewed
+train-0403,train-single,en,longevity,,0,"For tomorrow, I wish for longevity for my elders for everyone I care about.",template-reviewed
+train-0404,train-single,zh,joy,,0,此刻我盼望分享喜悦，在新的日子里。,template-reviewed
+train-0405,train-single,zh,abundance,,0,我希望五谷丰登。,template-reviewed
+train-0406,train-single,en,longevity,,0,Let this wish carry longevity for my elders and I will keep it in my heart.,template-reviewed
+train-0407,train-ambiguous,zh,abundance,,1,窗外有三棵树 4,template-reviewed
+train-0408,train-single,en,safety,,0,I sincerely hope for gentle protection for the people close to me.,template-reviewed
+train-0409,train-single,en,longevity,,0,I sincerely hope for many meaningful years for everyone I care about.,template-reviewed
+train-0410,train-single,en,courage,,0,My heart asks for strength through storms starting today.,template-reviewed
+train-0411,train-single,zh,joy,,0,我希望分享喜悦，不负每一次等待。,template-reviewed
+train-0412,train-single,en,reunion,,0,I want to see meeting old friends again in the days ahead.,template-reviewed
+train-0413,train-single,zh,joy,,0,愿收获快乐，愿好事慢慢发生。,template-reviewed
+train-0414,train-single,zh,abundance,,0,此刻我盼望事业有成，从今天开始。,template-reviewed
+train-0415,train-ambiguous,zh,abundance,,1,我在学习一门新语言 1,template-reviewed
+train-0416,train-ambiguous,en,reunion,,1,this is an ordinary sentence 1,template-reviewed
+train-0417,train-ambiguous,zh,longevity,,1,这是一段普通描述 2,template-reviewed
+train-0418,train-single,en,joy,,0,This year I hope for bright heart starting today.,template-reviewed
+train-0419,train-single,zh,joy,,0,请替我织下收获快乐，一直记在心里。,template-reviewed
+train-0420,train-single,en,reunion,,0,This year I hope for our family reunites and I will keep it in my heart.,template-reviewed
+train-0421,train-single,zh,longevity,,0,愿望很简单，福寿安康，也送给每一个努力的人。,template-reviewed
+train-0422,train-single,en,safety,,0,May there be everyone stays well starting today.,template-reviewed
+train-0423,train-single,zh,longevity,,0,此刻我盼望长辈长寿，从今天开始。,template-reviewed
+train-0424,train-ambiguous,en,reunion,,1,this is an ordinary sentence 3,template-reviewed
+train-0425,train-single,zh,longevity,,0,真心期待家族故事代代相传。谢谢此刻的自己。,template-reviewed
+train-0426,train-single,en,safety,,0,May there be a calm life for the people close to me.,template-reviewed
+train-0427,train-single,en,safety,,0,I sincerely hope for gentle protection for the people close to me.,template-reviewed
+train-0428,train-single,en,joy,,0,This year I hope for bright heart starting today.,template-reviewed
+train-0429,train-ambiguous,en,longevity,,1,there are three cups 2,template-reviewed
+train-0430,train-single,en,joy,,0,This year I hope for wonderful news starting today.,template-reviewed
+train-0431,train-single,en,joy,,0,May there be sharing delight with gratitude for this moment.,template-reviewed
+train-0432,train-single,zh,reunion,,0,此刻我盼望团聚有期。,template-reviewed
+train-0433,train-mixed,zh,reunion,longevity,0,愿望很简单，早日回家；更希望美好延续。,template-reviewed
+train-0434,train-single,en,reunion,,0,"For tomorrow, I wish for coming home soon.",template-reviewed
+train-0435,train-single,zh,courage,,0,愿望很简单，跨过难关，一直记在心里。,template-reviewed
+train-0436,train-ambiguous,zh,longevity,,1,窗外有三棵树 2,template-reviewed
+train-0437,train-ambiguous,zh,abundance,,1,这是一段普通描述 2,template-reviewed
+train-0438,train-ambiguous,zh,courage,,1,这是一段普通描述 4,template-reviewed
+train-0439,train-mixed,en,abundance,safety,0,"Let this wish carry rewarding results, while carrying a peaceful journey.",template-reviewed
+train-0440,train-ambiguous,zh,reunion,,1,我在学习一门新语言 1,template-reviewed
+train-0441,train-single,en,reunion,,0,May there be a joyful reunion after every patient wait.,template-reviewed
+train-0442,train-single,en,safety,,0,This year I hope for calm life in the days ahead.,template-reviewed
+train-0443,train-mixed,zh,courage,longevity,0,把这个心愿送给未来：坚持自己的选择；更希望美好延续。,template-reviewed
+train-0444,train-single,zh,abundance,,0,真心期待灵感丰沛，愿好事慢慢发生。,template-reviewed
+train-0445,train-ambiguous,en,safety,,1,the room is quiet 2,template-reviewed
+train-0446,train-mixed,zh,joy,reunion,0,想对明天说：笑容常在，同时盼望再见想念的人。,template-reviewed
+train-0447,train-single,en,reunion,,0,My simple wish is a festival together in the days ahead.,template-reviewed
+train-0448,train-ambiguous,zh,joy,,1,这是一段普通描述 2,template-reviewed
+train-0449,train-single,en,reunion,,0,I sincerely hope for our family reunites as good things unfold.,template-reviewed
+train-0450,train-single,zh,reunion,,0,愿共度佳节，这是我最珍重的期待。,template-reviewed
+train-0451,train-single,en,abundance,,0,"For tomorrow, I wish for success in my work for the people close to me.",template-reviewed
+train-0452,train-ambiguous,en,safety,,1,the window faces east 4,template-reviewed
+train-0453,train-single,zh,reunion,,0,我希望一家团圆，送给我在意的人。,template-reviewed
+train-0454,train-mixed,en,longevity,reunion,0,"I want to see goodness that continues, and also gathering around one table.",template-reviewed
+train-0455,train-single,en,joy,,0,May there be a bright heart after every patient wait.,template-reviewed
+train-0456,train-single,en,abundance,,0,My simple wish is prosperity through the seasons and I will keep it in my heart.,template-reviewed
+train-0457,train-single,zh,abundance,,0,我希望努力结出果实，在新的日子里。,template-reviewed
+train-0458,train-single,en,abundance,,0,My simple wish is abundant inspiration and I will keep it in my heart.,template-reviewed
+train-0459,train-mixed,zh,courage,longevity,0,想对明天说：跨过难关，同时盼望家族故事代代相传。,template-reviewed
+train-0460,train-single,zh,longevity,,0,我希望长辈长寿。,template-reviewed
+train-0461,train-single,en,reunion,,0,Please weave a wish for loved ones together starting today.,template-reviewed
+train-0462,train-single,zh,courage,,0,我希望勇敢向前，送给我在意的人。,template-reviewed
+train-0463,train-single,en,abundance,,0,Please weave a wish for rewarding results for the people close to me.,template-reviewed
+train-0464,train-single,zh,joy,,0,愿望很简单，生活有趣。谢谢此刻的自己。,template-reviewed
+train-0465,train-single,en,safety,,0,My heart asks for safe travels for the people close to me.,template-reviewed
+train-0466,train-mixed,zh,courage,reunion,0,请替我织下拥有勇气；更希望一家团圆。,template-reviewed
+train-0467,train-single,zh,longevity,,0,把这个心愿送给未来：情谊长久，这是我最珍重的期待。,template-reviewed
+train-0468,train-single,en,longevity,,0,My simple wish is a lasting friendship and I will keep it in my heart.,template-reviewed
+train-0469,train-ambiguous,en,longevity,,1,I wrote a short note 2,template-reviewed
+train-0470,train-single,en,abundance,,0,This year I hope for abundant harvest for everyone I care about.,template-reviewed
+train-0471,train-single,en,safety,,0,I sincerely hope for peaceful journey and I will keep it in my heart.,template-reviewed
+train-0472,train-single,en,longevity,,0,I want to see a lasting friendship for everyone I care about.,template-reviewed
+train-0473,train-single,zh,longevity,,0,想对明天说：岁月绵长，不负每一次等待。,template-reviewed
+train-0474,train-single,zh,abundance,,0,真心期待收获满满，愿好事慢慢发生。,template-reviewed
+train-0475,train-single,zh,abundance,,0,愿望很简单，灵感丰沛，也送给每一个努力的人。,template-reviewed
+train-0476,train-ambiguous,en,safety,,1,there are three cups 2,template-reviewed
+train-0477,train-single,zh,abundance,,0,把这个心愿送给未来：收获满满，这是我最珍重的期待。,template-reviewed
+train-0478,train-mixed,zh,courage,joy,0,真心期待拥有勇气；更希望日日欢喜。,template-reviewed
+train-0479,train-ambiguous,en,reunion,,1,the room is quiet 4,template-reviewed
+train-0480,train-single,en,joy,,0,I wish for many reasons to smile in the days ahead.,template-reviewed
+train-0481,train-single,zh,reunion,,0,我希望早日回家，送给我在意的人。,template-reviewed
+train-0482,train-single,en,courage,,0,I want to see strength through storms.,template-reviewed
+train-0483,train-single,zh,joy,,0,我的愿望是心里明亮。,template-reviewed
+train-0484,train-single,zh,longevity,,0,想对明天说：岁月绵长，不负每一次等待。,template-reviewed
+train-0485,train-single,zh,joy,,0,想对明天说：遇见好消息，一直记在心里。,template-reviewed
+train-0486,train-single,zh,joy,,0,我的愿望是遇见好消息，也送给每一个努力的人。,template-reviewed
+train-0487,train-ambiguous,en,safety,,1,this is an ordinary sentence 1,template-reviewed
+train-0488,train-single,en,abundance,,0,I want to see abundant inspiration for everyone I care about.,template-reviewed
+train-0489,train-ambiguous,en,courage,,1,this is an ordinary sentence 3,template-reviewed
+train-0490,train-single,en,safety,,0,I sincerely hope for everyone stays well after every patient wait.,template-reviewed
+train-0491,train-single,zh,courage,,0,此刻我盼望勇敢向前。,template-reviewed
+train-0492,train-mixed,en,safety,longevity,0,"I sincerely hope for everyone stays well, while carrying growing old together.",template-reviewed
+train-0493,train-mixed,en,courage,abundance,0,"I wish for finding my courage, together with an abundant harvest.",template-reviewed
+train-0494,train-single,zh,abundance,,0,我希望事业有成。,template-reviewed
+train-0495,train-single,en,joy,,0,My heart asks for lasting happiness.,template-reviewed
+train-0496,train-ambiguous,en,abundance,,1,the window faces east 1,template-reviewed
+train-0497,train-single,en,abundance,,0,My simple wish is a plentiful life—this matters deeply to me.,template-reviewed
+train-0498,train-ambiguous,en,longevity,,1,this is an ordinary sentence 4,template-reviewed
+train-0499,train-single,en,longevity,,0,Please weave a wish for family stories lasting generations—this matters deeply to me.,template-reviewed
+train-0500,train-single,en,safety,,0,Let this wish carry a peaceful journey for everyone I care about.,template-reviewed
+train-0501,train-single,zh,courage,,0,愿成长得更坚韧，愿好事慢慢发生。,template-reviewed
+train-0502,train-single,en,longevity,,0,My heart asks for long healthy life starting today.,template-reviewed
+train-0503,train-single,zh,longevity,,0,请替我织下福寿安康。谢谢此刻的自己。,template-reviewed
+train-0504,train-single,zh,reunion,,0,我希望团聚有期，送给我在意的人。,template-reviewed
+train-0505,train-mixed,en,joy,abundance,0,"My heart asks for a bright heart, together with a thriving home.",template-reviewed
+train-0506,train-mixed,en,reunion,safety,0,I sincerely hope for a festival together; I also hope for gentle protection.,template-reviewed
+train-0507,train-single,en,longevity,,0,Please weave a wish for lasting friendship with gratitude for this moment.,template-reviewed
+train-0508,train-mixed,zh,longevity,abundance,0,今年最想看到福寿安康，还想把祝福送给生活丰足。,template-reviewed
+train-0509,train-single,en,abundance,,0,Please weave a wish for abundant inspiration with gratitude for this moment.,template-reviewed
+train-0510,train-single,zh,longevity,,0,愿望很简单，家族故事代代相传，愿好事慢慢发生。,template-reviewed
+train-0511,train-mixed,en,courage,longevity,0,"Please weave a wish for finding my courage, together with longevity for my elders.",template-reviewed
+train-0512,train-single,zh,reunion,,0,想对明天说：家人围坐，从今天开始。,template-reviewed
+train-0513,train-single,zh,abundance,,0,请替我织下生活丰足。谢谢此刻的自己。,template-reviewed
+train-0514,train-single,en,reunion,,0,I want to see meeting old friends again in the days ahead.,template-reviewed
+train-0515,train-mixed,zh,safety,courage,0,真心期待旅途顺利；更希望勇敢向前。,template-reviewed
+train-0516,train-single,en,longevity,,0,I sincerely hope for longevity for my elders—this matters deeply to me.,template-reviewed
+train-0517,train-mixed,zh,joy,abundance,0,此刻我盼望收获快乐，还想把祝福送给生活丰足。,template-reviewed
+train-0518,train-single,zh,longevity,,0,愿望很简单，陪伴到老，也送给每一个努力的人。,template-reviewed
+train-0519,train-ambiguous,zh,safety,,1,这是一段普通描述 2,template-reviewed
+train-0520,train-single,zh,abundance,,0,我的愿望是家业兴旺，在新的日子里。,template-reviewed
+train-0521,train-mixed,zh,joy,courage,0,今年最想看到收获快乐，还想把祝福送给跨过难关。,template-reviewed
+train-0522,train-single,zh,courage,,0,此刻我盼望勇敢向前。,template-reviewed
+train-0523,train-single,zh,abundance,,0,把这个心愿送给未来：灵感丰沛，这是我最珍重的期待。,template-reviewed
+train-0524,train-single,en,reunion,,0,My simple wish is seeing those I miss in the days ahead.,template-reviewed
+train-0525,train-single,en,abundance,,0,Please weave a wish for abundant inspiration with gratitude for this moment.,template-reviewed
+train-0526,train-single,zh,abundance,,0,想对明天说：家业兴旺，不负每一次等待。,template-reviewed
+train-0527,train-ambiguous,zh,courage,,1,今天穿蓝色衣服 1,template-reviewed
+train-0528,train-single,zh,courage,,0,我希望拥有勇气，送给我在意的人。,template-reviewed
+train-0529,train-ambiguous,en,courage,,1,this is an ordinary sentence 4,template-reviewed
+train-0530,train-ambiguous,en,joy,,1,this is an ordinary sentence 4,template-reviewed
+train-0531,train-ambiguous,en,reunion,,1,I wrote a short note 4,template-reviewed
+train-0532,train-single,en,joy,,0,My simple wish is a playful life with gratitude for this moment.,template-reviewed
+train-0533,train-single,zh,longevity,,0,今年最想看到岁月绵长，送给我在意的人。,template-reviewed
+train-0534,train-single,zh,safety,,0,此刻我盼望岁岁康宁，这是我最珍重的期待。,template-reviewed
+train-0535,train-single,zh,abundance,,0,此刻我盼望事业有成，从今天开始。,template-reviewed
+train-0536,train-single,en,reunion,,0,I sincerely hope for joyful reunion in the days ahead.,template-reviewed
+train-0537,train-mixed,zh,abundance,courage,0,请替我织下努力结出果实；更希望勇敢向前。,template-reviewed
+train-0538,train-single,en,longevity,,0,This year I hope for purpose that endures starting today.,template-reviewed
+train-0539,train-mixed,zh,joy,abundance,0,此刻我盼望笑容常在，同时盼望四季富足。,template-reviewed
+train-0540,train-single,en,abundance,,0,Let this wish carry a thriving home with gratitude for this moment.,template-reviewed
+train-0541,train-single,en,joy,,0,My simple wish is many reasons to smile for the people close to me.,template-reviewed
+train-0542,train-single,en,longevity,,0,I wish for long healthy life in the days ahead.,template-reviewed
+train-0543,train-single,zh,abundance,,0,把这个心愿送给未来：四季富足，这是我最珍重的期待。,template-reviewed
+train-0544,train-single,en,courage,,0,My heart asks for growing resilient after every patient wait.,template-reviewed
+train-0545,train-ambiguous,en,longevity,,1,the room is quiet 3,template-reviewed
+train-0546,train-single,zh,longevity,,0,此刻我盼望初心长存，从今天开始。,template-reviewed
+train-0547,train-single,en,reunion,,0,May there be gathering around one table after every patient wait.,template-reviewed
+train-0548,train-ambiguous,en,reunion,,1,I wrote a short note 3,template-reviewed
+train-0549,train-single,zh,safety,,0,想对明天说：岁岁康宁，一直记在心里。,template-reviewed
+train-0550,train-single,zh,safety,,0,愿望很简单，出入平安。,template-reviewed
+train-0551,train-ambiguous,en,abundance,,1,the window faces east 3,template-reviewed
+train-0552,train-single,en,safety,,0,My heart asks for health and safety for everyone I care about.,template-reviewed
+train-0553,train-single,zh,abundance,,0,真心期待四季富足，愿好事慢慢发生。,template-reviewed
+train-0554,train-single,en,joy,,0,I sincerely hope for sharing delight—this matters deeply to me.,template-reviewed
+train-0555,train-single,en,abundance,,0,"For tomorrow, I wish for thriving home—this matters deeply to me.",template-reviewed
+train-0556,train-single,zh,joy,,0,想对明天说：分享喜悦，送给我在意的人。,template-reviewed
+train-0557,train-single,en,longevity,,0,My simple wish is family stories lasting generations for everyone I care about.,template-reviewed
+train-0558,train-ambiguous,zh,joy,,1,我在学习一门新语言 2,template-reviewed
+train-0559,train-single,zh,courage,,0,我的愿望是勇敢向前，不负每一次等待。,template-reviewed
+train-0560,train-single,zh,courage,,0,想对明天说：拥有勇气，从今天开始。,template-reviewed
+train-0561,train-single,zh,abundance,,0,请替我织下收获满满。谢谢此刻的自己。,template-reviewed
+train-0562,train-single,en,courage,,0,I sincerely hope for steady heart.,template-reviewed
+train-0563,train-single,en,safety,,0,My simple wish is safe travels after every patient wait.,template-reviewed
+train-0564,train-mixed,en,courage,abundance,0,"For tomorrow, I wish for a brave new start, while carrying a plentiful life.",template-reviewed
+train-0565,train-single,zh,abundance,,0,我的愿望是事业有成，在新的日子里。,template-reviewed
+train-0566,train-single,en,reunion,,0,I wish for festival together after every patient wait.,template-reviewed
+train-0567,train-single,zh,reunion,,0,请替我织下亲人常相聚，送给我在意的人。,template-reviewed
+train-0568,train-single,zh,joy,,0,我希望心里明亮，不负每一次等待。,template-reviewed
+train-0569,train-single,en,courage,,0,I sincerely hope for courage to move forward with gratitude for this moment.,template-reviewed
+train-0570,train-single,en,courage,,0,I sincerely hope for courage to move forward with gratitude for this moment.,template-reviewed
+train-0571,train-single,en,joy,,0,Please weave a wish for playful life for everyone I care about.,template-reviewed
+train-0572,train-ambiguous,zh,abundance,,1,我在学习一门新语言 2,template-reviewed
+train-0573,train-ambiguous,zh,longevity,,1,桌上放着一本书 3,template-reviewed
+train-0574,train-mixed,en,reunion,longevity,0,This year I hope for meeting old friends again; I also hope for family stories lasting generations.,template-reviewed
+train-0575,train-single,zh,reunion,,0,真心期待亲人常相聚，在新的日子里。,template-reviewed
+train-0576,train-mixed,zh,safety,courage,0,我希望一路顺遂，同时盼望成长得更坚韧。,template-reviewed
+train-0577,train-single,en,joy,,0,My simple wish is a playful life with gratitude for this moment.,template-reviewed
+train-0578,train-single,zh,courage,,0,此刻我盼望拥有勇气。,template-reviewed
+train-0579,train-single,zh,longevity,,0,请替我织下家族故事代代相传，这是我最珍重的期待。,template-reviewed
+train-0580,train-mixed,en,joy,safety,0,"I want to see a bright heart, together with safe travels.",template-reviewed
+train-0581,train-single,zh,reunion,,0,把这个心愿送给未来：共度佳节。谢谢此刻的自己。,template-reviewed
+train-0582,train-single,zh,safety,,0,我的愿望是生活安定，也送给每一个努力的人。,template-reviewed
+train-0583,train-single,en,abundance,,0,"For tomorrow, I wish for effort bearing fruit after every patient wait.",template-reviewed
+train-0584,train-single,zh,safety,,0,愿望很简单，健康安稳。,template-reviewed
+train-0585,train-single,zh,safety,,0,愿望很简单，健康安稳。,template-reviewed
+train-0586,train-mixed,zh,reunion,safety,0,此刻我盼望亲人常相聚，还想把祝福送给一路顺遂。,template-reviewed
+train-0587,train-single,zh,courage,,0,把这个心愿送给未来：跨过难关。谢谢此刻的自己。,template-reviewed
+train-0588,train-single,zh,reunion,,0,今年最想看到团聚有期，在新的日子里。,template-reviewed
+train-0589,train-single,zh,safety,,0,想对明天说：被温柔守护，不负每一次等待。,template-reviewed
+train-0590,train-mixed,zh,reunion,abundance,0,我希望与故友重逢，同时盼望四季富足。,template-reviewed
+train-0591,train-single,zh,abundance,,0,我的愿望是努力结出果实，从今天开始。,template-reviewed
+train-0592,train-single,en,safety,,0,Please weave a wish for my family stays safe after every patient wait.,template-reviewed
+train-0593,train-single,zh,joy,,0,此刻我盼望日日欢喜，在新的日子里。,template-reviewed
+train-0594,train-mixed,en,joy,reunion,0,"Let this wish carry finding happiness, while carrying meeting old friends again.",template-reviewed
+train-0595,train-ambiguous,zh,reunion,,1,我在学习一门新语言 4,template-reviewed
+train-0596,train-single,en,reunion,,0,I sincerely hope for coming home soon in the days ahead.,template-reviewed
+train-0597,train-mixed,en,safety,courage,0,"May there be everyone stays well, while carrying strength through storms.",template-reviewed
+train-0598,train-single,en,longevity,,0,I want to see family stories lasting generations as good things unfold.,template-reviewed
+train-0599,train-single,zh,longevity,,0,真心期待情谊长久，愿好事慢慢发生。,template-reviewed
+train-0600,train-mixed,zh,abundance,joy,0,我的愿望是四季富足，还想把祝福送给幸福相伴。,template-reviewed
+train-0601,train-single,en,longevity,,0,Please weave a wish for family stories lasting generations—this matters deeply to me.,template-reviewed
+train-0602,train-single,zh,abundance,,0,把这个心愿送给未来：生活丰足，这是我最珍重的期待。,template-reviewed
+train-0603,train-single,en,joy,,0,I wish for finding happiness after every patient wait.,template-reviewed
+train-0604,train-single,en,reunion,,0,My heart asks for loved ones together.,template-reviewed
+train-0605,train-single,zh,reunion,,0,我的愿望是早日回家，不负每一次等待。,template-reviewed
+train-0606,train-single,zh,reunion,,0,愿与故友重逢，从今天开始。,template-reviewed
+train-0607,train-single,zh,longevity,,0,此刻我盼望长辈长寿，从今天开始。,template-reviewed
+train-0608,train-single,zh,abundance,,0,愿望很简单，四季富足，也送给每一个努力的人。,template-reviewed
+train-0609,train-single,zh,safety,,0,我希望生活安定。谢谢此刻的自己。,template-reviewed
+train-0610,train-ambiguous,zh,safety,,1,桌上放着一本书 3,template-reviewed
+train-0611,train-single,en,safety,,0,This year I hope for everyone stays well.,template-reviewed
+train-0612,train-ambiguous,zh,abundance,,1,今天穿蓝色衣服 1,template-reviewed
+train-0613,train-mixed,en,reunion,abundance,0,"May there be seeing those I miss, while carrying abundant inspiration.",template-reviewed
+train-0614,train-single,zh,safety,,0,今年最想看到被温柔守护，送给我在意的人。,template-reviewed
+train-0615,train-single,en,safety,,0,Let this wish carry gentle protection.,template-reviewed
+train-0616,train-single,en,courage,,0,"For tomorrow, I wish for finding my courage in the days ahead.",template-reviewed
+train-0617,train-single,en,safety,,0,"For tomorrow, I wish for calm life after every patient wait.",template-reviewed
+train-0618,train-single,zh,courage,,0,把这个心愿送给未来：重新出发。谢谢此刻的自己。,template-reviewed
+train-0619,train-single,zh,courage,,0,愿望很简单，重新出发，一直记在心里。,template-reviewed
+train-0620,train-single,en,abundance,,0,Let this wish carry success in my work in the days ahead.,template-reviewed
+train-0621,train-single,en,safety,,0,"For tomorrow, I wish for calm life after every patient wait.",template-reviewed
+train-0622,train-single,en,safety,,0,I want to see peace at home—this matters deeply to me.,template-reviewed
+train-0623,train-single,en,joy,,0,My heart asks for many reasons to smile starting today.,template-reviewed
+train-0624,train-single,zh,abundance,,0,愿望很简单，生活丰足，也送给每一个努力的人。,template-reviewed
+train-0625,train-ambiguous,en,safety,,1,the window faces east 3,template-reviewed
+train-0626,train-single,zh,courage,,0,此刻我盼望坚持自己的选择，这是我最珍重的期待。,template-reviewed
+train-0627,train-single,zh,courage,,0,此刻我盼望内心坚定。,template-reviewed
+train-0628,train-ambiguous,zh,longevity,,1,窗外有三棵树 4,template-reviewed
+train-0629,train-mixed,en,longevity,reunion,0,"May there be family stories lasting generations, while carrying a festival together.",template-reviewed
+train-0630,train-single,en,longevity,,0,I want to see growing old together for everyone I care about.,template-reviewed
+train-0631,train-single,en,joy,,0,My simple wish is lasting happiness in the days ahead.,template-reviewed
+train-0632,train-ambiguous,zh,joy,,1,这是一段普通描述 4,template-reviewed
+train-0633,train-mixed,en,courage,longevity,0,"Please weave a wish for courage to move forward, and also many meaningful years.",template-reviewed
+train-0634,train-mixed,zh,courage,longevity,0,把这个心愿送给未来：内心坚定，也愿初心长存。,template-reviewed
+train-0635,train-single,zh,joy,,0,想对明天说：遇见好消息，一直记在心里。,template-reviewed
+train-0636,train-single,en,reunion,,0,I want to see seeing those I miss for the people close to me.,template-reviewed
+train-0637,train-mixed,zh,longevity,reunion,0,真心期待长辈长寿，也愿早日回家。,template-reviewed
+train-0638,train-single,zh,joy,,0,想对明天说：日日欢喜，送给我在意的人。,template-reviewed
+train-0639,train-single,en,courage,,0,I want to see overcoming this challenge in the days ahead.,template-reviewed
+train-0640,train-single,zh,courage,,0,此刻我盼望拥有勇气。,template-reviewed
+train-0641,train-ambiguous,zh,courage,,1,今天穿蓝色衣服 2,template-reviewed
+train-0642,train-single,en,longevity,,0,This year I hope for longevity for my elders as good things unfold.,template-reviewed
+train-0643,train-mixed,en,longevity,courage,0,"Please weave a wish for a purpose that endures, together with courage to move forward.",template-reviewed
+train-0644,train-ambiguous,zh,reunion,,1,我在学习一门新语言 3,template-reviewed
+train-0645,train-ambiguous,en,courage,,1,the window faces east 3,template-reviewed
+train-0646,train-single,zh,abundance,,0,请替我织下四季富足。谢谢此刻的自己。,template-reviewed
+train-0647,train-mixed,en,courage,reunion,0,"My heart asks for standing by my choice, together with a joyful reunion.",template-reviewed
+train-0648,train-ambiguous,en,safety,,1,the room is quiet 3,template-reviewed
+train-0649,train-ambiguous,en,joy,,1,the room is quiet 4,template-reviewed
+train-0650,train-single,zh,joy,,0,我的愿望是心里明亮。,template-reviewed
+train-0651,train-single,en,longevity,,0,This year I hope for many meaningful years—this matters deeply to me.,template-reviewed
+train-0652,train-mixed,zh,longevity,joy,0,请替我织下美好延续，也愿遇见好消息。,template-reviewed
+train-0653,train-ambiguous,zh,courage,,1,我在学习一门新语言 3,template-reviewed
+train-0654,train-single,zh,safety,,0,真心期待旅途顺利，从今天开始。,template-reviewed
+train-0655,train-mixed,en,abundance,joy,0,"For tomorrow, I wish for rewarding results, while carrying many reasons to smile.",template-reviewed
+train-0656,train-mixed,en,joy,courage,0,"My simple wish is wonderful news, together with courage to move forward.",template-reviewed
+train-0657,train-single,en,safety,,0,My heart asks for peace at home and I will keep it in my heart.,template-reviewed
+train-0658,train-single,zh,reunion,,0,愿望很简单，与故友重逢，不负每一次等待。,template-reviewed
+train-0659,train-single,zh,joy,,0,请替我织下收获快乐，一直记在心里。,template-reviewed
+train-0660,train-single,en,reunion,,0,May there be a joyful reunion after every patient wait.,template-reviewed
+train-0661,train-single,en,courage,,0,My heart asks for growing resilient after every patient wait.,template-reviewed
+train-0662,train-single,zh,longevity,,0,把这个心愿送给未来：家族故事代代相传，一直记在心里。,template-reviewed
+train-0663,train-single,en,joy,,0,My heart asks for playful life and I will keep it in my heart.,template-reviewed
+train-0664,train-single,en,courage,,0,May there be finding my courage.,template-reviewed
+train-0665,train-single,en,abundance,,0,I wish for abundant inspiration—this matters deeply to me.,template-reviewed
+train-0666,train-single,zh,safety,,0,我的愿望是被温柔守护，在新的日子里。,template-reviewed
+train-0667,train-ambiguous,zh,joy,,1,桌上放着一本书 4,template-reviewed
+train-0668,train-ambiguous,en,courage,,1,I wrote a short note 4,template-reviewed
+train-0669,train-single,zh,safety,,0,把这个心愿送给未来：旅途顺利，在新的日子里。,template-reviewed
+train-0670,train-single,zh,safety,,0,我的愿望是岁岁康宁，也送给每一个努力的人。,template-reviewed
+train-0671,train-single,zh,longevity,,0,今年最想看到初心长存，送给我在意的人。,template-reviewed
+train-0672,train-mixed,en,joy,reunion,0,"Please weave a wish for wonderful news, together with our family reunites.",template-reviewed
+train-0673,train-single,en,joy,,0,I wish for lasting happiness after every patient wait.,template-reviewed
+train-0674,train-single,en,joy,,0,I want to see many reasons to smile.,template-reviewed
+train-0675,train-mixed,en,joy,longevity,0,"For tomorrow, I wish for many reasons to smile; I also hope for family stories lasting generations.",template-reviewed
+train-0676,train-mixed,zh,longevity,joy,0,此刻我盼望福寿安康，还想把祝福送给笑容常在。,template-reviewed
+train-0677,train-single,en,abundance,,0,This year I hope for success in my work.,template-reviewed
+train-0678,train-mixed,zh,longevity,courage,0,想对明天说：家族故事代代相传，还想把祝福送给不惧风雨。,template-reviewed
+train-0679,train-mixed,en,longevity,safety,0,"I wish for goodness that continues, and also peace at home.",template-reviewed
+train-0680,train-mixed,en,longevity,joy,0,"My heart asks for many meaningful years, together with sharing delight.",template-reviewed
+train-0681,train-mixed,zh,abundance,safety,0,想对明天说：四季富足，还想把祝福送给岁岁康宁。,template-reviewed
+train-0682,train-single,zh,joy,,0,愿笑容常在，愿好事慢慢发生。,template-reviewed
+train-0683,train-ambiguous,zh,joy,,1,桌上放着一本书 2,template-reviewed
+train-0684,train-single,en,safety,,0,My heart asks for safe travels for the people close to me.,template-reviewed
+train-0685,train-single,en,courage,,0,I sincerely hope for finding my courage starting today.,template-reviewed
+train-0686,train-single,en,joy,,0,My heart asks for many reasons to smile starting today.,template-reviewed
+train-0687,train-single,zh,abundance,,0,此刻我盼望家业兴旺，从今天开始。,template-reviewed
+train-0688,train-ambiguous,en,abundance,,1,the room is quiet 1,template-reviewed
+train-0689,train-single,en,longevity,,0,My simple wish is a long healthy life for the people close to me.,template-reviewed
+train-0690,train-mixed,en,courage,reunion,0,I sincerely hope for strength through storms; I also hope for loved ones together.,template-reviewed
+train-0691,train-ambiguous,en,reunion,,1,there are three cups 2,template-reviewed
+train-0692,train-ambiguous,zh,abundance,,1,这是一段普通描述 1,template-reviewed
+train-0693,train-ambiguous,en,joy,,1,this is an ordinary sentence 3,template-reviewed
+train-0694,train-single,zh,courage,,0,我的愿望是坚持自己的选择，也送给每一个努力的人。,template-reviewed
+train-0695,train-ambiguous,en,joy,,1,the room is quiet 2,template-reviewed
+train-0696,train-single,zh,reunion,,0,请替我织下共度佳节，愿好事慢慢发生。,template-reviewed
+train-0697,train-single,zh,joy,,0,愿生活有趣，愿好事慢慢发生。,template-reviewed
+train-0698,train-single,en,abundance,,0,I wish for rewarding results.,template-reviewed
+train-0699,train-ambiguous,zh,courage,,1,这是一段普通描述 2,template-reviewed
+train-0700,train-ambiguous,en,longevity,,1,there are three cups 4,template-reviewed
+train-0701,train-single,en,joy,,0,Please weave a wish for playful life for everyone I care about.,template-reviewed
+train-0702,train-single,en,longevity,,0,"For tomorrow, I wish for purpose that endures.",template-reviewed
+train-0703,train-single,zh,joy,,0,把这个心愿送给未来：生活有趣，也送给每一个努力的人。,template-reviewed
+train-0704,train-single,en,joy,,0,I sincerely hope for wonderful news in the days ahead.,template-reviewed
+train-0705,train-single,en,safety,,0,Please weave a wish for peace at home for everyone I care about.,template-reviewed
+train-0706,train-single,en,safety,,0,My simple wish is safe travels after every patient wait.,template-reviewed
+train-0707,train-ambiguous,en,longevity,,1,the room is quiet 1,template-reviewed
+train-0708,train-single,en,abundance,,0,May there be effort bearing fruit for the people close to me.,template-reviewed
+train-0709,train-ambiguous,en,reunion,,1,I wrote a short note 2,template-reviewed
+train-0710,train-mixed,zh,longevity,reunion,0,我希望情谊长久，同时盼望再见想念的人。,template-reviewed
+train-0711,train-mixed,en,abundance,courage,0,"My heart asks for an abundant harvest, and also standing by my choice.",template-reviewed
+train-0712,train-single,zh,joy,,0,真心期待生活有趣，这是我最珍重的期待。,template-reviewed
+train-0713,train-single,en,abundance,,0,I want to see rewarding results after every patient wait.,template-reviewed
+train-0714,train-single,zh,courage,,0,请替我织下重新出发，愿好事慢慢发生。,template-reviewed
+train-0715,train-single,zh,courage,,0,把这个心愿送给未来：跨过难关。谢谢此刻的自己。,template-reviewed
+train-0716,train-single,zh,joy,,0,我的愿望是分享喜悦。,template-reviewed
+train-0717,train-single,zh,courage,,0,愿跨过难关，这是我最珍重的期待。,template-reviewed
+train-0718,train-single,zh,safety,,0,我希望岁岁康宁。谢谢此刻的自己。,template-reviewed
+train-0719,train-single,en,longevity,,0,My heart asks for family stories lasting generations with gratitude for this moment.,template-reviewed
+train-0720,train-single,zh,longevity,,0,我的愿望是美好延续，在新的日子里。,template-reviewed
+train-0721,train-mixed,zh,joy,safety,0,真心期待日日欢喜，也愿健康安稳。,template-reviewed
+train-0722,train-single,zh,joy,,0,我希望日日欢喜，不负每一次等待。,template-reviewed
+train-0723,train-single,zh,joy,,0,我希望遇见好消息。谢谢此刻的自己。,template-reviewed
+train-0724,train-single,en,joy,,0,Let this wish carry sharing delight and I will keep it in my heart.,template-reviewed
+train-0725,train-single,en,reunion,,0,"For tomorrow, I wish for joyful reunion.",template-reviewed
+train-0726,train-single,zh,courage,,0,真心期待重新出发，也送给每一个努力的人。,template-reviewed
+train-0727,train-single,en,longevity,,0,"For tomorrow, I wish for longevity for my elders for everyone I care about.",template-reviewed
+train-0728,train-single,en,courage,,0,This year I hope for courage to move forward for everyone I care about.,template-reviewed
+train-0729,train-ambiguous,zh,courage,,1,我在学习一门新语言 1,template-reviewed
+train-0730,train-single,en,safety,,0,I want to see safe travels in the days ahead.,template-reviewed
+train-0731,train-single,en,reunion,,0,I wish for seeing those I miss after every patient wait.,template-reviewed
+train-0732,train-mixed,en,reunion,abundance,0,"I want to see coming home soon, together with a thriving home.",template-reviewed
+train-0733,train-single,zh,courage,,0,愿望很简单，不惧风雨，一直记在心里。,template-reviewed
+train-0734,train-mixed,en,safety,abundance,0,"Please weave a wish for my family stays safe, and also success in my work.",template-reviewed
+train-0735,train-ambiguous,zh,abundance,,1,今天穿蓝色衣服 2,template-reviewed
+train-0736,train-single,en,courage,,0,Let this wish carry courage to move forward—this matters deeply to me.,template-reviewed
+train-0737,train-mixed,en,courage,longevity,0,"Let this wish carry a brave new start, while carrying a lasting friendship.",template-reviewed
+train-0738,train-single,en,abundance,,0,Let this wish carry effort bearing fruit starting today.,template-reviewed
+train-0739,train-single,en,longevity,,0,May there be goodness that continues with gratitude for this moment.,template-reviewed
+train-0740,train-single,en,courage,,0,I wish for growing resilient for the people close to me.,template-reviewed
+train-0741,train-single,en,reunion,,0,My simple wish is meeting old friends again after every patient wait.,template-reviewed
+train-0742,train-single,en,joy,,0,Please weave a wish for many reasons to smile after every patient wait.,template-reviewed
+train-0743,train-mixed,en,longevity,abundance,0,"My simple wish is a purpose that endures, together with an abundant harvest.",template-reviewed
+train-0744,train-mixed,en,abundance,courage,0,I sincerely hope for abundant inspiration; I also hope for a brave new start.,template-reviewed
+train-0745,train-ambiguous,en,reunion,,1,the room is quiet 2,template-reviewed
+train-0746,train-single,zh,joy,,0,我希望心里明亮，不负每一次等待。,template-reviewed
+train-0747,train-single,en,longevity,,0,May there be a purpose that endures after every patient wait.,template-reviewed
+train-0748,train-single,zh,courage,,0,我的愿望是内心坚定，不负每一次等待。,template-reviewed
+train-0749,train-ambiguous,en,safety,,1,there are three cups 3,template-reviewed
+train-0750,train-ambiguous,en,joy,,1,the window faces east 2,template-reviewed
+train-0751,train-single,zh,reunion,,0,今年最想看到家人围坐，在新的日子里。,template-reviewed
+train-0752,train-single,zh,reunion,,0,想对明天说：团聚有期，从今天开始。,template-reviewed
+train-0753,train-single,zh,abundance,,0,请替我织下生活丰足。谢谢此刻的自己。,template-reviewed
+train-0754,train-mixed,zh,abundance,courage,0,此刻我盼望收获满满，还想把祝福送给跨过难关。,template-reviewed
+train-0755,train-ambiguous,en,reunion,,1,there are three cups 1,template-reviewed
+train-0756,train-mixed,zh,courage,abundance,0,愿坚持自己的选择；更希望家业兴旺。,template-reviewed
+train-0757,train-single,zh,courage,,0,今年最想看到内心坚定，在新的日子里。,template-reviewed
+train-0758,train-single,en,longevity,,0,This year I hope for purpose that endures starting today.,template-reviewed
+train-0759,train-ambiguous,en,safety,,1,I wrote a short note 2,template-reviewed
+train-0760,train-single,en,reunion,,0,My simple wish is seeing those I miss in the days ahead.,template-reviewed
+train-0761,train-ambiguous,en,joy,,1,the window faces east 3,template-reviewed
+train-0762,train-single,en,longevity,,0,My heart asks for long healthy life starting today.,template-reviewed
+train-0763,train-single,zh,longevity,,0,我的愿望是岁月绵长，在新的日子里。,template-reviewed
+train-0764,train-single,en,abundance,,0,My simple wish is rewarding results starting today.,template-reviewed
+train-0765,train-single,zh,abundance,,0,想对明天说：事业有成，不负每一次等待。,template-reviewed
+train-0766,train-single,en,courage,,0,My heart asks for strength through storms starting today.,template-reviewed
+train-0767,train-single,zh,joy,,0,今年最想看到遇见好消息，愿好事慢慢发生。,template-reviewed
+train-0768,train-mixed,en,longevity,abundance,0,This year I hope for a lasting friendship; I also hope for prosperity through the seasons.,template-reviewed
+train-0769,train-mixed,en,abundance,joy,0,"I wish for effort bearing fruit, together with joy every day.",template-reviewed
+train-0770,train-single,zh,joy,,0,真心期待幸福相伴，这是我最珍重的期待。,template-reviewed
+train-0771,train-ambiguous,en,reunion,,1,this is an ordinary sentence 4,template-reviewed
+train-0772,train-single,en,abundance,,0,"For tomorrow, I wish for thriving home—this matters deeply to me.",template-reviewed
+train-0773,train-single,en,courage,,0,This year I hope for standing by my choice with gratitude for this moment.,template-reviewed
+train-0774,train-ambiguous,en,safety,,1,I wrote a short note 3,template-reviewed
+train-0775,train-mixed,zh,abundance,joy,0,我的愿望是灵感丰沛，同时盼望收获快乐。,template-reviewed
+train-0776,train-single,en,abundance,,0,May there be an abundant harvest as good things unfold.,template-reviewed
+train-0777,train-mixed,zh,abundance,courage,0,此刻我盼望生活丰足，同时盼望成长得更坚韧。,template-reviewed
+train-0778,train-single,zh,reunion,,0,今年最想看到一家团圆，在新的日子里。,template-reviewed
+train-0779,train-single,zh,courage,,0,我希望坚持自己的选择。谢谢此刻的自己。,template-reviewed
+train-0780,train-single,zh,joy,,0,愿望很简单，幸福相伴。谢谢此刻的自己。,template-reviewed
+train-0781,train-mixed,zh,reunion,safety,0,此刻我盼望与故友重逢，同时盼望生活安定。,template-reviewed
+train-0782,train-single,zh,longevity,,0,我的愿望是长辈长寿，在新的日子里。,template-reviewed
+train-0783,train-mixed,en,reunion,joy,0,"Let this wish carry loved ones together, while carrying many reasons to smile.",template-reviewed
+train-0784,train-single,en,longevity,,0,I sincerely hope for purpose that endures in the days ahead.,template-reviewed
+train-0785,train-mixed,en,safety,joy,0,"This year I hope for everyone stays well, while carrying lasting happiness.",template-reviewed
+train-0786,train-mixed,zh,abundance,longevity,0,真心期待努力结出果实；更希望长辈长寿。,template-reviewed
+train-0787,train-single,zh,safety,,0,请替我织下旅途顺利，不负每一次等待。,template-reviewed
+train-0788,train-single,en,reunion,,0,This year I hope for coming home soon starting today.,template-reviewed
+train-0789,train-single,zh,courage,,0,今年最想看到勇敢向前，在新的日子里。,template-reviewed
+train-0790,train-single,zh,longevity,,0,想对明天说：长辈长寿，不负每一次等待。,template-reviewed
+train-0791,train-single,en,joy,,0,I want to see a playful life—this matters deeply to me.,template-reviewed
+train-0792,train-single,zh,joy,,0,我的愿望是日日欢喜。,template-reviewed
+train-0793,train-single,en,joy,,0,This year I hope for wonderful news starting today.,template-reviewed
+train-0794,train-single,en,courage,,0,I wish for growing resilient for the people close to me.,template-reviewed
+train-0795,train-single,zh,safety,,0,想对明天说：生活安定，一直记在心里。,template-reviewed
+train-0796,train-single,zh,safety,,0,把这个心愿送给未来：旅途顺利，在新的日子里。,template-reviewed
+train-0797,train-single,en,joy,,0,My simple wish is lasting happiness in the days ahead.,template-reviewed
+train-0798,train-single,en,longevity,,0,This year I hope for many meaningful years—this matters deeply to me.,template-reviewed
+train-0799,train-single,en,joy,,0,I want to see many reasons to smile.,template-reviewed
+train-0800,train-single,en,abundance,,0,May there be effort bearing fruit for the people close to me.,template-reviewed
+train-0801,train-mixed,zh,reunion,courage,0,我的愿望是再见想念的人，还想把祝福送给不惧风雨。,template-reviewed
+train-0802,train-single,zh,joy,,0,愿望很简单，笑容常在。谢谢此刻的自己。,template-reviewed
+train-0803,train-single,zh,abundance,,0,我希望家业兴旺。,template-reviewed
+train-0804,train-single,zh,safety,,0,想对明天说：被温柔守护，不负每一次等待。,template-reviewed
+train-0805,train-single,zh,abundance,,0,想对明天说：事业有成，不负每一次等待。,template-reviewed
+train-0806,train-single,en,abundance,,0,My heart asks for plentiful life for everyone I care about.,template-reviewed
+train-0807,train-single,zh,longevity,,0,我的愿望是美好延续，在新的日子里。,template-reviewed
+train-0808,train-single,en,reunion,,0,Please weave a wish for festival together starting today.,template-reviewed
+train-0809,train-ambiguous,en,safety,,1,there are three cups 4,template-reviewed
+train-0810,train-single,en,safety,,0,"For tomorrow, I wish for gentle protection starting today.",template-reviewed
+train-0811,train-ambiguous,en,reunion,,1,the room is quiet 3,template-reviewed
+train-0812,train-ambiguous,zh,longevity,,1,桌上放着一本书 2,template-reviewed
+train-0813,train-single,zh,reunion,,0,我的愿望是一家团圆，不负每一次等待。,template-reviewed
+train-0814,train-single,en,safety,,0,This year I hope for peaceful journey with gratitude for this moment.,template-reviewed
+train-0815,train-mixed,zh,longevity,safety,0,我的愿望是陪伴到老，同时盼望被温柔守护。,template-reviewed
+train-0816,train-ambiguous,zh,safety,,1,窗外有三棵树 3,template-reviewed
+train-0817,train-mixed,zh,safety,joy,0,今年最想看到被温柔守护，还想把祝福送给笑容常在。,template-reviewed
+train-0818,train-ambiguous,en,courage,,1,this is an ordinary sentence 2,template-reviewed
+train-0819,train-single,en,abundance,,0,"For tomorrow, I wish for abundant harvest and I will keep it in my heart.",template-reviewed
+train-0820,train-single,zh,courage,,0,愿望很简单，成长得更坚韧。谢谢此刻的自己。,template-reviewed
+train-0821,train-single,zh,longevity,,0,把这个心愿送给未来：情谊长久，这是我最珍重的期待。,template-reviewed
+train-0822,train-mixed,zh,safety,longevity,0,请替我织下旅途顺利；更希望长辈长寿。,template-reviewed
+train-0823,train-ambiguous,zh,courage,,1,这是一段普通描述 3,template-reviewed
+train-0824,train-single,en,reunion,,0,"For tomorrow, I wish for our family reunites—this matters deeply to me.",template-reviewed
+train-0825,train-single,en,reunion,,0,Let this wish carry gathering around one table for the people close to me.,template-reviewed
+train-0826,train-ambiguous,zh,longevity,,1,今天穿蓝色衣服 1,template-reviewed
+train-0827,train-single,zh,abundance,,0,此刻我盼望五谷丰登，从今天开始。,template-reviewed
+train-0828,train-single,zh,safety,,0,把这个心愿送给未来：家人平安，在新的日子里。,template-reviewed
+train-0829,train-ambiguous,zh,abundance,,1,这是一段普通描述 4,template-reviewed
+train-0830,train-single,en,courage,,0,My simple wish is a brave new start.,template-reviewed
+train-0831,train-single,zh,reunion,,0,想对明天说：早日回家，从今天开始。,template-reviewed
+train-0832,train-single,zh,abundance,,0,真心期待灵感丰沛，愿好事慢慢发生。,template-reviewed
+train-0833,train-single,en,longevity,,0,My heart asks for lasting friendship as good things unfold.,template-reviewed
+train-0834,train-single,en,longevity,,0,I wish for family stories lasting generations and I will keep it in my heart.,template-reviewed
+train-0835,train-mixed,en,safety,joy,0,This year I hope for a peaceful journey; I also hope for a playful life.,template-reviewed
+train-0836,train-single,en,courage,,0,I sincerely hope for standing by my choice and I will keep it in my heart.,template-reviewed
+train-0837,train-single,en,reunion,,0,"For tomorrow, I wish for gathering around one table.",template-reviewed
+train-0838,train-single,en,reunion,,0,I sincerely hope for gathering around one table in the days ahead.,template-reviewed
+train-0839,train-single,en,abundance,,0,May there be success in my work starting today.,template-reviewed
+train-0840,train-single,zh,safety,,0,我希望一路顺遂。谢谢此刻的自己。,template-reviewed
+train-0841,train-mixed,zh,joy,abundance,0,请替我织下分享喜悦，也愿努力结出果实。,template-reviewed
+train-0842,train-mixed,en,courage,safety,0,"This year I hope for growing resilient, while carrying a calm life.",template-reviewed
+train-0843,train-mixed,zh,joy,longevity,0,愿心里明亮；更希望美好延续。,template-reviewed
+train-0844,train-single,en,courage,,0,May there be a steady heart for the people close to me.,template-reviewed
+train-0845,train-single,en,reunion,,0,My heart asks for festival together.,template-reviewed
+train-0846,train-ambiguous,zh,safety,,1,我在学习一门新语言 4,template-reviewed
+train-0847,train-single,en,safety,,0,I want to see my family stays safe.,template-reviewed
+train-0848,train-single,en,reunion,,0,Let this wish carry our family reunites with gratitude for this moment.,template-reviewed
+train-0849,train-single,en,longevity,,0,"For tomorrow, I wish for many meaningful years with gratitude for this moment.",template-reviewed
+train-0850,train-mixed,en,courage,reunion,0,"I sincerely hope for growing resilient, while carrying a festival together.",template-reviewed
+train-0851,train-mixed,zh,longevity,safety,0,愿长辈长寿，也愿健康安稳。,template-reviewed
+train-0852,train-single,zh,reunion,,0,愿再见想念的人，愿好事慢慢发生。,template-reviewed
+train-0853,train-mixed,en,joy,courage,0,"My simple wish is sharing delight, and also finding my courage.",template-reviewed
+train-0854,train-single,en,joy,,0,"For tomorrow, I wish for wonderful news.",template-reviewed
+train-0855,train-single,en,longevity,,0,Please weave a wish for long healthy life after every patient wait.,template-reviewed
+train-0856,train-single,zh,reunion,,0,今年最想看到早日回家，在新的日子里。,template-reviewed
+train-0857,train-single,zh,joy,,0,把这个心愿送给未来：笑容常在，也送给每一个努力的人。,template-reviewed
+train-0858,train-single,zh,abundance,,0,愿望很简单，灵感丰沛，也送给每一个努力的人。,template-reviewed
+train-0859,train-single,zh,abundance,,0,愿生活丰足，一直记在心里。,template-reviewed
+train-0860,train-single,zh,reunion,,0,把这个心愿送给未来：与故友重逢。,template-reviewed
+train-0861,train-ambiguous,en,longevity,,1,the room is quiet 4,template-reviewed
+train-0862,train-single,en,joy,,0,May there be wonderful news after every patient wait.,template-reviewed
+train-0863,train-mixed,zh,abundance,longevity,0,真心期待五谷丰登，也愿岁月绵长。,template-reviewed
+train-0864,train-single,zh,safety,,0,此刻我盼望岁岁康宁，这是我最珍重的期待。,template-reviewed
+train-0865,train-single,zh,courage,,0,此刻我盼望内心坚定。,template-reviewed
+train-0866,train-mixed,en,reunion,joy,0,"Please weave a wish for our family reunites, and also a bright heart.",template-reviewed
+train-0867,train-single,zh,courage,,0,愿跨过难关，这是我最珍重的期待。,template-reviewed
+train-0868,train-mixed,zh,safety,abundance,0,想对明天说：生活安定，还想把祝福送给灵感丰沛。,template-reviewed
+train-0869,train-mixed,zh,longevity,abundance,0,愿望很简单，岁月绵长；更希望家业兴旺。,template-reviewed
+train-0870,train-single,en,reunion,,0,I wish for festival together after every patient wait.,template-reviewed
+train-0871,train-single,zh,joy,,0,愿望很简单，收获快乐。谢谢此刻的自己。,template-reviewed
+train-0872,train-single,zh,longevity,,0,此刻我盼望美好延续，从今天开始。,template-reviewed
+train-0873,train-single,zh,joy,,0,今年最想看到心里明亮，从今天开始。,template-reviewed
+train-0874,train-single,en,longevity,,0,I wish for growing old together—this matters deeply to me.,template-reviewed
+train-0875,train-mixed,en,joy,longevity,0,"I wish for wonderful news, together with longevity for my elders.",template-reviewed
+train-0876,train-single,en,abundance,,0,My heart asks for rewarding results in the days ahead.,template-reviewed
+train-0877,train-mixed,en,joy,longevity,0,"I wish for sharing delight, and also a purpose that endures.",template-reviewed
+train-0878,train-single,zh,courage,,0,真心期待成长得更坚韧，这是我最珍重的期待。,template-reviewed
+train-0879,train-single,en,courage,,0,I wish for overcoming this challenge starting today.,template-reviewed
+train-0880,train-single,zh,joy,,0,把这个心愿送给未来：幸福相伴，也送给每一个努力的人。,template-reviewed
+train-0881,train-ambiguous,en,longevity,,1,this is an ordinary sentence 3,template-reviewed
+train-0882,train-single,zh,joy,,0,想对明天说：心里明亮，送给我在意的人。,template-reviewed
+train-0883,train-single,en,joy,,0,I sincerely hope for wonderful news in the days ahead.,template-reviewed
+train-0884,train-mixed,zh,abundance,reunion,0,今年最想看到灵感丰沛，同时盼望亲人常相聚。,template-reviewed
+train-0885,train-single,zh,abundance,,0,请替我织下四季富足。谢谢此刻的自己。,template-reviewed
+train-0886,train-single,zh,safety,,0,此刻我盼望生活安定，这是我最珍重的期待。,template-reviewed
+train-0887,train-single,zh,abundance,,0,此刻我盼望努力结出果实，送给我在意的人。,template-reviewed
+train-0888,train-single,en,reunion,,0,May there be our family reunites for everyone I care about.,template-reviewed
+train-0889,train-mixed,zh,safety,joy,0,愿望很简单，家人平安，也愿心里明亮。,template-reviewed
+train-0890,train-mixed,zh,reunion,courage,0,愿一家团圆，也愿坚持自己的选择。,template-reviewed
+train-0891,train-ambiguous,en,joy,,1,the room is quiet 1,template-reviewed
+train-0892,train-single,en,joy,,0,My heart asks for lasting happiness.,template-reviewed
+train-0893,train-single,zh,longevity,,0,此刻我盼望岁月绵长，从今天开始。,template-reviewed
+train-0894,train-single,en,abundance,,0,"For tomorrow, I wish for success in my work for the people close to me.",template-reviewed
+train-0895,train-ambiguous,zh,joy,,1,桌上放着一本书 3,template-reviewed
+train-0896,train-single,zh,joy,,0,想对明天说：日日欢喜，送给我在意的人。,template-reviewed
+train-0897,train-single,en,courage,,0,I sincerely hope for finding my courage starting today.,template-reviewed
+train-0898,train-single,en,longevity,,0,Let this wish carry longevity for my elders and I will keep it in my heart.,template-reviewed
+train-0899,train-ambiguous,zh,safety,,1,今天穿蓝色衣服 3,template-reviewed
+train-0900,train-single,zh,longevity,,0,愿福寿安康，一直记在心里。,template-reviewed
+train-0901,train-mixed,zh,joy,longevity,0,我的愿望是幸福相伴，同时盼望福寿安康。,template-reviewed
+train-0902,train-single,en,abundance,,0,May there be a thriving home for everyone I care about.,template-reviewed
+train-0903,train-mixed,zh,safety,longevity,0,请替我织下出入平安，也愿初心长存。,template-reviewed
+train-0904,train-single,en,safety,,0,Let this wish carry everyone stays well in the days ahead.,template-reviewed
+train-0905,train-mixed,en,longevity,abundance,0,"My simple wish is goodness that continues, and also effort bearing fruit.",template-reviewed
+train-0906,train-single,zh,reunion,,0,我的愿望是早日回家，不负每一次等待。,template-reviewed
+train-0907,train-single,zh,reunion,,0,我的愿望是家人围坐，不负每一次等待。,template-reviewed
+train-0908,train-ambiguous,en,abundance,,1,there are three cups 3,template-reviewed
+train-0909,train-single,en,reunion,,0,I want to see loved ones together for the people close to me.,template-reviewed
+train-0910,train-single,en,longevity,,0,I sincerely hope for longevity for my elders—this matters deeply to me.,template-reviewed
+train-0911,train-ambiguous,zh,reunion,,1,今天穿蓝色衣服 2,template-reviewed
+train-0912,train-single,zh,courage,,0,今年最想看到坚持自己的选择，愿好事慢慢发生。,template-reviewed
+train-0913,train-mixed,en,courage,joy,0,"I want to see standing by my choice, together with sharing delight.",template-reviewed
+train-0914,train-single,zh,safety,,0,我希望岁岁康宁。谢谢此刻的自己。,template-reviewed
+train-0915,train-single,en,joy,,0,Please weave a wish for finding happiness starting today.,template-reviewed
+train-0916,train-ambiguous,zh,reunion,,1,今天穿蓝色衣服 4,template-reviewed
+train-0917,train-single,en,reunion,,0,My heart asks for loved ones together.,template-reviewed
+train-0918,train-single,zh,abundance,,0,今年最想看到事业有成，送给我在意的人。,template-reviewed
+train-0919,train-single,zh,abundance,,0,愿灵感丰沛，一直记在心里。,template-reviewed
+train-0920,train-mixed,zh,courage,reunion,0,此刻我盼望重新出发，还想把祝福送给与故友重逢。,template-reviewed
+train-0921,train-single,en,longevity,,0,I want to see growing old together for everyone I care about.,template-reviewed
+train-0922,train-ambiguous,en,safety,,1,I wrote a short note 1,template-reviewed
+train-0923,train-ambiguous,zh,reunion,,1,桌上放着一本书 1,template-reviewed
+train-0924,train-single,zh,reunion,,0,我希望团聚有期，送给我在意的人。,template-reviewed
+train-0925,train-single,en,longevity,,0,I want to see a lasting friendship for everyone I care about.,template-reviewed
+train-0926,train-single,en,safety,,0,Let this wish carry a calm life starting today.,template-reviewed
+train-0927,train-single,zh,joy,,0,把这个心愿送给未来：笑容常在，也送给每一个努力的人。,template-reviewed
+train-0928,train-single,zh,joy,,0,我的愿望是日日欢喜。,template-reviewed
+train-0929,train-ambiguous,en,longevity,,1,I wrote a short note 3,template-reviewed
+train-0930,train-single,en,courage,,0,May there be finding my courage.,template-reviewed
+train-0931,train-mixed,zh,courage,abundance,0,我的愿望是不惧风雨，同时盼望收获满满。,template-reviewed
+train-0932,train-single,en,joy,,0,My simple wish is finding happiness in the days ahead.,template-reviewed
+train-0933,train-single,en,reunion,,0,This year I hope for gathering around one table starting today.,template-reviewed
+train-0934,train-single,zh,abundance,,0,请替我织下收获满满。谢谢此刻的自己。,template-reviewed
+train-0935,train-single,zh,longevity,,0,想对明天说：初心长存，不负每一次等待。,template-reviewed
+train-0936,train-ambiguous,en,joy,,1,the window faces east 4,template-reviewed
+train-0937,train-single,en,abundance,,0,My heart asks for prosperity through the seasons as good things unfold.,template-reviewed
+train-0938,train-single,zh,longevity,,0,真心期待福寿安康，愿好事慢慢发生。,template-reviewed
+train-0939,train-single,en,courage,,0,My simple wish is growing resilient.,template-reviewed
+train-0940,train-ambiguous,en,longevity,,1,there are three cups 1,template-reviewed
+train-0941,train-single,en,joy,,0,Please weave a wish for finding happiness starting today.,template-reviewed
+train-0942,train-single,en,abundance,,0,I sincerely hope for abundant harvest with gratitude for this moment.,template-reviewed
+train-0943,train-mixed,en,reunion,abundance,0,"I want to see a joyful reunion, and also effort bearing fruit.",template-reviewed
+train-0944,train-ambiguous,en,joy,,1,I wrote a short note 3,template-reviewed
+train-0945,train-single,zh,safety,,0,请替我织下健康安稳，不负每一次等待。,template-reviewed
+train-0946,train-ambiguous,zh,longevity,,1,桌上放着一本书 1,template-reviewed
+train-0947,train-mixed,en,safety,abundance,0,Let this wish carry a calm life; I also hope for rewarding results.,template-reviewed
+train-0948,train-ambiguous,en,abundance,,1,the window faces east 4,template-reviewed
+train-0949,train-single,zh,abundance,,0,愿望很简单，四季富足，也送给每一个努力的人。,template-reviewed
+train-0950,train-mixed,en,courage,reunion,0,"My heart asks for courage to move forward, and also coming home soon.",template-reviewed
+train-0951,train-single,zh,abundance,,0,愿灵感丰沛，一直记在心里。,template-reviewed
+train-0952,train-single,zh,joy,,0,请替我织下幸福相伴，一直记在心里。,template-reviewed
+train-0953,train-mixed,zh,safety,abundance,0,把这个心愿送给未来：出入平安，也愿努力结出果实。,template-reviewed
+train-0954,train-single,en,reunion,,0,I want to see seeing those I miss for the people close to me.,template-reviewed
+train-0955,train-ambiguous,en,courage,,1,the window faces east 4,template-reviewed
+train-0956,train-single,en,joy,,0,May there be joy every day and I will keep it in my heart.,template-reviewed
+train-0957,train-single,en,reunion,,0,I want to see loved ones together for the people close to me.,template-reviewed
+train-0958,train-ambiguous,en,joy,,1,the room is quiet 3,template-reviewed
+train-0959,train-single,zh,reunion,,0,此刻我盼望家人围坐。,template-reviewed
+train-0960,train-single,en,safety,,0,This year I hope for calm life in the days ahead.,template-reviewed
+train-0961,train-mixed,zh,abundance,longevity,0,我希望收获满满，还想把祝福送给情谊长久。,template-reviewed
+train-0962,train-mixed,zh,joy,courage,0,愿望很简单，心里明亮；更希望内心坚定。,template-reviewed
+train-0963,train-single,en,safety,,0,This year I hope for gentle protection after every patient wait.,template-reviewed
+train-0964,train-mixed,en,joy,safety,0,"I want to see sharing delight, and also peace at home.",template-reviewed
+train-0965,train-mixed,zh,safety,longevity,0,此刻我盼望被温柔守护，还想把祝福送给情谊长久。,template-reviewed
+train-0966,train-single,zh,safety,,0,我希望被温柔守护。,template-reviewed
+train-0967,train-mixed,en,joy,longevity,0,"For tomorrow, I wish for finding happiness, while carrying a lasting friendship.",template-reviewed
+train-0968,train-single,zh,longevity,,0,请替我织下情谊长久。谢谢此刻的自己。,template-reviewed
+train-0969,train-mixed,en,abundance,reunion,0,"My simple wish is effort bearing fruit, together with our family reunites.",template-reviewed
+train-0970,train-ambiguous,zh,longevity,,1,窗外有三棵树 3,template-reviewed
+train-0971,train-single,zh,reunion,,0,此刻我盼望家人围坐。,template-reviewed
+train-0972,train-single,en,reunion,,0,I want to see a festival together for the people close to me.,template-reviewed
+train-0973,train-mixed,en,joy,reunion,0,Let this wish carry lasting happiness; I also hope for loved ones together.,template-reviewed
+train-0974,train-mixed,en,safety,courage,0,"I want to see safe travels, and also finding my courage.",template-reviewed
+train-0975,train-single,zh,longevity,,0,请替我织下陪伴到老。谢谢此刻的自己。,template-reviewed
+train-0976,train-single,zh,joy,,0,愿望很简单，笑容常在。谢谢此刻的自己。,template-reviewed
+train-0977,train-mixed,zh,reunion,abundance,0,真心期待一家团圆，也愿事业有成。,template-reviewed
+train-0978,train-mixed,zh,reunion,courage,0,愿早日回家；更希望内心坚定。,template-reviewed
+train-0979,train-single,en,courage,,0,"For tomorrow, I wish for standing by my choice as good things unfold.",template-reviewed
+train-0980,train-single,en,safety,,0,My simple wish is my family stays safe for the people close to me.,template-reviewed
+train-0981,train-single,en,reunion,,0,Let this wish carry a joyful reunion for the people close to me.,template-reviewed
+train-0982,train-ambiguous,zh,safety,,1,今天穿蓝色衣服 2,template-reviewed
+train-0983,train-mixed,en,abundance,safety,0,"Please weave a wish for effort bearing fruit, together with my family stays safe.",template-reviewed
+train-0984,train-ambiguous,en,longevity,,1,the room is quiet 2,template-reviewed
+train-0985,train-ambiguous,en,abundance,,1,I wrote a short note 3,template-reviewed
+train-0986,train-single,en,safety,,0,I wish for safe travels starting today.,template-reviewed
+train-0987,train-single,zh,safety,,0,把这个心愿送给未来：家人平安，在新的日子里。,template-reviewed
+train-0988,train-single,zh,courage,,0,我希望内心坚定，送给我在意的人。,template-reviewed
+train-0989,train-single,en,joy,,0,Let this wish carry sharing delight and I will keep it in my heart.,template-reviewed
+train-0990,train-ambiguous,zh,joy,,1,这是一段普通描述 1,template-reviewed
+train-0991,train-single,en,reunion,,0,"For tomorrow, I wish for gathering around one table.",template-reviewed
+train-0992,train-single,zh,safety,,0,此刻我盼望一路顺遂，这是我最珍重的期待。,template-reviewed
+train-0993,train-ambiguous,zh,joy,,1,我在学习一门新语言 1,template-reviewed
+train-0994,train-single,en,abundance,,0,My heart asks for plentiful life for everyone I care about.,template-reviewed
+train-0995,train-single,en,safety,,0,My heart asks for my family stays safe starting today.,template-reviewed
+train-0996,train-mixed,en,longevity,reunion,0,"I want to see many meaningful years, together with a joyful reunion.",template-reviewed
+train-0997,train-single,zh,safety,,0,此刻我盼望被温柔守护，从今天开始。,template-reviewed
+train-0998,train-single,en,safety,,0,I want to see safe travels in the days ahead.,template-reviewed
+train-0999,train-mixed,en,safety,abundance,0,"Please weave a wish for peace at home, together with an abundant harvest.",template-reviewed
+train-1000,train-mixed,zh,abundance,joy,0,愿五谷丰登，也愿心里明亮。,template-reviewed
+train-1001,train-ambiguous,zh,reunion,,1,桌上放着一本书 2,template-reviewed
+train-1002,train-mixed,zh,reunion,safety,0,请替我织下团聚有期，也愿旅途顺利。,template-reviewed
+train-1003,train-single,en,abundance,,0,I sincerely hope for thriving home as good things unfold.,template-reviewed
+train-1004,train-single,en,safety,,0,I sincerely hope for calm life.,template-reviewed
+train-1005,train-single,zh,safety,,0,愿旅途顺利，送给我在意的人。,template-reviewed
+train-1006,train-single,en,joy,,0,I wish for many reasons to smile in the days ahead.,template-reviewed
+train-1007,train-single,zh,courage,,0,想对明天说：勇敢向前，从今天开始。,template-reviewed
+train-1008,train-single,zh,reunion,,0,真心期待与故友重逢，在新的日子里。,template-reviewed
+train-1009,train-single,en,courage,,0,My heart asks for overcoming this challenge for the people close to me.,template-reviewed
+train-1010,train-mixed,zh,courage,safety,0,愿望很简单，坚持自己的选择；更希望出入平安。,template-reviewed
+train-1011,train-single,en,joy,,0,Let this wish carry joy every day as good things unfold.,template-reviewed
+train-1012,train-mixed,zh,longevity,joy,0,此刻我盼望情谊长久，同时盼望生活有趣。,template-reviewed
+train-1013,train-single,en,reunion,,0,May there be coming home soon after every patient wait.,template-reviewed
+train-1014,train-single,zh,longevity,,0,愿望很简单，陪伴到老，也送给每一个努力的人。,template-reviewed
+train-1015,train-single,en,abundance,,0,"For tomorrow, I wish for effort bearing fruit after every patient wait.",template-reviewed
+train-1016,train-single,zh,joy,,0,想对明天说：心里明亮，送给我在意的人。,template-reviewed
+train-1017,train-single,en,safety,,0,"For tomorrow, I wish for everyone stays well for the people close to me.",template-reviewed
+train-1018,train-single,zh,longevity,,0,把这个心愿送给未来：福寿安康，这是我最珍重的期待。,template-reviewed
+train-1019,train-ambiguous,zh,safety,,1,这是一段普通描述 3,template-reviewed
+train-1020,train-single,en,joy,,0,Let this wish carry wonderful news for the people close to me.,template-reviewed
+train-1021,train-single,zh,abundance,,0,把这个心愿送给未来：灵感丰沛，这是我最珍重的期待。,template-reviewed
+train-1022,train-single,en,joy,,0,I wish for lasting happiness after every patient wait.,template-reviewed
+train-1023,train-single,en,joy,,0,My heart asks for playful life and I will keep it in my heart.,template-reviewed
+train-1024,train-mixed,zh,abundance,courage,0,请替我织下家业兴旺，也愿拥有勇气。,template-reviewed
+train-1025,train-single,en,courage,,0,I sincerely hope for steady heart.,template-reviewed
+train-1026,train-single,en,abundance,,0,Please weave a wish for plentiful life as good things unfold.,template-reviewed
+train-1027,train-single,zh,courage,,0,想对明天说：勇敢向前，从今天开始。,template-reviewed
+train-1028,train-single,zh,longevity,,0,此刻我盼望美好延续，从今天开始。,template-reviewed
+train-1029,train-ambiguous,zh,safety,,1,桌上放着一本书 4,template-reviewed
+train-1030,train-single,zh,reunion,,0,此刻我盼望一家团圆。,template-reviewed
+train-1031,train-single,en,joy,,0,May there be a bright heart after every patient wait.,template-reviewed
+train-1032,train-single,en,reunion,,0,I sincerely hope for gathering around one table in the days ahead.,template-reviewed
+train-1033,train-mixed,en,longevity,courage,0,"Please weave a wish for longevity for my elders, and also standing by my choice.",template-reviewed
+train-1034,train-mixed,zh,reunion,abundance,0,真心期待家人围坐；更希望五谷丰登。,template-reviewed
+train-1035,train-single,en,safety,,0,My simple wish is health and safety—this matters deeply to me.,template-reviewed
+train-1036,train-single,zh,longevity,,0,真心期待福寿安康，愿好事慢慢发生。,template-reviewed
+train-1037,train-single,en,abundance,,0,May there be an abundant harvest as good things unfold.,template-reviewed
+train-1038,train-single,zh,reunion,,0,愿与故友重逢，从今天开始。,template-reviewed
+train-1039,train-single,zh,longevity,,0,我的愿望是初心长存，在新的日子里。,template-reviewed
+train-1040,train-single,zh,longevity,,0,真心期待情谊长久，愿好事慢慢发生。,template-reviewed
+train-1041,train-single,zh,courage,,0,我的愿望是勇敢向前，不负每一次等待。,template-reviewed
+train-1042,train-mixed,en,safety,courage,0,May there be a calm life; I also hope for a brave new start.,template-reviewed
+train-1043,train-ambiguous,en,safety,,1,this is an ordinary sentence 2,template-reviewed
+train-1044,train-single,zh,longevity,,0,愿望很简单，家族故事代代相传，愿好事慢慢发生。,template-reviewed
+train-1045,train-ambiguous,en,joy,,1,I wrote a short note 4,template-reviewed
+train-1046,train-single,en,longevity,,0,My simple wish is growing old together and I will keep it in my heart.,template-reviewed
+train-1047,train-single,zh,joy,,0,想对明天说：分享喜悦，送给我在意的人。,template-reviewed
+train-1048,train-ambiguous,en,courage,,1,there are three cups 3,template-reviewed
+train-1049,train-single,zh,reunion,,0,把这个心愿送给未来：再见想念的人，也送给每一个努力的人。,template-reviewed
+train-1050,train-single,en,abundance,,0,My simple wish is rewarding results starting today.,template-reviewed
+train-1051,train-single,en,safety,,0,My simple wish is peace at home with gratitude for this moment.,template-reviewed
+train-1052,train-single,en,abundance,,0,I wish for abundant inspiration—this matters deeply to me.,template-reviewed
+train-1053,train-single,zh,reunion,,0,我的愿望是家人围坐，不负每一次等待。,template-reviewed
+train-1054,train-single,zh,reunion,,0,此刻我盼望早日回家。,template-reviewed
+train-1055,train-single,en,abundance,,0,Let this wish carry effort bearing fruit starting today.,template-reviewed
+train-1056,train-single,en,courage,,0,Please weave a wish for growing resilient in the days ahead.,template-reviewed
+train-1057,train-single,en,abundance,,0,I sincerely hope for effort bearing fruit.,template-reviewed
+train-1058,train-single,en,joy,,0,Let this wish carry a bright heart for the people close to me.,template-reviewed
+train-1059,train-single,zh,reunion,,0,愿亲人常相聚，从今天开始。,template-reviewed
+train-1060,train-single,en,reunion,,0,This year I hope for our family reunites and I will keep it in my heart.,template-reviewed
+train-1061,train-single,en,reunion,,0,My heart asks for seeing those I miss.,template-reviewed
+train-1062,train-ambiguous,zh,safety,,1,今天穿蓝色衣服 1,template-reviewed
+train-1063,train-mixed,zh,longevity,courage,0,把这个心愿送给未来：岁月绵长；更希望内心坚定。,template-reviewed
+train-1064,train-single,zh,abundance,,0,真心期待生活丰足，愿好事慢慢发生。,template-reviewed
+train-1065,train-single,en,safety,,0,Let this wish carry everyone stays well in the days ahead.,template-reviewed
+train-1066,train-single,en,longevity,,0,Please weave a wish for growing old together with gratitude for this moment.,template-reviewed
+train-1067,train-single,en,joy,,0,I sincerely hope for sharing delight—this matters deeply to me.,template-reviewed
+train-1068,train-ambiguous,en,courage,,1,the room is quiet 1,template-reviewed
+train-1069,train-single,zh,joy,,0,愿收获快乐，愿好事慢慢发生。,template-reviewed
+train-1070,train-ambiguous,en,longevity,,1,this is an ordinary sentence 2,template-reviewed
+train-1071,train-single,en,safety,,0,I want to see health and safety and I will keep it in my heart.,template-reviewed
+train-1072,train-single,en,courage,,0,"For tomorrow, I wish for courage to move forward and I will keep it in my heart.",template-reviewed
+train-1073,train-ambiguous,zh,abundance,,1,今天穿蓝色衣服 3,template-reviewed
+train-1074,train-single,zh,abundance,,0,此刻我盼望五谷丰登，从今天开始。,template-reviewed
+train-1075,train-single,zh,longevity,,0,我希望美好延续。,template-reviewed
+train-1076,train-single,zh,abundance,,0,真心期待生活丰足，愿好事慢慢发生。,template-reviewed
+train-1077,train-single,zh,joy,,0,真心期待幸福相伴，这是我最珍重的期待。,template-reviewed
+train-1078,train-single,en,abundance,,0,This year I hope for abundant harvest for everyone I care about.,template-reviewed
+train-1079,train-single,en,safety,,0,"For tomorrow, I wish for peaceful journey as good things unfold.",template-reviewed
+train-1080,train-mixed,en,joy,abundance,0,"I sincerely hope for a playful life, while carrying abundant inspiration.",template-reviewed
+train-1081,train-ambiguous,zh,joy,,1,今天穿蓝色衣服 3,template-reviewed
+train-1082,train-single,zh,safety,,0,今年最想看到岁岁康宁，愿好事慢慢发生。,template-reviewed
+train-1083,train-ambiguous,zh,longevity,,1,我在学习一门新语言 2,template-reviewed
+train-1084,train-single,zh,longevity,,0,真心期待陪伴到老，愿好事慢慢发生。,template-reviewed
+train-1085,train-single,zh,joy,,0,请替我织下生活有趣，一直记在心里。,template-reviewed
+train-1086,train-single,en,safety,,0,I wish for health and safety with gratitude for this moment.,template-reviewed
+train-1087,train-mixed,en,courage,joy,0,"May there be growing resilient, while carrying lasting happiness.",template-reviewed
+train-1088,train-single,zh,safety,,0,真心期待出入平安，从今天开始。,template-reviewed
+train-1089,train-single,zh,longevity,,0,把这个心愿送给未来：陪伴到老，这是我最珍重的期待。,template-reviewed
+train-1090,train-single,en,courage,,0,I sincerely hope for standing by my choice and I will keep it in my heart.,template-reviewed
+train-1091,train-single,zh,safety,,0,我的愿望是一路顺遂，也送给每一个努力的人。,template-reviewed
+train-1092,train-single,zh,reunion,,0,此刻我盼望一家团圆。,template-reviewed
+train-1093,train-single,zh,joy,,0,今年最想看到分享喜悦，从今天开始。,template-reviewed
+train-1094,train-mixed,zh,reunion,longevity,0,愿望很简单，一家团圆，也愿岁月绵长。,template-reviewed
+train-1095,train-mixed,en,abundance,safety,0,"Please weave a wish for an abundant harvest, and also health and safety.",template-reviewed
+train-1096,train-single,en,reunion,,0,May there be gathering around one table after every patient wait.,template-reviewed
+train-1097,train-mixed,en,abundance,courage,0,"My heart asks for success in my work, together with a steady heart.",template-reviewed
+train-1098,train-ambiguous,en,courage,,1,the room is quiet 2,template-reviewed
+train-1099,train-ambiguous,en,joy,,1,there are three cups 1,template-reviewed
+train-1100,train-single,en,joy,,0,I want to see finding happiness for the people close to me.,template-reviewed
+train-1101,train-single,zh,reunion,,0,愿望很简单，亲人常相聚，不负每一次等待。,template-reviewed
+train-1102,train-single,zh,reunion,,0,我希望一家团圆，送给我在意的人。,template-reviewed
+train-1103,train-single,en,abundance,,0,Let this wish carry an abundant harvest—this matters deeply to me.,template-reviewed
+train-1104,train-single,zh,reunion,,0,请替我织下与故友重逢，送给我在意的人。,template-reviewed
+train-1105,train-single,zh,joy,,0,把这个心愿送给未来：收获快乐，也送给每一个努力的人。,template-reviewed
+train-1106,train-single,en,courage,,0,Let this wish carry finding my courage after every patient wait.,template-reviewed
+train-1107,train-single,en,safety,,0,I wish for my family stays safe in the days ahead.,template-reviewed
+train-1108,train-mixed,zh,joy,courage,0,今年最想看到幸福相伴，同时盼望重新出发。,template-reviewed
+train-1109,train-ambiguous,zh,safety,,1,窗外有三棵树 1,template-reviewed
+train-1110,train-single,en,abundance,,0,I want to see a plentiful life and I will keep it in my heart.,template-reviewed
+train-1111,train-single,zh,courage,,0,想对明天说：拥有勇气，从今天开始。,template-reviewed
+train-1112,train-single,en,joy,,0,Please weave a wish for lasting happiness starting today.,template-reviewed
+train-1113,train-ambiguous,zh,abundance,,1,桌上放着一本书 1,template-reviewed
+train-1114,train-mixed,zh,longevity,reunion,0,真心期待初心长存；更希望一家团圆。,template-reviewed
+train-1115,train-mixed,en,longevity,joy,0,"My heart asks for longevity for my elders, and also a bright heart.",template-reviewed
+train-1116,train-single,en,courage,,0,Let this wish carry finding my courage after every patient wait.,template-reviewed
+train-1117,train-mixed,en,longevity,joy,0,"I sincerely hope for family stories lasting generations, while carrying lasting happiness.",template-reviewed
+train-1118,train-ambiguous,en,reunion,,1,I wrote a short note 1,template-reviewed
+train-1119,train-single,zh,abundance,,0,愿收获满满，一直记在心里。,template-reviewed
+train-1120,train-single,zh,courage,,0,想对明天说：坚持自己的选择，一直记在心里。,template-reviewed
+train-1121,train-single,zh,longevity,,0,真心期待陪伴到老，愿好事慢慢发生。,template-reviewed
+train-1122,train-single,en,safety,,0,Please weave a wish for health and safety as good things unfold.,template-reviewed
+train-1123,train-single,en,reunion,,0,I wish for meeting old friends again starting today.,template-reviewed
+train-1124,train-single,zh,abundance,,0,请替我织下灵感丰沛。谢谢此刻的自己。,template-reviewed
+train-1125,train-single,zh,reunion,,0,我的愿望是一家团圆，不负每一次等待。,template-reviewed
+train-1126,train-single,zh,safety,,0,想对明天说：一路顺遂，一直记在心里。,template-reviewed
+train-1127,train-mixed,zh,reunion,joy,0,想对明天说：再见想念的人，还想把祝福送给幸福相伴。,template-reviewed
+train-1128,train-single,zh,longevity,,0,此刻我盼望初心长存，从今天开始。,template-reviewed
+train-1129,train-single,zh,safety,,0,想对明天说：一路顺遂，一直记在心里。,template-reviewed
+train-1130,train-single,en,courage,,0,This year I hope for steady heart in the days ahead.,template-reviewed
+train-1131,train-single,zh,courage,,0,想对明天说：内心坚定，从今天开始。,template-reviewed
+train-1132,train-single,zh,reunion,,0,愿望很简单，亲人常相聚，不负每一次等待。,template-reviewed
+train-1133,train-single,zh,courage,,0,把这个心愿送给未来：成长得更坚韧，也送给每一个努力的人。,template-reviewed
+train-1134,train-single,en,longevity,,0,This year I hope for longevity for my elders as good things unfold.,template-reviewed
+train-1135,train-single,zh,courage,,0,请替我织下不惧风雨，愿好事慢慢发生。,template-reviewed
+train-1136,train-ambiguous,zh,reunion,,1,这是一段普通描述 4,template-reviewed
+train-1137,train-mixed,en,reunion,joy,0,Let this wish carry a festival together; I also hope for finding happiness.,template-reviewed
+train-1138,train-single,zh,joy,,0,把这个心愿送给未来：收获快乐，也送给每一个努力的人。,template-reviewed
+train-1139,train-single,en,longevity,,0,Please weave a wish for growing old together with gratitude for this moment.,template-reviewed
+train-1140,train-single,zh,reunion,,0,今年最想看到家人围坐，在新的日子里。,template-reviewed
+train-1141,train-single,zh,safety,,0,愿家人平安，送给我在意的人。,template-reviewed
+train-1142,train-single,zh,reunion,,0,想对明天说：团聚有期，从今天开始。,template-reviewed
+train-1143,train-ambiguous,zh,reunion,,1,窗外有三棵树 4,template-reviewed
+train-1144,train-ambiguous,en,abundance,,1,there are three cups 4,template-reviewed
+train-1145,train-single,en,safety,,0,"For tomorrow, I wish for gentle protection starting today.",template-reviewed
+train-1146,train-single,en,abundance,,0,My simple wish is abundant inspiration and I will keep it in my heart.,template-reviewed
+train-1147,train-single,en,reunion,,0,My heart asks for meeting old friends again for the people close to me.,template-reviewed
+train-1148,train-single,zh,longevity,,0,愿望很简单，情谊长久，也送给每一个努力的人。,template-reviewed
+train-1149,train-single,zh,reunion,,0,愿望很简单，再见想念的人。谢谢此刻的自己。,template-reviewed
+train-1150,train-ambiguous,en,abundance,,1,there are three cups 2,template-reviewed
+train-1151,train-single,en,reunion,,0,I wish for loved ones together after every patient wait.,template-reviewed
+train-1152,train-ambiguous,zh,reunion,,1,桌上放着一本书 3,template-reviewed
+train-1153,train-single,zh,joy,,0,此刻我盼望分享喜悦，在新的日子里。,template-reviewed
+train-1154,train-mixed,en,courage,abundance,0,"I wish for a steady heart, and also effort bearing fruit.",template-reviewed
+train-1155,train-mixed,zh,safety,courage,0,我希望被温柔守护，还想把祝福送给跨过难关。,template-reviewed
+train-1156,train-single,en,longevity,,0,Let this wish carry many meaningful years as good things unfold.,template-reviewed
+train-1157,train-single,en,reunion,,0,Please weave a wish for meeting old friends again.,template-reviewed
+train-1158,train-single,zh,safety,,0,愿出入平安，送给我在意的人。,template-reviewed
+train-1159,train-single,zh,safety,,0,请替我织下旅途顺利，不负每一次等待。,template-reviewed
+train-1160,train-ambiguous,zh,joy,,1,今天穿蓝色衣服 1,template-reviewed
+train-1161,train-mixed,zh,abundance,safety,0,想对明天说：生活丰足，同时盼望生活安定。,template-reviewed
+train-1162,train-single,zh,safety,,0,请替我织下出入平安，不负每一次等待。,template-reviewed
+train-1163,train-ambiguous,zh,courage,,1,今天穿蓝色衣服 4,template-reviewed
+train-1164,train-single,zh,abundance,,0,真心期待收获满满，愿好事慢慢发生。,template-reviewed
+train-1165,train-mixed,en,longevity,reunion,0,May there be growing old together; I also hope for loved ones together.,template-reviewed
+train-1166,train-single,zh,abundance,,0,把这个心愿送给未来：生活丰足，这是我最珍重的期待。,template-reviewed
+train-1167,train-ambiguous,zh,courage,,1,桌上放着一本书 2,template-reviewed
+train-1168,train-single,en,longevity,,0,I wish for lasting friendship—this matters deeply to me.,template-reviewed
+train-1169,train-single,zh,safety,,0,把这个心愿送给未来：出入平安，在新的日子里。,template-reviewed
+train-1170,train-single,en,abundance,,0,My simple wish is prosperity through the seasons and I will keep it in my heart.,template-reviewed
+train-1171,train-single,zh,joy,,0,请替我织下笑容常在，一直记在心里。,template-reviewed
+train-1172,train-single,zh,longevity,,0,我希望岁月绵长。,template-reviewed
+train-1173,train-single,en,abundance,,0,Please weave a wish for rewarding results for the people close to me.,template-reviewed
+train-1174,train-single,zh,longevity,,0,想对明天说：长辈长寿，不负每一次等待。,template-reviewed
+train-1175,train-single,en,longevity,,0,Let this wish carry a purpose that endures for the people close to me.,template-reviewed
+train-1176,train-single,zh,courage,,0,我希望勇敢向前，送给我在意的人。,template-reviewed
+train-1177,train-single,en,abundance,,0,This year I hope for effort bearing fruit in the days ahead.,template-reviewed
+train-1178,train-mixed,zh,longevity,joy,0,请替我织下初心长存；更希望日日欢喜。,template-reviewed
+train-1179,train-ambiguous,zh,safety,,1,这是一段普通描述 1,template-reviewed
+train-1180,train-single,en,safety,,0,Please weave a wish for peace at home for everyone I care about.,template-reviewed
+train-1181,train-ambiguous,zh,courage,,1,窗外有三棵树 3,template-reviewed
+train-1182,train-single,zh,abundance,,0,今年最想看到事业有成，送给我在意的人。,template-reviewed
+train-1183,train-single,en,abundance,,0,I sincerely hope for effort bearing fruit.,template-reviewed
+train-1184,train-single,zh,safety,,0,真心期待旅途顺利，从今天开始。,template-reviewed
+train-1185,train-mixed,zh,reunion,longevity,0,今年最想看到亲人常相聚，还想把祝福送给情谊长久。,template-reviewed
+train-1186,train-single,zh,abundance,,0,把这个心愿送给未来：四季富足，这是我最珍重的期待。,template-reviewed
+train-1187,train-single,zh,longevity,,0,愿福寿安康，一直记在心里。,template-reviewed
+train-1188,train-mixed,zh,joy,courage,0,愿望很简单，日日欢喜，也愿坚持自己的选择。,template-reviewed
+train-1189,train-single,en,joy,,0,May there be wonderful news after every patient wait.,template-reviewed
+train-1190,train-single,en,courage,,0,I wish for overcoming this challenge starting today.,template-reviewed
+train-1191,train-single,zh,longevity,,0,想对明天说：美好延续，不负每一次等待。,template-reviewed
+train-1192,train-single,zh,abundance,,0,我希望家业兴旺。,template-reviewed
+train-1193,train-single,en,reunion,,0,Please weave a wish for meeting old friends again.,template-reviewed
+train-1194,train-single,en,courage,,0,I want to see a brave new start starting today.,template-reviewed
+train-1195,train-single,en,courage,,0,I wish for strength through storms in the days ahead.,template-reviewed
+train-1196,train-ambiguous,zh,longevity,,1,我在学习一门新语言 1,template-reviewed
+train-1197,train-single,zh,abundance,,0,我的愿望是努力结出果实，从今天开始。,template-reviewed
+train-1198,train-ambiguous,en,safety,,1,the window faces east 2,template-reviewed
+train-1199,train-single,en,longevity,,0,I wish for family stories lasting generations and I will keep it in my heart.,template-reviewed
+train-1200,train-single,zh,abundance,,0,愿望很简单，收获满满，也送给每一个努力的人。,template-reviewed
+train-1201,train-single,zh,safety,,0,今年最想看到被温柔守护，送给我在意的人。,template-reviewed
+train-1202,train-single,zh,courage,,0,愿望很简单，不惧风雨，一直记在心里。,template-reviewed
+train-1203,train-single,en,courage,,0,My simple wish is overcoming this challenge after every patient wait.,template-reviewed
+train-1204,train-single,en,joy,,0,This year I hope for sharing delight as good things unfold.,template-reviewed
+train-1205,train-mixed,en,longevity,courage,0,Let this wish carry growing old together; I also hope for a brave new start.,template-reviewed
+train-1206,train-mixed,zh,abundance,safety,0,把这个心愿送给未来：家业兴旺，也愿旅途顺利。,template-reviewed
+train-1207,train-single,zh,abundance,,0,今年最想看到努力结出果实，不负每一次等待。,template-reviewed
+train-1208,train-ambiguous,zh,longevity,,1,窗外有三棵树 1,template-reviewed
+train-1209,train-mixed,en,longevity,safety,0,"I wish for a purpose that endures, together with my family stays safe.",template-reviewed
+train-1210,train-single,zh,joy,,0,此刻我盼望心里明亮，在新的日子里。,template-reviewed
+train-1211,train-single,en,safety,,0,Please weave a wish for safe travels.,template-reviewed
+train-1212,train-ambiguous,en,safety,,1,the window faces east 1,template-reviewed
+train-1213,train-ambiguous,en,abundance,,1,I wrote a short note 4,template-reviewed
+train-1214,train-single,en,joy,,0,This year I hope for joy every day—this matters deeply to me.,template-reviewed
+train-1215,train-single,en,safety,,0,My simple wish is my family stays safe for the people close to me.,template-reviewed
+train-1216,train-single,zh,joy,,0,愿望很简单，收获快乐。谢谢此刻的自己。,template-reviewed
+train-1217,train-single,en,abundance,,0,I wish for plentiful life with gratitude for this moment.,template-reviewed
+train-1218,train-single,en,reunion,,0,Please weave a wish for loved ones together starting today.,template-reviewed
+train-1219,train-single,zh,abundance,,0,想对明天说：努力结出果实。,template-reviewed
+train-1220,train-single,en,courage,,0,May there be courage to move forward as good things unfold.,template-reviewed
+train-1221,train-single,en,joy,,0,My simple wish is many reasons to smile for the people close to me.,template-reviewed
+train-1222,train-single,en,longevity,,0,May there be longevity for my elders with gratitude for this moment.,template-reviewed
+train-1223,train-mixed,zh,courage,safety,0,愿望很简单，勇敢向前，也愿健康安稳。,template-reviewed
+train-1224,train-single,en,safety,,0,May there be a peaceful journey—this matters deeply to me.,template-reviewed
+train-1225,train-single,zh,joy,,0,把这个心愿送给未来：幸福相伴，也送给每一个努力的人。,template-reviewed
+train-1226,train-single,zh,reunion,,0,今年最想看到一家团圆，在新的日子里。,template-reviewed
+train-1227,train-single,en,abundance,,0,I want to see rewarding results after every patient wait.,template-reviewed
+train-1228,train-single,zh,courage,,0,愿成长得更坚韧，愿好事慢慢发生。,template-reviewed
+train-1229,train-ambiguous,en,safety,,1,this is an ordinary sentence 4,template-reviewed
+train-1230,train-ambiguous,zh,longevity,,1,我在学习一门新语言 3,template-reviewed
+train-1231,train-mixed,zh,joy,safety,0,真心期待遇见好消息；更希望家人平安。,template-reviewed
+train-1232,train-single,en,reunion,,0,Let this wish carry a joyful reunion for the people close to me.,template-reviewed
+train-1233,train-single,en,abundance,,0,This year I hope for thriving home and I will keep it in my heart.,template-reviewed
+train-1234,train-single,en,reunion,,0,Let this wish carry our family reunites with gratitude for this moment.,template-reviewed
+train-1235,train-single,en,safety,,0,I want to see my family stays safe.,template-reviewed
+train-1236,train-ambiguous,zh,joy,,1,桌上放着一本书 1,template-reviewed
+train-1237,train-mixed,zh,abundance,longevity,0,我希望生活丰足，同时盼望家族故事代代相传。,template-reviewed
+train-1238,train-ambiguous,zh,safety,,1,窗外有三棵树 4,template-reviewed
+train-1239,train-mixed,zh,longevity,courage,0,把这个心愿送给未来：美好延续，也愿拥有勇气。,template-reviewed
+train-1240,train-ambiguous,zh,abundance,,1,这是一段普通描述 3,template-reviewed
+train-1241,train-single,zh,longevity,,0,此刻我盼望岁月绵长，从今天开始。,template-reviewed
+train-1242,train-ambiguous,en,abundance,,1,this is an ordinary sentence 4,template-reviewed
+train-1243,train-single,en,courage,,0,My heart asks for overcoming this challenge for the people close to me.,template-reviewed
+train-1244,train-mixed,en,courage,safety,0,This year I hope for overcoming this challenge; I also hope for everyone stays well.,template-reviewed
+train-1245,train-single,en,longevity,,0,Please weave a wish for lasting friendship with gratitude for this moment.,template-reviewed
+train-1246,train-single,zh,longevity,,0,今年最想看到岁月绵长，送给我在意的人。,template-reviewed
+train-1247,train-single,en,abundance,,0,I sincerely hope for thriving home as good things unfold.,template-reviewed
+train-1248,train-single,zh,reunion,,0,请替我织下亲人常相聚，送给我在意的人。,template-reviewed
+train-1249,train-single,zh,longevity,,0,我希望美好延续。,template-reviewed
+train-1250,train-single,en,joy,,0,May there be sharing delight with gratitude for this moment.,template-reviewed
+train-1251,train-ambiguous,en,abundance,,1,I wrote a short note 1,template-reviewed
+train-1252,train-mixed,en,reunion,courage,0,"For tomorrow, I wish for meeting old friends again; I also hope for growing resilient.",template-reviewed
+train-1253,train-mixed,zh,joy,reunion,0,把这个心愿送给未来：心里明亮；更希望团聚有期。,template-reviewed
+train-1254,train-ambiguous,en,courage,,1,there are three cups 1,template-reviewed
+train-1255,train-mixed,en,safety,longevity,0,"My heart asks for my family stays safe, and also many meaningful years.",template-reviewed
+train-1256,train-single,zh,joy,,0,我希望分享喜悦，不负每一次等待。,template-reviewed
+train-1257,train-single,zh,abundance,,0,愿四季富足，一直记在心里。,template-reviewed
+train-1258,train-mixed,en,reunion,longevity,0,"My simple wish is a joyful reunion, and also a purpose that endures.",template-reviewed
+train-1259,train-single,en,safety,,0,My simple wish is health and safety—this matters deeply to me.,template-reviewed
+train-1260,train-single,zh,longevity,,0,把这个心愿送给未来：陪伴到老，这是我最珍重的期待。,template-reviewed
+train-1261,train-single,en,safety,,0,This year I hope for everyone stays well.,template-reviewed
+train-1262,train-ambiguous,zh,courage,,1,我在学习一门新语言 4,template-reviewed
+train-1263,train-ambiguous,en,abundance,,1,this is an ordinary sentence 2,template-reviewed
+train-1264,train-ambiguous,zh,longevity,,1,这是一段普通描述 1,template-reviewed
+train-1265,train-single,zh,reunion,,0,请替我织下再见想念的人，一直记在心里。,template-reviewed
+train-1266,train-mixed,zh,reunion,courage,0,我的愿望是共度佳节，同时盼望重新出发。,template-reviewed
+train-1267,train-single,en,joy,,0,My heart asks for finding happiness.,template-reviewed
+train-1268,train-mixed,en,abundance,longevity,0,"I want to see success in my work, together with goodness that continues.",template-reviewed
+train-1269,train-mixed,zh,courage,reunion,0,请替我织下内心坚定，也愿家人围坐。,template-reviewed
+train-1270,train-ambiguous,en,courage,,1,there are three cups 4,template-reviewed
+train-1271,train-single,zh,abundance,,0,真心期待四季富足，愿好事慢慢发生。,template-reviewed
+train-1272,train-single,zh,reunion,,0,愿望很简单，共度佳节，一直记在心里。,template-reviewed
+train-1273,train-ambiguous,en,safety,,1,the room is quiet 4,template-reviewed
+train-1274,train-mixed,en,safety,joy,0,"My simple wish is safe travels, and also wonderful news.",template-reviewed
+train-1275,train-single,zh,abundance,,0,今年最想看到家业兴旺，送给我在意的人。,template-reviewed
+train-1276,train-single,zh,joy,,0,此刻我盼望心里明亮，在新的日子里。,template-reviewed
+train-1277,train-single,zh,reunion,,0,把这个心愿送给未来：亲人常相聚。,template-reviewed
+train-1278,train-single,en,longevity,,0,May there be a purpose that endures after every patient wait.,template-reviewed
+train-1279,train-single,zh,abundance,,0,我的愿望是家业兴旺，在新的日子里。,template-reviewed
+train-1280,train-single,zh,joy,,0,今年最想看到分享喜悦，从今天开始。,template-reviewed
+train-1281,train-single,en,reunion,,0,I wish for loved ones together after every patient wait.,template-reviewed
+train-1282,train-single,zh,safety,,0,今年最想看到生活安定，愿好事慢慢发生。,template-reviewed
+train-1283,train-single,en,courage,,0,I want to see growing resilient starting today.,template-reviewed
+train-1284,train-single,zh,safety,,0,真心期待健康安稳，从今天开始。,template-reviewed
+train-1285,train-single,zh,safety,,0,此刻我盼望生活安定，这是我最珍重的期待。,template-reviewed
+train-1286,train-single,en,safety,,0,I wish for my family stays safe in the days ahead.,template-reviewed
+train-1287,train-single,en,reunion,,0,"For tomorrow, I wish for coming home soon.",template-reviewed
+train-1288,train-single,en,longevity,,0,"For tomorrow, I wish for many meaningful years with gratitude for this moment.",template-reviewed
+train-1289,train-mixed,zh,joy,safety,0,我希望收获快乐，还想把祝福送给一路顺遂。,template-reviewed
+train-1290,train-single,zh,courage,,0,我希望拥有勇气，送给我在意的人。,template-reviewed
+train-1291,train-single,zh,safety,,0,我希望一路顺遂。谢谢此刻的自己。,template-reviewed
+train-1292,train-single,zh,longevity,,0,我的愿望是长辈长寿，在新的日子里。,template-reviewed
+train-1293,train-single,zh,joy,,0,此刻我盼望遇见好消息，这是我最珍重的期待。,template-reviewed
+train-1294,train-ambiguous,zh,abundance,,1,我在学习一门新语言 3,template-reviewed
+train-1295,train-single,zh,abundance,,0,此刻我盼望努力结出果实，送给我在意的人。,template-reviewed
+train-1296,train-ambiguous,zh,longevity,,1,今天穿蓝色衣服 4,template-reviewed
+train-1297,train-single,en,longevity,,0,My simple wish is a lasting friendship and I will keep it in my heart.,template-reviewed
+train-1298,train-mixed,zh,longevity,safety,0,愿岁月绵长；更希望出入平安。,template-reviewed
+train-1299,train-single,en,reunion,,0,"For tomorrow, I wish for our family reunites—this matters deeply to me.",template-reviewed
+train-1300,train-single,zh,reunion,,0,今年最想看到团聚有期，在新的日子里。,template-reviewed
+train-1301,train-single,en,reunion,,0,Please weave a wish for festival together starting today.,template-reviewed
+train-1302,train-single,zh,safety,,0,我希望生活安定。谢谢此刻的自己。,template-reviewed
+train-1303,train-single,en,reunion,,0,Let this wish carry gathering around one table for the people close to me.,template-reviewed
+train-1304,train-single,en,safety,,0,This year I hope for peaceful journey with gratitude for this moment.,template-reviewed
+train-1305,train-single,en,safety,,0,Let this wish carry a calm life starting today.,template-reviewed
+train-1306,train-single,en,longevity,,0,May there be goodness that continues with gratitude for this moment.,template-reviewed
+train-1307,train-mixed,zh,safety,joy,0,愿望很简单，健康安稳；更希望分享喜悦。,template-reviewed
+train-1308,train-single,zh,courage,,0,真心期待成长得更坚韧，这是我最珍重的期待。,template-reviewed
+train-1309,train-mixed,zh,safety,courage,0,真心期待家人平安，也愿坚持自己的选择。,template-reviewed
+train-1310,train-single,en,courage,,0,This year I hope for standing by my choice with gratitude for this moment.,template-reviewed
+train-1311,train-single,en,safety,,0,I sincerely hope for peaceful journey and I will keep it in my heart.,template-reviewed
+train-1312,train-single,zh,longevity,,0,想对明天说：美好延续，不负每一次等待。,template-reviewed
+train-1313,train-single,en,joy,,0,"For tomorrow, I wish for bright heart.",template-reviewed
+train-1314,train-ambiguous,zh,courage,,1,桌上放着一本书 3,template-reviewed
+train-1315,train-single,en,joy,,0,"For tomorrow, I wish for joy every day with gratitude for this moment.",template-reviewed
+train-1316,train-single,en,joy,,0,I sincerely hope for joy every day for everyone I care about.,template-reviewed
+train-1317,train-mixed,zh,reunion,longevity,0,今年最想看到共度佳节，同时盼望福寿安康。,template-reviewed
+train-1318,train-single,en,safety,,0,I wish for peace at home as good things unfold.,template-reviewed
+train-1319,train-single,en,reunion,,0,May there be coming home soon after every patient wait.,template-reviewed
+train-1320,train-ambiguous,zh,courage,,1,我在学习一门新语言 2,template-reviewed
+train-1321,train-single,zh,joy,,0,把这个心愿送给未来：生活有趣，也送给每一个努力的人。,template-reviewed
+train-1322,train-single,en,reunion,,0,My heart asks for meeting old friends again for the people close to me.,template-reviewed
+train-1323,train-single,zh,courage,,0,请替我织下重新出发，愿好事慢慢发生。,template-reviewed
+train-1324,train-single,zh,reunion,,0,真心期待共度佳节，也送给每一个努力的人。,template-reviewed
+train-1325,train-mixed,zh,joy,reunion,0,想对明天说：生活有趣，还想把祝福送给共度佳节。,template-reviewed
+train-1326,train-single,en,safety,,0,Please weave a wish for safe travels.,template-reviewed
+train-1327,train-single,zh,safety,,0,今年最想看到生活安定，愿好事慢慢发生。,template-reviewed
+train-1328,train-single,en,joy,,0,My simple wish is finding happiness in the days ahead.,template-reviewed
+train-1329,train-ambiguous,zh,joy,,1,我在学习一门新语言 4,template-reviewed
+train-1330,train-mixed,en,reunion,safety,0,"My heart asks for our family reunites, and also health and safety.",template-reviewed
+train-1331,train-single,en,courage,,0,"For tomorrow, I wish for finding my courage in the days ahead.",template-reviewed
+train-1332,train-single,en,reunion,,0,Please weave a wish for seeing those I miss starting today.,template-reviewed
+train-1333,train-single,en,safety,,0,My heart asks for my family stays safe starting today.,template-reviewed
+train-1334,train-single,zh,safety,,0,愿望很简单，家人平安。,template-reviewed
+train-1335,train-single,zh,reunion,,0,把这个心愿送给未来：再见想念的人，也送给每一个努力的人。,template-reviewed
+train-1336,train-mixed,zh,safety,reunion,0,我的愿望是岁岁康宁，同时盼望亲人常相聚。,template-reviewed
+train-1337,train-single,en,safety,,0,My heart asks for health and safety for everyone I care about.,template-reviewed
+train-1338,train-single,en,abundance,,0,I sincerely hope for success in my work after every patient wait.,template-reviewed
+train-1339,train-single,zh,safety,,0,请替我织下健康安稳，不负每一次等待。,template-reviewed
+train-1340,train-single,zh,safety,,0,愿望很简单，家人平安。,template-reviewed
+train-1341,train-mixed,en,courage,joy,0,May there be strength through storms; I also hope for finding happiness.,template-reviewed
+train-1342,train-single,en,reunion,,0,My simple wish is loved ones together in the days ahead.,template-reviewed
+train-1343,train-single,zh,courage,,0,愿望很简单，跨过难关，一直记在心里。,template-reviewed
+train-1344,train-single,en,courage,,0,I want to see a brave new start starting today.,template-reviewed
+train-1345,train-single,en,longevity,,0,I want to see a long healthy life.,template-reviewed
+train-1346,train-single,en,courage,,0,This year I hope for courage to move forward for everyone I care about.,template-reviewed
+train-1347,train-single,zh,abundance,,0,想对明天说：五谷丰登，不负每一次等待。,template-reviewed
+train-1348,train-single,en,courage,,0,Let this wish carry a steady heart starting today.,template-reviewed
+train-1349,train-ambiguous,zh,joy,,1,我在学习一门新语言 3,template-reviewed
+train-1350,train-single,en,reunion,,0,My simple wish is a festival together in the days ahead.,template-reviewed
+train-1351,train-ambiguous,zh,longevity,,1,今天穿蓝色衣服 2,template-reviewed
+train-1352,train-single,en,courage,,0,This year I hope for finding my courage for the people close to me.,template-reviewed
+train-1353,train-ambiguous,en,abundance,,1,this is an ordinary sentence 1,template-reviewed
+train-1354,train-ambiguous,en,safety,,1,I wrote a short note 4,template-reviewed
+train-1355,train-ambiguous,en,safety,,1,the room is quiet 1,template-reviewed
+train-1356,train-ambiguous,en,reunion,,1,the window faces east 2,template-reviewed
+train-1357,train-single,en,courage,,0,Please weave a wish for overcoming this challenge.,template-reviewed
+train-1358,train-ambiguous,en,longevity,,1,I wrote a short note 4,template-reviewed
+train-1359,train-mixed,en,courage,safety,0,"My simple wish is finding my courage, together with my family stays safe.",template-reviewed
+train-1360,train-single,en,courage,,0,"For tomorrow, I wish for courage to move forward and I will keep it in my heart.",template-reviewed
+train-1361,train-single,zh,longevity,,0,今年最想看到长辈长寿，送给我在意的人。,template-reviewed
+train-1362,train-mixed,en,reunion,safety,0,"I sincerely hope for seeing those I miss, while carrying a calm life.",template-reviewed
+train-1363,train-single,en,reunion,,0,I wish for seeing those I miss after every patient wait.,template-reviewed
+train-1364,train-mixed,en,safety,joy,0,"My simple wish is peace at home, together with joy every day.",template-reviewed
+train-1365,train-single,en,longevity,,0,May there be longevity for my elders with gratitude for this moment.,template-reviewed
+train-1366,train-single,en,longevity,,0,I sincerely hope for goodness that continues—this matters deeply to me.,template-reviewed
+train-1367,train-single,en,courage,,0,I wish for strength through storms in the days ahead.,template-reviewed
+train-1368,train-single,en,abundance,,0,My heart asks for abundant inspiration as good things unfold.,template-reviewed
+train-1369,train-single,en,reunion,,0,This year I hope for coming home soon starting today.,template-reviewed
+train-1370,train-single,zh,reunion,,0,此刻我盼望团聚有期。,template-reviewed
+train-1371,train-single,en,abundance,,0,Let this wish carry a thriving home with gratitude for this moment.,template-reviewed
+train-1372,train-mixed,en,abundance,joy,0,"For tomorrow, I wish for a plentiful life; I also hope for a playful life.",template-reviewed
+train-1373,train-single,en,safety,,0,I wish for safe travels starting today.,template-reviewed
+train-1374,train-single,zh,abundance,,0,想对明天说：家业兴旺，不负每一次等待。,template-reviewed
+train-1375,train-ambiguous,en,courage,,1,the window faces east 1,template-reviewed
+train-1376,train-single,zh,reunion,,0,真心期待再见想念的人，这是我最珍重的期待。,template-reviewed
+train-1377,train-ambiguous,zh,courage,,1,窗外有三棵树 2,template-reviewed
+train-1378,train-single,zh,abundance,,0,想对明天说：努力结出果实。,template-reviewed
+train-1379,train-single,en,joy,,0,I sincerely hope for bright heart in the days ahead.,template-reviewed
+train-1380,train-mixed,zh,safety,reunion,0,愿健康安稳；更希望团聚有期。,template-reviewed
+train-1381,train-single,en,abundance,,0,This year I hope for thriving home and I will keep it in my heart.,template-reviewed
+train-1382,train-single,zh,reunion,,0,想对明天说：一家团圆，从今天开始。,template-reviewed
+train-1383,train-ambiguous,en,reunion,,1,the window faces east 1,template-reviewed
+train-1384,train-single,zh,reunion,,0,愿亲人常相聚，从今天开始。,template-reviewed
+train-1385,train-single,zh,abundance,,0,今年最想看到五谷丰登，送给我在意的人。,template-reviewed
+train-1386,train-single,zh,safety,,0,真心期待出入平安，从今天开始。,template-reviewed
+train-1387,train-single,zh,courage,,0,今年最想看到内心坚定，在新的日子里。,template-reviewed
+train-1388,train-single,zh,safety,,0,真心期待家人平安，从今天开始。,template-reviewed
+train-1389,train-ambiguous,zh,reunion,,1,今天穿蓝色衣服 1,template-reviewed
+train-1390,train-single,en,reunion,,0,This year I hope for joyful reunion starting today.,template-reviewed
+train-1391,train-single,zh,courage,,0,真心期待跨过难关，也送给每一个努力的人。,template-reviewed
+train-1392,train-mixed,en,joy,safety,0,"May there be a playful life, while carrying a calm life.",template-reviewed
+train-1393,train-single,en,joy,,0,May there be joy every day and I will keep it in my heart.,template-reviewed
+train-1394,train-single,en,courage,,0,Let this wish carry standing by my choice for everyone I care about.,template-reviewed
+train-1395,train-mixed,zh,reunion,joy,0,把这个心愿送给未来：团聚有期，也愿遇见好消息。,template-reviewed
+train-1396,train-single,zh,abundance,,0,愿四季富足，一直记在心里。,template-reviewed
+train-1397,train-ambiguous,en,abundance,,1,there are three cups 1,template-reviewed
+train-1398,train-ambiguous,zh,courage,,1,桌上放着一本书 1,template-reviewed
+train-1399,train-single,zh,longevity,,0,想对明天说：初心长存，不负每一次等待。,template-reviewed
+train-1400,train-single,zh,longevity,,0,真心期待家族故事代代相传。谢谢此刻的自己。,template-reviewed
+train-1401,train-single,en,joy,,0,I wish for playful life as good things unfold.,template-reviewed
+train-1402,train-ambiguous,en,abundance,,1,this is an ordinary sentence 3,template-reviewed
+train-1403,train-mixed,zh,safety,abundance,0,想对明天说：一路顺遂，同时盼望四季富足。,template-reviewed
+train-1404,train-single,en,joy,,0,This year I hope for sharing delight as good things unfold.,template-reviewed
+train-1405,train-mixed,en,reunion,courage,0,"For tomorrow, I wish for loved ones together, while carrying overcoming this challenge.",template-reviewed
+train-1406,train-single,zh,joy,,0,请替我织下生活有趣，一直记在心里。,template-reviewed
+train-1407,train-single,en,courage,,0,Please weave a wish for strength through storms after every patient wait.,template-reviewed
+train-1408,train-single,en,courage,,0,"For tomorrow, I wish for steady heart after every patient wait.",template-reviewed
+train-1409,train-single,en,longevity,,0,Let this wish carry a purpose that endures for the people close to me.,template-reviewed
+train-1410,train-single,zh,reunion,,0,我希望家人围坐，送给我在意的人。,template-reviewed
+train-1411,train-mixed,en,joy,courage,0,"This year I hope for a playful life, while carrying strength through storms.",template-reviewed
+train-1412,train-single,en,joy,,0,My heart asks for finding happiness.,template-reviewed
+train-1413,train-single,zh,reunion,,0,请替我织下与故友重逢，送给我在意的人。,template-reviewed
+train-1414,train-mixed,zh,courage,joy,0,我希望重新出发，还想把祝福送给笑容常在。,template-reviewed
+train-1415,train-single,zh,abundance,,0,今年最想看到家业兴旺，送给我在意的人。,template-reviewed
+train-1416,train-single,en,longevity,,0,I wish for lasting friendship—this matters deeply to me.,template-reviewed
+train-1417,train-single,zh,abundance,,0,愿望很简单，生活丰足，也送给每一个努力的人。,template-reviewed
+train-1418,train-mixed,zh,joy,longevity,0,我的愿望是生活有趣，还想把祝福送给陪伴到老。,template-reviewed
+train-1419,train-single,zh,courage,,0,我希望坚持自己的选择。谢谢此刻的自己。,template-reviewed
+train-1420,train-single,en,longevity,,0,My simple wish is family stories lasting generations for everyone I care about.,template-reviewed
+train-1421,train-ambiguous,zh,longevity,,1,桌上放着一本书 4,template-reviewed
+train-1422,train-single,en,longevity,,0,I wish for long healthy life in the days ahead.,template-reviewed
+train-1423,train-single,zh,joy,,0,愿望很简单，生活有趣。谢谢此刻的自己。,template-reviewed
+train-1424,train-ambiguous,zh,safety,,1,我在学习一门新语言 1,template-reviewed
+train-1425,train-single,en,safety,,0,May there be everyone stays well starting today.,template-reviewed
+train-1426,train-single,en,courage,,0,My simple wish is strength through storms for the people close to me.,template-reviewed
+train-1427,train-single,en,longevity,,0,Let this wish carry many meaningful years as good things unfold.,template-reviewed
+train-1428,train-single,en,longevity,,0,Let this wish carry goodness that continues and I will keep it in my heart.,template-reviewed
+train-1429,train-single,zh,courage,,0,愿不惧风雨，这是我最珍重的期待。,template-reviewed
+train-1430,train-ambiguous,en,longevity,,1,the window faces east 2,template-reviewed
+train-1431,train-mixed,zh,longevity,courage,0,想对明天说：情谊长久，同时盼望成长得更坚韧。,template-reviewed
+train-1432,train-single,zh,safety,,0,此刻我盼望一路顺遂，这是我最珍重的期待。,template-reviewed
+train-1433,train-mixed,en,safety,reunion,0,"I wish for peace at home, together with our family reunites.",template-reviewed
+train-1434,train-single,en,longevity,,0,May there be many meaningful years and I will keep it in my heart.,template-reviewed
+train-1435,train-single,zh,reunion,,0,愿共度佳节，这是我最珍重的期待。,template-reviewed
+train-1436,train-single,zh,longevity,,0,请替我织下陪伴到老。谢谢此刻的自己。,template-reviewed
+train-1437,train-single,zh,safety,,0,今年最想看到岁岁康宁，愿好事慢慢发生。,template-reviewed
+train-1438,train-ambiguous,en,joy,,1,the window faces east 1,template-reviewed
+train-1439,train-single,zh,joy,,0,今年最想看到遇见好消息，愿好事慢慢发生。,template-reviewed
+train-1440,train-single,en,longevity,,0,This year I hope for goodness that continues as good things unfold.,template-reviewed

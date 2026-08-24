@@ -1,0 +1,13 @@
+id,type,item,source_or_author,license_or_status,used_in,notes
+C-001,code,Loom of Doom gameplay inspiration,andHW/lod@7c26fcf0284bb40a2d498bff1e64213a5697c905,MIT,interaction concept,"Attribution preserved; source implementation not copied"
+C-002,code,React and React DOM,Meta Open Source,MIT,application runtime,Locked in package-lock.json
+C-003,code,QRCode.js,soldair/node-qrcode,MIT,offline QR generation,Locked in package-lock.json
+C-004,code,Vite and vite-plugin-singlefile,respective maintainers,MIT,build only,Locked in package-lock.json
+F-001,font,Noto Serif CJK SC subset,Google/Adobe Noto project,SIL OFL 1.1,static headings,Original font and license retained
+V-001,image,Deep indigo thread background,AI-assisted then author-selected,original project asset,input/weaving/result atmosphere,No cultural object copied
+V-002,image,Gold and peacock-teal shuttle,AI-assisted then author-selected,original project asset,weaving interaction,Transparent PNG; no historic loom claim
+V-003,graphic,Eight bitmap motif redraws,author,original,pattern generator,Source concepts documented; pixels independently drawn
+V-004,graphic,Interface SVG icons,author/AI-assisted code,original,interface,No external icon pack
+R-001,research,Chinese ICH article,Cao Wen / Guangming Daily / ihchina.cn,research reference,cultural copy,Images not used
+R-002,research,Xinhua 2026 feature,Xinhua,research reference,title and cooperation fact,Images not used
+R-003,research,UNESCO ICH record,UNESCO,research reference,heritage listing fact,Images not used
