@@ -26,7 +26,9 @@ npm run model:build
 npm run font:subset
 ```
 
-正式发布前将环境变量 `VITE_SHARE_BASE_URL` 设为冻结后的 GitHub Pages `share.html` 地址再运行 `npm run build`。未设置时，二维码使用与主页面同目录的 `share.html`，便于本地测试。
+正式分享地址已冻结为 `https://zys1544526484.github.io/woven-wishes/share.html`，并通过 `.env.production` 注入离线主构建。未设置该变量时，二维码仍会使用与主页面同目录的 `share.html`，便于本地测试。
+
+推送到 `main` 后，`.github/workflows/deploy-pages.yml` 会构建并部署仅含结果重建功能的 `dist-share/`。首次发布前需在仓库 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。
 
 ## 项目结构
 

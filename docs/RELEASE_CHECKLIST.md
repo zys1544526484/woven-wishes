@@ -5,7 +5,7 @@
 - [ ] 向组委会发送 `EXTERNAL_REVIEW_PACK.md` 中的开源二改咨询并保存书面回复。
 - [ ] 至少联系两家保护/研究机构或三名从业者；9 月 2 日前记录回复，未回复则保持保守文案。
 - [ ] 人工逐行复核 `data/generated/train.csv` 与 `test.csv`，将 `review_status` 更新为真实状态后重训。
-- [ ] 创建并冻结 GitHub Pages 仓库路径；上传 `dist-share/`；将最终 `share.html` HTTPS 地址写入 `VITE_SHARE_BASE_URL` 后重建主单文件。
+- [x] 冻结 GitHub Pages 地址并写入 `VITE_SHARE_BASE_URL`；已加入 `dist-share/` 自动部署工作流并重建主单文件。线上发布与真机扫码结果须在 Pages 首次部署后补录。
 - [ ] 1920×1080 Windows 真触屏：软键盘、触控阈值、失焦、多指、窗口缩放和原速 30 轮。
 - [ ] 两款 Android、两款 iPhone 各 5 次、0.5—1.5m 扫码；记录机型、系统、距离和成功率。
 - [ ] 5 名用户理解度测试，其中 2 人英文输入、2 人不了解云锦；记录是否复述“两人协作/非工艺复原”。
