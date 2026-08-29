@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { Locale, Palette, PatternMatrix, PatternRecipe } from "../core/types";
 import { paintActiveWeft, paintWovenMatrix } from "./weavePainter";
-import { loadMotifAtlas, paintRefinedPattern } from "./refinedPattern";
+import { loadMotifAtlas, paintRefinedPattern, refinedPatternSignature } from "./refinedPattern";
 
 interface WeaveCanvasProps {
   matrix: PatternMatrix;
@@ -30,6 +30,7 @@ function setupCanvas(canvas: HTMLCanvasElement): { context: CanvasRenderingConte
 export function WeaveCanvas({ matrix, palette, recipe, completedRows, committingRow, direction = "ltr", locale = "zh", className }: WeaveCanvasProps) {
   const staticRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<HTMLCanvasElement>(null);
+  const renderSignature = refinedPatternSignature(recipe, completedRows);
 
   useEffect(() => {
     const canvas = staticRef.current;
@@ -74,7 +75,11 @@ export function WeaveCanvas({ matrix, palette, recipe, completedRows, committing
   }, [committingRow, direction, matrix.length]);
 
   return (
-    <div className={`weave-canvas ${className ?? ""}`} aria-label={locale === "zh" ? `已完成 ${completedRows} 梭，共 ${matrix.length} 梭` : `${completedRows} of ${matrix.length} passes completed`}>
+    <div
+      className={`weave-canvas ${className ?? ""}`}
+      aria-label={locale === "zh" ? `已完成 ${completedRows} 梭，共 ${matrix.length} 梭` : `${completedRows} of ${matrix.length} passes completed`}
+      data-render-signature={renderSignature}
+    >
       <canvas ref={staticRef} />
       <canvas ref={animationRef} aria-hidden="true" />
     </div>

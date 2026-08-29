@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import shuttleAsset from "../assets/shuttle.png";
+import { getWeaveStageTip } from "../content/craftTips";
 import { INTENT_COPY, localized } from "../content/project";
 import { PALETTES } from "../content/motifs";
 import { isValidWeaveGesture } from "../core/gesture";
@@ -37,11 +38,31 @@ const MODE_COPY: Record<WeaveMode, { zh: string; en: string; upperZh: string; up
   duo: { zh: "两人同时配合", en: "Two people coordinate", upperZh: "玩家一", upperEn: "Player one", lowerZh: "玩家二", lowerEn: "Player two" },
 };
 
+type GestureFeedback = "short" | "direction" | "vertical" | "cancelled" | "extra-pointer" | "lift-released";
+
+export function gestureFeedbackCopy(locale: Locale, feedback: GestureFeedback, direction: "ltr" | "rtl"): string {
+  if (locale === "zh") {
+    if (feedback === "direction") return direction === "ltr" ? "方向反了：这一梭请向右送" : "方向反了：这一梭请向左送";
+    if (feedback === "vertical") return "请贴着横向轨道送梭";
+    if (feedback === "cancelled") return "触控中断了，请重新送这一梭";
+    if (feedback === "extra-pointer") return "检测到额外触点，请重新送这一梭";
+    if (feedback === "lift-released") return "提经区松开了，请两人同时配合";
+    return "还差一点：把梭子送到轨道另一端";
+  }
+  if (feedback === "direction") return direction === "ltr" ? "Wrong way: send this pass to the right" : "Wrong way: send this pass to the left";
+  if (feedback === "vertical") return "Keep the shuttle on the horizontal track";
+  if (feedback === "cancelled") return "Touch was interrupted; try this pass again";
+  if (feedback === "extra-pointer") return "An extra touch was detected; try this pass again";
+  if (feedback === "lift-released") return "The warp cue was released; coordinate both roles";
+  return "A little farther: send the shuttle to the other end";
+}
+
 export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, proposal, completedRows, committingRow, weaveMode, soundEnabled, onSoundToggle, onExit, onCommit }: WeavingScreenProps) {
   const [paused, setPaused] = useState(false);
   const [warpReady, setWarpReady] = useState(false);
   const [liftHeld, setLiftHeld] = useState(false);
   const [aiSending, setAiSending] = useState(false);
+  const [gestureFeedback, setGestureFeedback] = useState<GestureFeedback | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const shuttleRef = useRef<HTMLImageElement>(null);
   const pointerId = useRef<number | null>(null);
@@ -49,18 +70,31 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   const liftHeldRef = useRef(false);
   const liftTimer = useRef<number | undefined>(undefined);
   const aiTimer = useRef<number | undefined>(undefined);
+  const feedbackTimer = useRef<number | undefined>(undefined);
   const invalidGesture = useRef(false);
   const start = useRef({ x: 0, y: 0 });
   const currentDelta = useRef(0);
+  const rawDelta = useRef(0);
   const direction = completedRows % 2 === 0 ? "ltr" : "rtl";
   const isCommitting = committingRow !== undefined;
   const palette = PALETTES[recipe.palette];
   const intent = INTENT_COPY[primaryIntent];
   const activeStage = Math.min(3, Math.floor(completedRows / 6));
   const stage = STAGE_COPY[activeStage];
+  const stageTip = getWeaveStageTip(completedRows);
   const modeCopy = MODE_COPY[weaveMode];
   const canDragShuttle = !paused && !isCommitting && weaveMode !== "player-drawboy"
     && (weaveMode === "player-weaver" ? warpReady : liftHeld);
+  const showFirstPassGuide = weaveMode === "player-weaver" && completedRows === 0 && !isCommitting && !paused;
+
+  const showGestureFeedback = useCallback((feedback: GestureFeedback) => {
+    if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
+    setGestureFeedback(feedback);
+    feedbackTimer.current = window.setTimeout(() => {
+      feedbackTimer.current = undefined;
+      setGestureFeedback(null);
+    }, 1700);
+  }, []);
 
   const positionShuttle = useCallback((delta = 0, animate = false) => {
     const track = trackRef.current;
@@ -87,7 +121,14 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   useEffect(() => () => {
     if (liftTimer.current !== undefined) window.clearTimeout(liftTimer.current);
     if (aiTimer.current !== undefined) window.clearTimeout(aiTimer.current);
+    if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
   }, []);
+
+  useEffect(() => {
+    if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
+    feedbackTimer.current = undefined;
+    setGestureFeedback(null);
+  }, [completedRows]);
 
   const sendAiShuttle = useCallback((requireLift = false) => {
     if (weaveMode !== "player-drawboy" || paused || isCommitting || (requireLift && !liftHeldRef.current)) return;
@@ -149,7 +190,10 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
       }
       if (weaveMode !== "player-weaver" || !warpReady) return;
       const valid = (direction === "ltr" && event.key === "ArrowRight") || (direction === "rtl" && event.key === "ArrowLeft");
-      if (valid) onCommit();
+      if (valid) {
+        setGestureFeedback(null);
+        onCommit();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -189,6 +233,10 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     invalidGesture.current = false;
     start.current = { x: event.clientX, y: event.clientY };
     currentDelta.current = 0;
+    rawDelta.current = 0;
+    if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
+    feedbackTimer.current = undefined;
+    setGestureFeedback(null);
     event.currentTarget.setPointerCapture(event.pointerId);
     event.currentTarget.classList.add("is-dragging");
   };
@@ -200,6 +248,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     if (!track || !shuttle) return;
     const travel = Math.max(1, track.clientWidth - shuttle.clientWidth);
     const raw = event.clientX - start.current.x;
+    rawDelta.current = raw;
     const allowed = direction === "ltr" ? Math.max(0, raw) : Math.min(0, raw);
     currentDelta.current = Math.max(-travel, Math.min(travel, allowed));
     positionShuttle(currentDelta.current, false);
@@ -213,9 +262,12 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     event.currentTarget.classList.remove("is-dragging");
     if (!track || !shuttle) return;
     const travel = Math.max(1, track.clientWidth - shuttle.clientWidth);
+    const deltaY = event.clientY - start.current.y;
+    const wrongDirection = direction === "ltr" ? rawDelta.current < -12 : rawDelta.current > 12;
+    const lostLift = weaveMode === "duo" && !liftHeldRef.current;
     const valid = isValidWeaveGesture({
       deltaX: currentDelta.current,
-      deltaY: event.clientY - start.current.y,
+      deltaY,
       travel,
       trackHeight: track.clientHeight,
       direction,
@@ -223,9 +275,20 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
       multiPointer: invalidGesture.current || (weaveMode === "duo" && !liftHeldRef.current),
     });
     if (valid) {
+      if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
+      feedbackTimer.current = undefined;
+      setGestureFeedback(null);
       positionShuttle(direction === "ltr" ? travel : -travel, true);
       onCommit();
-    } else positionShuttle(0, true);
+    } else {
+      positionShuttle(0, true);
+      if (cancelled) showGestureFeedback("cancelled");
+      else if (lostLift) showGestureFeedback("lift-released");
+      else if (invalidGesture.current) showGestureFeedback("extra-pointer");
+      else if (wrongDirection) showGestureFeedback("direction");
+      else if (Math.abs(deltaY) > track.clientHeight * 0.35) showGestureFeedback("vertical");
+      else showGestureFeedback("short");
+    }
   };
 
   const liftStatus = weaveMode === "player-weaver"
@@ -276,8 +339,10 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
           </ol>
           <div className={`shuttle-track ${direction}${canDragShuttle ? " is-ready" : ""}${aiSending ? " is-ai-sending" : ""}`} ref={trackRef}>
             <div className="track-dashes" aria-hidden="true" />
-            <img ref={shuttleRef} src={shuttleAsset} alt={localized(locale, "数字梭子", "Digital shuttle")} draggable="false" aria-disabled={!canDragShuttle} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={(event) => finishPointer(event)} onPointerCancel={(event) => finishPointer(event, true)} />
-            <div className="track-instruction"><b>{weaveMode === "player-drawboy" ? localized(locale, "按住上方提经，AI送梭", "Hold above and AI sends") : weaveMode === "duo" ? localized(locale, "下方玩家同时沿纬向送梭", "Lower player sends while the cue is held") : warpReady ? localized(locale, "经线已提，沿纬向送梭", "Warps lifted; send the shuttle") : localized(locale, "等待AI完成提经", "Waiting for AI to lift warps")}</b></div>
+            {showFirstPassGuide ? <div className={`first-pass-guide${warpReady ? " is-ready" : ""}`} aria-hidden="true"><span className="first-pass-guide__trail" /><img src={shuttleAsset} alt="" /><span className="first-pass-guide__arrows">› › ›</span></div> : null}
+            <img className="shuttle-handle" ref={shuttleRef} src={shuttleAsset} alt={localized(locale, "数字梭子", "Digital shuttle")} draggable="false" aria-disabled={!canDragShuttle} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={(event) => finishPointer(event)} onPointerCancel={(event) => finishPointer(event, true)} />
+            <div className={`track-instruction${gestureFeedback ? " is-muted" : ""}`}><b>{weaveMode === "player-drawboy" ? localized(locale, "按住上方提经，AI送梭", "Hold above and AI sends") : weaveMode === "duo" ? localized(locale, "下方玩家同时沿纬向送梭", "Lower player sends while the cue is held") : warpReady ? localized(locale, "经线已提，沿纬向送梭", "Warps lifted; send the shuttle") : localized(locale, "等待AI完成提经", "Waiting for AI to lift warps")}</b></div>
+            {gestureFeedback ? <div className="track-feedback" role="status" aria-live="polite"><span aria-hidden="true">↺</span>{gestureFeedbackCopy(locale, gestureFeedback, direction)}</div> : null}
           </div>
         </main>
         <aside className="motif-panel collaboration-panel">
@@ -287,6 +352,11 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
           <h3>{locale === "zh" ? stage.zh : stage.en}</h3>
           <p>{locale === "zh" ? stage.detailZh : stage.detailEn}</p>
           <span className="stage-pass-range">{activeStage * 6 + 1}–{Math.min(24, activeStage * 6 + 6)} / 24</span>
+          <section className="weave-micro-tip" key={stageTip.id} aria-live="polite">
+            <span>{locale === "zh" ? stageTip.eyebrowZh : stageTip.eyebrowEn}</span>
+            <strong>{locale === "zh" ? stageTip.titleZh : stageTip.titleEn}</strong>
+            <p>{locale === "zh" ? stageTip.bodyZh : stageTip.bodyEn}</p>
+          </section>
           <button type="button" className="pause-button" aria-pressed={paused} aria-label={locale === "zh" ? (paused ? "继续织造" : "暂停织造") : (paused ? "Resume weaving" : "Pause weaving")} onClick={() => setPaused((value) => !value)}><PauseIcon /><span>{locale === "zh" ? (paused ? "继续" : "暂停") : (paused ? "Resume" : "Pause")}</span></button>
         </aside>
         {paused ? <div className="pause-overlay" role="status"><b>{localized(locale, "织机已暂停", "Loom paused")}</b></div> : null}

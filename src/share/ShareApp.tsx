@@ -28,9 +28,12 @@ export function ShareApp() {
   const palette = PALETTES[payload.recipe.palette];
   const proposalId = payload.codecVersion === 2 ? payload.proposalId : "A";
   const weaveMode = payload.codecVersion === 2 ? payload.weaveMode : "player-weaver";
-  const proposal = proposalFromRecipe(proposalId, payload.primaryIntent, payload.recipe);
+  const proposal = proposalFromRecipe(proposalId, payload.primaryIntent, payload.recipe, payload.secondaryIntent);
   const craftTip = getCraftTip(payload.recipe.seed);
   const intent = INTENT_COPY[payload.primaryIntent];
+  const secondaryIntent = payload.secondaryIntent && payload.secondaryIntent !== payload.primaryIntent
+    ? INTENT_COPY[payload.secondaryIntent]
+    : undefined;
   const zh = payload.locale === "zh";
 
   const save = async () => {
@@ -38,7 +41,7 @@ export function ShareApp() {
     setSaving(true);
     try {
       const qrDataUrl = await createQrDataUrl(window.location.href);
-      const blob = await createResultCardBlob({ wish: payload.wish, locale: payload.locale, primaryIntent: payload.primaryIntent, matrix, recipe: payload.recipe, proposalId, weaveMode, qrDataUrl });
+      const blob = await createResultCardBlob({ wish: payload.wish, locale: payload.locale, primaryIntent: payload.primaryIntent, secondaryIntent: payload.secondaryIntent, matrix, recipe: payload.recipe, proposalId, weaveMode, qrDataUrl });
       downloadBlob(blob, `锦愿-${payload.recipe.seed.toString(16)}.png`);
     } finally { setSaving(false); }
   };
@@ -52,7 +55,11 @@ export function ShareApp() {
         <h2>「{zh ? proposal.titleZh : proposal.titleEn}」</h2>
         <h1>“{payload.wish}”</h1>
         <div className="share-rule" />
-        <h3>{zh ? `AI读懂：${intent.nameZh}` : `AI understands: ${intent.nameEn}`}</h3>
+        <h3>
+          {zh
+            ? `AI读懂：主要心意 ${intent.nameZh}${secondaryIntent ? ` · 也听见 ${secondaryIntent.nameZh}` : ""}`
+            : `AI understands: main feeling ${intent.nameEn}${secondaryIntent ? ` · also heard ${secondaryIntent.nameEn}` : ""}`}
+        </h3>
         <p className="share-choice">{zh ? "你定稿：" : "You chose: "}{zh ? proposal.titleZh : proposal.titleEn} · {zh ? palette.nameZh : palette.nameEn}</p>
         <p className="share-collaboration">{zh ? "共同完成：" : "Co-woven as: "}{collaborationSummary(payload.locale, weaveMode)}</p>
         <p>{zh ? proposal.rationaleZh : proposal.rationaleEn}</p>

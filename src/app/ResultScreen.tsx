@@ -27,6 +27,9 @@ interface ResultScreenProps {
 export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, proposal, qrDataUrl, shareUrl, weaveMode, soundEnabled, onSoundToggle, onRestart }: ResultScreenProps) {
   const [saving, setSaving] = useState(false);
   const intent = INTENT_COPY[primaryIntent];
+  const secondaryIntent = proposal.secondaryIntent && proposal.secondaryIntent !== primaryIntent
+    ? INTENT_COPY[proposal.secondaryIntent]
+    : undefined;
   const craftTip = getCraftTip(recipe.seed);
   const palette = PALETTES[recipe.palette];
   const collaboration = collaborationSummary(locale, weaveMode);
@@ -35,7 +38,7 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
     if (!qrDataUrl || saving) return;
     setSaving(true);
     try {
-      const blob = await createResultCardBlob({ wish, locale, primaryIntent, matrix, recipe, proposalId: proposal.id, weaveMode, qrDataUrl });
+      const blob = await createResultCardBlob({ wish, locale, primaryIntent, secondaryIntent: proposal.secondaryIntent, matrix, recipe, proposalId: proposal.id, weaveMode, qrDataUrl });
       downloadBlob(blob, `锦愿-${primaryIntent}-${recipe.seed.toString(16)}.png`);
     } finally {
       setSaving(false);
@@ -62,7 +65,14 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
           <div className="meaning-share-row">
             <div className="meaning-story">
               <h3>{locale === "zh" ? "为什么是这幅纹样？" : "Why this pattern?"}</h3>
-              <p className="ai-reading"><span>{locale === "zh" ? "AI读懂" : "AI understands"}</span><strong>{locale === "zh" ? intent.nameZh : intent.nameEn}</strong></p>
+              <p className="ai-reading">
+                <span>{locale === "zh" ? "AI读懂" : "AI understands"}</span>
+                <strong>
+                  {locale === "zh"
+                    ? `主要心意：${intent.nameZh}${secondaryIntent ? ` · 也听见：${secondaryIntent.nameZh}` : ""}`
+                    : `Main feeling: ${intent.nameEn}${secondaryIntent ? ` · Also heard: ${secondaryIntent.nameEn}` : ""}`}
+                </strong>
+              </p>
               <p className="choice-result"><span>{locale === "zh" ? "你定稿" : "You chose"}</span><strong>{locale === "zh" ? proposal.titleZh : proposal.titleEn} · {locale === "zh" ? palette.nameZh : palette.nameEn}</strong></p>
               <p className="co-weave-result"><span>{locale === "zh" ? "共同完成" : "Co-woven as"}</span><strong>{collaboration}</strong></p>
               <p>{locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn}</p>

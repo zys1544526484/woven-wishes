@@ -11,6 +11,7 @@ interface ResultCardOptions {
   wish: string;
   locale: Locale;
   primaryIntent: IntentId;
+  secondaryIntent?: IntentId;
   matrix: PatternMatrix;
   recipe: PatternRecipe;
   proposalId: ProposalId;
@@ -52,7 +53,10 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
   if (!context) throw new Error("Canvas is unavailable");
   const palette = PALETTES[options.recipe.palette];
   const intent = INTENT_COPY[options.primaryIntent];
-  const proposal = proposalFromRecipe(options.proposalId, options.primaryIntent, options.recipe);
+  const proposal = proposalFromRecipe(options.proposalId, options.primaryIntent, options.recipe, options.secondaryIntent);
+  const secondaryIntent = options.secondaryIntent && options.secondaryIntent !== options.primaryIntent
+    ? INTENT_COPY[options.secondaryIntent]
+    : undefined;
   const craftTip = getCraftTip(options.recipe.seed);
   const motifAtlas = await loadMotifAtlas();
 
@@ -100,7 +104,13 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
 
   context.fillStyle = "#F0DFC0";
   context.font = '500 22px Inter, "Microsoft YaHei", sans-serif';
-  context.fillText(`${options.locale === "zh" ? "AI读懂：" : "AI understands: "}${options.locale === "zh" ? intent.nameZh : intent.nameEn}`, 72, cursorY);
+  context.fillText(
+    options.locale === "zh"
+      ? `AI读懂：主要心意 ${intent.nameZh}${secondaryIntent ? ` · 也听见 ${secondaryIntent.nameZh}` : ""}`
+      : `AI understands: main feeling ${intent.nameEn}${secondaryIntent ? ` · also heard ${secondaryIntent.nameEn}` : ""}`,
+    72,
+    cursorY,
+  );
   cursorY += 32;
   context.font = '500 18px Inter, "Microsoft YaHei", sans-serif';
   context.fillStyle = "#D6A458";

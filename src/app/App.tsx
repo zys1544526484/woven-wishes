@@ -43,9 +43,8 @@ export function App() {
   }, []);
   const reset = useCallback(() => {
     clearTimers();
-    sound.stop();
     dispatch({ type: "RESET" });
-  }, [clearTimers, sound.stop]);
+  }, [clearTimers]);
   const idleWarning = useIdleReset(state.phase, Boolean(state.wishInput), reset);
 
   useEffect(() => clearTimers, [clearTimers]);

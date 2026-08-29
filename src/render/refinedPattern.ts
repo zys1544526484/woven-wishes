@@ -1,5 +1,6 @@
 import motifAtlasUrl from "../assets/motif-atlas-v1.3.png";
-import type { Palette, PatternRecipe } from "../core/types";
+import { seededRandom } from "../core/hash";
+import type { Palette, PatternRecipe, WeaveStageId } from "../core/types";
 
 interface AtlasRegion { x: number; y: number; width: number; height: number }
 
@@ -13,6 +14,36 @@ export const MOTIF_ATLAS_REGIONS: Record<string, AtlasRegion> = {
   magpie: { x: 844, y: 472, width: 397, height: 399 },
   peach: { x: 1256, y: 472, width: 398, height: 399 },
 };
+
+type ThreadLayerId = "colour" | "gold";
+
+export interface RefinedStageState {
+  completedRows: number;
+  activeStage: WeaveStageId;
+  ground: number;
+  colour: number;
+  gold: number;
+  border: number;
+}
+
+/** Normalised, square motif placement used by the actual high-density painter. */
+export interface RefinedMotifPlacement {
+  motifId: string;
+  centerX: number;
+  centerY: number;
+  size: number;
+  mirror: boolean;
+  opacity: number;
+  revealSeed: number;
+}
+
+export interface RefinedPatternPlan {
+  layout: PatternRecipe["layout"];
+  borderVariant: number;
+  borderStartSegment: number;
+  groundPhase: number;
+  placements: RefinedMotifPlacement[];
+}
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
@@ -29,6 +60,136 @@ export function loadMotifAtlas(): Promise<HTMLImageElement> {
   return atlasPromise;
 }
 
+function clamp(value: number, minimum: number, maximum: number): number {
+  return Math.min(maximum, Math.max(minimum, value));
+}
+
+function clamp01(value: number): number {
+  return clamp(value, 0, 1);
+}
+
+export function getRefinedStageState(completedRows: number, totalRows = 24): RefinedStageState {
+  const safeTotal = Math.max(4, totalRows);
+  const rows = clamp(completedRows, 0, safeTotal);
+  const section = safeTotal / 4;
+  const phase = (start: number) => clamp01((rows - start) / section);
+  const activeStage: WeaveStageId = rows <= section
+    ? "ground"
+    : rows <= section * 2
+      ? "colour"
+      : rows <= section * 3
+        ? "gold"
+        : "border";
+  return {
+    completedRows: rows,
+    activeStage,
+    ground: phase(0),
+    colour: phase(section),
+    gold: phase(section * 2),
+    border: phase(section * 3),
+  };
+}
+
+function placement(
+  motifId: string,
+  centerX: number,
+  centerY: number,
+  size: number,
+  mirror: boolean,
+  opacity: number,
+  seed: number,
+  index: number,
+): RefinedMotifPlacement {
+  return {
+    motifId,
+    centerX: clamp(centerX, 0.08, 0.92),
+    centerY: clamp(centerY, 0.08, 0.92),
+    size: clamp(size, 0.18, 0.96),
+    mirror,
+    opacity,
+    revealSeed: (seed ^ Math.imul(index + 1, 0x9e3779b1)) >>> 0,
+  };
+}
+
+/**
+ * Turns the recipe into the composition instructions consumed by paintRefinedPattern.
+ * It is deliberately pure so previews, result cards and tests share one deterministic plan.
+ */
+export function createRefinedPatternPlan(recipe: PatternRecipe): RefinedPatternPlan {
+  const random = seededRandom((recipe.seed ^ 0x73e2d41b) >>> 0);
+  const scale = 0.94 + random() * 0.11;
+  const driftX = (random() - 0.5) * 0.055;
+  const driftY = (random() - 0.5) * 0.045;
+  const mirror = random() >= 0.5;
+  const secondary = recipe.secondaryMotif ?? recipe.primaryMotif;
+  const placements: RefinedMotifPlacement[] = [];
+  const add = (motifId: string, centerX: number, centerY: number, size: number, reflected: boolean, opacity = 1) => {
+    placements.push(placement(motifId, centerX, centerY, size, reflected, opacity, recipe.seed, placements.length));
+  };
+
+  if (recipe.layout === "roundel") {
+    add(recipe.primaryMotif, 0.5 + driftX * 0.35, 0.5 + driftY * 0.3, 0.9 * scale, mirror);
+    if (recipe.secondaryMotif) {
+      add(secondary, 0.82 - driftX, 0.23 + driftY, 0.25 * scale, !mirror, 0.82);
+      add(secondary, 0.18 + driftX, 0.77 - driftY, 0.21 * scale, mirror, 0.68);
+    }
+  } else if (recipe.layout === "continuous") {
+    add(recipe.primaryMotif, 0.27 + driftX, 0.51 + driftY * 0.45, 0.64 * scale, mirror, 0.98);
+    add(secondary, 0.73 - driftX, 0.49 - driftY * 0.45, 0.64 * (1.98 - scale), !mirror, 0.98);
+    if (recipe.secondaryMotif) add(recipe.primaryMotif, 0.5, 0.2 - driftY, 0.2 * scale, !mirror, 0.6);
+  } else if (recipe.layout === "scattered") {
+    add(recipe.primaryMotif, 0.34 + driftX, 0.47 + driftY, 0.74 * scale, mirror);
+    add(secondary, 0.73 - driftX, 0.63 - driftY, 0.48 * (1.98 - scale), !mirror, 0.92);
+    add(recipe.primaryMotif, 0.79 - driftX * 0.5, 0.18 + driftY, 0.23 * scale, !mirror, 0.66);
+  } else {
+    add(recipe.primaryMotif, 0.35 + driftX, 0.5 + driftY, 0.78 * scale, mirror);
+    add(secondary, 0.7 - driftX, 0.52 - driftY * 0.4, 0.58 * (1.98 - scale), !mirror, 0.96);
+  }
+
+  return {
+    layout: recipe.layout,
+    borderVariant: Math.floor(random() * 12),
+    borderStartSegment: Math.floor(random() * 6),
+    groundPhase: Math.floor(random() * 6),
+    placements,
+  };
+}
+
+function fnv1a(value: string): string {
+  let hash = 0x811c9dc5;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+  return hash.toString(16).padStart(8, "0");
+}
+
+/** A signature of the same plan and four layer progresses used for canvas drawing. */
+export function refinedPatternSignature(recipe: PatternRecipe, completedRows: number = recipe.rows): string {
+  const plan = createRefinedPatternPlan(recipe);
+  const stage = getRefinedStageState(completedRows, recipe.rows);
+  const placementTokens = plan.placements.map((item) => [
+    item.motifId,
+    item.centerX.toFixed(4),
+    item.centerY.toFixed(4),
+    item.size.toFixed(4),
+    item.mirror ? 1 : 0,
+    item.opacity.toFixed(3),
+    item.revealSeed,
+  ].join(",")).join(";");
+  return fnv1a([
+    plan.layout,
+    plan.borderVariant,
+    plan.borderStartSegment,
+    plan.groundPhase,
+    placementTokens,
+    stage.ground.toFixed(3),
+    stage.colour.toFixed(3),
+    stage.gold.toFixed(3),
+    stage.border.toFixed(3),
+  ].join("|"));
+}
+
 function parseHex(hex: string): [number, number, number] {
   const normalized = hex.replace("#", "");
   return [
@@ -42,9 +203,9 @@ function liftThreadColor(color: [number, number, number], amount: number): [numb
   return color.map((channel) => Math.round(channel + (255 - channel) * amount)) as [number, number, number];
 }
 
-function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette): HTMLCanvasElement {
+function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette, layer: ThreadLayerId): HTMLCanvasElement {
   const region = MOTIF_ATLAS_REGIONS[motifId] ?? MOTIF_ATLAS_REGIONS.cloud;
-  const cacheKey = `${motifId}:${palette.id}`;
+  const cacheKey = `${motifId}:${palette.id}:${palette.colors.join("")}:${layer}`;
   const cached = tintedMotifs.get(cacheKey);
   if (cached) return cached;
 
@@ -55,9 +216,9 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette)
   if (!context) return canvas;
   context.drawImage(atlas, region.x, region.y, region.width, region.height, 0, 0, region.width, region.height);
   const imageData = context.getImageData(0, 0, region.width, region.height);
-  const gold = liftThreadColor(parseHex(palette.colors[1]), 0.06);
-  const teal = liftThreadColor(parseHex(palette.colors[2]), 0.24);
-  const accent = liftThreadColor(parseHex(palette.colors[3]), 0.18);
+  const gold = liftThreadColor(parseHex(palette.colors[1]), 0.1);
+  const teal = liftThreadColor(parseHex(palette.colors[2]), 0.3);
+  const accent = liftThreadColor(parseHex(palette.colors[3]), 0.24);
 
   for (let index = 0; index < imageData.data.length; index += 4) {
     const red = imageData.data[index];
@@ -71,14 +232,18 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette)
       continue;
     }
     const goldThread = red > blue * 1.24 && green > blue * 1.12;
+    if ((layer === "gold") !== goldThread) {
+      imageData.data[index + 3] = 0;
+      continue;
+    }
     const accentThread = !goldThread && red > 74 && blue > 58 && red > green * 1.08;
-    const target = accentThread ? accent : goldThread ? gold : teal;
-    const threadStrength = Math.min(1, Math.max(0, (maximum - 32) / 150));
-    const brightness = 0.72 + threadStrength * 0.56;
+    const target = goldThread ? gold : accentThread ? accent : teal;
+    const threadStrength = clamp01((maximum - 30) / 148);
+    const brightness = layer === "gold" ? 0.82 + threadStrength * 0.55 : 0.76 + threadStrength * 0.5;
     imageData.data[index] = Math.min(255, target[0] * brightness);
     imageData.data[index + 1] = Math.min(255, target[1] * brightness);
     imageData.data[index + 2] = Math.min(255, target[2] * brightness);
-    imageData.data[index + 3] = Math.round(255 * (0.6 + threadStrength * 0.4));
+    imageData.data[index + 3] = Math.round(255 * (0.64 + threadStrength * 0.36));
   }
   context.clearRect(0, 0, region.width, region.height);
   context.putImageData(imageData, 0, 0);
@@ -100,31 +265,50 @@ function roundedRectPath(context: CanvasRenderingContext2D, x: number, y: number
   context.closePath();
 }
 
-function drawWarpGround(context: CanvasRenderingContext2D, palette: Palette, width: number, height: number): void {
+function drawWarpGround(
+  context: CanvasRenderingContext2D,
+  palette: Palette,
+  width: number,
+  height: number,
+  progress: number,
+  phase: number,
+): void {
   context.fillStyle = palette.colors[0];
   context.fillRect(0, 0, width, height);
   const glow = context.createRadialGradient(width * 0.5, height * 0.44, 0, width * 0.5, height * 0.44, Math.max(width, height) * 0.65);
-  glow.addColorStop(0, `${palette.colors[2]}2b`);
-  glow.addColorStop(0.5, `${palette.colors[0]}00`);
-  glow.addColorStop(1, "rgba(0,0,0,.3)");
+  glow.addColorStop(0, `${palette.colors[2]}30`);
+  glow.addColorStop(0.52, `${palette.colors[0]}00`);
+  glow.addColorStop(1, "rgba(0,0,0,.34)");
   context.fillStyle = glow;
   context.fillRect(0, 0, width, height);
 
-  context.lineWidth = Math.max(0.5, width / 2200);
-  for (let x = 0; x <= width; x += Math.max(5, width / 112)) {
-    context.strokeStyle = x % 3 < 1 ? `${palette.colors[1]}18` : `${palette.colors[2]}20`;
+  const warpStep = Math.max(4, width / 150);
+  context.lineWidth = Math.max(0.45, width / 2400);
+  for (let x = 0, index = 0; x <= width; x += warpStep, index += 1) {
+    context.strokeStyle = index % 4 === phase % 4 ? `${palette.colors[1]}18` : `${palette.colors[2]}24`;
     context.beginPath();
     context.moveTo(x, 0);
     context.lineTo(x, height);
     context.stroke();
   }
-  for (let y = 0; y <= height; y += Math.max(4, height / 76)) {
-    context.strokeStyle = y % 3 < 1 ? `${palette.colors[1]}12` : `${palette.colors[2]}14`;
+
+  const revealedGroups = Math.round(clamp01(progress) * 6);
+  const weftStep = Math.max(3.5, height / 112);
+  for (let y = weftStep, index = 0; y < height; y += weftStep, index += 1) {
+    const group = (index * 5 + phase) % 6;
+    if (group >= revealedGroups) continue;
+    const highlighted = (index + phase) % 5 === 0;
+    context.strokeStyle = highlighted ? `${palette.colors[1]}24` : `${palette.colors[2]}30`;
+    context.lineWidth = highlighted ? Math.max(0.65, height / 1050) : Math.max(0.45, height / 1450);
+    context.setLineDash([Math.max(2, width / 420), Math.max(1.5, width / 760)]);
+    context.lineDashOffset = ((index * 13 + phase * 7) % 31) * -1;
     context.beginPath();
     context.moveTo(0, y);
     context.lineTo(width, y);
     context.stroke();
   }
+  context.setLineDash([]);
+  context.lineDashOffset = 0;
 }
 
 function drawThreadBorder(context: CanvasRenderingContext2D, palette: Palette, width: number, height: number, variant: number): void {
@@ -132,7 +316,7 @@ function drawThreadBorder(context: CanvasRenderingContext2D, palette: Palette, w
   const inner = outer + Math.max(8, Math.min(width, height) * 0.018);
   const radius = Math.max(10, Math.min(width, height) * 0.025);
   context.save();
-  context.shadowColor = `${palette.colors[1]}70`;
+  context.shadowColor = `${palette.colors[1]}82`;
   context.shadowBlur = Math.max(7, width * 0.009);
   context.strokeStyle = palette.colors[1];
   context.lineWidth = Math.max(1.4, width / 540);
@@ -146,34 +330,101 @@ function drawThreadBorder(context: CanvasRenderingContext2D, palette: Palette, w
 
   const horizontalStart = inner + radius;
   const horizontalEnd = width - inner - radius;
-  const step = Math.max(14, width / 34);
-  const amplitude = Math.max(4, height * 0.011);
+  const step = Math.max(13, width / (31 + variant % 5));
+  const amplitude = Math.max(4, height * (0.009 + (variant % 3) * 0.0015));
   for (const edgeY of [inner + amplitude * 1.7, height - inner - amplitude * 1.7]) {
     context.beginPath();
     for (let x = horizontalStart; x <= horizontalEnd; x += 2) {
       const phase = ((x - horizontalStart) / step) * Math.PI * 2;
-      const y = edgeY + Math.sin(phase + variant * 0.7) * amplitude;
+      const waveform = variant % 3 === 0
+        ? Math.sin(phase)
+        : variant % 3 === 1
+          ? Math.sin(phase) * Math.cos(phase * 0.5)
+          : Math.sin(phase) * 0.72 + Math.sin(phase * 2) * 0.28;
+      const y = edgeY + waveform * amplitude;
       if (x === horizontalStart) context.moveTo(x, y);
       else context.lineTo(x, y);
     }
     context.strokeStyle = palette.colors[1];
     context.lineWidth = Math.max(1, width / 950);
-    context.setLineDash([Math.max(1, width / 980), Math.max(2, width / 430)]);
+    context.setLineDash([Math.max(1, width / 980), Math.max(2, width / (390 + variant * 8))]);
+    context.lineDashOffset = -(variant % 6) * Math.max(1, width / 620);
     context.stroke();
   }
   context.setLineDash([]);
+  context.lineDashOffset = 0;
 
-  const verticalStep = Math.max(16, height / 20);
+  const verticalStep = Math.max(15, height / (18 + variant % 4));
   for (const edgeX of [inner + amplitude * 1.6, width - inner - amplitude * 1.6]) {
-    for (let y = inner + radius; y < height - inner - radius; y += verticalStep) {
-      context.strokeStyle = (Math.floor(y / verticalStep) + variant) % 2 ? palette.colors[1] : palette.colors[2];
+    for (let y = inner + radius, index = 0; y < height - inner - radius; y += verticalStep, index += 1) {
+      context.strokeStyle = (index + variant) % 2 ? palette.colors[1] : palette.colors[2];
       context.lineWidth = Math.max(1, width / 980);
       context.beginPath();
-      context.ellipse(edgeX, y, amplitude * 0.68, amplitude, 0, 0, Math.PI * 2);
+      if (variant % 2 === 0) {
+        context.ellipse(edgeX, y, amplitude * 0.68, amplitude, 0, 0, Math.PI * 2);
+      } else {
+        context.moveTo(edgeX, y - amplitude);
+        context.lineTo(edgeX + amplitude * 0.7, y);
+        context.lineTo(edgeX, y + amplitude);
+        context.lineTo(edgeX - amplitude * 0.7, y);
+        context.closePath();
+      }
       context.stroke();
     }
   }
+
+  const cornerSize = Math.max(7, Math.min(width, height) * 0.017);
+  for (const [cornerX, cornerY] of [[inner, inner], [width - inner, inner], [width - inner, height - inner], [inner, height - inner]]) {
+    context.save();
+    context.translate(cornerX, cornerY);
+    context.rotate((variant % 4) * Math.PI / 4);
+    context.strokeStyle = variant % 2 ? palette.colors[2] : palette.colors[1];
+    context.beginPath();
+    context.moveTo(0, -cornerSize);
+    context.lineTo(cornerSize, 0);
+    context.lineTo(0, cornerSize);
+    context.lineTo(-cornerSize, 0);
+    context.closePath();
+    context.stroke();
+    context.restore();
+  }
   context.restore();
+}
+
+function revealOrder(seed: number, count: number): number[] {
+  const values = Array.from({ length: count }, (_, index) => index);
+  const random = seededRandom((seed ^ 0x4f1bbcdc) >>> 0);
+  for (let index = values.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(random() * (index + 1));
+    [values[index], values[swapIndex]] = [values[swapIndex], values[index]];
+  }
+  return values;
+}
+
+function clipMotifReveal(
+  context: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  progress: number,
+  seed: number,
+): void {
+  if (progress >= 1) return;
+  const columns = 4;
+  const rows = 3;
+  const tileCount = columns * rows;
+  const visibleTiles = Math.max(1, Math.ceil(clamp01(progress) * tileCount));
+  const order = revealOrder(seed, tileCount);
+  const tileWidth = width / columns;
+  const tileHeight = height / rows;
+  context.beginPath();
+  for (const tile of order.slice(0, visibleTiles)) {
+    const column = tile % columns;
+    const row = Math.floor(tile / columns);
+    context.rect(x + column * tileWidth - 1, y + row * tileHeight - 1, tileWidth + 2, tileHeight + 2);
+  }
+  context.clip();
 }
 
 function drawMotifLayer(
@@ -183,24 +434,162 @@ function drawMotifLayer(
   y: number,
   width: number,
   height: number,
-  alpha = 1,
-  mirror = false,
+  options: { alpha: number; mirror: boolean; reveal: number; revealSeed: number; layer: ThreadLayerId },
 ): void {
   const insetX = motif.width * 0.095;
   const insetY = motif.height * 0.095;
   context.save();
-  context.globalAlpha = alpha;
+  clipMotifReveal(context, x, y, width, height, options.reveal, options.revealSeed);
+  context.globalAlpha = options.alpha * (0.82 + options.reveal * 0.18);
   context.globalCompositeOperation = "screen";
-  context.filter = "brightness(1.1) contrast(1.06) saturate(1.08)";
-  context.shadowColor = "rgba(227,179,79,.22)";
-  context.shadowBlur = Math.max(4, width * 0.007);
-  if (mirror) {
+  context.filter = options.layer === "gold"
+    ? "brightness(1.18) contrast(1.08) saturate(1.08)"
+    : "brightness(1.14) contrast(1.08) saturate(1.2)";
+  context.shadowColor = options.layer === "gold" ? "rgba(227,179,79,.36)" : "rgba(42,126,130,.2)";
+  context.shadowBlur = Math.max(3, width * (options.layer === "gold" ? 0.009 : 0.005));
+  if (options.mirror) {
     context.translate(x + width, y);
     context.scale(-1, 1);
     context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, 0, 0, width, height);
   } else {
     context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, x, y, width, height);
   }
+  context.restore();
+}
+
+function drawCompositionConnectors(
+  context: CanvasRenderingContext2D,
+  plan: RefinedPatternPlan,
+  palette: Palette,
+  width: number,
+  height: number,
+  layer: ThreadLayerId,
+  progress: number,
+): void {
+  if (progress <= 0 || plan.placements.length === 0) return;
+  const color = layer === "gold" ? palette.colors[1] : palette.colors[2];
+  const first = plan.placements[0];
+  const second = plan.placements[1] ?? first;
+  context.save();
+  context.globalAlpha = (layer === "gold" ? 0.52 : 0.38) * progress;
+  context.strokeStyle = color;
+  context.lineWidth = Math.max(0.8, width / (layer === "gold" ? 1050 : 1350));
+  context.setLineDash(layer === "gold" ? [Math.max(2, width / 430), Math.max(4, width / 230)] : [Math.max(1, width / 700), Math.max(3, width / 310)]);
+  context.lineDashOffset = -plan.borderVariant * 2;
+  context.beginPath();
+  if (plan.layout === "roundel") {
+    const radius = first.size * Math.min(width, height) * 0.43;
+    context.ellipse(first.centerX * width, first.centerY * height, radius, radius * 0.91, 0, 0, Math.PI * 2);
+  } else if (plan.layout === "continuous") {
+    context.moveTo(width * 0.05, height * 0.5);
+    context.bezierCurveTo(width * 0.28, height * 0.3, width * 0.7, height * 0.7, width * 0.95, height * 0.5);
+  } else if (plan.layout === "scattered") {
+    context.moveTo(first.centerX * width, first.centerY * height);
+    context.quadraticCurveTo(width * 0.56, height * 0.24, second.centerX * width, second.centerY * height);
+  } else {
+    context.moveTo(first.centerX * width, first.centerY * height);
+    context.bezierCurveTo(width * 0.5, height * 0.28, width * 0.57, height * 0.74, second.centerX * width, second.centerY * height);
+  }
+  context.stroke();
+  context.restore();
+}
+
+function drawMotifComposition(
+  context: CanvasRenderingContext2D,
+  atlas: HTMLImageElement,
+  plan: RefinedPatternPlan,
+  palette: Palette,
+  width: number,
+  height: number,
+  layer: ThreadLayerId,
+  progress: number,
+): void {
+  if (progress <= 0) return;
+  drawCompositionConnectors(context, plan, palette, width, height, layer, progress);
+  const shortSide = Math.min(width, height);
+  const layerSalt = layer === "gold" ? 0xa511e9b3 : 0x3c6ef372;
+  for (const item of plan.placements) {
+    const size = item.size * shortSide;
+    const x = item.centerX * width - size / 2;
+    const y = item.centerY * height - size / 2;
+    const motif = tintedMotif(atlas, item.motifId, palette, layer);
+    drawMotifLayer(context, motif, x, y, size, size, {
+      alpha: item.opacity,
+      mirror: item.mirror,
+      reveal: progress,
+      revealSeed: (item.revealSeed ^ layerSalt) >>> 0,
+      layer,
+    });
+  }
+}
+
+interface BorderSegment { x: number; y: number; width: number; height: number }
+
+function drawBorderReveal(
+  context: CanvasRenderingContext2D,
+  palette: Palette,
+  width: number,
+  height: number,
+  plan: RefinedPatternPlan,
+  progress: number,
+): void {
+  if (progress <= 0) return;
+  if (progress >= 1) {
+    drawThreadBorder(context, palette, width, height, plan.borderVariant);
+    return;
+  }
+  const segments: BorderSegment[] = [
+    { x: 0, y: 0, width: 0.56, height: 0.2 },
+    { x: 0.44, y: 0, width: 0.56, height: 0.2 },
+    { x: 0.8, y: 0, width: 0.2, height: 1 },
+    { x: 0.44, y: 0.8, width: 0.56, height: 0.2 },
+    { x: 0, y: 0.8, width: 0.56, height: 0.2 },
+    { x: 0, y: 0, width: 0.2, height: 1 },
+  ];
+  const visible = Math.max(1, Math.ceil(clamp01(progress) * segments.length));
+  for (let index = 0; index < visible; index += 1) {
+    const segment = segments[(index + plan.borderStartSegment) % segments.length];
+    context.save();
+    context.beginPath();
+    context.rect(segment.x * width, segment.y * height, segment.width * width, segment.height * height);
+    context.clip();
+    drawThreadBorder(context, palette, width, height, plan.borderVariant);
+    context.restore();
+  }
+}
+
+function drawStageGlow(
+  context: CanvasRenderingContext2D,
+  palette: Palette,
+  plan: RefinedPatternPlan,
+  stage: RefinedStageState,
+  width: number,
+  height: number,
+): void {
+  if (stage.completedRows >= 24) return;
+  const main = plan.placements[0];
+  if (stage.activeStage === "border") {
+    context.save();
+    context.strokeStyle = `${palette.colors[1]}70`;
+    context.shadowColor = palette.colors[1];
+    context.shadowBlur = Math.max(10, width * 0.014);
+    context.lineWidth = Math.max(1, width / 700);
+    roundedRectPath(context, width * 0.025, height * 0.025, width * 0.95, height * 0.95, Math.min(width, height) * 0.03);
+    context.stroke();
+    context.restore();
+    return;
+  }
+  if (!main || stage.activeStage === "ground") return;
+  const colour = stage.activeStage === "gold" ? palette.colors[1] : palette.colors[2];
+  const radius = Math.min(width, height) * main.size * 0.55;
+  const glow = context.createRadialGradient(main.centerX * width, main.centerY * height, 0, main.centerX * width, main.centerY * height, radius);
+  glow.addColorStop(0, `${colour}18`);
+  glow.addColorStop(0.6, `${colour}08`);
+  glow.addColorStop(1, `${colour}00`);
+  context.save();
+  context.globalCompositeOperation = "screen";
+  context.fillStyle = glow;
+  context.fillRect(0, 0, width, height);
   context.restore();
 }
 
@@ -218,74 +607,18 @@ export function paintRefinedPattern(
   height: number,
   options: RefinedPatternOptions = {},
 ): void {
-  const completedRows = Math.min(recipe.rows, Math.max(0, options.completedRows ?? recipe.rows));
-  const visibleRatio = completedRows / recipe.rows;
+  const completedRows = clamp(options.completedRows ?? recipe.rows, 0, recipe.rows);
+  const stage = getRefinedStageState(completedRows, recipe.rows);
+  const plan = createRefinedPatternPlan(recipe);
   context.clearRect(0, 0, width, height);
-  drawWarpGround(context, palette, width, height);
+  drawWarpGround(context, palette, width, height, stage.ground, plan.groundPhase);
   if (completedRows === 0) return;
 
-  context.save();
-  context.beginPath();
-  context.rect(0, 0, width, height * visibleRatio);
-  context.clip();
-
-  for (let row = 0; row < completedRows; row += 1) {
-    const y = (row + 0.5) * (height / recipe.rows);
-    context.strokeStyle = row % 2 ? `${palette.colors[2]}22` : `${palette.colors[1]}20`;
-    context.lineWidth = Math.max(0.8, height / 980);
-    context.beginPath();
-    context.moveTo(0, y);
-    context.lineTo(width, y);
-    context.stroke();
-  }
-
-  drawThreadBorder(context, palette, width, height, recipe.seed & 3);
-  const mainMotif = tintedMotif(atlas, recipe.primaryMotif, palette);
-  const secondaryMotif = tintedMotif(atlas, recipe.secondaryMotif ?? recipe.primaryMotif, palette);
-  if (recipe.secondaryMotif) {
-    const primaryHeight = height * 0.66;
-    const primaryWidth = Math.min(width * 0.56, primaryHeight);
-    const secondarySize = Math.min(width, height) * 0.38;
-    drawMotifLayer(context, mainMotif, width * 0.07, height * 0.17, primaryWidth, primaryHeight);
-    drawMotifLayer(context, secondaryMotif, width * 0.61, height * 0.43, secondarySize, secondarySize, 0.94, true);
-    context.save();
-    context.strokeStyle = `${palette.colors[1]}88`;
-    context.lineWidth = Math.max(1, width / 1200);
-    context.setLineDash([Math.max(2, width / 360), Math.max(4, width / 190)]);
-    context.beginPath();
-    context.moveTo(width * 0.49, height * 0.53);
-    context.bezierCurveTo(width * 0.58, height * 0.42, width * 0.61, height * 0.66, width * 0.69, height * 0.61);
-    context.stroke();
-    context.restore();
-  } else {
-    const mainHeight = height * (recipe.layout === "roundel" ? 0.78 : 0.73);
-    const mainWidth = Math.min(width * 0.68, mainHeight);
-    const mainY = (height - mainHeight) * 0.5;
-    let mainX = (width - mainWidth) * 0.5;
-    if (recipe.layout === "combined") mainX -= width * 0.055;
-    if (recipe.layout === "scattered") mainX -= width * 0.035;
-    drawMotifLayer(context, mainMotif, mainX, mainY, mainWidth, mainHeight);
-
-    if (recipe.layout === "combined" || recipe.layout === "scattered") {
-    const echoSize = Math.min(width, height) * (recipe.layout === "combined" ? 0.25 : 0.2);
-    const echoX = recipe.layout === "combined" ? width * 0.7 : width * 0.73;
-    const echoY = recipe.layout === "combined" ? height * 0.56 : height * 0.66;
-    drawMotifLayer(context, secondaryMotif, echoX, echoY, echoSize, echoSize, 0.84, true);
-    } else if (recipe.layout === "continuous") {
-      const echoSize = Math.min(width, height) * 0.2;
-      drawMotifLayer(context, secondaryMotif, width * 0.075, height * 0.65, echoSize, echoSize, 0.68);
-      drawMotifLayer(context, secondaryMotif, width - width * 0.075 - echoSize, height * 0.65, echoSize, echoSize, 0.68, true);
-    }
-  }
-  context.restore();
-
-  if (options.glow && completedRows < recipe.rows) {
-    const edgeY = height * visibleRatio;
-    const edgeGlow = context.createLinearGradient(0, edgeY - height / recipe.rows, 0, edgeY + height / recipe.rows);
-    edgeGlow.addColorStop(0, `${palette.colors[1]}00`);
-    edgeGlow.addColorStop(0.5, `${palette.colors[1]}dd`);
-    edgeGlow.addColorStop(1, `${palette.colors[1]}00`);
-    context.fillStyle = edgeGlow;
-    context.fillRect(0, edgeY - height / recipe.rows, width, (height / recipe.rows) * 2);
-  }
+  // Four six-pass sections reveal semantic layers over the whole textile. This is
+  // intentionally not a top-to-bottom crop: distributed ground threads, colour,
+  // gold and the closing border each have their own deterministic reveal mask.
+  drawMotifComposition(context, atlas, plan, palette, width, height, "colour", stage.colour);
+  drawMotifComposition(context, atlas, plan, palette, width, height, "gold", stage.gold);
+  drawBorderReveal(context, palette, width, height, plan, stage.border);
+  if (options.glow) drawStageGlow(context, palette, plan, stage, width, height);
 }

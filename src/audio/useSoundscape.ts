@@ -1,103 +1,194 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const NOTE_SEQUENCE = [261.63, 293.66, 329.63, 392, 440, 392, 329.63, 293.66] as const;
+const MUSIC_LEVEL = 0.62;
+const DUCKED_MUSIC_LEVEL = 0.4;
 
 class OfflineSoundscape {
   private context?: AudioContext;
   private master?: GainNode;
+  private musicBus?: GainNode;
+  private effectsBus?: GainNode;
   private musicTimer?: number;
   private noteIndex = 0;
   private active = false;
+  private starting?: Promise<void>;
+  private sources = new Set<AudioScheduledSourceNode>();
 
   private ensureContext(): AudioContext {
     if (!this.context) {
       this.context = new AudioContext();
       this.master = this.context.createGain();
-      this.master.gain.value = 0;
-      this.master.connect(this.context.destination);
+      this.musicBus = this.context.createGain();
+      this.effectsBus = this.context.createGain();
+      const compressor = this.context.createDynamicsCompressor();
+
+      this.master.gain.value = 0.0001;
+      this.musicBus.gain.value = MUSIC_LEVEL;
+      this.effectsBus.gain.value = 0.42;
+      compressor.threshold.value = -18;
+      compressor.knee.value = 18;
+      compressor.ratio.value = 2.5;
+      compressor.attack.value = 0.008;
+      compressor.release.value = 0.25;
+
+      this.musicBus.connect(compressor);
+      this.effectsBus.connect(compressor);
+      compressor.connect(this.master).connect(this.context.destination);
     }
     return this.context;
   }
 
-  private tone(frequency: number, duration: number, volume: number, detune = 0): void {
+  private trackSource<T extends AudioScheduledSourceNode>(source: T): T {
+    this.sources.add(source);
+    source.addEventListener("ended", () => this.sources.delete(source), { once: true });
+    return source;
+  }
+
+  private tonalVoice(
+    frequency: number,
+    duration: number,
+    volume: number,
+    destination: GainNode | undefined,
+    options: { delay?: number; type?: OscillatorType; detune?: number; cutoff?: number } = {},
+  ): void {
     const context = this.context;
-    const master = this.master;
-    if (!context || !master || !this.active) return;
-    const oscillator = context.createOscillator();
+    if (!context || !destination || !this.active) return;
+
+    const startAt = context.currentTime + (options.delay ?? 0);
+    const oscillator = this.trackSource(context.createOscillator());
+    const filter = context.createBiquadFilter();
     const gain = context.createGain();
-    oscillator.type = "sine";
+
+    oscillator.type = options.type ?? "triangle";
     oscillator.frequency.value = frequency;
-    oscillator.detune.value = detune;
-    gain.gain.setValueAtTime(0.0001, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(volume, context.currentTime + 0.16);
-    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
-    oscillator.connect(gain).connect(master);
-    oscillator.start();
-    oscillator.stop(context.currentTime + duration + 0.05);
+    oscillator.detune.value = options.detune ?? 0;
+    filter.type = "lowpass";
+    filter.frequency.value = options.cutoff ?? 2_200;
+    filter.Q.value = 0.55;
+    gain.gain.setValueAtTime(0.0001, startAt);
+    gain.gain.exponentialRampToValueAtTime(volume, startAt + 0.012);
+    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, volume * 0.34), startAt + Math.min(0.24, duration * 0.28));
+    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+
+    oscillator.connect(filter).connect(gain).connect(destination);
+    oscillator.start(startAt);
+    oscillator.stop(startAt + duration + 0.04);
   }
 
   private playAmbientNote = (): void => {
     const frequency = NOTE_SEQUENCE[this.noteIndex % NOTE_SEQUENCE.length];
     this.noteIndex += 1;
-    this.tone(frequency, 3.25, 0.06, -2);
-    this.tone(frequency * 2, 2.35, 0.016, 3);
+    this.tonalVoice(frequency, 1.9, 0.105, this.musicBus, { type: "triangle", cutoff: 1_900 });
+    this.tonalVoice(frequency * 2, 1.25, 0.022, this.musicBus, { type: "sine", detune: 2, cutoff: 2_800 });
   };
 
   async start(): Promise<void> {
     if (this.active) return;
-    const context = this.ensureContext();
-    this.active = true;
-    await context.resume();
-    this.master?.gain.cancelScheduledValues(context.currentTime);
-    this.master?.gain.setTargetAtTime(0.42, context.currentTime, 0.32);
-    this.playAmbientNote();
-    this.musicTimer = window.setInterval(this.playAmbientNote, 2600);
+    if (this.starting) return this.starting;
+
+    this.starting = (async () => {
+      const context = this.ensureContext();
+      try {
+        await context.resume();
+      } catch {
+        this.active = false;
+        return;
+      }
+
+      this.active = true;
+      this.master?.gain.cancelScheduledValues(context.currentTime);
+      this.master?.gain.setTargetAtTime(0.78, context.currentTime, 0.18);
+      this.musicBus?.gain.cancelScheduledValues(context.currentTime);
+      this.musicBus?.gain.setTargetAtTime(MUSIC_LEVEL, context.currentTime, 0.12);
+      this.playAmbientNote();
+      this.musicTimer = window.setInterval(this.playAmbientNote, 4_200);
+    })().finally(() => {
+      this.starting = undefined;
+    });
+
+    return this.starting;
   }
 
   stop(): void {
-    if (!this.active) return;
     this.active = false;
     if (this.musicTimer !== undefined) window.clearInterval(this.musicTimer);
     this.musicTimer = undefined;
+
     const context = this.context;
-    if (context && this.master) this.master.gain.setTargetAtTime(0.0001, context.currentTime, 0.08);
+    if (context && this.master) {
+      this.master.gain.cancelScheduledValues(context.currentTime);
+      this.master.gain.setTargetAtTime(0.0001, context.currentTime, 0.035);
+      this.sources.forEach((source) => {
+        try {
+          source.stop(context.currentTime + 0.14);
+        } catch {
+          // The source may already have ended.
+        }
+      });
+    }
+    this.sources.clear();
   }
 
   playWeft(row: number): void {
     const context = this.context;
-    const master = this.master;
-    if (!context || !master || !this.active) return;
-    const frameCount = Math.max(1, Math.floor(context.sampleRate * 0.18));
+    const effectsBus = this.effectsBus;
+    if (!context || !effectsBus || !this.active) return;
+
+    const duration = 0.08;
+    const frameCount = Math.max(1, Math.floor(context.sampleRate * duration));
     const buffer = context.createBuffer(1, frameCount, context.sampleRate);
     const samples = buffer.getChannelData(0);
     for (let index = 0; index < samples.length; index += 1) {
-      const envelope = 1 - index / samples.length;
+      const progress = index / Math.max(1, samples.length - 1);
+      const envelope = Math.sin(Math.PI * progress) * (1 - progress);
       samples[index] = (Math.random() * 2 - 1) * envelope;
     }
-    const source = context.createBufferSource();
-    const filter = context.createBiquadFilter();
-    const gain = context.createGain();
-    filter.type = "bandpass";
+
     const stage = Math.min(3, Math.floor(row / 6));
-    const stageFrequencies = [720, 1040, 1360, 1640] as const;
-    const stageVolumes = [0.024, 0.029, 0.034, 0.039] as const;
-    filter.frequency.value = stageFrequencies[stage];
-    filter.Q.value = 0.72 + stage * 0.11;
-    gain.gain.value = stageVolumes[stage];
+    const source = this.trackSource(context.createBufferSource());
+    const highpass = context.createBiquadFilter();
+    const bandpass = context.createBiquadFilter();
+    const gain = context.createGain();
+    const peak = 0.034 + stage * 0.002;
+
     source.buffer = buffer;
-    source.connect(filter).connect(gain).connect(master);
+    highpass.type = "highpass";
+    highpass.frequency.value = 900;
+    highpass.Q.value = 0.7;
+    bandpass.type = "bandpass";
+    bandpass.frequency.value = 2_200 + stage * 300;
+    bandpass.Q.value = 1.9 + stage * 0.1;
+    gain.gain.setValueAtTime(0.0001, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(peak, context.currentTime + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
+    source.connect(highpass).connect(bandpass).connect(gain).connect(effectsBus);
     source.start();
-    if (stage >= 1) this.tone(294 + stage * 49 + (row % 3) * 14, 0.5, 0.012 + stage * 0.003);
-    if (stage >= 2) this.tone(588 + (row % 4) * 18, 0.38, 0.008 + stage * 0.002, 3);
+
+    this.tonalVoice(620 + stage * 72 + (row % 3) * 18, 0.14, 0.052, effectsBus, { type: "triangle", cutoff: 2_600 });
+
     if ((row + 1) % 6 === 0) {
-      this.tone(392 + stage * 55, 0.95, 0.042);
-      if (stage === 3) this.tone(587, 1.2, 0.025, 4);
+      const stageCue = [329.63, 392, 440, 523.25] as const;
+      this.tonalVoice(stageCue[stage], 0.82, 0.085, effectsBus, { type: "triangle", cutoff: 2_300 });
     }
   }
 
   playComplete(): void {
+    const context = this.context;
+    const effectsBus = this.effectsBus;
+    const musicBus = this.musicBus;
+    if (!context || !effectsBus || !musicBus || !this.active) return;
+
+    musicBus.gain.cancelScheduledValues(context.currentTime);
+    musicBus.gain.setTargetAtTime(DUCKED_MUSIC_LEVEL, context.currentTime, 0.08);
+    musicBus.gain.setTargetAtTime(MUSIC_LEVEL, context.currentTime + 1.8, 0.28);
+
     [329.63, 392, 523.25].forEach((frequency, index) => {
-      window.setTimeout(() => this.tone(frequency, 2.4, 0.058), index * 120);
+      this.tonalVoice(frequency, 0.96, 0.095, effectsBus, {
+        delay: index * 0.14,
+        type: "triangle",
+        cutoff: 2_600,
+      });
     });
   }
 }

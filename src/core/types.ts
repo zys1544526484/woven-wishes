@@ -59,6 +59,8 @@ export interface PatternRecipe {
 export interface PatternProposal {
   id: ProposalId;
   recipe: PatternRecipe;
+  /** Present only when the analysed wish contains a qualified second intent. */
+  secondaryIntent?: IntentId;
   titleZh: string;
   titleEn: string;
   rationaleZh: string;

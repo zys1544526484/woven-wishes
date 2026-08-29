@@ -13,8 +13,9 @@ export function composePattern(analysis: WishAnalysis): PatternRecipe {
   const random = seededRandom(analysis.seed);
   const motifChoices = INTENT_MOTIFS[analysis.primaryIntent];
   const primaryMotif = analysis.fallback ? "cloud" : choose(motifChoices, random);
-  const intentSecondary = analysis.secondaryIntent
-    ? choose(INTENT_MOTIFS[analysis.secondaryIntent], random)
+  const secondaryIntent = qualifiedSecondaryIntent(analysis);
+  const intentSecondary = secondaryIntent
+    ? choose(INTENT_MOTIFS[secondaryIntent], random)
     : motifChoices.find((motif) => motif !== primaryMotif);
   const secondaryMotif = intentSecondary === primaryMotif
     ? motifChoices.find((motif) => motif !== primaryMotif)
@@ -34,18 +35,50 @@ export function composePattern(analysis: WishAnalysis): PatternRecipe {
 const ALL_LAYOUTS: readonly PatternRecipe["layout"][] = ["continuous", "roundel", "combined", "scattered"];
 const PROPOSAL_IDS: readonly ProposalId[] = ["A", "B", "C"];
 
+function qualifiedSecondaryIntent(analysis: WishAnalysis): WishAnalysis["secondaryIntent"] {
+  const candidate = analysis.secondaryIntent;
+  if (!candidate || candidate === analysis.primaryIntent || analysis.fallback) return undefined;
+  const primaryScore = analysis.scores[analysis.primaryIntent];
+  const secondaryScore = analysis.scores[candidate];
+  return secondaryScore >= 0.45 && primaryScore > 0 && secondaryScore / primaryScore >= 0.65
+    ? candidate
+    : undefined;
+}
+
+function chooseDifferent<T>(values: readonly T[], excluded: readonly T[], seed: number): T | undefined {
+  const available = values.filter((value) => !excluded.includes(value));
+  return available.length ? available[seed % available.length] : undefined;
+}
+
 export function composePatternProposals(analysis: WishAnalysis): PatternProposal[] {
   const base = composePattern(analysis);
+  const secondaryIntent = qualifiedSecondaryIntent(analysis);
   const [firstMotif, secondMotif] = INTENT_MOTIFS[analysis.primaryIntent];
-  const [firstLayout, secondLayout] = INTENT_LAYOUTS[analysis.primaryIntent];
-  const remainingLayouts = ALL_LAYOUTS.filter((layout) => layout !== firstLayout && layout !== secondLayout);
-  const compositeLayout = remainingLayouts[analysis.seed % remainingLayouts.length];
+  const [firstLayout, relatedLayout] = INTENT_LAYOUTS[analysis.primaryIntent];
+  const secondaryMotifs = secondaryIntent ? INTENT_MOTIFS[secondaryIntent] : INTENT_MOTIFS[analysis.primaryIntent];
+  const proposalBMotif = secondaryIntent
+    ? chooseDifferent(secondaryMotifs, [firstMotif], analysis.seed) ?? secondaryMotifs[0]
+    : secondMotif;
+  const secondaryLayouts = secondaryIntent ? INTENT_LAYOUTS[secondaryIntent] : INTENT_LAYOUTS[analysis.primaryIntent];
+  const proposalBLayout = secondaryIntent
+    ? chooseDifferent(secondaryLayouts, [firstLayout], analysis.seed >>> 3)
+      ?? chooseDifferent(ALL_LAYOUTS, [firstLayout], analysis.seed >>> 3)
+      ?? relatedLayout
+    : relatedLayout;
+  const compositeLayout = chooseDifferent(ALL_LAYOUTS, [firstLayout, proposalBLayout], analysis.seed >>> 7)
+    ?? ALL_LAYOUTS.find((layout) => layout !== firstLayout)
+    ?? "combined";
   const recipes: PatternRecipe[] = [
     { ...base, primaryMotif: firstMotif, secondaryMotif: undefined, layout: firstLayout },
-    { ...base, seed: (base.seed + 0x9e3779b1) >>> 0, primaryMotif: secondMotif, secondaryMotif: undefined, layout: secondLayout },
-    { ...base, seed: (base.seed + 0x3c6ef362) >>> 0, primaryMotif: firstMotif, secondaryMotif: secondMotif, layout: compositeLayout },
+    { ...base, seed: (base.seed + 0x9e3779b1) >>> 0, primaryMotif: proposalBMotif, secondaryMotif: undefined, layout: proposalBLayout },
+    { ...base, seed: (base.seed + 0x3c6ef362) >>> 0, primaryMotif: firstMotif, secondaryMotif: proposalBMotif, layout: compositeLayout },
   ];
-  return recipes.map((recipe, index) => createPatternProposal(PROPOSAL_IDS[index], analysis.primaryIntent, recipe));
+  return recipes.map((recipe, index) => {
+    const id = PROPOSAL_IDS[index];
+    const copyIntent = id === "B" && secondaryIntent ? secondaryIntent : analysis.primaryIntent;
+    const proposal = createPatternProposal(id, copyIntent, recipe, id === "C" ? secondaryIntent : undefined);
+    return secondaryIntent ? { ...proposal, secondaryIntent } : proposal;
+  });
 }
 
 /** @deprecated Use composePatternProposals when UI copy and proposal identity are required. */

@@ -1,5 +1,6 @@
 import type { IntentId, PatternProposal, PatternRecipe, ProposalId } from "../core/types";
 import { getMotifStory } from "./motifs";
+import { INTENT_COPY } from "./project";
 
 interface ProposalCopy {
   titleZh: string;
@@ -61,12 +62,39 @@ const COMPOSITE_PROPOSAL_COPY: Record<IntentId, ProposalCopy> = {
   },
 };
 
-export function createPatternProposal(id: ProposalId, intent: IntentId, recipe: PatternRecipe): PatternProposal {
-  if (id === "C") return { id, recipe, ...COMPOSITE_PROPOSAL_COPY[intent] };
+function mixedCompositeCopy(primaryIntent: IntentId, secondaryIntent: IntentId): ProposalCopy {
+  const primary = INTENT_COPY[primaryIntent];
+  const secondary = INTENT_COPY[secondaryIntent];
+  return {
+    titleZh: `${primary.nameZh}·${secondary.nameZh}合景`,
+    titleEn: `${primary.nameEn} & ${secondary.nameEn}`,
+    rationaleZh: `这张数字花本把主要心意「${primary.nameZh}」与同时听见的「${secondary.nameZh}」并置，让两层愿望在同一幅构图中相遇。`,
+    rationaleEn: `This digital pattern plan places the main wish for ${primary.nameEn.toLowerCase()} beside the accompanying wish for ${secondary.nameEn.toLowerCase()}, bringing both into one composition.`,
+    culturalBoundaryZh: "两种题材的传统资料依据分别见说明；将它们组合回应这句话，是本作的当代映射，不代表南京云锦中的固定历史寓意。",
+    culturalBoundaryEn: "Each subject has its own documented basis; combining them for this wish is a contemporary mapping, not a claim of fixed historic meaning in Nanjing Yunjin.",
+  };
+}
+
+export function createPatternProposal(
+  id: ProposalId,
+  intent: IntentId,
+  recipe: PatternRecipe,
+  secondaryIntent?: IntentId,
+): PatternProposal {
+  const qualifiedSecondary = secondaryIntent && secondaryIntent !== intent ? secondaryIntent : undefined;
+  if (id === "C") {
+    return {
+      id,
+      recipe,
+      secondaryIntent: qualifiedSecondary,
+      ...(qualifiedSecondary ? mixedCompositeCopy(intent, qualifiedSecondary) : COMPOSITE_PROPOSAL_COPY[intent]),
+    };
+  }
   const story = getMotifStory(recipe.primaryMotif, intent);
   return {
     id,
     recipe,
+    secondaryIntent: qualifiedSecondary,
     titleZh: story.titleZh,
     titleEn: story.titleEn,
     rationaleZh: story.whyZh,
@@ -76,6 +104,13 @@ export function createPatternProposal(id: ProposalId, intent: IntentId, recipe: 
   };
 }
 
-export function proposalFromRecipe(id: ProposalId, intent: IntentId, recipe: PatternRecipe): PatternProposal {
-  return createPatternProposal(id, intent, recipe);
+export function proposalFromRecipe(
+  id: ProposalId,
+  intent: IntentId,
+  recipe: PatternRecipe,
+  secondaryIntent?: IntentId,
+): PatternProposal {
+  const copyIntent = id === "B" && secondaryIntent ? secondaryIntent : intent;
+  const proposal = createPatternProposal(id, copyIntent, recipe, id === "C" ? secondaryIntent : undefined);
+  return secondaryIntent && secondaryIntent !== intent ? { ...proposal, secondaryIntent } : proposal;
 }
