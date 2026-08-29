@@ -21,9 +21,34 @@ function strictOfflineCsp(): Plugin {
   };
 }
 
+function localPreviewSession(): Plugin {
+  const sessionId = String(Date.now());
+
+  return {
+    name: "local-preview-session",
+    apply: "serve",
+    configureServer(server) {
+      server.middlewares.use("/__woven-wishes-preview-session", (_request, response) => {
+        response.statusCode = 200;
+        response.setHeader("Content-Type", "text/plain; charset=utf-8");
+        response.setHeader("Cache-Control", "no-store, max-age=0");
+        response.end(sessionId);
+      });
+    },
+  };
+}
+
 export default defineConfig(({ command }) => ({
   base: "./",
-  plugins: [react(), ...(command === "build" ? [strictOfflineCsp(), viteSingleFile()] : [])],
+  plugins: [react(), localPreviewSession(), ...(command === "build" ? [strictOfflineCsp(), viteSingleFile()] : [])],
+  server: {
+    host: "127.0.0.1",
+    port: 4173,
+    strictPort: true,
+    headers: {
+      "Cache-Control": "no-store, max-age=0",
+    },
+  },
   build: {
     outDir: "dist",
     modulePreload: false,

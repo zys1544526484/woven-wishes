@@ -1,6 +1,6 @@
-import type { Locale, PatternMatrix, PatternRecipe, WishAnalysis } from "../core/types";
+import type { Locale, PaletteId, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode, WishAnalysis } from "../core/types";
 
-export type AppPhase = "input" | "analyzing" | "weaving" | "result-rendering" | "result";
+export type AppPhase = "input" | "analyzing" | "plan-selection" | "role-selection" | "weaving" | "result-rendering" | "result";
 
 export interface AppState {
   phase: AppPhase;
@@ -9,6 +9,10 @@ export interface AppState {
   wish: string;
   error: string;
   analysis?: WishAnalysis;
+  proposals: PatternProposal[];
+  selectedCandidate: number;
+  selectedPalette: PaletteId;
+  weaveMode: WeaveMode;
   recipe?: PatternRecipe;
   matrix?: PatternMatrix;
   completedRows: number;
@@ -21,7 +25,12 @@ export type AppAction =
   | { type: "SET_LOCALE"; locale: Locale }
   | { type: "SET_INPUT"; value: string }
   | { type: "SET_ERROR"; error: string }
-  | { type: "START_ANALYSIS"; wish: string; analysis: WishAnalysis; recipe: PatternRecipe; matrix: PatternMatrix }
+  | { type: "START_ANALYSIS"; wish: string; analysis: WishAnalysis; proposals: PatternProposal[]; recipe: PatternRecipe; matrix: PatternMatrix }
+  | { type: "OPEN_PLAN_SELECTION" }
+  | { type: "SELECT_PLAN"; index: number; recipe: PatternRecipe; matrix: PatternMatrix }
+  | { type: "SELECT_PALETTE"; palette: PaletteId; recipe: PatternRecipe; matrix: PatternMatrix }
+  | { type: "CONFIRM_PLAN" }
+  | { type: "SET_WEAVE_MODE"; mode: WeaveMode }
   | { type: "START_WEAVING" }
   | { type: "START_ROW"; row: number }
   | { type: "COMMIT_ROW" }
@@ -35,6 +44,10 @@ export const initialState: AppState = {
   wishInput: "",
   wish: "",
   error: "",
+  proposals: [],
+  selectedCandidate: 0,
+  selectedPalette: "indigo-gold",
+  weaveMode: "player-weaver",
   completedRows: 0,
   qrUrl: "",
   qrDataUrl: "",
@@ -42,7 +55,7 @@ export const initialState: AppState = {
 
 export function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
-    case "SET_LOCALE": return { ...state, locale: action.locale };
+    case "SET_LOCALE": return { ...state, locale: action.locale, error: "" };
     case "SET_INPUT": return { ...state, wishInput: action.value, error: "" };
     case "SET_ERROR": return { ...state, error: action.error };
     case "START_ANALYSIS":
@@ -52,12 +65,22 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         wish: action.wish,
         wishInput: action.wish,
         analysis: action.analysis,
+        proposals: action.proposals,
+        selectedCandidate: 0,
+        selectedPalette: action.recipe.palette,
         recipe: action.recipe,
         matrix: action.matrix,
         completedRows: 0,
         committingRow: undefined,
         error: "",
       };
+    case "OPEN_PLAN_SELECTION": return { ...state, phase: "plan-selection" };
+    case "SELECT_PLAN":
+      return { ...state, selectedCandidate: action.index, recipe: action.recipe, matrix: action.matrix };
+    case "SELECT_PALETTE":
+      return { ...state, selectedPalette: action.palette, recipe: action.recipe, matrix: action.matrix };
+    case "CONFIRM_PLAN": return { ...state, phase: "role-selection" };
+    case "SET_WEAVE_MODE": return { ...state, weaveMode: action.mode };
     case "START_WEAVING": return { ...state, phase: "weaving" };
     case "START_ROW": return state.committingRow === undefined && state.completedRows < 24 ? { ...state, committingRow: action.row } : state;
     case "COMMIT_ROW": return { ...state, completedRows: Math.min(24, state.completedRows + 1), committingRow: undefined };

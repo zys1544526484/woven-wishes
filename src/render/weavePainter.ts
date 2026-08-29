@@ -31,7 +31,7 @@ export function paintWovenMatrix(
   context.save();
   context.translate(padding, padding);
   context.lineWidth = Math.max(0.45, Math.min(cellWidth, cellHeight) * 0.07);
-  context.strokeStyle = "rgba(19, 147, 155, 0.22)";
+  context.strokeStyle = "rgba(19, 147, 155, 0.18)";
   for (let x = 0; x <= columns; x += 1) {
     const xPosition = x * cellWidth;
     context.beginPath();
@@ -43,27 +43,40 @@ export function paintWovenMatrix(
   const visibleRows = Math.min(completedRows, rows);
   for (let row = 0; row < visibleRows; row += 1) {
     const y = row * cellHeight;
-    for (let column = 0; column < columns; column += 1) {
-      const value = matrix[row][column];
-      const x = column * cellWidth;
-      const base = value === 0 ? palette.colors[0] : palette.colors[value];
-      context.fillStyle = base;
-      context.fillRect(x, y, Math.ceil(cellWidth + 0.35), Math.ceil(cellHeight + 0.35));
-      if (value !== 0) {
-        const highlight = context.createLinearGradient(0, y, 0, y + cellHeight);
-        highlight.addColorStop(0, "rgba(255,255,255,0.34)");
-        highlight.addColorStop(0.24, "rgba(255,255,255,0.06)");
-        highlight.addColorStop(0.72, "rgba(0,0,0,0.08)");
-        highlight.addColorStop(1, "rgba(0,0,0,0.35)");
-        context.fillStyle = highlight;
-        context.fillRect(x, y, Math.ceil(cellWidth), cellHeight);
-      }
-    }
-    context.strokeStyle = row % 2 === 0 ? "rgba(214,164,88,0.2)" : "rgba(8,116,124,0.2)";
+    const bandHeight = Math.max(2, cellHeight * 0.5);
+    const bandY = y + (cellHeight - bandHeight) / 2;
+    context.strokeStyle = row % 2 === 0 ? "rgba(214,164,88,0.17)" : "rgba(8,116,124,0.17)";
     context.beginPath();
     context.moveTo(0, y + cellHeight * 0.5);
     context.lineTo(innerWidth, y + cellHeight * 0.5);
     context.stroke();
+
+    for (let column = 0; column < columns; column += 1) {
+      const value = matrix[row][column];
+      if (value === 0) continue;
+      const x = column * cellWidth;
+      const bandWidth = Math.ceil(cellWidth + 0.5);
+      context.fillStyle = palette.colors[value];
+      context.fillRect(x, bandY, bandWidth, bandHeight);
+
+      const shade = context.createLinearGradient(0, bandY, 0, bandY + bandHeight);
+      shade.addColorStop(0, "rgba(255,255,255,0.24)");
+      shade.addColorStop(0.18, "rgba(255,255,255,0.05)");
+      shade.addColorStop(0.76, "rgba(0,0,0,0.05)");
+      shade.addColorStop(1, "rgba(0,0,0,0.28)");
+      context.fillStyle = shade;
+      context.fillRect(x, bandY, bandWidth, bandHeight);
+
+      context.strokeStyle = "rgba(255,244,214,0.2)";
+      context.lineWidth = Math.max(0.45, bandHeight * 0.055);
+      for (let filament = 1; filament <= 3; filament += 1) {
+        const filamentY = bandY + (bandHeight * filament) / 4;
+        context.beginPath();
+        context.moveTo(x, filamentY);
+        context.lineTo(x + bandWidth, filamentY);
+        context.stroke();
+      }
+    }
   }
 
   if (glow && visibleRows > 0 && visibleRows < rows) {

@@ -5,6 +5,8 @@ coverage/
 test-results/
 playwright-report/
 .playwright-cli/
+.local-preview/
+artifacts/
 release/
 deliverables/*.zip
 *.log

@@ -1,16 +1,18 @@
 import { fnv1a } from "./hash";
-import { INTENT_IDS, type LayoutId, type PaletteId, type SharePayloadV1 } from "./types";
+import { INTENT_IDS, type IntentId, type LayoutId, type PaletteId, type PatternRecipe, type ProposalId, type SharePayload, type WeaveMode } from "./types";
 
 const MAX_PAYLOAD_BYTES = 1024;
 const PALETTES: readonly PaletteId[] = ["indigo-gold", "peacock-gold", "cinnabar-night", "jade-moon"];
 const LAYOUTS: readonly LayoutId[] = ["continuous", "roundel", "scattered", "combined"];
 const MOTIFS = ["cloud", "roundel", "plum", "bamboo", "fish", "peony", "magpie", "peach"] as const;
+const PROPOSALS: readonly ProposalId[] = ["A", "B", "C"];
+const WEAVE_MODES: readonly WeaveMode[] = ["player-weaver", "player-drawboy", "duo"];
 
 type CompactPayloadV1 = [1, 0 | 1, string, number, number, number, number, number, number, number];
+type CompactPayloadV2 = [2, 0 | 1, string, number, number, number, number, number, number, number, number, number];
 
-function compactPayload(payload: SharePayloadV1): CompactPayloadV1 {
-  return [
-    1,
+function compactPayload(payload: SharePayload): CompactPayloadV1 | CompactPayloadV2 {
+  const common = [
     payload.locale === "zh" ? 0 : 1,
     payload.wish,
     INTENT_IDS.indexOf(payload.primaryIntent),
@@ -20,13 +22,16 @@ function compactPayload(payload: SharePayloadV1): CompactPayloadV1 {
     payload.recipe.secondaryMotif ? MOTIFS.indexOf(payload.recipe.secondaryMotif as (typeof MOTIFS)[number]) + 1 : 0,
     PALETTES.indexOf(payload.recipe.palette),
     LAYOUTS.indexOf(payload.recipe.layout),
-  ];
+  ] as const;
+  if (payload.codecVersion === 1) return [1, ...common];
+  return [2, ...common, PROPOSALS.indexOf(payload.proposalId), WEAVE_MODES.indexOf(payload.weaveMode)];
 }
 
 function expandPayload(value: unknown): unknown {
-  if (!Array.isArray(value) || value.length !== 10 || value[0] !== 1) return value;
-  const [codecVersion, localeCode, wish, primaryIndex, secondaryCode, seed, motifIndex, secondaryMotifCode, paletteIndex, layoutIndex] = value;
-  return {
+  if (!Array.isArray(value) || (value[0] !== 1 && value[0] !== 2)) return value;
+  if ((value[0] === 1 && value.length !== 10) || (value[0] === 2 && value.length !== 12)) return value;
+  const [codecVersion, localeCode, wish, primaryIndex, secondaryCode, seed, motifIndex, secondaryMotifCode, paletteIndex, layoutIndex, proposalIndex, weaveModeIndex] = value;
+  const common = {
     codecVersion,
     locale: localeCode === 0 ? "zh" : localeCode === 1 ? "en" : undefined,
     wish,
@@ -43,6 +48,8 @@ function expandPayload(value: unknown): unknown {
       layout: LAYOUTS[layoutIndex],
     },
   };
+  if (codecVersion === 1) return common;
+  return { ...common, proposalId: PROPOSALS[proposalIndex], weaveMode: WEAVE_MODES[weaveModeIndex] };
 }
 
 function bytesToBase64Url(bytes: Uint8Array): string {
@@ -58,29 +65,42 @@ function base64UrlToBytes(encoded: string): Uint8Array {
   return Uint8Array.from(binary, (character) => character.charCodeAt(0));
 }
 
-function isSharePayload(value: unknown): value is SharePayloadV1 {
+function isSharePayload(value: unknown): value is SharePayload {
   if (!value || typeof value !== "object") return false;
-  const payload = value as Partial<SharePayloadV1>;
-  return payload.codecVersion === 1
+  const payload = value as {
+    codecVersion?: unknown;
+    wish?: unknown;
+    locale?: unknown;
+    primaryIntent?: unknown;
+    secondaryIntent?: unknown;
+    recipe?: Partial<PatternRecipe>;
+    proposalId?: unknown;
+    weaveMode?: unknown;
+  };
+  const commonIsValid = (payload.codecVersion === 1 || payload.codecVersion === 2)
     && typeof payload.wish === "string"
     && Array.from(payload.wish).length >= 2
     && Array.from(payload.wish).length <= 48
     && (payload.locale === "zh" || payload.locale === "en")
-    && INTENT_IDS.includes(payload.primaryIntent as (typeof INTENT_IDS)[number])
-    && (payload.secondaryIntent === undefined || INTENT_IDS.includes(payload.secondaryIntent))
+    && INTENT_IDS.includes(payload.primaryIntent as IntentId)
+    && (payload.secondaryIntent === undefined || INTENT_IDS.includes(payload.secondaryIntent as IntentId))
     && payload.recipe?.version === 1
     && payload.recipe.rows === 24
     && payload.recipe.columns === 48
     && Number.isSafeInteger(payload.recipe.seed)
-    && payload.recipe.seed >= 0
-    && payload.recipe.seed <= 0xffffffff
+    && (payload.recipe.seed as number) >= 0
+    && (payload.recipe.seed as number) <= 0xffffffff
     && MOTIFS.includes(payload.recipe.primaryMotif as (typeof MOTIFS)[number])
     && (payload.recipe.secondaryMotif === undefined || MOTIFS.includes(payload.recipe.secondaryMotif as (typeof MOTIFS)[number]))
-    && PALETTES.includes(payload.recipe.palette)
-    && LAYOUTS.includes(payload.recipe.layout);
+    && PALETTES.includes(payload.recipe.palette as PaletteId)
+    && LAYOUTS.includes(payload.recipe.layout as LayoutId);
+  if (!commonIsValid) return false;
+  if (payload.codecVersion === 1) return true;
+  return PROPOSALS.includes(payload.proposalId as ProposalId)
+    && WEAVE_MODES.includes(payload.weaveMode as WeaveMode);
 }
 
-export function encodeSharePayload(payload: SharePayloadV1): string {
+export function encodeSharePayload(payload: SharePayload): string {
   const json = JSON.stringify(compactPayload(payload));
   const bytes = new TextEncoder().encode(json);
   if (bytes.byteLength > MAX_PAYLOAD_BYTES) throw new Error("Share payload exceeds 1024 bytes");
@@ -89,7 +109,7 @@ export function encodeSharePayload(payload: SharePayloadV1): string {
   return `${encoded}.${checksum}`;
 }
 
-export function decodeSharePayload(encoded: string): SharePayloadV1 {
+export function decodeSharePayload(encoded: string): SharePayload {
   const separator = encoded.lastIndexOf(".");
   if (separator < 1) throw new Error("Missing checksum");
   const body = encoded.slice(0, separator);
@@ -102,7 +122,7 @@ export function decodeSharePayload(encoded: string): SharePayloadV1 {
   return value;
 }
 
-export function buildShareUrl(payload: SharePayloadV1, configuredBase?: string): string {
+export function buildShareUrl(payload: SharePayload, configuredBase?: string): string {
   const current = new URL(globalThis.location?.href ?? "https://localhost/");
   const base = configuredBase?.trim()
     ? new URL(configuredBase)
@@ -111,7 +131,7 @@ export function buildShareUrl(payload: SharePayloadV1, configuredBase?: string):
   return base.toString();
 }
 
-export function payloadFromLocationHash(hash: string): SharePayloadV1 {
+export function payloadFromLocationHash(hash: string): SharePayload {
   const match = hash.match(/^#?r=(.+)$/);
   if (!match) throw new Error("Missing result payload");
   return decodeSharePayload(match[1]);

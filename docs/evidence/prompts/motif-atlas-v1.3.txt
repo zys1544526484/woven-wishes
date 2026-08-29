@@ -1,0 +1,14 @@
+Use case: stylized-concept
+Asset type: production design reference atlas for a 1920×1080 interactive digital weaving experience
+Primary request: Extend the reference image's refined central woven-pattern art direction into one coherent 2-row by 4-column atlas of eight original contemporary Nanjing-Yunjin-inspired digital motifs. Keep the exact refinement standard: dense luminous silk-thread dots, flowing continuous curves, multiple parallel thread contours, intricate but orderly borders, deep indigo woven ground, restrained gold and peacock-teal highlights, symmetrical intentional composition, museum-exhibition polish.
+Input image: style and quality reference only. Do not reproduce its UI, text, QR code, buttons, or exact flower design.
+Fixed motif order: top row left to right: auspicious flowing clouds; centred reunion roundel; rising bamboo; plum branch with blossoms. Bottom row left to right: paired fish in circular motion; layered peony bloom; clearly recognisable magpie on a branch; peach with leaves and continuous scrolls.
+Composition: eight equally sized isolated square textile panels, each with its own complete fine ornamental border and one large legible central motif. Consistent scale, line density and finish across all eight. Leave narrow even gutters between panels.
+Style/medium: high-density digital silk weaving visualization, dotted and filament-like warp/weft linework, not embroidery stitches, not painted illustration, not photorealistic fabric.
+Color palette: near-black indigo #020C18, silk gold #D6A458 and bright gold, peacock teal #08747C, tiny accents of cinnabar only when needed.
+Constraints: every motif must be instantly distinguishable at thumbnail size; culturally conservative auspicious subjects; original redraws; no people; no UI chrome; no words, letters, numbers, labels, logos, signatures, watermarks, QR codes, or mockup screens; no blurry or coarse pixel blocks; no Chinese knot motifs; no dragon or phoenix.
+
+Reference image role: quality and style reference only.
+Reference: docs/concepts/v1.4/refined-pattern-quality-standard.png
+Built-in output: D:/CodexHome/generated_images/01a02eea-6937-76c1-9155-0fcfe23e508e/exec-8cc0bce2-a53b-4064-87a2-7ca00e686bf1.png
+Selected project asset: src/assets/motif-atlas-v1.3.png

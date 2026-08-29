@@ -11,6 +11,9 @@ export type IntentId = (typeof INTENT_IDS)[number];
 export type Locale = "zh" | "en";
 export type PaletteId = "indigo-gold" | "peacock-gold" | "cinnabar-night" | "jade-moon";
 export type LayoutId = "continuous" | "roundel" | "scattered" | "combined";
+export type WeaveMode = "player-weaver" | "player-drawboy" | "duo";
+export type ProposalId = "A" | "B" | "C";
+export type WeaveStageId = "ground" | "colour" | "gold" | "border";
 
 export interface WishAnalysis {
   primaryIntent: IntentId;
@@ -53,6 +56,17 @@ export interface PatternRecipe {
   layout: LayoutId;
 }
 
+export interface PatternProposal {
+  id: ProposalId;
+  recipe: PatternRecipe;
+  titleZh: string;
+  titleEn: string;
+  rationaleZh: string;
+  rationaleEn: string;
+  culturalBoundaryZh: string;
+  culturalBoundaryEn: string;
+}
+
 export interface Palette {
   id: PaletteId;
   nameZh: string;
@@ -70,3 +84,16 @@ export interface SharePayloadV1 {
   primaryIntent: IntentId;
   secondaryIntent?: IntentId;
 }
+
+export interface SharePayloadV2 {
+  codecVersion: 2;
+  recipe: PatternRecipe;
+  locale: Locale;
+  wish: string;
+  primaryIntent: IntentId;
+  secondaryIntent?: IntentId;
+  proposalId: ProposalId;
+  weaveMode: WeaveMode;
+}
+
+export type SharePayload = SharePayloadV1 | SharePayloadV2;

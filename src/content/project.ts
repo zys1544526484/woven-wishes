@@ -5,14 +5,19 @@ export const PROJECT_SUBTITLE_ZH = "AI共织锦愿";
 export const PROJECT_TITLE_EN = "Six Centimetres a Day";
 export const PROJECT_SUBTITLE_EN = "Woven Wishes with AI";
 
-export const EXPERIENCE_DISCLAIMER_ZH = "AI数字锦样 · 受云锦文化启发 · 非真实织造复原";
+export const EXPERIENCE_DISCLAIMER_ZH = "聚焦南京云锦木机妆花 · 数字织造示意 · 非工艺复原";
 export const EXPERIENCE_DISCLAIMER_EN =
-  "An AI-assisted digital pattern inspired by Yunjin culture — not a reconstruction of the craft.";
+  "A digital weaving interpretation focused on Nanjing Yunjin zhuanghua — not a craft reconstruction.";
 
 export const CRAFT_FACT_ZH =
-  "在新华社报道的复杂云锦匹料织造中，拽花工与织手两人配合，一天约织五六厘米。";
+  "在新华社报道的复杂南京云锦匹料织造中，拽花工与织手两人配合，一天约织五六厘米。";
 export const CRAFT_FACT_EN =
   "In a Xinhua report on complex Yunjin yardage, two artisans working together weave about five to six centimetres a day.";
+
+export const CRAFT_DISTINCTION_ZH =
+  "木机妆花由拽花工按花本提经、织手织入彩纬与金线，纹样随经纬交织成形。本作只聚焦南京云锦，不代表其他织锦。";
+export const CRAFT_DISTINCTION_EN =
+  "In zhuanghua, one craftsperson lifts selected warps while another weaves coloured and gold wefts. This work focuses on Nanjing Yunjin, not other brocade traditions.";
 
 export interface IntentCopy {
   id: IntentId;
@@ -38,9 +43,9 @@ export const INTENT_COPY: Record<IntentId, IntentCopy> = {
     id: "reunion",
     nameZh: "团聚",
     nameEn: "Reunion",
-    planZh: "以团式构图聚拢线条，让相隔的心意在中心相遇。",
+    planZh: "以团花构图聚拢线条，让相隔的心意在中心相遇。",
     planEn: "A gathered composition brings distant threads toward one centre.",
-    resultZh: "团式结构是云锦常见构图形式之一；本作借它表达相聚。",
+    resultZh: "团花是云锦常见图案构成之一；本作借向心结构表达相聚。",
     resultEn: "Roundel structures occur in Yunjin composition; here, they are used to express reunion.",
   },
   courage: {
@@ -86,6 +91,8 @@ export const PRESETS: Array<{ id: IntentId; zh: string; en: string; wishZh: stri
   { id: "safety", zh: "平安", en: "Peace", wishZh: "愿远方的家人平安", wishEn: "May my family afar be safe" },
   { id: "courage", zh: "勇气", en: "Courage", wishZh: "愿我们都有重新出发的勇气", wishEn: "May we find courage to begin again" },
   { id: "abundance", zh: "丰足", en: "Abundance", wishZh: "愿四季丰足，耕耘有收获", wishEn: "May every season bring abundance" },
+  { id: "joy", zh: "喜悦", en: "Joy", wishZh: "愿好消息如约而至", wishEn: "May good news arrive as hoped" },
+  { id: "longevity", zh: "长久", en: "Longevity", wishZh: "愿岁岁康宁，长久相伴", wishEn: "May well-being and companionship last" },
 ];
 
 export function localized(locale: Locale, zh: string, en: string): string {

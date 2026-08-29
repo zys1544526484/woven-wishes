@@ -1,13 +1,16 @@
 import { useEffect, useRef } from "react";
-import type { Palette, PatternMatrix } from "../core/types";
+import type { Locale, Palette, PatternMatrix, PatternRecipe } from "../core/types";
 import { paintActiveWeft, paintWovenMatrix } from "./weavePainter";
+import { loadMotifAtlas, paintRefinedPattern } from "./refinedPattern";
 
 interface WeaveCanvasProps {
   matrix: PatternMatrix;
   palette: Palette;
+  recipe: PatternRecipe;
   completedRows: number;
   committingRow?: number;
   direction?: "ltr" | "rtl";
+  locale?: Locale;
   className?: string;
 }
 
@@ -24,22 +27,34 @@ function setupCanvas(canvas: HTMLCanvasElement): { context: CanvasRenderingConte
   return context ? { context, width, height } : null;
 }
 
-export function WeaveCanvas({ matrix, palette, completedRows, committingRow, direction = "ltr", className }: WeaveCanvasProps) {
+export function WeaveCanvas({ matrix, palette, recipe, completedRows, committingRow, direction = "ltr", locale = "zh", className }: WeaveCanvasProps) {
   const staticRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = staticRef.current;
     if (!canvas) return;
+    let active = true;
     const draw = () => {
       const setup = setupCanvas(canvas);
-      if (setup) paintWovenMatrix(setup.context, matrix, palette, setup.width, setup.height, { completedRows });
+      if (!setup) return;
+      paintWovenMatrix(setup.context, matrix, palette, setup.width, setup.height, { completedRows: 0 });
+      loadMotifAtlas().then((atlas) => {
+        if (!active) return;
+        const latestSetup = setupCanvas(canvas);
+        if (latestSetup) paintRefinedPattern(latestSetup.context, atlas, recipe, palette, latestSetup.width, latestSetup.height, { completedRows, glow: true });
+      }).catch(() => {
+        if (active) paintWovenMatrix(setup.context, matrix, palette, setup.width, setup.height, { completedRows });
+      });
     };
     draw();
     const observer = new ResizeObserver(draw);
     observer.observe(canvas);
-    return () => observer.disconnect();
-  }, [matrix, palette, completedRows]);
+    return () => {
+      active = false;
+      observer.disconnect();
+    };
+  }, [matrix, palette, recipe, completedRows]);
 
   useEffect(() => {
     const canvas = animationRef.current;
@@ -59,7 +74,7 @@ export function WeaveCanvas({ matrix, palette, completedRows, committingRow, dir
   }, [committingRow, direction, matrix.length]);
 
   return (
-    <div className={`weave-canvas ${className ?? ""}`} aria-label={`已完成 ${completedRows} 梭，共 ${matrix.length} 梭`}>
+    <div className={`weave-canvas ${className ?? ""}`} aria-label={locale === "zh" ? `已完成 ${completedRows} 梭，共 ${matrix.length} 梭` : `${completedRows} of ${matrix.length} passes completed`}>
       <canvas ref={staticRef} />
       <canvas ref={animationRef} aria-hidden="true" />
     </div>
