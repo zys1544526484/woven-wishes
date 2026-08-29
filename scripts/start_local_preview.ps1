@@ -11,6 +11,8 @@ $serverLog = Join-Path $previewStateDir "vite.log"
 $serverErrorLog = Join-Path $previewStateDir "vite-error.log"
 $serverPidFile = Join-Path $previewStateDir "server.pid"
 $viteEntry = Join-Path $projectRoot "node_modules\vite\bin\vite.js"
+$previewMutex = [System.Threading.Mutex]::new($false, "Local\WovenWishesPreview_3A89F1D4")
+$previewMutexAcquired = $false
 
 function Test-PreviewPort {
   $client = $null
@@ -37,7 +39,7 @@ function Test-WovenWishesReady {
     $response = Invoke-WebRequest `
       -Uri "$previewOrigin/" `
       -UseBasicParsing `
-      -TimeoutSec 1 `
+      -TimeoutSec 5 `
       -Headers @{ "Cache-Control" = "no-cache" }
 
     return $response.StatusCode -eq 200 `
@@ -72,27 +74,53 @@ function Test-ProjectViteProcess([int]$ProcessId) {
 }
 
 function Test-ManagedPreview([int]$ProcessId) {
+  $savedPid = Get-SavedPreviewPid
+  return $null -ne $savedPid -and $savedPid -eq $ProcessId -and (Test-ProjectViteProcess $ProcessId)
+}
+
+function Get-SavedPreviewPid {
   if (-not (Test-Path -LiteralPath $serverPidFile -PathType Leaf)) {
-    return $false
+    return $null
+  }
+
+  try {
+    $pidText = Get-Content -LiteralPath $serverPidFile -Raw -ErrorAction Stop
+  }
+  catch {
+    return $null
+  }
+
+  if ([string]::IsNullOrWhiteSpace($pidText)) {
+    return $null
   }
 
   $savedPid = 0
-  if (-not [int]::TryParse((Get-Content -LiteralPath $serverPidFile -Raw).Trim(), [ref]$savedPid)) {
-    return $false
+  if (-not [int]::TryParse($pidText.Trim(), [ref]$savedPid) -or $savedPid -le 0) {
+    return $null
   }
 
-  return $savedPid -eq $ProcessId -and (Test-ProjectViteProcess $ProcessId)
+  return $savedPid
 }
 
-$needsManagedServer = $true
-if (Test-PreviewPort) {
-  if (-not (Test-WovenWishesReady)) {
-    throw "Port 4173 is used by another program. Close that program and run the launcher again."
+try {
+  try {
+    $previewMutexAcquired = $previewMutex.WaitOne([TimeSpan]::FromSeconds(75))
+  }
+  catch [System.Threading.AbandonedMutexException] {
+    $previewMutexAcquired = $true
   }
 
+  if (-not $previewMutexAcquired) {
+    throw "Another preview launcher is still starting. Wait a moment and run the launcher again."
+  }
+
+$needsManagedServer = $true
+$managedPid = $null
+if (Test-PreviewPort) {
   $listenerPid = Get-PreviewListenerPid
   if ($null -ne $listenerPid -and (Test-ManagedPreview $listenerPid)) {
     $needsManagedServer = $false
+    $managedPid = $listenerPid
   }
   elseif ($null -ne $listenerPid -and (Test-ProjectViteProcess $listenerPid)) {
     Stop-Process -Id $listenerPid -Force
@@ -101,8 +129,18 @@ if (Test-PreviewPort) {
       Start-Sleep -Milliseconds 100
     }
   }
-  else {
+  elseif (Test-WovenWishesReady) {
     throw "The preview is not managed by this launcher. Close the program on port 4173 and run the launcher again."
+  }
+  else {
+    throw "Port 4173 is used by another program. Close that program and run the launcher again."
+  }
+}
+else {
+  $savedPid = Get-SavedPreviewPid
+  if ($null -ne $savedPid -and (Test-ProjectViteProcess $savedPid)) {
+    $needsManagedServer = $false
+    $managedPid = $savedPid
   }
 }
 
@@ -125,15 +163,34 @@ if ($needsManagedServer) {
     -PassThru
 
   Set-Content -LiteralPath $serverPidFile -Value $serverProcess.Id -Encoding ascii
+  $managedPid = $serverProcess.Id
+}
 
-  $deadline = (Get-Date).AddSeconds(20)
-  while (-not (Test-WovenWishesReady) -and (Get-Date) -lt $deadline) {
-    Start-Sleep -Milliseconds 250
+$ready = $false
+$deadline = (Get-Date).AddSeconds(60)
+$processCheckNotBefore = (Get-Date).AddSeconds(2)
+$missingProcessChecks = 0
+while ((Get-Date) -lt $deadline) {
+  if ($null -ne $managedPid -and (Get-Date) -ge $processCheckNotBefore) {
+    if (Test-ProjectViteProcess $managedPid) {
+      $missingProcessChecks = 0
+    }
+    else {
+      $missingProcessChecks += 1
+      if ($missingProcessChecks -ge 3) {
+        break
+      }
+    }
   }
+  if ((Test-PreviewPort) -and (Test-WovenWishesReady)) {
+    $ready = $true
+    break
+  }
+  Start-Sleep -Milliseconds 300
+}
 
-  if (-not (Test-WovenWishesReady)) {
-    throw "The local preview did not start. See $serverErrorLog"
-  }
+if (-not $ready) {
+  throw "The local preview did not become ready. See $serverErrorLog"
 }
 
 $refreshToken = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
@@ -145,3 +202,10 @@ if (-not $NoBrowser) {
 Write-Host "Woven Wishes is open."
 Write-Host "Stable local URL: $previewOrigin/"
 Write-Host "The preview keeps running after this Codex task ends. Run the launcher again after a PC restart."
+}
+finally {
+  if ($previewMutexAcquired) {
+    $previewMutex.ReleaseMutex()
+  }
+  $previewMutex.Dispose()
+}
