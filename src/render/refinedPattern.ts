@@ -47,6 +47,7 @@ export interface RefinedPatternPlan {
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
+const REFINED_RENDER_VERSION = 2;
 
 export function loadMotifAtlas(): Promise<HTMLImageElement> {
   if (!atlasPromise) {
@@ -205,7 +206,7 @@ function liftThreadColor(color: [number, number, number], amount: number): [numb
 
 function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette, layer: ThreadLayerId): HTMLCanvasElement {
   const region = MOTIF_ATLAS_REGIONS[motifId] ?? MOTIF_ATLAS_REGIONS.cloud;
-  const cacheKey = `${motifId}:${palette.id}:${palette.colors.join("")}:${layer}`;
+  const cacheKey = `${REFINED_RENDER_VERSION}:${motifId}:${palette.id}:${palette.colors.join("")}:${layer}`;
   const cached = tintedMotifs.get(cacheKey);
   if (cached) return cached;
 
@@ -216,9 +217,9 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
   if (!context) return canvas;
   context.drawImage(atlas, region.x, region.y, region.width, region.height, 0, 0, region.width, region.height);
   const imageData = context.getImageData(0, 0, region.width, region.height);
-  const gold = liftThreadColor(parseHex(palette.colors[1]), 0.1);
-  const teal = liftThreadColor(parseHex(palette.colors[2]), 0.3);
-  const accent = liftThreadColor(parseHex(palette.colors[3]), 0.24);
+  const gold = liftThreadColor(parseHex(palette.colors[1]), 0.035);
+  const teal = liftThreadColor(parseHex(palette.colors[2]), 0.2);
+  const accent = liftThreadColor(parseHex(palette.colors[3]), 0.18);
 
   for (let index = 0; index < imageData.data.length; index += 4) {
     const red = imageData.data[index];
@@ -227,7 +228,14 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
     const maximum = Math.max(red, green, blue);
     const minimum = Math.min(red, green, blue);
     const chroma = maximum - minimum;
-    if (maximum < 36 || chroma < 8) {
+    const pixelIndex = index / 4;
+    const pixelX = pixelIndex % region.width;
+    const pixelY = Math.floor(pixelIndex / region.width);
+    const normalizedX = pixelX / region.width;
+    const normalizedY = pixelY / region.height;
+    const atlasCorner = (normalizedX < 0.17 || normalizedX > 0.83)
+      && (normalizedY < 0.17 || normalizedY > 0.83);
+    if (maximum < 42 || chroma < 9 || atlasCorner) {
       imageData.data[index + 3] = 0;
       continue;
     }
@@ -238,12 +246,24 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
     }
     const accentThread = !goldThread && red > 74 && blue > 58 && red > green * 1.08;
     const target = goldThread ? gold : accentThread ? accent : teal;
-    const threadStrength = clamp01((maximum - 30) / 148);
-    const brightness = layer === "gold" ? 0.82 + threadStrength * 0.55 : 0.76 + threadStrength * 0.5;
+    const luminanceStrength = clamp01((maximum - 40) / 168);
+    const colourStrength = clamp01((chroma - 7) / 92);
+    const threadStrength = clamp01(luminanceStrength * (0.62 + colourStrength * 0.38));
+    if (threadStrength < 0.055) {
+      imageData.data[index + 3] = 0;
+      continue;
+    }
+    const brightness = layer === "gold"
+      ? 0.56 + threadStrength * 0.48
+      : 0.57 + threadStrength * 0.53;
+    const edgeFade = clamp01(threadStrength / 0.18);
+    const opacity = layer === "gold"
+      ? (0.17 + Math.pow(threadStrength, 0.78) * 0.78) * edgeFade
+      : (0.17 + Math.pow(threadStrength, 0.82) * 0.76) * edgeFade;
     imageData.data[index] = Math.min(255, target[0] * brightness);
     imageData.data[index + 1] = Math.min(255, target[1] * brightness);
     imageData.data[index + 2] = Math.min(255, target[2] * brightness);
-    imageData.data[index + 3] = Math.round(255 * (0.64 + threadStrength * 0.36));
+    imageData.data[index + 3] = Math.round(255 * opacity);
   }
   context.clearRect(0, 0, region.width, region.height);
   context.putImageData(imageData, 0, 0);
@@ -283,9 +303,19 @@ function drawWarpGround(
   context.fillRect(0, 0, width, height);
 
   const warpStep = Math.max(4, width / 150);
-  context.lineWidth = Math.max(0.45, width / 2400);
+  const fineWarpStep = Math.max(2.4, width / 420);
+  context.lineWidth = Math.max(0.4, width / 3200);
+  for (let x = 0, index = 0; x <= width; x += fineWarpStep, index += 1) {
+    context.strokeStyle = index % 6 === phase % 6 ? `${palette.colors[1]}12` : `${palette.colors[2]}18`;
+    context.beginPath();
+    context.moveTo(x, 0);
+    context.lineTo(x, height);
+    context.stroke();
+  }
+
+  context.lineWidth = Math.max(0.45, width / 2700);
   for (let x = 0, index = 0; x <= width; x += warpStep, index += 1) {
-    context.strokeStyle = index % 4 === phase % 4 ? `${palette.colors[1]}18` : `${palette.colors[2]}24`;
+    context.strokeStyle = index % 4 === phase % 4 ? `${palette.colors[1]}13` : `${palette.colors[2]}1d`;
     context.beginPath();
     context.moveTo(x, 0);
     context.lineTo(x, height);
@@ -293,14 +323,14 @@ function drawWarpGround(
   }
 
   const revealedGroups = Math.round(clamp01(progress) * 6);
-  const weftStep = Math.max(3.5, height / 112);
+  const weftStep = Math.max(2.4, height / 240);
   for (let y = weftStep, index = 0; y < height; y += weftStep, index += 1) {
     const group = (index * 5 + phase) % 6;
     if (group >= revealedGroups) continue;
     const highlighted = (index + phase) % 5 === 0;
-    context.strokeStyle = highlighted ? `${palette.colors[1]}24` : `${palette.colors[2]}30`;
-    context.lineWidth = highlighted ? Math.max(0.65, height / 1050) : Math.max(0.45, height / 1450);
-    context.setLineDash([Math.max(2, width / 420), Math.max(1.5, width / 760)]);
+    context.strokeStyle = highlighted ? `${palette.colors[1]}18` : `${palette.colors[2]}1f`;
+    context.lineWidth = highlighted ? Math.max(0.55, height / 1450) : Math.max(0.38, height / 1900);
+    context.setLineDash([Math.max(1.2, width / 760), Math.max(1.8, width / 610)]);
     context.lineDashOffset = ((index * 13 + phase * 7) % 31) * -1;
     context.beginPath();
     context.moveTo(0, y);
@@ -316,8 +346,8 @@ function drawThreadBorder(context: CanvasRenderingContext2D, palette: Palette, w
   const inner = outer + Math.max(8, Math.min(width, height) * 0.018);
   const radius = Math.max(10, Math.min(width, height) * 0.025);
   context.save();
-  context.shadowColor = `${palette.colors[1]}82`;
-  context.shadowBlur = Math.max(7, width * 0.009);
+  context.shadowColor = `${palette.colors[1]}4a`;
+  context.shadowBlur = Math.max(3, width * 0.0035);
   context.strokeStyle = palette.colors[1];
   context.lineWidth = Math.max(1.4, width / 540);
   roundedRectPath(context, outer, outer, width - outer * 2, height - outer * 2, radius);
@@ -328,28 +358,39 @@ function drawThreadBorder(context: CanvasRenderingContext2D, palette: Palette, w
   roundedRectPath(context, inner, inner, width - inner * 2, height - inner * 2, radius * 0.72);
   context.stroke();
 
+  const railGap = Math.max(3, Math.min(width, height) * 0.007);
+  context.strokeStyle = `${palette.colors[1]}c8`;
+  context.lineWidth = Math.max(0.65, width / 1500);
+  roundedRectPath(context, outer + railGap, outer + railGap, width - (outer + railGap) * 2, height - (outer + railGap) * 2, radius * 0.86);
+  context.stroke();
+  context.strokeStyle = `${palette.colors[2]}a8`;
+  roundedRectPath(context, inner + railGap, inner + railGap, width - (inner + railGap) * 2, height - (inner + railGap) * 2, radius * 0.6);
+  context.stroke();
+
   const horizontalStart = inner + radius;
   const horizontalEnd = width - inner - radius;
   const step = Math.max(13, width / (31 + variant % 5));
   const amplitude = Math.max(4, height * (0.009 + (variant % 3) * 0.0015));
   for (const edgeY of [inner + amplitude * 1.7, height - inner - amplitude * 1.7]) {
-    context.beginPath();
-    for (let x = horizontalStart; x <= horizontalEnd; x += 2) {
-      const phase = ((x - horizontalStart) / step) * Math.PI * 2;
-      const waveform = variant % 3 === 0
-        ? Math.sin(phase)
-        : variant % 3 === 1
-          ? Math.sin(phase) * Math.cos(phase * 0.5)
-          : Math.sin(phase) * 0.72 + Math.sin(phase * 2) * 0.28;
-      const y = edgeY + waveform * amplitude;
-      if (x === horizontalStart) context.moveTo(x, y);
-      else context.lineTo(x, y);
+    for (const [offset, colour] of [[-amplitude * 0.22, palette.colors[1]], [amplitude * 0.22, palette.colors[2]]] as const) {
+      context.beginPath();
+      for (let x = horizontalStart; x <= horizontalEnd; x += 1.5) {
+        const phase = ((x - horizontalStart) / step) * Math.PI * 2;
+        const waveform = variant % 3 === 0
+          ? Math.sin(phase)
+          : variant % 3 === 1
+            ? Math.sin(phase) * Math.cos(phase * 0.5)
+            : Math.sin(phase) * 0.72 + Math.sin(phase * 2) * 0.28;
+        const y = edgeY + waveform * amplitude + offset;
+        if (x === horizontalStart) context.moveTo(x, y);
+        else context.lineTo(x, y);
+      }
+      context.strokeStyle = colour;
+      context.lineWidth = Math.max(0.7, width / 1450);
+      context.setLineDash([Math.max(0.9, width / 1250), Math.max(1.5, width / (560 + variant * 8))]);
+      context.lineDashOffset = -(variant % 6) * Math.max(1, width / 850);
+      context.stroke();
     }
-    context.strokeStyle = palette.colors[1];
-    context.lineWidth = Math.max(1, width / 950);
-    context.setLineDash([Math.max(1, width / 980), Math.max(2, width / (390 + variant * 8))]);
-    context.lineDashOffset = -(variant % 6) * Math.max(1, width / 620);
-    context.stroke();
   }
   context.setLineDash([]);
   context.lineDashOffset = 0;
@@ -440,19 +481,33 @@ function drawMotifLayer(
   const insetY = motif.height * 0.095;
   context.save();
   clipMotifReveal(context, x, y, width, height, options.reveal, options.revealSeed);
-  context.globalAlpha = options.alpha * (0.82 + options.reveal * 0.18);
-  context.globalCompositeOperation = "screen";
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = "high";
+  context.globalAlpha = options.alpha * (0.78 + options.reveal * 0.22);
+  context.globalCompositeOperation = options.layer === "gold" ? "screen" : "source-over";
   context.filter = options.layer === "gold"
-    ? "brightness(1.18) contrast(1.08) saturate(1.08)"
-    : "brightness(1.14) contrast(1.08) saturate(1.2)";
-  context.shadowColor = options.layer === "gold" ? "rgba(227,179,79,.36)" : "rgba(42,126,130,.2)";
-  context.shadowBlur = Math.max(3, width * (options.layer === "gold" ? 0.009 : 0.005));
+    ? "brightness(1.03) contrast(1.16) saturate(1.02)"
+    : "brightness(1.07) contrast(1.14) saturate(1.12)";
+  context.shadowColor = options.layer === "gold" ? "rgba(227,179,79,.17)" : "rgba(42,126,130,.08)";
+  context.shadowBlur = Math.min(2.2, Math.max(0.7, width * (options.layer === "gold" ? 0.0026 : 0.0016)));
+  const drawLayer = () => {
+    if (options.mirror) {
+      context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, 0, 0, width, height);
+    } else {
+      context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, x, y, width, height);
+    }
+  };
   if (options.mirror) {
     context.translate(x + width, y);
     context.scale(-1, 1);
-    context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, 0, 0, width, height);
-  } else {
-    context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, x, y, width, height);
+  }
+  drawLayer();
+  if (options.layer === "gold") {
+    context.globalCompositeOperation = "lighter";
+    context.globalAlpha = options.alpha * 0.11;
+    context.filter = "brightness(1.08) contrast(1.22) saturate(.96)";
+    context.shadowBlur = 0;
+    drawLayer();
   }
   context.restore();
 }
