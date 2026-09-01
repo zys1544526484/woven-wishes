@@ -44,8 +44,12 @@ describe("weaving progress state", () => {
     });
     state = appReducer(state, { type: "OPEN_PLAN_SELECTION" });
     expect(state.phase).toBe("plan-selection");
+    expect(state.planChosen).toBe(false);
+    state = appReducer(state, { type: "CONFIRM_PLAN" });
+    expect(state.phase).toBe("plan-selection");
     state = appReducer(state, { type: "SELECT_PLAN", index: 1, recipe: { ...recipe, seed: 8, layout: "roundel" }, matrix });
     expect(state.selectedCandidate).toBe(1);
+    expect(state.planChosen).toBe(true);
     state = appReducer(state, { type: "SELECT_PALETTE", palette: "cinnabar-night", recipe: { ...recipe, palette: "cinnabar-night" }, matrix });
     expect(state.selectedPalette).toBe("cinnabar-night");
     state = appReducer(state, { type: "CONFIRM_PLAN" });

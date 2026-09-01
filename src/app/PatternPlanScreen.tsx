@@ -13,6 +13,7 @@ interface PatternPlanScreenProps {
   analysis: WishAnalysis;
   proposals: PatternProposal[];
   selectedIndex: number;
+  planChosen: boolean;
   selectedPalette: PaletteId;
   soundEnabled: boolean;
   onSoundToggle: () => void;
@@ -38,6 +39,7 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
     const recipe = { ...proposal.recipe, palette: props.selectedPalette };
     return { proposal, recipe, matrix: generatePatternMatrix(recipe) };
   }), [props.proposals, props.selectedPalette]);
+  const chosenProposal = props.proposals[props.selectedIndex];
 
   return (
     <section className="screen plan-screen" lang={props.locale === "zh" ? "zh-CN" : "en"}>
@@ -74,25 +76,30 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
               <span>{localized(props.locale, "三张提案", "Three proposals")}</span>
               <strong>{localized(props.locale, "先选构图，再选彩纬", "Choose a composition, then its colours")}</strong>
             </div>
-            <small>{localized(props.locale, "同一句心愿，每次选择都可复现", "Every choice is reproducible for the same wish")}</small>
+            <small className={props.planChosen ? "is-chosen" : "is-awaiting"} role="status">
+              {props.planChosen && chosenProposal
+                ? localized(props.locale, `你选择了 ${chosenProposal.titleZh}`, `You chose ${chosenProposal.titleEn}`)
+                : localized(props.locale, "请亲自点选 A、B 或 C", "Choose A, B or C yourself")}
+            </small>
           </div>
 
           <div className="candidate-row" role="radiogroup" aria-label={localized(props.locale, "数字花本提案", "Digital pattern plan proposals")}>
             {previews.map(({ proposal, recipe, matrix }, index) => {
               const layoutName = LAYOUT_NAMES[recipe.layout];
               const selected = index === props.selectedIndex;
+              const chosen = selected && props.planChosen;
               return (
                 <button
                   type="button"
                   role="radio"
-                  aria-checked={selected}
-                  className={`candidate-option${selected ? " is-selected" : ""}`}
+                  aria-checked={chosen}
+                  className={`candidate-option${chosen ? " is-selected" : selected ? " is-previewed" : ""}`}
                   key={proposal.id}
                   onClick={() => props.onSelectCandidate(index)}
                 >
                   <div className="candidate-preview">
                     <WeaveCanvas matrix={matrix} palette={PALETTES[recipe.palette]} recipe={recipe} completedRows={24} locale={props.locale} />
-                    {selected ? <span className="candidate-check" aria-hidden="true">✓</span> : null}
+                    {chosen ? <span className="candidate-check" aria-hidden="true">✓</span> : null}
                   </div>
                   <span className="candidate-number">{proposal.id}</span>
                   <strong>{props.locale === "zh" ? proposal.titleZh : proposal.titleEn}</strong>
@@ -128,8 +135,10 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
             })}
           </div>
 
-          <button type="button" className="plan-confirm-action" onClick={props.onConfirm}>
-            <span>{localized(props.locale, "采用这张数字花本", "Use This Pattern Plan")}</span>
+          <button type="button" className="plan-confirm-action" disabled={!props.planChosen} onClick={props.onConfirm}>
+            <span>{props.planChosen && chosenProposal
+              ? localized(props.locale, `采用「${chosenProposal.titleZh}」`, `Use “${chosenProposal.titleEn}”`)
+              : localized(props.locale, "先选择一张数字花本", "Choose a Pattern Plan First")}</span>
             <ArrowIcon />
           </button>
         </main>

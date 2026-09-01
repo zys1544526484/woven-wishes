@@ -11,6 +11,7 @@ export interface AppState {
   analysis?: WishAnalysis;
   proposals: PatternProposal[];
   selectedCandidate: number;
+  planChosen: boolean;
   selectedPalette: PaletteId;
   weaveMode: WeaveMode;
   recipe?: PatternRecipe;
@@ -46,6 +47,7 @@ export const initialState: AppState = {
   error: "",
   proposals: [],
   selectedCandidate: 0,
+  planChosen: false,
   selectedPalette: "indigo-gold",
   weaveMode: "player-weaver",
   completedRows: 0,
@@ -67,6 +69,7 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         analysis: action.analysis,
         proposals: action.proposals,
         selectedCandidate: 0,
+        planChosen: false,
         selectedPalette: action.recipe.palette,
         recipe: action.recipe,
         matrix: action.matrix,
@@ -76,10 +79,10 @@ export function appReducer(state: AppState, action: AppAction): AppState {
       };
     case "OPEN_PLAN_SELECTION": return { ...state, phase: "plan-selection" };
     case "SELECT_PLAN":
-      return { ...state, selectedCandidate: action.index, recipe: action.recipe, matrix: action.matrix };
+      return { ...state, selectedCandidate: action.index, planChosen: true, recipe: action.recipe, matrix: action.matrix };
     case "SELECT_PALETTE":
       return { ...state, selectedPalette: action.palette, recipe: action.recipe, matrix: action.matrix };
-    case "CONFIRM_PLAN": return { ...state, phase: "role-selection" };
+    case "CONFIRM_PLAN": return state.planChosen ? { ...state, phase: "role-selection" } : state;
     case "SET_WEAVE_MODE": return { ...state, weaveMode: action.mode };
     case "START_WEAVING": return { ...state, phase: "weaving" };
     case "START_ROW": return state.committingRow === undefined && state.completedRows < 24 ? { ...state, committingRow: action.row } : state;

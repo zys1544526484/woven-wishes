@@ -65,7 +65,7 @@ export function WeaveCanvas({ matrix, palette, recipe, completedRows, committing
     const animate = (now: number) => {
       const setup = setupCanvas(canvas);
       if (!setup) return;
-      const progress = Math.min(1, (now - start) / 450);
+      const progress = Math.min(1, (now - start) / 320);
       paintActiveWeft(setup.context, setup.width, setup.height, committingRow, matrix.length, progress, direction);
       if (progress < 1) frame = requestAnimationFrame(animate);
       else setup.context.clearRect(0, 0, setup.width, setup.height);

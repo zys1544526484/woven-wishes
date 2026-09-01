@@ -68,7 +68,7 @@ export function App() {
 
   useEffect(() => {
     if (state.phase !== "analyzing") return;
-    const timer = window.setTimeout(() => dispatch({ type: "OPEN_PLAN_SELECTION" }), 2200);
+    const timer = window.setTimeout(() => dispatch({ type: "OPEN_PLAN_SELECTION" }), 1450);
     return () => window.clearTimeout(timer);
   }, [state.phase]);
 
@@ -100,7 +100,7 @@ export function App() {
         sound.playComplete();
         dispatch({ type: "START_RESULT" });
       }, 800);
-    }, 450);
+    }, 320);
   }, [state.phase, state.committingRow, state.completedRows, schedule, sound]);
 
   useEffect(() => {
@@ -154,6 +154,7 @@ export function App() {
             analysis={state.analysis}
             proposals={state.proposals}
             selectedIndex={state.selectedCandidate}
+            planChosen={state.planChosen}
             selectedPalette={state.selectedPalette}
             soundEnabled={sound.enabled}
             onSoundToggle={sound.toggle}

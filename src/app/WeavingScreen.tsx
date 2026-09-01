@@ -32,6 +32,18 @@ const STAGE_COPY: ReadonlyArray<{ id: WeaveStageId; zh: string; en: string; deta
   { id: "border", zh: "边饰合拢", en: "Border closes", detailZh: "连续边饰在最后几梭合拢，完成这张数字锦愿。", detailEn: "The continuous border closes over the final passes to complete the wish." },
 ] as const;
 
+type MilestoneRow = 6 | 12 | 18;
+
+const MILESTONE_COPY: Record<MilestoneRow, { chapterZh: string; chapterEn: string; titleZh: string; titleEn: string; detailZh: string; detailEn: string }> = {
+  6: { chapterZh: "第一章完成", chapterEn: "Chapter one complete", titleZh: "数字地部已成", titleEn: "Digital ground formed", detailZh: "前六梭为彩纬托起一层数字织地。", detailEn: "The first six passes form a digital ground for the coloured wefts." },
+  12: { chapterZh: "第二章完成", chapterEn: "Chapter two complete", titleZh: "彩纬已经入纹", titleEn: "Colour has entered", detailZh: "你选择的彩纬开始让主纹清晰可辨。", detailEn: "Your chosen colours now make the main motif legible." },
+  18: { chapterZh: "第三章完成", chapterEn: "Chapter three complete", titleZh: "金线层已显花", titleEn: "Gold reveals the motif", detailZh: "数字金线沿主纹点亮，锦愿进入最后收边。", detailEn: "Digital gold now follows the motif before the final border closes." },
+};
+
+function isMilestoneRow(value: number): value is MilestoneRow {
+  return value === 6 || value === 12 || value === 18;
+}
+
 const MODE_COPY: Record<WeaveMode, { zh: string; en: string; upperZh: string; upperEn: string; lowerZh: string; lowerEn: string }> = {
   "player-weaver": { zh: "你送梭 · AI提经", en: "You send · AI lifts", upperZh: "AI", upperEn: "AI", lowerZh: "你", lowerEn: "You" },
   "player-drawboy": { zh: "你提经 · AI送梭", en: "You lift · AI sends", upperZh: "你", upperEn: "You", lowerZh: "AI", lowerEn: "AI" },
@@ -63,6 +75,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   const [liftHeld, setLiftHeld] = useState(false);
   const [aiSending, setAiSending] = useState(false);
   const [gestureFeedback, setGestureFeedback] = useState<GestureFeedback | null>(null);
+  const [milestoneRow, setMilestoneRow] = useState<MilestoneRow | null>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const shuttleRef = useRef<HTMLImageElement>(null);
   const pointerId = useRef<number | null>(null);
@@ -75,6 +88,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   const start = useRef({ x: 0, y: 0 });
   const currentDelta = useRef(0);
   const rawDelta = useRef(0);
+  const maxAbsDeltaY = useRef(0);
   const direction = completedRows % 2 === 0 ? "ltr" : "rtl";
   const isCommitting = committingRow !== undefined;
   const palette = PALETTES[recipe.palette];
@@ -114,7 +128,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     liftHeldRef.current = false;
     setLiftHeld(false);
     if (weaveMode !== "player-weaver" || paused || isCommitting) return;
-    const timer = window.setTimeout(() => setWarpReady(true), 380);
+    const timer = window.setTimeout(() => setWarpReady(true), 160);
     return () => window.clearTimeout(timer);
   }, [completedRows, isCommitting, paused, weaveMode]);
 
@@ -128,6 +142,16 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
     feedbackTimer.current = undefined;
     setGestureFeedback(null);
+  }, [completedRows]);
+
+  useEffect(() => {
+    if (!isMilestoneRow(completedRows)) {
+      setMilestoneRow(null);
+      return;
+    }
+    setMilestoneRow(completedRows);
+    const timer = window.setTimeout(() => setMilestoneRow(null), 900);
+    return () => window.clearTimeout(timer);
   }, [completedRows]);
 
   const sendAiShuttle = useCallback((requireLift = false) => {
@@ -174,9 +198,14 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     };
     window.addEventListener("pointerdown", invalidateOnAdditionalPointer, true);
     window.addEventListener("blur", cancelOnBlur);
+    const cancelWhenHidden = () => {
+      if (document.visibilityState === "hidden") cancelOnBlur();
+    };
+    document.addEventListener("visibilitychange", cancelWhenHidden);
     return () => {
       window.removeEventListener("pointerdown", invalidateOnAdditionalPointer, true);
       window.removeEventListener("blur", cancelOnBlur);
+      document.removeEventListener("visibilitychange", cancelWhenHidden);
     };
   }, [positionShuttle, weaveMode]);
 
@@ -234,6 +263,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     start.current = { x: event.clientX, y: event.clientY };
     currentDelta.current = 0;
     rawDelta.current = 0;
+    maxAbsDeltaY.current = 0;
     if (feedbackTimer.current !== undefined) window.clearTimeout(feedbackTimer.current);
     feedbackTimer.current = undefined;
     setGestureFeedback(null);
@@ -249,6 +279,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     const travel = Math.max(1, track.clientWidth - shuttle.clientWidth);
     const raw = event.clientX - start.current.x;
     rawDelta.current = raw;
+    maxAbsDeltaY.current = Math.max(maxAbsDeltaY.current, Math.abs(event.clientY - start.current.y));
     const allowed = direction === "ltr" ? Math.max(0, raw) : Math.min(0, raw);
     currentDelta.current = Math.max(-travel, Math.min(travel, allowed));
     positionShuttle(currentDelta.current, false);
@@ -263,11 +294,13 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     if (!track || !shuttle) return;
     const travel = Math.max(1, track.clientWidth - shuttle.clientWidth);
     const deltaY = event.clientY - start.current.y;
+    maxAbsDeltaY.current = Math.max(maxAbsDeltaY.current, Math.abs(deltaY));
     const wrongDirection = direction === "ltr" ? rawDelta.current < -12 : rawDelta.current > 12;
     const lostLift = weaveMode === "duo" && !liftHeldRef.current;
     const valid = isValidWeaveGesture({
       deltaX: currentDelta.current,
       deltaY,
+      maxAbsDeltaY: maxAbsDeltaY.current,
       travel,
       trackHeight: track.clientHeight,
       direction,
@@ -286,7 +319,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
       else if (lostLift) showGestureFeedback("lift-released");
       else if (invalidGesture.current) showGestureFeedback("extra-pointer");
       else if (wrongDirection) showGestureFeedback("direction");
-      else if (Math.abs(deltaY) > track.clientHeight * 0.35) showGestureFeedback("vertical");
+      else if (maxAbsDeltaY.current > track.clientHeight * 0.35) showGestureFeedback("vertical");
       else showGestureFeedback("short");
     }
   };
@@ -333,14 +366,21 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
             <span className="warp-cue-lines" aria-hidden="true">{Array.from({ length: 12 }, (_, index) => <i key={index} />)}</span>
             <strong>{liftStatus}</strong>
           </button>
-          <div className="weave-frame"><WeaveCanvas matrix={matrix} palette={palette} recipe={recipe} completedRows={completedRows} committingRow={committingRow} direction={direction} locale={locale} /></div>
+          <div className="weave-frame">
+            <WeaveCanvas matrix={matrix} palette={palette} recipe={recipe} completedRows={completedRows} committingRow={committingRow} direction={direction} locale={locale} />
+            {milestoneRow ? <div className="stage-milestone" key={milestoneRow} role="status" aria-live="polite" aria-atomic="true">
+              <span>{locale === "zh" ? MILESTONE_COPY[milestoneRow].chapterZh : MILESTONE_COPY[milestoneRow].chapterEn}</span>
+              <strong>{locale === "zh" ? MILESTONE_COPY[milestoneRow].titleZh : MILESTONE_COPY[milestoneRow].titleEn}</strong>
+              <small>{locale === "zh" ? MILESTONE_COPY[milestoneRow].detailZh : MILESTONE_COPY[milestoneRow].detailEn}</small>
+            </div> : null}
+          </div>
           <ol className="weave-stages" aria-label={localized(locale, "织造阶段", "Weaving stages")}>
             {STAGE_COPY.map((item, index) => <li key={item.en} className={index === activeStage ? "is-active" : index < activeStage ? "is-complete" : ""}><span />{locale === "zh" ? item.zh : item.en}</li>)}
           </ol>
           <div className={`shuttle-track ${direction}${canDragShuttle ? " is-ready" : ""}${aiSending ? " is-ai-sending" : ""}`} ref={trackRef}>
             <div className="track-dashes" aria-hidden="true" />
             {showFirstPassGuide ? <div className={`first-pass-guide${warpReady ? " is-ready" : ""}`} aria-hidden="true"><span className="first-pass-guide__trail" /><img src={shuttleAsset} alt="" /><span className="first-pass-guide__arrows">› › ›</span></div> : null}
-            <img className="shuttle-handle" ref={shuttleRef} src={shuttleAsset} alt={localized(locale, "数字梭子", "Digital shuttle")} draggable="false" aria-disabled={!canDragShuttle} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={(event) => finishPointer(event)} onPointerCancel={(event) => finishPointer(event, true)} />
+            <img className="shuttle-handle" ref={shuttleRef} src={shuttleAsset} alt={localized(locale, "数字梭子", "Digital shuttle")} draggable="false" aria-disabled={!canDragShuttle} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={(event) => finishPointer(event)} onPointerCancel={(event) => finishPointer(event, true)} onLostPointerCapture={(event) => finishPointer(event, true)} />
             <div className={`track-instruction${gestureFeedback ? " is-muted" : ""}`}><b>{weaveMode === "player-drawboy" ? localized(locale, "按住上方提经，AI送梭", "Hold above and AI sends") : weaveMode === "duo" ? localized(locale, "下方玩家同时沿纬向送梭", "Lower player sends while the cue is held") : warpReady ? localized(locale, "经线已提，沿纬向送梭", "Warps lifted; send the shuttle") : localized(locale, "等待AI完成提经", "Waiting for AI to lift warps")}</b></div>
             {gestureFeedback ? <div className="track-feedback" role="status" aria-live="polite"><span aria-hidden="true">↺</span>{gestureFeedbackCopy(locale, gestureFeedback, direction)}</div> : null}
           </div>

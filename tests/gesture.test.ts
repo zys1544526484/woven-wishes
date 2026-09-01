@@ -12,6 +12,8 @@ describe("one-shuttle gesture validation", () => {
 
   it("rejects vertical drift, cancellation and multiple pointers", () => {
     expect(isValidWeaveGesture({ ...base, deltaX: 900, deltaY: 71 })).toBe(false);
+    expect(isValidWeaveGesture({ ...base, deltaX: 900, deltaY: 0, maxAbsDeltaY: 71 })).toBe(false);
+    expect(isValidWeaveGesture({ ...base, deltaX: 900, deltaY: 0, maxAbsDeltaY: 70 })).toBe(true);
     expect(isValidWeaveGesture({ ...base, deltaX: 900, deltaY: 0, cancelled: true })).toBe(false);
     expect(isValidWeaveGesture({ ...base, deltaX: 900, deltaY: 0, multiPointer: true })).toBe(false);
   });
