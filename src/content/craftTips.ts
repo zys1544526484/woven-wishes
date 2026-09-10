@@ -115,7 +115,7 @@ export const CRAFT_TIPS: readonly CraftTip[] = [
     id: "four-varieties",
     titleZh: "本作聚焦妆花",
     titleEn: "This work focuses on zhuanghua",
-    bodyZh: "南京云锦传统上有织金、库锦、库缎、妆花等品种。本体验聚焦工艺最为繁复的木机妆花，不代表其他织锦。",
+    bodyZh: "南京云锦传统上有织金、库锦、库缎、妆花等品种。本体验聚焦工艺复杂的木机妆花，不代表其他织锦。",
     bodyEn: "Traditional Nanjing Yunjin includes zhijin, kujin, kuduan and zhuanghua. This experience focuses on the highly complex hand-woven zhuanghua tradition.",
     sourceRefs: ["ICH-NJ-STRUCTURE", "ICH-MOTIF-2023-A"],
   },

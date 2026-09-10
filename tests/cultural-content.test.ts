@@ -1,10 +1,17 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
 import { MOTIFS, MOTIF_STORIES, YUNJIN_COLOR_REFERENCE } from "../src/content/motifs";
 import { CRAFT_TIPS, getWeaveStageTip, WEAVE_STAGE_TIPS } from "../src/content/craftTips";
 import { gestureFeedbackCopy } from "../src/app/WeavingScreen";
 import { CRAFT_DISTINCTION_ZH, EXPERIENCE_DISCLAIMER_ZH } from "../src/content/project";
 
 describe("Nanjing Yunjin cultural boundaries", () => {
+  it("resolves every motif and tip reference to the cultural ledger", () => {
+    const ledger = readFileSync(new URL("../docs/CULTURAL_BASIS.md", import.meta.url), "utf8");
+    for (const item of [...Object.values(MOTIFS), ...CRAFT_TIPS, ...WEAVE_STAGE_TIPS]) {
+      for (const reference of item.sourceRefs) expect(ledger).toContain(`| ${reference} |`);
+    }
+  });
   it("identifies the exact craft focus instead of generic brocade", () => {
     expect(EXPERIENCE_DISCLAIMER_ZH).toContain("南京云锦木机妆花");
     expect(CRAFT_DISTINCTION_ZH).toContain("拽花工");

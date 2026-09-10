@@ -47,7 +47,7 @@ export interface RefinedPatternPlan {
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
-const REFINED_RENDER_VERSION = 2;
+const REFINED_RENDER_VERSION = 3;
 
 export function loadMotifAtlas(): Promise<HTMLImageElement> {
   if (!atlasPromise) {
@@ -128,23 +128,25 @@ export function createRefinedPatternPlan(recipe: PatternRecipe): RefinedPatternP
     placements.push(placement(motifId, centerX, centerY, size, reflected, opacity, recipe.seed, placements.length));
   };
 
-  if (recipe.layout === "roundel") {
+  if (recipe.secondaryMotif && recipe.layout === "roundel") {
+    add(recipe.primaryMotif, 0.36 + driftX * 0.3, 0.48, 0.59 * scale, mirror);
+    add(secondary, 0.78, 0.59 + driftY, 0.34 * scale, !mirror);
+  } else if (recipe.layout === "roundel") {
     add(recipe.primaryMotif, 0.5 + driftX * 0.35, 0.5 + driftY * 0.3, 0.9 * scale, mirror);
     if (recipe.secondaryMotif) {
       add(secondary, 0.82 - driftX, 0.23 + driftY, 0.25 * scale, !mirror, 0.82);
       add(secondary, 0.18 + driftX, 0.77 - driftY, 0.21 * scale, mirror, 0.68);
     }
   } else if (recipe.layout === "continuous") {
-    add(recipe.primaryMotif, 0.27 + driftX, 0.51 + driftY * 0.45, 0.64 * scale, mirror, 0.98);
-    add(secondary, 0.73 - driftX, 0.49 - driftY * 0.45, 0.64 * (1.98 - scale), !mirror, 0.98);
-    if (recipe.secondaryMotif) add(recipe.primaryMotif, 0.5, 0.2 - driftY, 0.2 * scale, !mirror, 0.6);
+    add(recipe.primaryMotif, 0.26 + driftX * 0.3, 0.48 + driftY, 0.44 * scale, mirror);
+    add(secondary, 0.74 - driftX * 0.3, 0.52 - driftY, 0.44 * (1.98 - scale), !mirror);
   } else if (recipe.layout === "scattered") {
-    add(recipe.primaryMotif, 0.34 + driftX, 0.47 + driftY, 0.74 * scale, mirror);
-    add(secondary, 0.73 - driftX, 0.63 - driftY, 0.48 * (1.98 - scale), !mirror, 0.92);
-    add(recipe.primaryMotif, 0.79 - driftX * 0.5, 0.18 + driftY, 0.23 * scale, !mirror, 0.66);
+    add(recipe.primaryMotif, 0.32 + driftX * 0.3, 0.43, 0.54 * scale, mirror);
+    add(secondary, 0.77, 0.7 - driftY, 0.33 * scale, !mirror);
+    add(recipe.primaryMotif, 0.78, 0.23, 0.23 * scale, !mirror, 0.92);
   } else {
-    add(recipe.primaryMotif, 0.35 + driftX, 0.5 + driftY, 0.78 * scale, mirror);
-    add(secondary, 0.7 - driftX, 0.52 - driftY * 0.4, 0.58 * (1.98 - scale), !mirror, 0.96);
+    add(recipe.primaryMotif, 0.31 + driftX * 0.3, 0.4, 0.53 * scale, mirror);
+    add(secondary, 0.75, 0.64 + driftY, 0.4 * (1.98 - scale), !mirror);
   }
 
   return {
@@ -179,6 +181,8 @@ export function refinedPatternSignature(recipe: PatternRecipe, completedRows: nu
     item.revealSeed,
   ].join(",")).join(";");
   return fnv1a([
+    REFINED_RENDER_VERSION,
+    recipe.palette,
     plan.layout,
     plan.borderVariant,
     plan.borderStartSegment,
@@ -244,8 +248,10 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
       imageData.data[index + 3] = 0;
       continue;
     }
-    const accentThread = !goldThread && red > 74 && blue > 58 && red > green * 1.08;
-    const target = goldThread ? gold : accentThread ? accent : teal;
+    // Contemporary colour zoning follows broad motif areas, never individual random pixels.
+    const blend = clamp01((normalizedY - 0.46) / 0.3);
+    const target = goldThread ? gold : teal.map((channel, i) =>
+      channel * (1 - blend) + accent[i] * blend);
     const luminanceStrength = clamp01((maximum - 40) / 168);
     const colourStrength = clamp01((chroma - 7) / 92);
     const threadStrength = clamp01(luminanceStrength * (0.62 + colourStrength * 0.38));
@@ -254,12 +260,12 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
       continue;
     }
     const brightness = layer === "gold"
-      ? 0.56 + threadStrength * 0.48
-      : 0.57 + threadStrength * 0.53;
+      ? 0.8 + threadStrength * 0.4
+      : 0.8 + threadStrength * 0.45;
     const edgeFade = clamp01(threadStrength / 0.18);
     const opacity = layer === "gold"
-      ? (0.17 + Math.pow(threadStrength, 0.78) * 0.78) * edgeFade
-      : (0.17 + Math.pow(threadStrength, 0.82) * 0.76) * edgeFade;
+      ? (0.38 + Math.pow(threadStrength, 0.78) * 0.62) * edgeFade
+      : (0.4 + Math.pow(threadStrength, 0.82) * 0.6) * edgeFade;
     imageData.data[index] = Math.min(255, target[0] * brightness);
     imageData.data[index + 1] = Math.min(255, target[1] * brightness);
     imageData.data[index + 2] = Math.min(255, target[2] * brightness);
@@ -267,8 +273,37 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
   }
   context.clearRect(0, 0, region.width, region.height);
   context.putImageData(imageData, 0, 0);
-  tintedMotifs.set(cacheKey, canvas);
-  return canvas;
+  // Resample the shape once, then shade fine horizontal floats and dark warp crossings.
+  // This is a digital material treatment, not a historical weave structure.
+  const textile = document.createElement("canvas");
+  const resolution = 768;
+  textile.width = textile.height = resolution;
+  const textileContext = textile.getContext("2d", { willReadFrequently: true });
+  if (!textileContext) return canvas;
+  textileContext.imageSmoothingQuality = "high";
+  textileContext.drawImage(canvas, 0, 0, resolution, resolution);
+  const threads = textileContext.getImageData(0, 0, resolution, resolution);
+  const lightAcross = Array.from({ length: resolution }, (_, x) => 0.94 + 0.06 * Math.cos(x / 94));
+  for (let y = 0; y < resolution; y++) {
+    const row = Math.floor(y / 3);
+    const ridge = [0.78, 1.24, 1.02][y % 3];
+    for (let x = 0; x < resolution; x++) {
+      const i = (y * resolution + x) * 4;
+      if (!threads.data[i + 3]) continue;
+      const crossing = (x + row * 3) % 12 < 2;
+      const light = ridge * (crossing ? 0.62 : 1)
+        * lightAcross[x];
+      for (let channel = 0; channel < 3; channel++) {
+        threads.data[i + channel] *= light;
+      }
+      threads.data[i + 3] *= crossing ? 0.66 : 1;
+    }
+  }
+  textileContext.putImageData(threads, 0, 0);
+  // Bound the derived cache for long-running exhibitions.
+  if (tintedMotifs.size >= 12) tintedMotifs.delete(tintedMotifs.keys().next().value!);
+  tintedMotifs.set(cacheKey, textile);
+  return textile;
 }
 
 function roundedRectPath(context: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number): void {
@@ -452,8 +487,8 @@ function clipMotifReveal(
   seed: number,
 ): void {
   if (progress >= 1) return;
-  const columns = 4;
-  const rows = 3;
+  const columns = 1;
+  const rows = 48;
   const tileCount = columns * rows;
   const visibleTiles = Math.max(1, Math.ceil(clamp01(progress) * tileCount));
   const order = revealOrder(seed, tileCount);
@@ -483,13 +518,13 @@ function drawMotifLayer(
   clipMotifReveal(context, x, y, width, height, options.reveal, options.revealSeed);
   context.imageSmoothingEnabled = true;
   context.imageSmoothingQuality = "high";
-  context.globalAlpha = options.alpha * (0.78 + options.reveal * 0.22);
-  context.globalCompositeOperation = options.layer === "gold" ? "screen" : "source-over";
+  context.globalAlpha *= options.alpha * (0.78 + options.reveal * 0.22);
+  context.globalCompositeOperation = "source-over";
   context.filter = options.layer === "gold"
     ? "brightness(1.03) contrast(1.16) saturate(1.02)"
     : "brightness(1.07) contrast(1.14) saturate(1.12)";
   context.shadowColor = options.layer === "gold" ? "rgba(227,179,79,.17)" : "rgba(42,126,130,.08)";
-  context.shadowBlur = Math.min(2.2, Math.max(0.7, width * (options.layer === "gold" ? 0.0026 : 0.0016)));
+  context.shadowBlur = 0;
   const drawLayer = () => {
     if (options.mirror) {
       context.drawImage(motif, insetX, insetY, motif.width - insetX * 2, motif.height - insetY * 2, 0, 0, width, height);
@@ -502,13 +537,6 @@ function drawMotifLayer(
     context.scale(-1, 1);
   }
   drawLayer();
-  if (options.layer === "gold") {
-    context.globalCompositeOperation = "lighter";
-    context.globalAlpha = options.alpha * 0.11;
-    context.filter = "brightness(1.08) contrast(1.22) saturate(.96)";
-    context.shadowBlur = 0;
-    drawLayer();
-  }
   context.restore();
 }
 
@@ -526,7 +554,7 @@ function drawCompositionConnectors(
   const first = plan.placements[0];
   const second = plan.placements[1] ?? first;
   context.save();
-  context.globalAlpha = (layer === "gold" ? 0.52 : 0.38) * progress;
+  context.globalAlpha *= (layer === "gold" ? 0.52 : 0.38) * progress;
   context.strokeStyle = color;
   context.lineWidth = Math.max(0.8, width / (layer === "gold" ? 1050 : 1350));
   context.setLineDash(layer === "gold" ? [Math.max(2, width / 430), Math.max(4, width / 230)] : [Math.max(1, width / 700), Math.max(3, width / 310)]);
@@ -667,6 +695,13 @@ export function paintRefinedPattern(
   const plan = createRefinedPatternPlan(recipe);
   context.clearRect(0, 0, width, height);
   drawWarpGround(context, palette, width, height, stage.ground, plan.groundPhase);
+  if (completedRows < 18) {
+    context.save();
+    context.globalAlpha = 0.1;
+    drawMotifComposition(context, atlas, plan, palette, width, height, "colour", 1);
+    drawMotifComposition(context, atlas, plan, palette, width, height, "gold", 1);
+    context.restore();
+  }
   if (completedRows === 0) return;
 
   // Four six-pass sections reveal semantic layers over the whole textile. This is

@@ -469,6 +469,16 @@ body:has(.share-page), body:has(.share-error) { overflow: auto; background: #020
 .share-error h1 { color: var(--text); font-family: var(--serif); font-size: clamp(32px, 6vw, 64px); }
 .share-error p { color: var(--muted); line-height: 1.8; }
 
+/* Textile-first review: keep the finished cloth brighter than its display frame. */
+.role-map-veil { background: linear-gradient(90deg, transparent 50%, rgba(2,12,24,.18)); }
+.result-layout { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+.result-pattern-frame { padding: 3px; background: #122027; border-color: #967a48; box-shadow: 0 12px 28px #0005; }
+.result-pattern-frame::after { animation-iteration-count: 1; }
+.meaning-share-row { grid-template-columns: minmax(0, 1fr) 25%; gap: 1em; }
+.meaning-story p { margin: .55em 0; color: #dfcba8; font-size: 1em; line-height: 1.5; }
+.meaning-story .culture-boundary { font-size: .9em; color: #b9aa90; }
+.craft-tip p { font-size: .88em; color: #cfbc9a; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }

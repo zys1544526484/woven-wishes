@@ -50,7 +50,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作以连续云线回应平安与长久。",
     contemporaryMappingEn: "Here, continuous cloud lines answer wishes for safety and continuity.",
     bitmapMask: mask(["000011000", "001122100", "012001210", "120112021", "012221210", "001110000"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
   roundel: {
@@ -62,7 +62,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作借向心结构表达团聚，不将其宣称为固定历史寓意。",
     contemporaryMappingEn: "A centred structure expresses reunion here without claiming a fixed historic meaning.",
     bitmapMask: mask(["000111000", "011222110", "012101210", "121232121", "012101210", "011222110", "000111000"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-A"],
     reviewStatus: "source-verified",
   },
   bamboo: {
@@ -74,7 +74,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作以向上竹节表达成长与勇气。",
     contemporaryMappingEn: "Rising bamboo joints become a contemporary expression of courage.",
     bitmapMask: mask(["0011000", "0121000", "0011000", "0011210", "0011000", "0211000", "0011000", "0011200"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
   plum: {
@@ -86,7 +86,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作将梅枝转译为坚韧与重新出发。",
     contemporaryMappingEn: "A plum branch is translated here into resilience and renewal.",
     bitmapMask: mask(["000010000", "000111000", "010121010", "111232111", "010121010", "000111000", "000010000"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
   fish: {
@@ -98,7 +98,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作以成对游鱼回应丰足和收获。",
     contemporaryMappingEn: "Paired swimming fish answer a wish for abundance and harvest.",
     bitmapMask: mask(["000110000", "001221100", "012112210", "121111121", "012112210", "001221100", "000110000"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
   peony: {
@@ -110,7 +110,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作以开放花形回应丰足与喜悦。",
     contemporaryMappingEn: "An opening flower answers wishes for abundance and joy.",
     bitmapMask: mask(["001010100", "012121210", "121232121", "012323210", "121232121", "012121210", "001010100"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
   magpie: {
@@ -122,7 +122,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作以抽象鸟形回应喜悦与相聚。",
     contemporaryMappingEn: "An abstract bird form answers joy and reunion here.",
     bitmapMask: mask(["000011000", "000121100", "001221210", "012111100", "121110000", "012100000", "001000000"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
   peach: {
@@ -134,7 +134,7 @@ export const MOTIFS: Record<string, CulturalMotif> = {
     contemporaryMappingZh: "本作将桃形与连续线条结合，表达康宁长久。",
     contemporaryMappingEn: "A peach-like form joins continuous lines to express lasting well-being.",
     bitmapMask: mask(["000010000", "000121000", "001212100", "012222210", "012222210", "001222100", "000121000", "000010000"]),
-    sourceRefs: ["ICH-MOTIF-2023"],
+    sourceRefs: ["ICH-MOTIF-2023-C"],
     reviewStatus: "source-verified",
   },
 };
