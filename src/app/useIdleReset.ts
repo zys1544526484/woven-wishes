@@ -10,7 +10,7 @@ export function useIdleReset(phase: AppPhase, hasInput: boolean, onReset: () => 
       return;
     }
 
-    const activeCreation = phase === "plan-selection" || phase === "role-selection" || phase === "weaving";
+    const activeCreation = phase === "plan-selection" || phase === "pattern-coding" || phase === "role-selection" || phase === "weaving";
     const total = phase === "input" ? 120_000 : activeCreation ? 60_000 : 45_000;
     const warningDuration = phase === "input" ? 0 : 10_000;
     let warningTimer = 0;

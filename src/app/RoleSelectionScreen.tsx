@@ -33,8 +33,8 @@ const MODES: Array<{
     id: "player-weaver",
     zh: "我来送梭",
     en: "I Send the Shuttle",
-    detailZh: "AI按数字花本准备经线，你沿纬向完成每一梭。",
-    detailEn: "AI prepares the warps from the digital plan; you send every weft pass.",
+    detailZh: "AI按数字花本提示准备经线，你沿纬向完成每一梭。",
+    detailEn: "AI prepares the warps from the digital pattern cues; you send every weft pass.",
     tagZh: "单人快速开始",
     tagEn: "Quick solo start",
   },
@@ -92,7 +92,7 @@ export function RoleSelectionScreen(props: RoleSelectionScreenProps) {
         </div>
 
         <aside className="role-choice-panel">
-          <span className="panel-label">{localized(props.locale, "你的数字花本", "Your digital pattern plan")}</span>
+          <span className="panel-label">{localized(props.locale, "你的纹样方案", "Your motif proposal")}</span>
           <h2>{props.locale === "zh" ? props.proposal.titleZh : props.proposal.titleEn}</h2>
           <p className="role-wish">“{props.wish}”</p>
           <div className="mode-options" role="radiogroup" aria-label={localized(props.locale, "共织方式", "Weaving mode")}>

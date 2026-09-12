@@ -1,6 +1,6 @@
-import type { Locale, PaletteId, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode, WishAnalysis } from "../core/types";
+import type { BorderTreatmentId, GoldTreatmentId, Locale, PaletteId, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode, WishAnalysis } from "../core/types";
 
-export type AppPhase = "input" | "analyzing" | "plan-selection" | "role-selection" | "weaving" | "result-rendering" | "result";
+export type AppPhase = "input" | "analyzing" | "plan-selection" | "pattern-coding" | "role-selection" | "weaving" | "result-rendering" | "result";
 
 export interface AppState {
   phase: AppPhase;
@@ -13,6 +13,7 @@ export interface AppState {
   selectedCandidate: number;
   planChosen: boolean;
   selectedPalette: PaletteId;
+  colourChosen: boolean;
   weaveMode: WeaveMode;
   recipe?: PatternRecipe;
   matrix?: PatternMatrix;
@@ -31,6 +32,9 @@ export type AppAction =
   | { type: "SELECT_PLAN"; index: number; recipe: PatternRecipe; matrix: PatternMatrix }
   | { type: "SELECT_PALETTE"; palette: PaletteId; recipe: PatternRecipe; matrix: PatternMatrix }
   | { type: "CONFIRM_PLAN" }
+  | { type: "COMPLETE_PATTERN_CODING" }
+  | { type: "SET_GOLD_TREATMENT"; treatment: GoldTreatmentId }
+  | { type: "SET_BORDER_TREATMENT"; treatment: BorderTreatmentId }
   | { type: "SET_WEAVE_MODE"; mode: WeaveMode }
   | { type: "START_WEAVING" }
   | { type: "START_ROW"; row: number }
@@ -49,6 +53,7 @@ export const initialState: AppState = {
   selectedCandidate: 0,
   planChosen: false,
   selectedPalette: "indigo-gold",
+  colourChosen: false,
   weaveMode: "player-weaver",
   completedRows: 0,
   qrUrl: "",
@@ -71,6 +76,7 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         selectedCandidate: 0,
         planChosen: false,
         selectedPalette: action.recipe.palette,
+        colourChosen: false,
         recipe: action.recipe,
         matrix: action.matrix,
         completedRows: 0,
@@ -81,11 +87,23 @@ export function appReducer(state: AppState, action: AppAction): AppState {
     case "SELECT_PLAN":
       return { ...state, selectedCandidate: action.index, planChosen: true, recipe: action.recipe, matrix: action.matrix };
     case "SELECT_PALETTE":
-      return { ...state, selectedPalette: action.palette, recipe: action.recipe, matrix: action.matrix };
-    case "CONFIRM_PLAN": return state.planChosen ? { ...state, phase: "role-selection" } : state;
+      return { ...state, selectedPalette: action.palette, colourChosen: true, recipe: action.recipe, matrix: action.matrix };
+    case "CONFIRM_PLAN": return state.planChosen ? { ...state, phase: "pattern-coding" } : state;
+    case "COMPLETE_PATTERN_CODING": return state.phase === "pattern-coding" ? { ...state, phase: "role-selection" } : state;
+    case "SET_GOLD_TREATMENT":
+      return state.recipe ? { ...state, recipe: { ...state.recipe, goldTreatment: action.treatment } } : state;
+    case "SET_BORDER_TREATMENT":
+      return state.recipe ? { ...state, recipe: { ...state.recipe, borderTreatment: action.treatment } } : state;
     case "SET_WEAVE_MODE": return { ...state, weaveMode: action.mode };
     case "START_WEAVING": return { ...state, phase: "weaving" };
-    case "START_ROW": return state.committingRow === undefined && state.completedRows < 24 ? { ...state, committingRow: action.row } : state;
+    case "START_ROW": {
+      const awaitingChoice = (state.completedRows === 6 && !state.colourChosen)
+        || (state.completedRows === 12 && !state.recipe?.goldTreatment)
+        || (state.completedRows === 18 && !state.recipe?.borderTreatment);
+      return !awaitingChoice && state.committingRow === undefined && state.completedRows < 24
+        ? { ...state, committingRow: action.row }
+        : state;
+    }
     case "COMMIT_ROW": return { ...state, completedRows: Math.min(24, state.completedRows + 1), committingRow: undefined };
     case "START_RESULT": return { ...state, phase: "result-rendering", committingRow: undefined };
     case "RESULT_READY": return { ...state, phase: "result", qrUrl: action.qrUrl, qrDataUrl: action.qrDataUrl };

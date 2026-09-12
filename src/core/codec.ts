@@ -1,5 +1,5 @@
 import { fnv1a } from "./hash";
-import { INTENT_IDS, type IntentId, type LayoutId, type PaletteId, type PatternRecipe, type ProposalId, type SharePayload, type WeaveMode } from "./types";
+import { INTENT_IDS, type BorderTreatmentId, type GoldTreatmentId, type IntentId, type LayoutId, type PaletteId, type PatternRecipe, type ProposalId, type SharePayload, type WeaveMode } from "./types";
 
 const MAX_PAYLOAD_BYTES = 1024;
 const PALETTES: readonly PaletteId[] = ["indigo-gold", "peacock-gold", "cinnabar-night", "jade-moon"];
@@ -7,11 +7,14 @@ const LAYOUTS: readonly LayoutId[] = ["continuous", "roundel", "scattered", "com
 const MOTIFS = ["cloud", "roundel", "plum", "bamboo", "fish", "peony", "magpie", "peach"] as const;
 const PROPOSALS: readonly ProposalId[] = ["A", "B", "C"];
 const WEAVE_MODES: readonly WeaveMode[] = ["player-weaver", "player-drawboy", "duo"];
+const GOLD_TREATMENTS: readonly GoldTreatmentId[] = ["outline", "centre"];
+const BORDER_TREATMENTS: readonly BorderTreatmentId[] = ["continuous", "balanced"];
 
 type CompactPayloadV1 = [1, 0 | 1, string, number, number, number, number, number, number, number];
 type CompactPayloadV2 = [2, 0 | 1, string, number, number, number, number, number, number, number, number, number];
+type CompactPayloadV3 = [3, 0 | 1, string, number, number, number, number, number, number, number, number, number, number, number];
 
-function compactPayload(payload: SharePayload): CompactPayloadV1 | CompactPayloadV2 {
+function compactPayload(payload: SharePayload): CompactPayloadV1 | CompactPayloadV2 | CompactPayloadV3 {
   const common = [
     payload.locale === "zh" ? 0 : 1,
     payload.wish,
@@ -24,13 +27,15 @@ function compactPayload(payload: SharePayload): CompactPayloadV1 | CompactPayloa
     LAYOUTS.indexOf(payload.recipe.layout),
   ] as const;
   if (payload.codecVersion === 1) return [1, ...common];
-  return [2, ...common, PROPOSALS.indexOf(payload.proposalId), WEAVE_MODES.indexOf(payload.weaveMode)];
+  const authored = [PROPOSALS.indexOf(payload.proposalId), WEAVE_MODES.indexOf(payload.weaveMode)] as const;
+  if (payload.codecVersion === 2) return [2, ...common, ...authored];
+  return [3, ...common, ...authored, GOLD_TREATMENTS.indexOf(payload.recipe.goldTreatment), BORDER_TREATMENTS.indexOf(payload.recipe.borderTreatment)];
 }
 
 function expandPayload(value: unknown): unknown {
-  if (!Array.isArray(value) || (value[0] !== 1 && value[0] !== 2)) return value;
-  if ((value[0] === 1 && value.length !== 10) || (value[0] === 2 && value.length !== 12)) return value;
-  const [codecVersion, localeCode, wish, primaryIndex, secondaryCode, seed, motifIndex, secondaryMotifCode, paletteIndex, layoutIndex, proposalIndex, weaveModeIndex] = value;
+  if (!Array.isArray(value) || (value[0] !== 1 && value[0] !== 2 && value[0] !== 3)) return value;
+  if ((value[0] === 1 && value.length !== 10) || (value[0] === 2 && value.length !== 12) || (value[0] === 3 && value.length !== 14)) return value;
+  const [codecVersion, localeCode, wish, primaryIndex, secondaryCode, seed, motifIndex, secondaryMotifCode, paletteIndex, layoutIndex, proposalIndex, weaveModeIndex, goldIndex, borderIndex] = value;
   const common = {
     codecVersion,
     locale: localeCode === 0 ? "zh" : localeCode === 1 ? "en" : undefined,
@@ -49,7 +54,12 @@ function expandPayload(value: unknown): unknown {
     },
   };
   if (codecVersion === 1) return common;
-  return { ...common, proposalId: PROPOSALS[proposalIndex], weaveMode: WEAVE_MODES[weaveModeIndex] };
+  const authored = { ...common, proposalId: PROPOSALS[proposalIndex], weaveMode: WEAVE_MODES[weaveModeIndex] };
+  if (codecVersion === 2) return authored;
+  return {
+    ...authored,
+    recipe: { ...common.recipe, goldTreatment: GOLD_TREATMENTS[goldIndex], borderTreatment: BORDER_TREATMENTS[borderIndex] },
+  };
 }
 
 function bytesToBase64Url(bytes: Uint8Array): string {
@@ -77,7 +87,7 @@ function isSharePayload(value: unknown): value is SharePayload {
     proposalId?: unknown;
     weaveMode?: unknown;
   };
-  const commonIsValid = (payload.codecVersion === 1 || payload.codecVersion === 2)
+  const commonIsValid = (payload.codecVersion === 1 || payload.codecVersion === 2 || payload.codecVersion === 3)
     && typeof payload.wish === "string"
     && Array.from(payload.wish).length >= 2
     && Array.from(payload.wish).length <= 48
@@ -96,8 +106,11 @@ function isSharePayload(value: unknown): value is SharePayload {
     && LAYOUTS.includes(payload.recipe.layout as LayoutId);
   if (!commonIsValid) return false;
   if (payload.codecVersion === 1) return true;
-  return PROPOSALS.includes(payload.proposalId as ProposalId)
+  const authoredIsValid = PROPOSALS.includes(payload.proposalId as ProposalId)
     && WEAVE_MODES.includes(payload.weaveMode as WeaveMode);
+  if (!authoredIsValid || payload.codecVersion === 2) return authoredIsValid;
+  return GOLD_TREATMENTS.includes(payload.recipe?.goldTreatment as GoldTreatmentId)
+    && BORDER_TREATMENTS.includes(payload.recipe?.borderTreatment as BorderTreatmentId);
 }
 
 export function encodeSharePayload(payload: SharePayload): string {

@@ -39,6 +39,7 @@ export interface RefinedMotifPlacement {
 
 export interface RefinedPatternPlan {
   layout: PatternRecipe["layout"];
+  goldTreatment: NonNullable<PatternRecipe["goldTreatment"]>;
   borderVariant: number;
   borderStartSegment: number;
   groundPhase: number;
@@ -47,7 +48,7 @@ export interface RefinedPatternPlan {
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
-const REFINED_RENDER_VERSION = 3;
+const REFINED_RENDER_VERSION = 4;
 
 export function loadMotifAtlas(): Promise<HTMLImageElement> {
   if (!atlasPromise) {
@@ -149,9 +150,16 @@ export function createRefinedPatternPlan(recipe: PatternRecipe): RefinedPatternP
     add(secondary, 0.75, 0.64 + driftY, 0.4 * (1.98 - scale), !mirror);
   }
 
+  const randomBorder = Math.floor(random() * 12);
+  const borderVariant = recipe.borderTreatment === "continuous"
+    ? Math.floor(randomBorder / 3) * 3
+    : recipe.borderTreatment === "balanced"
+      ? Math.floor(randomBorder / 3) * 3 + 1
+      : randomBorder;
   return {
     layout: recipe.layout,
-    borderVariant: Math.floor(random() * 12),
+    goldTreatment: recipe.goldTreatment ?? "outline",
+    borderVariant,
     borderStartSegment: Math.floor(random() * 6),
     groundPhase: Math.floor(random() * 6),
     placements,
@@ -184,6 +192,8 @@ export function refinedPatternSignature(recipe: PatternRecipe, completedRows: nu
     REFINED_RENDER_VERSION,
     recipe.palette,
     plan.layout,
+    plan.goldTreatment,
+    recipe.borderTreatment ?? "seeded",
     plan.borderVariant,
     plan.borderStartSegment,
     plan.groundPhase,
@@ -588,7 +598,9 @@ function drawMotifComposition(
   progress: number,
 ): void {
   if (progress <= 0) return;
-  drawCompositionConnectors(context, plan, palette, width, height, layer, progress);
+  if (layer !== "gold" || plan.goldTreatment === "outline") {
+    drawCompositionConnectors(context, plan, palette, width, height, layer, progress);
+  }
   const shortSide = Math.min(width, height);
   const layerSalt = layer === "gold" ? 0xa511e9b3 : 0x3c6ef372;
   for (const item of plan.placements) {
@@ -596,13 +608,22 @@ function drawMotifComposition(
     const x = item.centerX * width - size / 2;
     const y = item.centerY * height - size / 2;
     const motif = tintedMotif(atlas, item.motifId, palette, layer);
-    drawMotifLayer(context, motif, x, y, size, size, {
-      alpha: item.opacity,
+    const draw = (alpha: number): void => drawMotifLayer(context, motif, x, y, size, size, {
+      alpha,
       mirror: item.mirror,
       reveal: progress,
       revealSeed: (item.revealSeed ^ layerSalt) >>> 0,
       layer,
     });
+    if (layer === "gold" && plan.goldTreatment === "centre") draw(item.opacity * 0.3);
+    context.save();
+    if (layer === "gold" && plan.goldTreatment === "centre") {
+      context.beginPath();
+      context.ellipse(item.centerX * width, item.centerY * height, size * 0.24, size * 0.2, 0, 0, Math.PI * 2);
+      context.clip();
+    }
+    draw(item.opacity);
+    context.restore();
   }
 }
 

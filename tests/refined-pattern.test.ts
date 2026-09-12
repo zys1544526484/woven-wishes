@@ -73,4 +73,14 @@ describe("high-density refined pattern plan", () => {
     expect(new Set(plans.map(({ placements }) => placements[0].mirror)).size).toBe(2);
     expect(new Set(plans.map(({ placements }) => placements[0].size.toFixed(3))).size).toBeGreaterThanOrEqual(8);
   });
+
+  it("turns the player's gold and border decisions into deterministic render instructions", () => {
+    const outlined = { ...baseRecipe, goldTreatment: "outline" as const, borderTreatment: "continuous" as const };
+    const centred = { ...baseRecipe, goldTreatment: "centre" as const, borderTreatment: "balanced" as const };
+    expect(createRefinedPatternPlan(outlined).goldTreatment).toBe("outline");
+    expect(createRefinedPatternPlan(outlined).borderVariant % 3).toBe(0);
+    expect(createRefinedPatternPlan(centred).goldTreatment).toBe("centre");
+    expect(createRefinedPatternPlan(centred).borderVariant % 3).toBe(1);
+    expect(refinedPatternSignature(outlined)).not.toBe(refinedPatternSignature(centred));
+  });
 });

@@ -1,8 +1,8 @@
-import { useMemo, type CSSProperties } from "react";
+import { useMemo } from "react";
 import { PALETTES } from "../content/motifs";
 import { INTENT_COPY, localized } from "../content/project";
 import { generatePatternMatrix } from "../core/pattern";
-import type { Locale, PaletteId, PatternProposal, WishAnalysis } from "../core/types";
+import type { Locale, PatternProposal, WishAnalysis } from "../core/types";
 import { WeaveCanvas } from "../render/WeaveCanvas";
 import { ArrowIcon } from "./icons";
 import { Brand, Disclaimer, ExitButton, OrnamentalRule, SoundToggle } from "./common";
@@ -14,12 +14,10 @@ interface PatternPlanScreenProps {
   proposals: PatternProposal[];
   selectedIndex: number;
   planChosen: boolean;
-  selectedPalette: PaletteId;
   soundEnabled: boolean;
   onSoundToggle: () => void;
   onExit: () => void;
   onSelectCandidate: (index: number) => void;
-  onSelectPalette: (palette: PaletteId) => void;
   onConfirm: () => void;
 }
 
@@ -30,22 +28,21 @@ const LAYOUT_NAMES = {
   combined: { zh: "合景式", en: "Combined" },
 } as const;
 
-const PALETTE_IDS = Object.keys(PALETTES) as PaletteId[];
-
 export function PatternPlanScreen(props: PatternPlanScreenProps) {
   const selectedIntent = INTENT_COPY[props.analysis.primaryIntent];
   const secondaryIntent = props.analysis.secondaryIntent ? INTENT_COPY[props.analysis.secondaryIntent] : undefined;
-  const previews = useMemo(() => props.proposals.map((proposal) => {
-    const recipe = { ...proposal.recipe, palette: props.selectedPalette };
-    return { proposal, recipe, matrix: generatePatternMatrix(recipe) };
-  }), [props.proposals, props.selectedPalette]);
+  const previews = useMemo(() => props.proposals.map((proposal) => ({
+    proposal,
+    recipe: proposal.recipe,
+    matrix: generatePatternMatrix(proposal.recipe),
+  })), [props.proposals]);
   const chosenProposal = props.proposals[props.selectedIndex];
 
   return (
     <section className="screen plan-screen" lang={props.locale === "zh" ? "zh-CN" : "en"}>
       <header className="weaving-header plan-header">
         <Brand locale={props.locale} compact />
-        <h1>{localized(props.locale, "选择你的数字花本", "Choose Your Pattern Plan")}</h1>
+        <h1>{localized(props.locale, "选择你的纹样方案", "Choose Your Motif Proposal")}</h1>
         <div className="weaving-status">
           <span>{localized(props.locale, "第 2 步 / 4", "Step 2 / 4")}</span>
           <ExitButton locale={props.locale} onExit={props.onExit} />
@@ -65,8 +62,8 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
           </div>
           <p>{localized(
             props.locale,
-            "AI只提出三种数字织法。主纹、构图和彩纬由你亲自定稿。",
-            "AI proposes three digital approaches. You make the final choice of motif, layout and colours.",
+            "AI只提出三种纹样方向。你先定主纹与构图，彩纬将在织造中亲自选择。",
+            "AI proposes three motif directions. You choose the motif and layout now, then choose coloured wefts while weaving.",
           )}</p>
         </aside>
 
@@ -74,7 +71,7 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
           <div className="candidate-heading">
             <div>
               <span>{localized(props.locale, "三张提案", "Three proposals")}</span>
-              <strong>{localized(props.locale, "先选构图，再选彩纬", "Choose a composition, then its colours")}</strong>
+              <strong>{localized(props.locale, "先定纹样，再转成花本提示", "Choose a motif, then translate it into pattern cues")}</strong>
             </div>
             <small className={props.planChosen ? "is-chosen" : "is-awaiting"} role="status">
               {props.planChosen && chosenProposal
@@ -83,7 +80,7 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
             </small>
           </div>
 
-          <div className="candidate-row" role="radiogroup" aria-label={localized(props.locale, "数字花本提案", "Digital pattern plan proposals")}>
+          <div className="candidate-row" role="radiogroup" aria-label={localized(props.locale, "纹样方案", "Motif proposals")}>
             {previews.map(({ proposal, recipe, matrix }, index) => {
               const layoutName = LAYOUT_NAMES[recipe.layout];
               const selected = index === props.selectedIndex;
@@ -111,34 +108,10 @@ export function PatternPlanScreen(props: PatternPlanScreenProps) {
             })}
           </div>
 
-          <div className="palette-choice" role="radiogroup" aria-label={localized(props.locale, "彩纬配色", "Colour palette")}>
-            <div className="palette-choice-copy">
-              <span>{localized(props.locale, "选择彩纬", "Choose the coloured wefts")}</span>
-              <small>{localized(props.locale, "均为本作屏幕配色，不代表传统染色标准", "Digital screen palettes, not traditional dye standards")}</small>
-            </div>
-            {PALETTE_IDS.map((paletteId) => {
-              const palette = PALETTES[paletteId];
-              const selected = paletteId === props.selectedPalette;
-              return (
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={selected}
-                  className={`palette-option${selected ? " is-selected" : ""}`}
-                  key={paletteId}
-                  onClick={() => props.onSelectPalette(paletteId)}
-                >
-                  <i style={{ "--swatch-a": palette.colors[1], "--swatch-b": palette.colors[2], "--swatch-c": palette.colors[3] } as CSSProperties} />
-                  <span>{props.locale === "zh" ? palette.nameZh : palette.nameEn}</span>
-                </button>
-              );
-            })}
-          </div>
-
           <button type="button" className="plan-confirm-action" disabled={!props.planChosen} onClick={props.onConfirm}>
             <span>{props.planChosen && chosenProposal
               ? localized(props.locale, `采用「${chosenProposal.titleZh}」`, `Use “${chosenProposal.titleEn}”`)
-              : localized(props.locale, "先选择一张数字花本", "Choose a Pattern Plan First")}</span>
+              : localized(props.locale, "先选择一张纹样方案", "Choose a Motif Proposal First")}</span>
             <ArrowIcon />
           </button>
         </main>

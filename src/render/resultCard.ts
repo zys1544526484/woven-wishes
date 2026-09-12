@@ -1,5 +1,5 @@
 import { getCraftTip } from "../content/craftTips";
-import { collaborationSummary } from "../content/collaboration";
+import { collaborationSummary, treatmentSummary } from "../content/collaboration";
 import { INTENT_COPY, CRAFT_FACT_EN, CRAFT_FACT_ZH, EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH, PROJECT_TITLE_EN, PROJECT_TITLE_ZH } from "../content/project";
 import { PALETTES } from "../content/motifs";
 import { proposalFromRecipe } from "../content/proposals";
@@ -58,6 +58,7 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
     ? INTENT_COPY[options.secondaryIntent]
     : undefined;
   const craftTip = getCraftTip(options.recipe.seed);
+  const treatment = treatmentSummary(options.locale, options.recipe);
   const motifAtlas = await loadMotifAtlas();
 
   context.fillStyle = "#020C18";
@@ -114,8 +115,7 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
   cursorY += 32;
   context.font = '500 18px Inter, "Microsoft YaHei", sans-serif';
   context.fillStyle = "#D6A458";
-  context.fillText(`${options.locale === "zh" ? "你定稿：" : "You chose: "}${options.locale === "zh" ? proposal.titleZh : proposal.titleEn} · ${options.locale === "zh" ? palette.nameZh : palette.nameEn}`, 72, cursorY);
-  cursorY += 29;
+  cursorY = drawTextLines(context, wrapText(context, `${options.locale === "zh" ? "你亲自决定：" : "You decided: "}${options.locale === "zh" ? proposal.titleZh : proposal.titleEn} · ${options.locale === "zh" ? palette.nameZh : palette.nameEn}${treatment ? ` · ${treatment}` : ""}`, 650).slice(0, 2), 72, cursorY, 25) + 4;
   context.fillStyle = "#52BDC2";
   context.fillText(`${options.locale === "zh" ? "共同完成：" : "Co-woven as: "}${collaborationSummary(options.locale, options.weaveMode)}`, 72, cursorY);
   cursorY += 30;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { decodeSharePayload, encodeSharePayload } from "../src/core/codec";
-import type { SharePayloadV1, SharePayloadV2 } from "../src/core/types";
+import type { SharePayloadV1, SharePayloadV2, SharePayloadV3 } from "../src/core/types";
 
 const payload: SharePayloadV1 = {
   codecVersion: 1,
@@ -26,6 +26,12 @@ const payloadV2: SharePayloadV2 = {
   weaveMode: "duo",
 };
 
+const payloadV3: SharePayloadV3 = {
+  ...payloadV2,
+  codecVersion: 3,
+  recipe: { ...payload.recipe, goldTreatment: "centre", borderTreatment: "balanced" },
+};
+
 describe("share fragment codec", () => {
   it("round-trips without a server", () => {
     const encoded = encodeSharePayload(payload);
@@ -37,6 +43,12 @@ describe("share fragment codec", () => {
     const encoded = encodeSharePayload(payloadV2);
     expect(decodeSharePayload(encoded)).toEqual(payloadV2);
     expect(encoded.length).toBeLessThan(180);
+  });
+
+  it("round-trips player-authored colour, gold and border decisions in V3", () => {
+    const encoded = encodeSharePayload(payloadV3);
+    expect(decodeSharePayload(encoded)).toEqual(payloadV3);
+    expect(encoded.length).toBeLessThan(190);
   });
 
   it("rejects tampering", () => {

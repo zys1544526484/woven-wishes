@@ -14,6 +14,8 @@ export type LayoutId = "continuous" | "roundel" | "scattered" | "combined";
 export type WeaveMode = "player-weaver" | "player-drawboy" | "duo";
 export type ProposalId = "A" | "B" | "C";
 export type WeaveStageId = "ground" | "colour" | "gold" | "border";
+export type GoldTreatmentId = "outline" | "centre";
+export type BorderTreatmentId = "continuous" | "balanced";
 
 export interface WishAnalysis {
   primaryIntent: IntentId;
@@ -54,6 +56,8 @@ export interface PatternRecipe {
   secondaryMotif?: string;
   palette: PaletteId;
   layout: LayoutId;
+  goldTreatment?: GoldTreatmentId;
+  borderTreatment?: BorderTreatmentId;
 }
 
 export interface PatternProposal {
@@ -98,4 +102,12 @@ export interface SharePayloadV2 {
   weaveMode: WeaveMode;
 }
 
-export type SharePayload = SharePayloadV1 | SharePayloadV2;
+export interface SharePayloadV3 extends Omit<SharePayloadV2, "codecVersion"> {
+  codecVersion: 3;
+  recipe: PatternRecipe & {
+    goldTreatment: GoldTreatmentId;
+    borderTreatment: BorderTreatmentId;
+  };
+}
+
+export type SharePayload = SharePayloadV1 | SharePayloadV2 | SharePayloadV3;

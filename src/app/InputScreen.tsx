@@ -25,8 +25,8 @@ export function InputScreen(props: InputScreenProps) {
   const characterCount = useMemo(() => countGraphemes(props.value), [props.value]);
   const analyzingIntent = props.analyzingIntent ? INTENT_COPY[props.analyzingIntent] : undefined;
   const journey = props.locale === "zh"
-    ? ["写下心愿", "选择花本", "协作共织", "带走锦愿"]
-    : ["Write a wish", "Choose a plan", "Weave together", "Keep your wish"];
+    ? ["写下心愿", "选择纹样", "转译共织", "带走锦愿"]
+    : ["Write a wish", "Choose a motif", "Translate and weave", "Keep your wish"];
   return (
     <section className="screen input-screen" lang={props.locale === "zh" ? "zh-CN" : "en"} aria-labelledby="experience-title">
       <div className="input-background" aria-hidden="true" />
@@ -76,8 +76,8 @@ export function InputScreen(props: InputScreenProps) {
                 : localized(props.locale, "AI正在理解锦愿", "AI is reading your wish")}</strong>
               <span>{localized(
                 props.locale,
-                "正在提出三张数字花本，由你决定主纹、构图与彩纬",
-                "Preparing three digital pattern plans for you to choose",
+                "正在提出三张纹样方案，由你决定主纹与构图",
+                "Preparing three motif proposals for you to choose",
               )}</span>
             </div>
           ) : null}

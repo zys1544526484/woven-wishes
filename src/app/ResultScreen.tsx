@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getCraftTip } from "../content/craftTips";
-import { collaborationSummary } from "../content/collaboration";
+import { collaborationSummary, treatmentSummary } from "../content/collaboration";
 import { CRAFT_FACT_EN, CRAFT_FACT_ZH, EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH, INTENT_COPY } from "../content/project";
 import { PALETTES } from "../content/motifs";
 import type { IntentId, Locale, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode } from "../core/types";
@@ -33,6 +33,7 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
   const craftTip = getCraftTip(recipe.seed);
   const palette = PALETTES[recipe.palette];
   const collaboration = collaborationSummary(locale, weaveMode);
+  const treatment = treatmentSummary(locale, recipe);
 
   const save = async () => {
     if (!qrDataUrl || saving) return;
@@ -56,7 +57,9 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
         <div className="result-pattern-frame">
           <WeaveCanvas matrix={matrix} palette={palette} recipe={recipe} completedRows={24} locale={locale} />
           <div className="pattern-annotation pattern-annotation--primary"><span>{locale === "zh" ? proposal.titleZh : proposal.titleEn}</span><i /></div>
-          <div className="pattern-annotation pattern-annotation--border"><i /><span>{locale === "zh" ? "连续边饰" : "Continuous border"}</span></div>
+          <div className="pattern-annotation pattern-annotation--border"><i /><span>{recipe.borderTreatment === "balanced"
+            ? (locale === "zh" ? "对称边饰" : "Balanced border")
+            : (locale === "zh" ? "连续边饰" : "Continuous border")}</span></div>
         </div>
         <article className="result-copy">
           <h1>{locale === "zh" ? "你织成了一幅" : "You have woven"}<em>「{locale === "zh" ? proposal.titleZh : proposal.titleEn}」</em></h1>
@@ -73,7 +76,7 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
                     : `Main feeling: ${intent.nameEn}${secondaryIntent ? ` · Also heard: ${secondaryIntent.nameEn}` : ""}`}
                 </strong>
               </p>
-              <p className="choice-result"><span>{locale === "zh" ? "你定稿" : "You chose"}</span><strong>{locale === "zh" ? proposal.titleZh : proposal.titleEn} · {locale === "zh" ? palette.nameZh : palette.nameEn}</strong></p>
+              <p className="choice-result"><span>{locale === "zh" ? "你亲自决定" : "You decided"}</span><strong>{locale === "zh" ? proposal.titleZh : proposal.titleEn} · {locale === "zh" ? palette.nameZh : palette.nameEn}{treatment ? ` · ${treatment}` : ""}</strong></p>
               <p className="co-weave-result"><span>{locale === "zh" ? "共同完成" : "Co-woven as"}</span><strong>{collaboration}</strong></p>
               <p>{locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn}</p>
               <p className="culture-boundary">{locale === "zh" ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn}</p>

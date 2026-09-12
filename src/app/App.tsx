@@ -2,9 +2,10 @@ import { useCallback, useEffect, useReducer, useRef } from "react";
 import { processWish } from "../core/classifier";
 import { buildShareUrl } from "../core/codec";
 import { composePatternProposals, generatePatternMatrix } from "../core/pattern";
-import type { IntentId, Locale, PaletteId, SharePayloadV2, WeaveMode } from "../core/types";
+import type { BorderTreatmentId, GoldTreatmentId, IntentId, Locale, PaletteId, SharePayloadV3, WeaveMode } from "../core/types";
 import { createQrDataUrl } from "../render/qr";
 import { InputScreen } from "./InputScreen";
+import { PatternCodingScreen } from "./PatternCodingScreen";
 import { PatternPlanScreen } from "./PatternPlanScreen";
 import { ResultScreen } from "./ResultScreen";
 import { RoleSelectionScreen } from "./RoleSelectionScreen";
@@ -89,6 +90,14 @@ export function App() {
     dispatch({ type: "SET_WEAVE_MODE", mode });
   }, []);
 
+  const selectGoldTreatment = useCallback((treatment: GoldTreatmentId) => {
+    dispatch({ type: "SET_GOLD_TREATMENT", treatment });
+  }, []);
+
+  const selectBorderTreatment = useCallback((treatment: BorderTreatmentId) => {
+    dispatch({ type: "SET_BORDER_TREATMENT", treatment });
+  }, []);
+
   const commitRow = useCallback(() => {
     if (state.phase !== "weaving" || state.committingRow !== undefined || state.completedRows >= 24) return;
     const row = state.completedRows;
@@ -104,13 +113,13 @@ export function App() {
   }, [state.phase, state.committingRow, state.completedRows, schedule, sound]);
 
   useEffect(() => {
-    if (state.phase !== "result-rendering" || !state.analysis || !state.recipe) return;
+    if (state.phase !== "result-rendering" || !state.analysis || !state.recipe?.goldTreatment || !state.recipe.borderTreatment) return;
     let active = true;
     const proposal = state.proposals[state.selectedCandidate];
     if (!proposal) return;
-    const payload: SharePayloadV2 = {
-      codecVersion: 2,
-      recipe: state.recipe,
+    const payload: SharePayloadV3 = {
+      codecVersion: 3,
+      recipe: { ...state.recipe, goldTreatment: state.recipe.goldTreatment, borderTreatment: state.recipe.borderTreatment },
       locale: state.locale,
       wish: state.wish,
       primaryIntent: state.analysis.primaryIntent,
@@ -155,13 +164,23 @@ export function App() {
             proposals={state.proposals}
             selectedIndex={state.selectedCandidate}
             planChosen={state.planChosen}
-            selectedPalette={state.selectedPalette}
             soundEnabled={sound.enabled}
             onSoundToggle={sound.toggle}
             onExit={reset}
             onSelectCandidate={selectCandidate}
-            onSelectPalette={selectPalette}
             onConfirm={() => dispatch({ type: "CONFIRM_PLAN" })}
+          />
+        ) : null}
+        {state.phase === "pattern-coding" && state.matrix && state.recipe ? (
+          <PatternCodingScreen
+            locale={state.locale}
+            matrix={state.matrix}
+            recipe={state.recipe}
+            proposal={state.proposals[state.selectedCandidate]}
+            soundEnabled={sound.enabled}
+            onSoundToggle={sound.toggle}
+            onExit={reset}
+            onComplete={() => dispatch({ type: "COMPLETE_PATTERN_CODING" })}
           />
         ) : null}
         {state.phase === "role-selection" && state.analysis && state.matrix && state.recipe ? (
@@ -190,9 +209,13 @@ export function App() {
             completedRows={state.completedRows}
             committingRow={state.committingRow}
             weaveMode={state.weaveMode}
+            colourChosen={state.colourChosen}
             soundEnabled={sound.enabled}
             onSoundToggle={sound.toggle}
             onExit={reset}
+            onSelectPalette={selectPalette}
+            onSelectGoldTreatment={selectGoldTreatment}
+            onSelectBorderTreatment={selectBorderTreatment}
             onCommit={commitRow}
           />
         ) : null}

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { payloadFromLocationHash } from "../core/codec";
 import { generatePatternMatrix } from "../core/pattern";
 import type { SharePayload } from "../core/types";
-import { collaborationSummary } from "../content/collaboration";
+import { collaborationSummary, treatmentSummary } from "../content/collaboration";
 import { getCraftTip } from "../content/craftTips";
 import { CRAFT_FACT_EN, CRAFT_FACT_ZH, EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH, INTENT_COPY, PROJECT_TITLE_EN, PROJECT_TITLE_ZH } from "../content/project";
 import { PALETTES } from "../content/motifs";
@@ -26,8 +26,9 @@ export function ShareApp() {
   }
   const matrix = generatePatternMatrix(payload.recipe);
   const palette = PALETTES[payload.recipe.palette];
-  const proposalId = payload.codecVersion === 2 ? payload.proposalId : "A";
-  const weaveMode = payload.codecVersion === 2 ? payload.weaveMode : "player-weaver";
+  const authoredPayload = payload.codecVersion === 2 || payload.codecVersion === 3;
+  const proposalId = authoredPayload ? payload.proposalId : "A";
+  const weaveMode = authoredPayload ? payload.weaveMode : "player-weaver";
   const proposal = proposalFromRecipe(proposalId, payload.primaryIntent, payload.recipe, payload.secondaryIntent);
   const craftTip = getCraftTip(payload.recipe.seed);
   const intent = INTENT_COPY[payload.primaryIntent];
@@ -60,7 +61,7 @@ export function ShareApp() {
             ? `AI读懂：主要心意 ${intent.nameZh}${secondaryIntent ? ` · 也听见 ${secondaryIntent.nameZh}` : ""}`
             : `AI understands: main feeling ${intent.nameEn}${secondaryIntent ? ` · also heard ${secondaryIntent.nameEn}` : ""}`}
         </h3>
-        <p className="share-choice">{zh ? "你定稿：" : "You chose: "}{zh ? proposal.titleZh : proposal.titleEn} · {zh ? palette.nameZh : palette.nameEn}</p>
+        <p className="share-choice">{zh ? "你亲自决定：" : "You decided: "}{zh ? proposal.titleZh : proposal.titleEn} · {zh ? palette.nameZh : palette.nameEn}{treatmentSummary(payload.locale, payload.recipe) ? ` · ${treatmentSummary(payload.locale, payload.recipe)}` : ""}</p>
         <p className="share-collaboration">{zh ? "共同完成：" : "Co-woven as: "}{collaborationSummary(payload.locale, weaveMode)}</p>
         <p>{zh ? proposal.rationaleZh : proposal.rationaleEn}</p>
         <p className="share-intent">{zh ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn}</p>

@@ -68,8 +68,8 @@ function mixedCompositeCopy(primaryIntent: IntentId, secondaryIntent: IntentId):
   return {
     titleZh: `${primary.nameZh}·${secondary.nameZh}合景`,
     titleEn: `${primary.nameEn} & ${secondary.nameEn}`,
-    rationaleZh: `这张数字花本把主要心意「${primary.nameZh}」与同时听见的「${secondary.nameZh}」并置，让两层愿望在同一幅构图中相遇。`,
-    rationaleEn: `This digital pattern plan places the main wish for ${primary.nameEn.toLowerCase()} beside the accompanying wish for ${secondary.nameEn.toLowerCase()}, bringing both into one composition.`,
+    rationaleZh: `这张纹样方案把主要心意「${primary.nameZh}」与同时听见的「${secondary.nameZh}」并置，让两层愿望在同一幅构图中相遇。`,
+    rationaleEn: `This motif proposal places the main wish for ${primary.nameEn.toLowerCase()} beside the accompanying wish for ${secondary.nameEn.toLowerCase()}, bringing both into one composition.`,
     culturalBoundaryZh: "两种题材的传统资料依据分别见说明；将它们组合回应这句话，是本作的当代映射，不代表南京云锦中的固定历史寓意。",
     culturalBoundaryEn: "Each subject has its own documented basis; combining them for this wish is a contemporary mapping, not a claim of fixed historic meaning in Nanjing Yunjin.",
   };

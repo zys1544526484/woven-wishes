@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import shuttleAsset from "../assets/shuttle.png";
 import { getWeaveStageTip } from "../content/craftTips";
 import { INTENT_COPY, localized } from "../content/project";
 import { PALETTES } from "../content/motifs";
 import { isValidWeaveGesture } from "../core/gesture";
-import type { IntentId, Locale, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode, WeaveStageId } from "../core/types";
+import type { BorderTreatmentId, GoldTreatmentId, IntentId, Locale, PaletteId, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode, WeaveStageId } from "../core/types";
 import { WeaveCanvas } from "../render/WeaveCanvas";
 import { Brand, Disclaimer, ExitButton, OrnamentalRule, SoundToggle } from "./common";
 import { PauseIcon } from "./icons";
@@ -19,9 +19,13 @@ interface WeavingScreenProps {
   completedRows: number;
   committingRow?: number;
   weaveMode: WeaveMode;
+  colourChosen: boolean;
   soundEnabled: boolean;
   onSoundToggle: () => void;
   onExit: () => void;
+  onSelectPalette: (palette: PaletteId) => void;
+  onSelectGoldTreatment: (treatment: GoldTreatmentId) => void;
+  onSelectBorderTreatment: (treatment: BorderTreatmentId) => void;
   onCommit: () => void;
 }
 
@@ -35,9 +39,9 @@ const STAGE_COPY: ReadonlyArray<{ id: WeaveStageId; zh: string; en: string; deta
 type MilestoneRow = 6 | 12 | 18;
 
 const MILESTONE_COPY: Record<MilestoneRow, { chapterZh: string; chapterEn: string; titleZh: string; titleEn: string; detailZh: string; detailEn: string }> = {
-  6: { chapterZh: "第一章完成", chapterEn: "Chapter one complete", titleZh: "数字地部已成", titleEn: "Digital ground formed", detailZh: "前六梭为彩纬托起一层数字织地。", detailEn: "The first six passes form a digital ground for the coloured wefts." },
-  12: { chapterZh: "第二章完成", chapterEn: "Chapter two complete", titleZh: "彩纬已经入纹", titleEn: "Colour has entered", detailZh: "你选择的彩纬开始让主纹清晰可辨。", detailEn: "Your chosen colours now make the main motif legible." },
-  18: { chapterZh: "第三章完成", chapterEn: "Chapter three complete", titleZh: "金线层已显花", titleEn: "Gold reveals the motif", detailZh: "数字金线沿主纹点亮，锦愿进入最后收边。", detailEn: "Digital gold now follows the motif before the final border closes." },
+  6: { chapterZh: "第一章完成", chapterEn: "Chapter one complete", titleZh: "数字地部已成", titleEn: "Digital ground formed", detailZh: "接下来，由你为主花选择彩纬。", detailEn: "Next, you choose the coloured wefts for the main motif." },
+  12: { chapterZh: "第二章完成", chapterEn: "Chapter two complete", titleZh: "彩纬已经入纹", titleEn: "Colour has entered", detailZh: "接下来，由你决定数字金线的落点。", detailEn: "Next, you decide where the digital gold will appear." },
+  18: { chapterZh: "第三章完成", chapterEn: "Chapter three complete", titleZh: "金线层已显花", titleEn: "Gold reveals the motif", detailZh: "最后，由你选择边饰如何合拢。", detailEn: "Finally, you choose how the border closes." },
 };
 
 function isMilestoneRow(value: number): value is MilestoneRow {
@@ -51,6 +55,8 @@ const MODE_COPY: Record<WeaveMode, { zh: string; en: string; upperZh: string; up
 };
 
 type GestureFeedback = "short" | "direction" | "vertical" | "cancelled" | "extra-pointer" | "lift-released";
+type WeaveChoiceGate = "colour" | "gold" | "border";
+const PALETTE_IDS = Object.keys(PALETTES) as PaletteId[];
 
 export function gestureFeedbackCopy(locale: Locale, feedback: GestureFeedback, direction: "ltr" | "rtl"): string {
   if (locale === "zh") {
@@ -69,7 +75,7 @@ export function gestureFeedbackCopy(locale: Locale, feedback: GestureFeedback, d
   return "A little farther: send the shuttle to the other end";
 }
 
-export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, proposal, completedRows, committingRow, weaveMode, soundEnabled, onSoundToggle, onExit, onCommit }: WeavingScreenProps) {
+export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, proposal, completedRows, committingRow, weaveMode, colourChosen, soundEnabled, onSoundToggle, onExit, onSelectPalette, onSelectGoldTreatment, onSelectBorderTreatment, onCommit }: WeavingScreenProps) {
   const [paused, setPaused] = useState(false);
   const [warpReady, setWarpReady] = useState(false);
   const [liftHeld, setLiftHeld] = useState(false);
@@ -97,7 +103,14 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   const stage = STAGE_COPY[activeStage];
   const stageTip = getWeaveStageTip(completedRows);
   const modeCopy = MODE_COPY[weaveMode];
-  const canDragShuttle = !paused && !isCommitting && weaveMode !== "player-drawboy"
+  const choiceGate: WeaveChoiceGate | null = completedRows === 6 && !colourChosen
+    ? "colour"
+    : completedRows === 12 && !recipe.goldTreatment
+      ? "gold"
+      : completedRows === 18 && !recipe.borderTreatment
+        ? "border"
+        : null;
+  const canDragShuttle = !paused && !isCommitting && !choiceGate && weaveMode !== "player-drawboy"
     && (weaveMode === "player-weaver" ? warpReady : liftHeld);
   const showFirstPassGuide = weaveMode === "player-weaver" && completedRows === 0 && !isCommitting && !paused;
 
@@ -127,10 +140,10 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     setAiSending(false);
     liftHeldRef.current = false;
     setLiftHeld(false);
-    if (weaveMode !== "player-weaver" || paused || isCommitting) return;
+    if (weaveMode !== "player-weaver" || paused || isCommitting || choiceGate) return;
     const timer = window.setTimeout(() => setWarpReady(true), 160);
     return () => window.clearTimeout(timer);
-  }, [completedRows, isCommitting, paused, weaveMode]);
+  }, [choiceGate, completedRows, isCommitting, paused, weaveMode]);
 
   useEffect(() => () => {
     if (liftTimer.current !== undefined) window.clearTimeout(liftTimer.current);
@@ -155,7 +168,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   }, [completedRows]);
 
   const sendAiShuttle = useCallback((requireLift = false) => {
-    if (weaveMode !== "player-drawboy" || paused || isCommitting || (requireLift && !liftHeldRef.current)) return;
+    if (weaveMode !== "player-drawboy" || paused || isCommitting || choiceGate || (requireLift && !liftHeldRef.current)) return;
     const track = trackRef.current;
     const shuttle = shuttleRef.current;
     if (!track || !shuttle) return;
@@ -174,7 +187,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
       setAiSending(false);
       onCommit();
     }, 180);
-  }, [direction, isCommitting, onCommit, paused, positionShuttle, weaveMode]);
+  }, [choiceGate, direction, isCommitting, onCommit, paused, positionShuttle, weaveMode]);
 
   useEffect(() => {
     const invalidateOnAdditionalPointer = (event: PointerEvent) => {
@@ -211,7 +224,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.repeat || isCommitting || paused) return;
+      if (event.repeat || isCommitting || paused || choiceGate) return;
       if (weaveMode === "player-drawboy" && (event.key === " " || event.key === "Enter")) {
         event.preventDefault();
         sendAiShuttle();
@@ -226,10 +239,10 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [direction, isCommitting, onCommit, paused, sendAiShuttle, warpReady, weaveMode]);
+  }, [choiceGate, direction, isCommitting, onCommit, paused, sendAiShuttle, warpReady, weaveMode]);
 
   const startLift = (event: React.PointerEvent<HTMLButtonElement>) => {
-    if (weaveMode === "player-weaver" || paused || isCommitting || liftPointerId.current !== null) return;
+    if (weaveMode === "player-weaver" || paused || isCommitting || choiceGate || liftPointerId.current !== null) return;
     liftPointerId.current = event.pointerId;
     liftHeldRef.current = true;
     setLiftHeld(true);
@@ -325,7 +338,9 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
   };
 
   const liftStatus = weaveMode === "player-weaver"
-    ? (warpReady ? localized(locale, "AI已提经，等待你送梭", "AI has lifted the warps; send the shuttle") : localized(locale, "AI正在按数字花本提经", "AI is lifting warps from the digital plan"))
+    ? (choiceGate
+      ? localized(locale, "先完成本阶段的数字选择", "Complete this digital choice first")
+      : warpReady ? localized(locale, "AI已提经，等待你送梭", "AI has lifted the warps; send the shuttle") : localized(locale, "AI正在按数字花本提示提经", "AI is lifting warps from the digital pattern cues"))
     : weaveMode === "player-drawboy"
       ? (liftHeld ? localized(locale, "保持按住，AI正在准备送梭", "Keep holding while AI prepares the shuttle") : localized(locale, "按住这里完成本梭提经", "Hold here to lift warps for this pass"))
       : (liftHeld ? localized(locale, "经线已保持打开，请同伴送梭", "Warps held open; your partner can send") : localized(locale, "上方玩家先按住提经区", "Upper player holds the warp cue first"));
@@ -348,7 +363,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
           <div className="causal-chain">
             <div><small>{localized(locale, "AI读懂", "AI understands")}</small><strong>{locale === "zh" ? intent.nameZh : intent.nameEn}</strong></div>
             <i aria-hidden="true" />
-            <div><small>{localized(locale, "你选择的花本", "Your chosen plan")}</small><strong>{locale === "zh" ? proposal.titleZh : proposal.titleEn}</strong></div>
+            <div><small>{localized(locale, "你的纹样方案", "Your motif proposal")}</small><strong>{locale === "zh" ? proposal.titleZh : proposal.titleEn}</strong></div>
           </div>
           <div className="craft-role"><strong>{locale === "zh" ? modeCopy.zh : modeCopy.en}</strong><span>{localized(locale, "数字协作示意，不是传统织机操作复原。", "A digital collaboration, not a reconstruction of loom operation.")}</span></div>
         </aside>
@@ -356,7 +371,7 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
           <button
             type="button"
             className={`lift-console${liftHeld ? " is-held" : ""}${warpReady ? " is-ready" : ""}`}
-            disabled={weaveMode === "player-weaver" || paused || isCommitting}
+            disabled={weaveMode === "player-weaver" || paused || isCommitting || Boolean(choiceGate)}
             onPointerDown={startLift}
             onPointerUp={finishLift}
             onPointerCancel={finishLift}
@@ -373,6 +388,32 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
               <strong>{locale === "zh" ? MILESTONE_COPY[milestoneRow].titleZh : MILESTONE_COPY[milestoneRow].titleEn}</strong>
               <small>{locale === "zh" ? MILESTONE_COPY[milestoneRow].detailZh : MILESTONE_COPY[milestoneRow].detailEn}</small>
             </div> : null}
+            {choiceGate && !milestoneRow ? <section className="weave-choice-gate" role="dialog" aria-modal="true" aria-labelledby="weave-choice-title">
+              <span>{localized(locale, "你的选择会进入最终锦愿", "Your choice will shape the finished wish")}</span>
+              <h2 id="weave-choice-title">{choiceGate === "colour"
+                ? localized(locale, "为主花选择彩纬", "Choose coloured wefts for the main motif")
+                : choiceGate === "gold"
+                  ? localized(locale, "决定数字金线的落点", "Choose where the digital gold appears")
+                  : localized(locale, "选择边饰的合拢方式", "Choose how the border closes")}</h2>
+              <p>{choiceGate === "colour"
+                ? localized(locale, "妆花可以按纹样需要局部换入彩纬。这里选择的是本作屏幕色系。", "Zhuanghua can introduce coloured wefts locally. These are screen palettes created for this work.")
+                : localized(locale, "这是本作的数字视觉选择，不模拟真实盘织或妆金操作。", "This is a digital visual choice, not a simulation of real weaving or goldwork.")}</p>
+              <div className={`weave-choice-options is-${choiceGate}`}>
+                {choiceGate === "colour" ? PALETTE_IDS.map((paletteId) => {
+                  const option = PALETTES[paletteId];
+                  return <button type="button" key={paletteId} onClick={() => onSelectPalette(paletteId)}>
+                    <i className="choice-palette" style={{ "--swatch-a": option.colors[1], "--swatch-b": option.colors[2], "--swatch-c": option.colors[3] } as CSSProperties} />
+                    <strong>{locale === "zh" ? option.nameZh : option.nameEn}</strong>
+                  </button>;
+                }) : choiceGate === "gold" ? <>
+                  <button type="button" onClick={() => onSelectGoldTreatment("outline")}><i className="choice-gold choice-gold--outline" /><strong>{localized(locale, "金线勾边", "Gold along the contours")}</strong></button>
+                  <button type="button" onClick={() => onSelectGoldTreatment("centre")}><i className="choice-gold choice-gold--centre" /><strong>{localized(locale, "金线聚心", "Gold at the centre")}</strong></button>
+                </> : <>
+                  <button type="button" onClick={() => onSelectBorderTreatment("continuous")}><i className="choice-border choice-border--continuous" /><strong>{localized(locale, "连续边饰", "Continuous border")}</strong></button>
+                  <button type="button" onClick={() => onSelectBorderTreatment("balanced")}><i className="choice-border choice-border--balanced" /><strong>{localized(locale, "对称边饰", "Balanced border")}</strong></button>
+                </>}
+              </div>
+            </section> : null}
           </div>
           <ol className="weave-stages" aria-label={localized(locale, "织造阶段", "Weaving stages")}>
             {STAGE_COPY.map((item, index) => <li key={item.en} className={index === activeStage ? "is-active" : index < activeStage ? "is-complete" : ""}><span />{locale === "zh" ? item.zh : item.en}</li>)}
@@ -381,7 +422,9 @@ export function WeavingScreen({ locale, wish, primaryIntent, matrix, recipe, pro
             <div className="track-dashes" aria-hidden="true" />
             {showFirstPassGuide ? <div className={`first-pass-guide${warpReady ? " is-ready" : ""}`} aria-hidden="true"><span className="first-pass-guide__trail" /><img src={shuttleAsset} alt="" /><span className="first-pass-guide__arrows">› › ›</span></div> : null}
             <img className="shuttle-handle" ref={shuttleRef} src={shuttleAsset} alt={localized(locale, "数字梭子", "Digital shuttle")} draggable="false" aria-disabled={!canDragShuttle} onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={(event) => finishPointer(event)} onPointerCancel={(event) => finishPointer(event, true)} onLostPointerCapture={(event) => finishPointer(event, true)} />
-            <div className={`track-instruction${gestureFeedback ? " is-muted" : ""}`}><b>{weaveMode === "player-drawboy" ? localized(locale, "按住上方提经，AI送梭", "Hold above and AI sends") : weaveMode === "duo" ? localized(locale, "下方玩家同时沿纬向送梭", "Lower player sends while the cue is held") : warpReady ? localized(locale, "经线已提，沿纬向送梭", "Warps lifted; send the shuttle") : localized(locale, "等待AI完成提经", "Waiting for AI to lift warps")}</b></div>
+            <div className={`track-instruction${gestureFeedback ? " is-muted" : ""}`}><b>{choiceGate
+              ? localized(locale, "先完成锦面上的本阶段选择", "Complete the choice shown on the textile first")
+              : weaveMode === "player-drawboy" ? localized(locale, "按住上方提经，AI送梭", "Hold above and AI sends") : weaveMode === "duo" ? localized(locale, "下方玩家同时沿纬向送梭", "Lower player sends while the cue is held") : warpReady ? localized(locale, "经线已提，沿纬向送梭", "Warps lifted; send the shuttle") : localized(locale, "等待AI完成提经", "Waiting for AI to lift warps")}</b></div>
             {gestureFeedback ? <div className="track-feedback" role="status" aria-live="polite"><span aria-hidden="true">↺</span>{gestureFeedbackCopy(locale, gestureFeedback, direction)}</div> : null}
           </div>
         </main>
