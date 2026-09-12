@@ -48,7 +48,7 @@ export interface RefinedPatternPlan {
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
-const REFINED_RENDER_VERSION = 5;
+const REFINED_RENDER_VERSION = 6;
 
 export function loadMotifAtlas(): Promise<HTMLImageElement> {
   if (!atlasPromise) {
@@ -129,25 +129,18 @@ export function createRefinedPatternPlan(recipe: PatternRecipe): RefinedPatternP
     placements.push(placement(motifId, centerX, centerY, size, reflected, opacity, recipe.seed, placements.length));
   };
 
-  if (recipe.secondaryMotif && recipe.layout === "roundel") {
-    add(recipe.primaryMotif, 0.36 + driftX * 0.3, 0.48, 0.59 * scale, mirror);
-    add(secondary, 0.78, 0.59 + driftY, 0.34 * scale, !mirror);
-  } else if (recipe.layout === "roundel") {
-    add(recipe.primaryMotif, 0.5 + driftX * 0.35, 0.5 + driftY * 0.3, 0.78 * scale, mirror);
-    if (recipe.secondaryMotif) {
-      add(secondary, 0.82 - driftX, 0.23 + driftY, 0.25 * scale, !mirror, 0.82);
-      add(secondary, 0.18 + driftX, 0.77 - driftY, 0.21 * scale, mirror, 0.68);
-    }
-  } else if (recipe.layout === "continuous") {
-    add(recipe.primaryMotif, 0.26 + driftX * 0.3, 0.48 + driftY, 0.44 * scale, mirror);
-    add(secondary, 0.74 - driftX * 0.3, 0.52 - driftY, 0.44 * (1.98 - scale), !mirror);
-  } else if (recipe.layout === "scattered") {
-    add(recipe.primaryMotif, 0.32 + driftX * 0.3, 0.43, 0.54 * scale, mirror);
-    add(secondary, 0.77, 0.7 - driftY, 0.33 * scale, !mirror);
-    add(recipe.primaryMotif, 0.78, 0.23, 0.23 * scale, !mirror, 0.92);
+  // All subjects share one compact square field, even on a wide result card.
+  // Layout changes the movement within the picture, never creates corner samples.
+  const offsets = { roundel: [0, 0], continuous: [-0.035, 0.025], scattered: [0.025, -0.025], combined: [-0.02, -0.015] };
+  const [offsetX, offsetY] = offsets[recipe.layout];
+  if (!recipe.secondaryMotif || secondary === recipe.primaryMotif) {
+    add(recipe.primaryMotif, 0.5 + offsetX + driftX * 0.25, 0.5 + offsetY, 0.76 * scale, mirror);
+  } else if (recipe.primaryMotif === "cloud" && secondary === "roundel") {
+    add(recipe.primaryMotif, 0.5, 0.5, 0.8 * scale, mirror);
+    add(secondary, 0.52 + offsetX, 0.51 + offsetY, 0.38 * scale, !mirror);
   } else {
-    add(recipe.primaryMotif, 0.31 + driftX * 0.3, 0.4, 0.53 * scale, mirror);
-    add(secondary, 0.75, 0.64 + driftY, 0.4 * (1.98 - scale), !mirror);
+    add(recipe.primaryMotif, 0.43 + offsetX + driftX * 0.2, 0.43 + offsetY, 0.64 * scale, mirror);
+    add(secondary, 0.62 + offsetX, 0.64 + offsetY + driftY * 0.2, 0.45 * scale, !mirror);
   }
 
   const randomBorder = Math.floor(random() * 12);
@@ -561,29 +554,32 @@ function drawCompositionConnectors(
 ): void {
   if (progress <= 0 || plan.placements.length === 0) return;
   const color = layer === "gold" ? palette.colors[1] : palette.colors[2];
-  const first = plan.placements[0];
-  const second = plan.placements[1] ?? first;
+  const side = Math.min(width, height);
   context.save();
-  context.globalAlpha *= (layer === "gold" ? 0.52 : 0.38) * progress;
+  context.globalAlpha *= (layer === "gold" ? 0.85 : 0.68) * progress;
   context.strokeStyle = color;
   context.lineWidth = Math.max(0.8, width / (layer === "gold" ? 1050 : 1350));
-  context.setLineDash(layer === "gold" ? [Math.max(2, width / 430), Math.max(4, width / 230)] : [Math.max(1, width / 700), Math.max(3, width / 310)]);
+  context.setLineDash([side / 700, side / 460]);
   context.lineDashOffset = -plan.borderVariant * 2;
-  context.beginPath();
-  if (plan.layout === "roundel") {
-    const radius = first.size * Math.min(width, height) * 0.43;
-    context.ellipse(first.centerX * width, first.centerY * height, radius, radius * 0.91, 0, 0, Math.PI * 2);
-  } else if (plan.layout === "continuous") {
-    context.moveTo(width * 0.05, height * 0.5);
-    context.bezierCurveTo(width * 0.28, height * 0.3, width * 0.7, height * 0.7, width * 0.95, height * 0.5);
-  } else if (plan.layout === "scattered") {
-    context.moveTo(first.centerX * width, first.centerY * height);
-    context.quadraticCurveTo(width * 0.56, height * 0.24, second.centerX * width, second.centerY * height);
-  } else {
-    context.moveTo(first.centerX * width, first.centerY * height);
-    context.bezierCurveTo(width * 0.5, height * 0.28, width * 0.57, height * 0.74, second.centerX * width, second.centerY * height);
+  // A continuous leaf scroll gathers the subjects into one ornamental picture.
+  context.translate(width / 2, height / 2);
+  for (let strand = 0; strand < 3; strand++) {
+    context.beginPath();
+    const radius = side * (0.412 + strand * 0.006);
+    context.ellipse(0, 0, radius, radius * 0.98, 0, 0, Math.PI * 2);
+    context.stroke();
   }
-  context.stroke();
+  for (let index = 0; index < 28; index++) {
+    context.save();
+    context.rotate(index * Math.PI * 2 / 28);
+    context.translate(side * 0.42, 0);
+    context.beginPath();
+    context.moveTo(0, 0);
+    context.bezierCurveTo(-side * 0.045, -side * 0.035, -side * 0.065, side * 0.018, 0, 0);
+    context.bezierCurveTo(side * 0.012, -side * 0.032, side * 0.028, -side * 0.028, side * 0.013, -side * 0.004);
+    context.stroke();
+    context.restore();
+  }
   context.restore();
 }
 
@@ -598,16 +594,25 @@ function drawMotifComposition(
   progress: number,
 ): void {
   if (progress <= 0) return;
-  if (layer !== "gold" || plan.goldTreatment === "outline") {
-    drawCompositionConnectors(context, plan, palette, width, height, layer, progress);
-  }
+  drawCompositionConnectors(context, plan, palette, width, height, layer, progress);
   const shortSide = Math.min(width, height);
   const layerSalt = layer === "gold" ? 0xa511e9b3 : 0x3c6ef372;
   for (const item of plan.placements) {
     const size = item.size * shortSide;
-    const x = item.centerX * width - size / 2;
-    const y = item.centerY * height - size / 2;
+    const centerX = width / 2 + (item.centerX - 0.5) * shortSide;
+    const centerY = height / 2 + (item.centerY - 0.5) * shortSide;
+    const x = centerX - size / 2;
+    const y = centerY - size / 2;
     const motif = tintedMotif(atlas, item.motifId, palette, layer);
+    context.save();
+    if (item === plan.placements[0] && item.motifId === "cloud" && plan.placements[1]?.motifId === "roundel") {
+      const flower = plan.placements[1];
+      context.beginPath();
+      context.rect(0, 0, width, height);
+      context.ellipse(width / 2 + (flower.centerX - 0.5) * shortSide, height / 2 + (flower.centerY - 0.5) * shortSide,
+        flower.size * shortSide * 0.48, flower.size * shortSide * 0.48, 0, 0, Math.PI * 2);
+      context.clip("evenodd");
+    }
     const draw = (alpha: number): void => drawMotifLayer(context, motif, x, y, size, size, {
       alpha,
       mirror: item.mirror,
@@ -619,10 +624,11 @@ function drawMotifComposition(
     context.save();
     if (layer === "gold" && plan.goldTreatment === "centre") {
       context.beginPath();
-      context.ellipse(item.centerX * width, item.centerY * height, size * 0.24, size * 0.2, 0, 0, Math.PI * 2);
+      context.ellipse(centerX, centerY, size * 0.24, size * 0.2, 0, 0, Math.PI * 2);
       context.clip();
     }
     draw(item.opacity);
+    context.restore();
     context.restore();
   }
 }

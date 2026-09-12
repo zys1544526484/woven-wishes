@@ -18,6 +18,16 @@ const baseRecipe: PatternRecipe = {
 };
 
 describe("high-density refined pattern plan", () => {
+  it("keeps subjects together in the central picture without corner samples", () => {
+    for (const layout of ["continuous", "roundel", "scattered", "combined"] as const) {
+      const plan = createRefinedPatternPlan({ ...baseRecipe, layout });
+      expect(plan.placements.length).toBeLessThanOrEqual(2);
+      for (const item of plan.placements) {
+        expect(Math.abs(item.centerX - 0.5)).toBeLessThan(0.2);
+        expect(Math.abs(item.centerY - 0.5)).toBeLessThan(0.2);
+      }
+    }
+  });
   it("is deterministic for the same complete recipe", () => {
     expect(createRefinedPatternPlan(baseRecipe)).toEqual(createRefinedPatternPlan({ ...baseRecipe }));
     expect(refinedPatternSignature(baseRecipe, 24)).toBe(refinedPatternSignature({ ...baseRecipe }, 24));

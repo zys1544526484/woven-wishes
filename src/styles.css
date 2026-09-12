@@ -530,6 +530,9 @@ html:has(.share-error), body:has(.share-error), #root:has(.share-error) { height
 .meaning-story p { margin: .55em 0; color: #dfcba8; font-size: 1em; line-height: 1.5; }
 .meaning-story .culture-boundary { font-size: 1em; color: #dfcba8; border-top: 0; padding-top: 0; }
 .meaning-story p + h3 { margin-top: 1.6em; }
+.result-copy .meaning-story { display: flex; flex-direction: column; justify-content: center; padding-right: 1.4em; }
+.result-copy .meaning-story h3 { font-size: 1.45em; margin-bottom: .65em; }
+.result-copy .meaning-story p { font-size: 1.55em; line-height: 1.8; color: #f0dfc0; margin: 0; }
 .craft-tip p { font-size: .88em; color: #cfbc9a; }
 
 @media (prefers-reduced-motion: reduce) {

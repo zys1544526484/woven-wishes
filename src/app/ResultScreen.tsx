@@ -47,10 +47,6 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
       <div className="result-layout">
         <div className="result-pattern-frame">
           <WeaveCanvas matrix={matrix} palette={palette} recipe={recipe} completedRows={24} locale={locale} />
-          <div className="pattern-annotation pattern-annotation--primary"><span>{locale === "zh" ? proposal.titleZh : proposal.titleEn}</span><i /></div>
-          <div className="pattern-annotation pattern-annotation--border"><i /><span>{recipe.borderTreatment === "balanced"
-            ? (locale === "zh" ? "对称边饰" : "Balanced border")
-            : (locale === "zh" ? "连续边饰" : "Continuous border")}</span></div>
         </div>
         <article className="result-copy">
           <h1>{locale === "zh" ? "你织成了一幅" : "You have woven"}<em>「{locale === "zh" ? proposal.titleZh : proposal.titleEn}」</em></h1>
@@ -58,10 +54,8 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
           <OrnamentalRule />
           <div className="meaning-share-row">
             <div className="meaning-story">
-              <h3>{locale === "zh" ? "为什么是这幅纹样？" : "Why this pattern?"}</h3>
-              <p>{locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn}</p>
               <h3>{locale === "zh" ? "纹样寓意" : "Meaning"}</h3>
-              <p className="culture-boundary">{locale === "zh" ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn}</p>
+              <p>{locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn}</p>
             </div>
             <div className="qr-block">
               {qrDataUrl ? <img src={qrDataUrl} data-share-url={shareUrl} alt={locale === "zh" ? "锦愿分享二维码" : "Woven wish sharing QR code"} /> : <div className="qr-loading">{locale === "zh" ? "生成中" : "Generating"}</div>}

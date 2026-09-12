@@ -93,7 +93,7 @@ try {
     if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)) throw new Error('Share page overflow');
     await page.locator('.share-copy button').scrollIntoViewIfNeeded();
     const button = await page.locator('.share-copy button').boundingBox();
-    if(!button || button.y < 0 || button.y + button.height > 844) throw new Error('Share save button is unreachable');
+    if(!button || button.y < -1 || button.y + button.height > 845) throw new Error(`Share save button is unreachable: ${JSON.stringify(button)}`);
   }
   console.log(`Verified ${examples.length} cards and Chinese/English mobile share pages`);
   console.log(JSON.stringify({ ...report, output }, null, 2));

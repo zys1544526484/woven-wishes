@@ -24,7 +24,7 @@ function wrapText(context: CanvasRenderingContext2D, text: string, maxWidth: num
   let line = "";
   for (const character of characters) {
     const candidate = line + character;
-    if (context.measureText(candidate).width > maxWidth && line) {
+    if (context.measureText(candidate).width > maxWidth && line && !/^[，。！？；：、,.!?;:]$/.test(character)) {
       lines.push(line.trimEnd());
       line = character.trimStart();
     } else line = candidate;
@@ -93,12 +93,12 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
 
   context.fillStyle = "#D6A458";
   context.font = '500 24px Inter, "Microsoft YaHei", sans-serif';
-  context.fillText(options.locale === "zh" ? "为什么是这幅纹样？" : "Why this pattern?", 72, cursorY);
+  context.fillText(options.locale === "zh" ? "纹样寓意" : "Meaning", 72, cursorY);
   cursorY += 42;
 
   context.fillStyle = "#F0DFC0";
-  context.font = '500 22px Inter, "Microsoft YaHei", sans-serif';
-  drawTextLines(context, wrapText(context, options.locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn, 650), 72, cursorY, 30);
+  context.font = '500 28px Inter, "Microsoft YaHei", sans-serif';
+  drawTextLines(context, wrapText(context, options.locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn, 650), 72, cursorY, 39);
 
   const qrImage = await imageFromDataUrl(options.qrDataUrl);
   context.fillStyle = "#fffdf7";
@@ -117,14 +117,6 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
   context.stroke();
   context.fillStyle = "#D6A458";
   context.font = '500 18px Inter, "Microsoft YaHei", sans-serif';
-  context.fillText(
-    options.locale === "zh" ? "纹样寓意" : "Meaning",
-    72,
-    1230,
-  );
-  context.fillStyle = "#F0DFC0";
-  context.font = '400 22px Inter, "Microsoft YaHei", sans-serif';
-  drawTextLines(context, wrapText(context, options.locale === "zh" ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn, 936), 72, 1262, 30);
   context.fillStyle = "#9A8F7A";
   context.font = '400 14px Inter, "Microsoft YaHei", sans-serif';
   drawTextLines(context, wrapText(context, options.locale === "zh" ? EXPERIENCE_DISCLAIMER_ZH : EXPERIENCE_DISCLAIMER_EN, 936).slice(0, 2), 72, 1390, 19);

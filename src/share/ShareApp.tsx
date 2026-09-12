@@ -54,10 +54,8 @@ export function ShareApp() {
         <h2>「{zh ? proposal.titleZh : proposal.titleEn}」</h2>
         <h1>“{payload.wish}”</h1>
         <div className="share-rule" />
-        <h3>{zh ? "为什么是这幅纹样？" : "Why this pattern?"}</h3>
-        <p>{zh ? proposal.rationaleZh : proposal.rationaleEn}</p>
         <h3>{zh ? "纹样寓意" : "Meaning"}</h3>
-        <p className="share-intent">{zh ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn}</p>
+        <p className="share-intent">{zh ? proposal.rationaleZh : proposal.rationaleEn}</p>
         <button type="button" onClick={save} disabled={saving}><DownloadIcon /><span>{zh ? (saving ? "正在生成" : "保存锦愿卡") : (saving ? "Generating" : "Save Wish Card")}</span></button>
       </section>
       <footer><small>{zh ? EXPERIENCE_DISCLAIMER_ZH : EXPERIENCE_DISCLAIMER_EN}</small></footer>
