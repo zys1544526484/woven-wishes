@@ -491,7 +491,8 @@ button:disabled { cursor: default; opacity: 0.62; }
 .idle-warning { position: absolute; z-index: 50; left: 50%; bottom: 4%; transform: translateX(-50%); padding: .9em 1.5em; border: 1px solid var(--gold); border-radius: 10px; background: rgba(2,12,24,.94); color: #efce8f; box-shadow: 0 0 20px rgba(0,0,0,.4); }
 
 /* Share page */
-body:has(.share-page), body:has(.share-error) { overflow: auto; background: #020c18; }
+html:has(.share-page), body:has(.share-page), #root:has(.share-page),
+html:has(.share-error), body:has(.share-error), #root:has(.share-error) { height: auto; min-height: 100%; overflow: visible; background: #020c18; }
 .share-page { min-height: 100%; max-width: 980px; margin: 0 auto; padding: 38px 28px 48px; background: radial-gradient(circle at 50% 20%, #092438, #020c18 58%); }
 .share-page header { display: flex; justify-content: space-between; align-items: baseline; color: var(--gold-bright); font-family: var(--serif); font-size: 30px; }
 .share-page header small { color: var(--muted); font-family: Inter, sans-serif; font-size: 13px; }
@@ -527,7 +528,8 @@ body:has(.share-page), body:has(.share-error) { overflow: auto; background: #020
 .result-pattern-frame::after { animation-iteration-count: 1; }
 .meaning-share-row { grid-template-columns: minmax(0, 1fr) 25%; gap: 1em; }
 .meaning-story p { margin: .55em 0; color: #dfcba8; font-size: 1em; line-height: 1.5; }
-.meaning-story .culture-boundary { font-size: .9em; color: #b9aa90; }
+.meaning-story .culture-boundary { font-size: 1em; color: #dfcba8; border-top: 0; padding-top: 0; }
+.meaning-story p + h3 { margin-top: 1.6em; }
 .craft-tip p { font-size: .88em; color: #cfbc9a; }
 
 @media (prefers-reduced-motion: reduce) {

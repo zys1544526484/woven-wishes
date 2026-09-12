@@ -48,7 +48,7 @@ export interface RefinedPatternPlan {
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
-const REFINED_RENDER_VERSION = 4;
+const REFINED_RENDER_VERSION = 5;
 
 export function loadMotifAtlas(): Promise<HTMLImageElement> {
   if (!atlasPromise) {
@@ -133,7 +133,7 @@ export function createRefinedPatternPlan(recipe: PatternRecipe): RefinedPatternP
     add(recipe.primaryMotif, 0.36 + driftX * 0.3, 0.48, 0.59 * scale, mirror);
     add(secondary, 0.78, 0.59 + driftY, 0.34 * scale, !mirror);
   } else if (recipe.layout === "roundel") {
-    add(recipe.primaryMotif, 0.5 + driftX * 0.35, 0.5 + driftY * 0.3, 0.9 * scale, mirror);
+    add(recipe.primaryMotif, 0.5 + driftX * 0.35, 0.5 + driftY * 0.3, 0.78 * scale, mirror);
     if (recipe.secondaryMotif) {
       add(secondary, 0.82 - driftX, 0.23 + driftY, 0.25 * scale, !mirror, 0.82);
       add(secondary, 0.18 + driftX, 0.77 - driftY, 0.21 * scale, mirror, 0.68);
@@ -270,12 +270,12 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
       continue;
     }
     const brightness = layer === "gold"
-      ? 0.8 + threadStrength * 0.4
-      : 0.8 + threadStrength * 0.45;
+      ? 1.02 + threadStrength * 0.3
+      : 1.08 + threadStrength * 0.35;
     const edgeFade = clamp01(threadStrength / 0.18);
     const opacity = layer === "gold"
-      ? (0.38 + Math.pow(threadStrength, 0.78) * 0.62) * edgeFade
-      : (0.4 + Math.pow(threadStrength, 0.82) * 0.6) * edgeFade;
+      ? (0.72 + Math.pow(threadStrength, 0.78) * 0.28) * edgeFade
+      : (0.75 + Math.pow(threadStrength, 0.82) * 0.25) * edgeFade;
     imageData.data[index] = Math.min(255, target[0] * brightness);
     imageData.data[index + 1] = Math.min(255, target[1] * brightness);
     imageData.data[index + 2] = Math.min(255, target[2] * brightness);
@@ -301,12 +301,12 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
       const i = (y * resolution + x) * 4;
       if (!threads.data[i + 3]) continue;
       const crossing = (x + row * 3) % 12 < 2;
-      const light = ridge * (crossing ? 0.62 : 1)
+      const light = ridge * (crossing ? 0.82 : 1)
         * lightAcross[x];
       for (let channel = 0; channel < 3; channel++) {
         threads.data[i + channel] *= light;
       }
-      threads.data[i + 3] *= crossing ? 0.66 : 1;
+      threads.data[i + 3] *= crossing ? 0.88 : 1;
     }
   }
   textileContext.putImageData(threads, 0, 0);
@@ -615,7 +615,7 @@ function drawMotifComposition(
       revealSeed: (item.revealSeed ^ layerSalt) >>> 0,
       layer,
     });
-    if (layer === "gold" && plan.goldTreatment === "centre") draw(item.opacity * 0.3);
+    if (layer === "gold" && plan.goldTreatment === "centre") draw(item.opacity * 0.85);
     context.save();
     if (layer === "gold" && plan.goldTreatment === "centre") {
       context.beginPath();

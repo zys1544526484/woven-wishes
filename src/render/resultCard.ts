@@ -1,6 +1,4 @@
-import { getCraftTip } from "../content/craftTips";
-import { collaborationSummary, treatmentSummary } from "../content/collaboration";
-import { INTENT_COPY, CRAFT_FACT_EN, CRAFT_FACT_ZH, EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH, PROJECT_TITLE_EN, PROJECT_TITLE_ZH } from "../content/project";
+import { EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH, PROJECT_TITLE_EN, PROJECT_TITLE_ZH } from "../content/project";
 import { PALETTES } from "../content/motifs";
 import { proposalFromRecipe } from "../content/proposals";
 import type { IntentId, Locale, PatternMatrix, PatternRecipe, ProposalId, WeaveMode } from "../core/types";
@@ -20,14 +18,15 @@ interface ResultCardOptions {
 }
 
 function wrapText(context: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
-  const characters = Array.from(text);
+  const characters = (text.match(/[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*|\s+|./gu) ?? [])
+    .flatMap(token => context.measureText(token).width > maxWidth ? Array.from(token) : [token]);
   const lines: string[] = [];
   let line = "";
   for (const character of characters) {
     const candidate = line + character;
     if (context.measureText(candidate).width > maxWidth && line) {
-      lines.push(line);
-      line = character;
+      lines.push(line.trimEnd());
+      line = character.trimStart();
     } else line = candidate;
   }
   if (line) lines.push(line);
@@ -52,13 +51,7 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
   const context = canvas.getContext("2d");
   if (!context) throw new Error("Canvas is unavailable");
   const palette = PALETTES[options.recipe.palette];
-  const intent = INTENT_COPY[options.primaryIntent];
   const proposal = proposalFromRecipe(options.proposalId, options.primaryIntent, options.recipe, options.secondaryIntent);
-  const secondaryIntent = options.secondaryIntent && options.secondaryIntent !== options.primaryIntent
-    ? INTENT_COPY[options.secondaryIntent]
-    : undefined;
-  const craftTip = getCraftTip(options.recipe.seed);
-  const treatment = treatmentSummary(options.locale, options.recipe);
   const motifAtlas = await loadMotifAtlas();
 
   context.fillStyle = "#020C18";
@@ -105,23 +98,7 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
 
   context.fillStyle = "#F0DFC0";
   context.font = '500 22px Inter, "Microsoft YaHei", sans-serif';
-  context.fillText(
-    options.locale === "zh"
-      ? `AI读懂：主要心意 ${intent.nameZh}${secondaryIntent ? ` · 也听见 ${secondaryIntent.nameZh}` : ""}`
-      : `AI understands: main feeling ${intent.nameEn}${secondaryIntent ? ` · also heard ${secondaryIntent.nameEn}` : ""}`,
-    72,
-    cursorY,
-  );
-  cursorY += 32;
-  context.font = '500 18px Inter, "Microsoft YaHei", sans-serif';
-  context.fillStyle = "#D6A458";
-  cursorY = drawTextLines(context, wrapText(context, `${options.locale === "zh" ? "你亲自决定：" : "You decided: "}${options.locale === "zh" ? proposal.titleZh : proposal.titleEn} · ${options.locale === "zh" ? palette.nameZh : palette.nameEn}${treatment ? ` · ${treatment}` : ""}`, 650).slice(0, 2), 72, cursorY, 25) + 4;
-  context.fillStyle = "#52BDC2";
-  context.fillText(`${options.locale === "zh" ? "共同完成：" : "Co-woven as: "}${collaborationSummary(options.locale, options.weaveMode)}`, 72, cursorY);
-  cursorY += 30;
-  context.fillStyle = "#F0DFC0";
-  context.font = '400 18px Inter, "Microsoft YaHei", sans-serif';
-  drawTextLines(context, wrapText(context, options.locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn, 650).slice(0, 2), 72, cursorY, 27);
+  drawTextLines(context, wrapText(context, options.locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn, 650), 72, cursorY, 30);
 
   const qrImage = await imageFromDataUrl(options.qrDataUrl);
   context.fillStyle = "#fffdf7";
@@ -141,16 +118,13 @@ export async function createResultCardBlob(options: ResultCardOptions): Promise<
   context.fillStyle = "#D6A458";
   context.font = '500 18px Inter, "Microsoft YaHei", sans-serif';
   context.fillText(
-    options.locale === "zh" ? `云锦一梭知｜${craftTip.titleZh}` : `A Yunjin Note | ${craftTip.titleEn}`,
+    options.locale === "zh" ? "纹样寓意" : "Meaning",
     72,
     1230,
   );
   context.fillStyle = "#F0DFC0";
-  context.font = '400 16px Inter, "Microsoft YaHei", sans-serif';
-  drawTextLines(context, wrapText(context, options.locale === "zh" ? craftTip.bodyZh : craftTip.bodyEn, 936).slice(0, 2), 72, 1262, 25);
-  context.fillStyle = "#D2B57D";
-  context.font = '400 15px Inter, "Microsoft YaHei", sans-serif';
-  drawTextLines(context, wrapText(context, options.locale === "zh" ? CRAFT_FACT_ZH : CRAFT_FACT_EN, 936).slice(0, 2), 72, 1328, 22);
+  context.font = '400 22px Inter, "Microsoft YaHei", sans-serif';
+  drawTextLines(context, wrapText(context, options.locale === "zh" ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn, 936), 72, 1262, 30);
   context.fillStyle = "#9A8F7A";
   context.font = '400 14px Inter, "Microsoft YaHei", sans-serif';
   drawTextLines(context, wrapText(context, options.locale === "zh" ? EXPERIENCE_DISCLAIMER_ZH : EXPERIENCE_DISCLAIMER_EN, 936).slice(0, 2), 72, 1390, 19);

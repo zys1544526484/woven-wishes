@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { getCraftTip } from "../content/craftTips";
-import { collaborationSummary, treatmentSummary } from "../content/collaboration";
-import { CRAFT_FACT_EN, CRAFT_FACT_ZH, EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH, INTENT_COPY } from "../content/project";
+import { EXPERIENCE_DISCLAIMER_EN, EXPERIENCE_DISCLAIMER_ZH } from "../content/project";
 import { PALETTES } from "../content/motifs";
 import type { IntentId, Locale, PatternMatrix, PatternProposal, PatternRecipe, WeaveMode } from "../core/types";
 import { WeaveCanvas } from "../render/WeaveCanvas";
@@ -26,14 +24,7 @@ interface ResultScreenProps {
 
 export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, proposal, qrDataUrl, shareUrl, weaveMode, soundEnabled, onSoundToggle, onRestart }: ResultScreenProps) {
   const [saving, setSaving] = useState(false);
-  const intent = INTENT_COPY[primaryIntent];
-  const secondaryIntent = proposal.secondaryIntent && proposal.secondaryIntent !== primaryIntent
-    ? INTENT_COPY[proposal.secondaryIntent]
-    : undefined;
-  const craftTip = getCraftTip(recipe.seed);
   const palette = PALETTES[recipe.palette];
-  const collaboration = collaborationSummary(locale, weaveMode);
-  const treatment = treatmentSummary(locale, recipe);
 
   const save = async () => {
     if (!qrDataUrl || saving) return;
@@ -68,23 +59,9 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
           <div className="meaning-share-row">
             <div className="meaning-story">
               <h3>{locale === "zh" ? "为什么是这幅纹样？" : "Why this pattern?"}</h3>
-              <p className="ai-reading">
-                <span>{locale === "zh" ? "AI读懂" : "AI understands"}</span>
-                <strong>
-                  {locale === "zh"
-                    ? `主要心意：${intent.nameZh}${secondaryIntent ? ` · 也听见：${secondaryIntent.nameZh}` : ""}`
-                    : `Main feeling: ${intent.nameEn}${secondaryIntent ? ` · Also heard: ${secondaryIntent.nameEn}` : ""}`}
-                </strong>
-              </p>
-              <p className="choice-result"><span>{locale === "zh" ? "你亲自决定" : "You decided"}</span><strong>{locale === "zh" ? proposal.titleZh : proposal.titleEn} · {locale === "zh" ? palette.nameZh : palette.nameEn}{treatment ? ` · ${treatment}` : ""}</strong></p>
-              <p className="co-weave-result"><span>{locale === "zh" ? "共同完成" : "Co-woven as"}</span><strong>{collaboration}</strong></p>
               <p>{locale === "zh" ? proposal.rationaleZh : proposal.rationaleEn}</p>
+              <h3>{locale === "zh" ? "纹样寓意" : "Meaning"}</h3>
               <p className="culture-boundary">{locale === "zh" ? proposal.culturalBoundaryZh : proposal.culturalBoundaryEn}</p>
-              <aside className="craft-tip" data-tip-id={craftTip.id}>
-                <span>{locale === "zh" ? "云锦一梭知" : "A Yunjin Note"}</span>
-                <strong>{locale === "zh" ? craftTip.titleZh : craftTip.titleEn}</strong>
-                <p>{locale === "zh" ? craftTip.bodyZh : craftTip.bodyEn}</p>
-              </aside>
             </div>
             <div className="qr-block">
               {qrDataUrl ? <img src={qrDataUrl} data-share-url={shareUrl} alt={locale === "zh" ? "锦愿分享二维码" : "Woven wish sharing QR code"} /> : <div className="qr-loading">{locale === "zh" ? "生成中" : "Generating"}</div>}
@@ -97,7 +74,6 @@ export function ResultScreen({ locale, wish, primaryIntent, matrix, recipe, prop
           </div>
         </article>
       </div>
-      <div className="craft-fact">{locale === "zh" ? CRAFT_FACT_ZH : CRAFT_FACT_EN}</div>
       <div className="result-disclaimer">{locale === "zh" ? EXPERIENCE_DISCLAIMER_ZH : EXPERIENCE_DISCLAIMER_EN}</div>
     </section>
   );
