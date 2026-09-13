@@ -12,7 +12,7 @@ class OfflineSoundscape {
   private musicTimer?: number;
   private noteIndex = 0;
   private active = false;
-  private starting?: Promise<void>;
+  private requested = false;
   private sources = new Set<AudioScheduledSourceNode>();
 
   private ensureContext(): AudioContext {
@@ -84,33 +84,28 @@ class OfflineSoundscape {
   };
 
   async start(): Promise<void> {
+    this.requested = true;
     if (this.active) return;
-    if (this.starting) return this.starting;
+    const context = this.ensureContext();
+    try {
+      await context.resume();
+    } catch {
+      return;
+    }
 
-    this.starting = (async () => {
-      const context = this.ensureContext();
-      try {
-        await context.resume();
-      } catch {
-        this.active = false;
-        return;
-      }
-
-      this.active = true;
-      this.master?.gain.cancelScheduledValues(context.currentTime);
-      this.master?.gain.setTargetAtTime(0.78, context.currentTime, 0.18);
-      this.musicBus?.gain.cancelScheduledValues(context.currentTime);
-      this.musicBus?.gain.setTargetAtTime(MUSIC_LEVEL, context.currentTime, 0.12);
-      this.playAmbientNote();
-      this.musicTimer = window.setInterval(this.playAmbientNote, 4_200);
-    })().finally(() => {
-      this.starting = undefined;
-    });
-
-    return this.starting;
+    // A blocked autoplay attempt can resolve after the visitor has muted.
+    if (!this.requested || this.active) return;
+    this.active = true;
+    this.master?.gain.cancelScheduledValues(context.currentTime);
+    this.master?.gain.setTargetAtTime(0.78, context.currentTime, 0.18);
+    this.musicBus?.gain.cancelScheduledValues(context.currentTime);
+    this.musicBus?.gain.setTargetAtTime(MUSIC_LEVEL, context.currentTime, 0.12);
+    this.playAmbientNote();
+    this.musicTimer = window.setInterval(this.playAmbientNote, 4_200);
   }
 
   stop(): void {
+    this.requested = false;
     this.active = false;
     if (this.musicTimer !== undefined) window.clearInterval(this.musicTimer);
     this.musicTimer = undefined;
@@ -213,18 +208,26 @@ export function useSoundscape(): SoundscapeControls {
     if (enabledRef.current) void soundscape.start();
   }, []);
   const toggle = useCallback(() => {
-    setEnabled((current) => {
-      const next = !current;
-      if (next) void soundscape.start();
-      else soundscape.stop();
-      return next;
-    });
+    const next = !enabledRef.current;
+    enabledRef.current = next;
+    setEnabled(next);
+    if (next) void soundscape.start();
+    else soundscape.stop();
   }, []);
   const playWeft = useCallback((row: number) => soundscape.playWeft(row), []);
   const playComplete = useCallback(() => soundscape.playComplete(), []);
   const stop = useCallback(() => soundscape.stop(), []);
 
-  useEffect(() => () => soundscape.stop(), []);
+  useEffect(() => {
+    start();
+    window.addEventListener("pointerdown", start);
+    window.addEventListener("keydown", start);
+    return () => {
+      window.removeEventListener("pointerdown", start);
+      window.removeEventListener("keydown", start);
+      soundscape.stop();
+    };
+  }, [start]);
 
   return { enabled, start, toggle, stop, playWeft, playComplete };
 }

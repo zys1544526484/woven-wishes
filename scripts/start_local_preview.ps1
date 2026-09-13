@@ -263,7 +263,28 @@ try {
   $refreshToken = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
   $previewUrl = "$previewOrigin/?refresh=$refreshToken"
   if (-not $NoBrowser) {
-    Start-Process -FilePath $previewUrl
+    $browserPath = @(
+      "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe",
+      "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe",
+      "$env:LOCALAPPDATA\Google\Chrome\Application\chrome.exe",
+      "${env:ProgramFiles(x86)}\Microsoft\Edge\Application\msedge.exe",
+      "${env:ProgramFiles}\Microsoft\Edge\Application\msedge.exe"
+    ) | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
+    if ($browserPath) {
+      # Only this exhibition profile permits autoplay; personal browser settings stay unchanged.
+      $browserProfile = Join-Path $previewStateDir "exhibition-browser"
+      Start-Process -FilePath $browserPath -ArgumentList @(
+        "--user-data-dir=`"$browserProfile`"",
+        "--autoplay-policy=no-user-gesture-required",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "--app=`"$previewUrl`""
+      )
+    }
+    else {
+      Write-Warning "Chrome/Edge not found. The default browser may require a first touch before music plays."
+      Start-Process -FilePath $previewUrl
+    }
   }
 
   Write-Host "Woven Wishes is open."
