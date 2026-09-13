@@ -45,6 +45,9 @@ export default defineConfig(({ command }) => ({
     host: "127.0.0.1",
     port: 4173,
     strictPort: true,
+    watch: {
+      ignored: ["**/.local-preview/**"],
+    },
     headers: {
       "Cache-Control": "no-store, max-age=0",
     },

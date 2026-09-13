@@ -272,7 +272,7 @@ try {
     ) | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf } | Select-Object -First 1
     if ($browserPath) {
       # Only this exhibition profile permits autoplay; personal browser settings stay unchanged.
-      $browserProfile = Join-Path $previewStateDir "exhibition-browser"
+      $browserProfile = Join-Path $env:LOCALAPPDATA "WovenWishes\exhibition-browser"
       Start-Process -FilePath $browserPath -ArgumentList @(
         "--user-data-dir=`"$browserProfile`"",
         "--autoplay-policy=no-user-gesture-required",
