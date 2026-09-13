@@ -47,9 +47,9 @@ export function PatternCodingScreen(props: PatternCodingScreenProps) {
     <section className="screen coding-screen" lang={props.locale === "zh" ? "zh-CN" : "en"}>
       <header className="weaving-header coding-header">
         <Brand locale={props.locale} compact />
-        <h1>{localized(props.locale, "把纹样转成数字花本", "Translate the Motif into Digital Pattern Cues")}</h1>
+        <h1>{localized(props.locale, "把纹样转成数字花本", "Create Pattern Cues")}</h1>
         <div className="weaving-status">
-          <span>{localized(props.locale, "第 2 步 · 花本转译", "Step 2 · Pattern translation")}</span>
+          <span>{localized(props.locale, "第 2 步 · 花本转译", "Step 2 · Pattern cues")}</span>
           <ExitButton locale={props.locale} onExit={props.onExit} />
           <SoundToggle locale={props.locale} enabled={props.soundEnabled} onToggle={props.onSoundToggle} compact />
         </div>

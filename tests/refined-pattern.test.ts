@@ -18,6 +18,13 @@ const baseRecipe: PatternRecipe = {
 };
 
 describe("high-density refined pattern plan", () => {
+  it("uses an independently drawn composite instead of stacking the standalone pictures", () => {
+    for (const [primaryMotif, secondaryMotif] of [["cloud", "roundel"], ["roundel", "magpie"], ["bamboo", "plum"], ["fish", "peony"], ["magpie", "peony"], ["peach", "cloud"]]) {
+      const plan = createRefinedPatternPlan({ ...baseRecipe, primaryMotif, secondaryMotif });
+      expect(plan.placements).toHaveLength(1);
+      expect(plan.placements[0].motifId).toBe(`${primaryMotif}-${secondaryMotif}`);
+    }
+  });
   it("keeps subjects together in the central picture without corner samples", () => {
     for (const layout of ["continuous", "roundel", "scattered", "combined"] as const) {
       const plan = createRefinedPatternPlan({ ...baseRecipe, layout });

@@ -73,6 +73,7 @@ button:disabled { cursor: default; opacity: 0.62; }
   text-shadow: 0 0 28px rgba(214,164,88,.12);
 }
 .brand--compact { font-size: 2.15em; white-space: nowrap; }
+.screen:lang(en) .brand--compact { font-size: 1.5em; letter-spacing: .01em; }
 .language-toggle {
   position: relative;
   z-index: 1;
@@ -178,6 +179,8 @@ button:disabled { cursor: default; opacity: 0.62; }
 .preset-icon svg { width: 62%; height: 62%; }
 .preset-option b, .preset-option small { display: block; white-space: nowrap; }
 .preset-option b { font-family: var(--serif); color: #ecd5a5; font-size: 1.16em; font-weight: 500; }
+.input-screen[lang="en"] .preset-option { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 8px; padding: 8px 4px; text-align: center; }
+.input-screen[lang="en"] .preset-option b { font: 500 1.05em/1.2 var(--ui); white-space: normal; overflow-wrap: anywhere; max-width: 100%; }
 .preset-option small { margin-top: .2em; color: #d5b77e; font-size: .9em; }
 .variation-note { margin: -.35em 0 0; color: rgba(154,143,122,.88); font-size: .75em; line-height: 1.45; text-align: center; }
 .primary-action { align-self: end; justify-self: end; display: grid; grid-template-columns: 1fr 42px; align-items: center; gap: 1.25em; width: 50%; min-width: 520px; min-height: 96px; padding: 0 2em; border: 1.5px solid var(--gold-bright); border-radius: 20px; background: linear-gradient(180deg, rgba(10,112,122,.72), rgba(4,58,68,.84)); color: #f2d69e; box-shadow: inset 0 0 0 4px rgba(2,12,24,.55), 0 0 20px rgba(8,116,124,.2); cursor: pointer; }

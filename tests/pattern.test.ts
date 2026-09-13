@@ -112,7 +112,7 @@ describe("deterministic pattern generation", () => {
 
   it("has a refined atlas panel for every approved motif", () => {
     expect(Object.keys(MOTIF_ATLAS_REGIONS).sort()).toEqual([
-      "bamboo", "cloud", "fish", "magpie", "peach", "peony", "plum", "roundel",
+      "bamboo", "bamboo-plum", "cloud", "cloud-roundel", "fish", "fish-peony", "magpie", "magpie-peony", "peach", "peach-cloud", "peony", "plum", "roundel", "roundel-magpie",
     ]);
   });
 });

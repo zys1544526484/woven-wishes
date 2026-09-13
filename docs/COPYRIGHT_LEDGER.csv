@@ -13,3 +13,4 @@ A-001,audio,Procedural pentatonic soundscape and shuttle feedback,author/AI-assi
 R-001,research,Chinese ICH article,Cao Wen / Guangming Daily / ihchina.cn,research reference,cultural copy,Images not used
 R-002,research,Xinhua 2026 feature,Xinhua,research reference,title and cooperation fact,Images not used
 R-003,research,UNESCO ICH record,UNESCO,research reference,heritage listing fact,Images not used
+G-014,generated graphic,motif-atlas-v2.png,OpenAI built-in image generation,AI-generated contemporary artwork,14 original and composite motif panels,Prompt and original path in docs/evidence/prompts/motif-atlas-v2.txt; pending human aesthetic and cultural review

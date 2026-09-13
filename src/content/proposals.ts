@@ -13,20 +13,20 @@ interface ProposalCopy {
 
 const COMPOSITE_PROPOSAL_COPY: Record<IntentId, ProposalCopy> = {
   safety: {
-    titleZh: "安宁云环",
-    titleEn: "Clouds of Calm",
-    rationaleZh: "连续云线环抱团花中心，把平安愿望安稳收拢。",
-    rationaleEn: "Continuous cloud lines encircle a roundel, gathering the wish for safety.",
+    titleZh: "云结平安",
+    titleEn: "Cloud Knot of Peace",
+    rationaleZh: "四向云头交织成结，把来自四方的牵挂收拢成一份平安。",
+    rationaleEn: "Four cloud lobes intertwine, gathering care from every direction into a wish for peace.",
     culturalBoundaryZh: "云纹与团花构图均见于云锦资料；二者组合表达守护，是本作的当代转译。",
     culturalBoundaryEn: "Cloud motifs and roundel compositions are documented in Yunjin; combining them for protection is this work's contemporary translation.",
   },
   reunion: {
-    titleZh: "喜相逢团花",
-    titleEn: "Joyful Reunion Roundel",
-    rationaleZh: "枝头喜讯向团花中心靠近，像远方的人重新相逢。",
-    rationaleEn: "Good news on a branch gathers toward a roundel, like distant people meeting again.",
-    culturalBoundaryZh: "喜鹊题材与团花构图均有资料依据；用它们表达团聚，是本作的重新组合。",
-    culturalBoundaryEn: "Magpie subjects and roundel compositions are documented; using them for reunion is this work's recomposition.",
+    titleZh: "双鹊相逢",
+    titleEn: "Magpies Reunited",
+    rationaleZh: "双鹊相向，共栖一枝；花枝把两端连在一起，回应久别重逢的心愿。",
+    rationaleEn: "Two magpies face each other on a shared flowering branch, answering a wish to reunite.",
+    culturalBoundaryZh: "喜鹊为传统吉祥题材；双鹊与共枝表达团聚，是本作的当代设计。",
+    culturalBoundaryEn: "The magpie is a traditional auspicious subject; this shared-branch reunion is a contemporary design.",
   },
   courage: {
     titleZh: "梅竹新生",

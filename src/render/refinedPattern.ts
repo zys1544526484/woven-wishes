@@ -1,19 +1,14 @@
-import motifAtlasUrl from "../assets/motif-atlas-v1.3.png";
+import motifAtlasUrl from "../assets/motif-atlas-v2.png";
 import { seededRandom } from "../core/hash";
 import type { Palette, PatternRecipe, WeaveStageId } from "../core/types";
 
 interface AtlasRegion { x: number; y: number; width: number; height: number }
 
-export const MOTIF_ATLAS_REGIONS: Record<string, AtlasRegion> = {
-  cloud: { x: 18, y: 31, width: 397, height: 400 },
-  roundel: { x: 431, y: 31, width: 397, height: 400 },
-  bamboo: { x: 844, y: 31, width: 397, height: 400 },
-  plum: { x: 1256, y: 31, width: 398, height: 400 },
-  fish: { x: 18, y: 472, width: 397, height: 399 },
-  peony: { x: 431, y: 472, width: 397, height: 399 },
-  magpie: { x: 844, y: 472, width: 397, height: 399 },
-  peach: { x: 1256, y: 472, width: 398, height: 399 },
-};
+export const MOTIF_ATLAS_REGIONS: Record<string, AtlasRegion> = Object.fromEntries(
+  ["cloud", "roundel", "bamboo", "plum", "fish", "peony", "magpie", "peach",
+    "cloud-roundel", "roundel-magpie", "bamboo-plum", "fish-peony", "magpie-peony", "peach-cloud"]
+    .map((id, index) => [id, { x: (index % 4) * 313.5, y: [0, 307, 612, 917][Math.floor(index / 4)], width: 313.5, height: 300 }]),
+);
 
 type ThreadLayerId = "colour" | "gold";
 
@@ -48,7 +43,7 @@ export interface RefinedPatternPlan {
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;
 const tintedMotifs = new Map<string, HTMLCanvasElement>();
-const REFINED_RENDER_VERSION = 6;
+const REFINED_RENDER_VERSION = 7;
 
 export function loadMotifAtlas(): Promise<HTMLImageElement> {
   if (!atlasPromise) {
@@ -133,7 +128,11 @@ export function createRefinedPatternPlan(recipe: PatternRecipe): RefinedPatternP
   // Layout changes the movement within the picture, never creates corner samples.
   const offsets = { roundel: [0, 0], continuous: [-0.035, 0.025], scattered: [0.025, -0.025], combined: [-0.02, -0.015] };
   const [offsetX, offsetY] = offsets[recipe.layout];
-  if (!recipe.secondaryMotif || secondary === recipe.primaryMotif) {
+  const composedId = [`${recipe.primaryMotif}-${secondary}`, `${secondary}-${recipe.primaryMotif}`]
+    .find(id => MOTIF_ATLAS_REGIONS[id]);
+  if (recipe.secondaryMotif && composedId) {
+    add(composedId, 0.5 + offsetX * 0.25, 0.5 + offsetY * 0.25, 0.82 * scale, mirror);
+  } else if (!recipe.secondaryMotif || secondary === recipe.primaryMotif) {
     add(recipe.primaryMotif, 0.5 + offsetX + driftX * 0.25, 0.5 + offsetY, 0.76 * scale, mirror);
   } else if (recipe.primaryMotif === "cloud" && secondary === "roundel") {
     add(recipe.primaryMotif, 0.5, 0.5, 0.8 * scale, mirror);
@@ -240,19 +239,17 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
     const pixelY = Math.floor(pixelIndex / region.width);
     const normalizedX = pixelX / region.width;
     const normalizedY = pixelY / region.height;
-    const atlasCorner = (normalizedX < 0.17 || normalizedX > 0.83)
-      && (normalizedY < 0.17 || normalizedY > 0.83);
-    if (maximum < 42 || chroma < 9 || atlasCorner) {
+    if (maximum < 32 || chroma < 9) {
       imageData.data[index + 3] = 0;
       continue;
     }
-    const goldThread = red > blue * 1.24 && green > blue * 1.12;
+    const goldThread = red > blue * 1.24 && green > blue * 1.12 && green > red * 0.58;
     if ((layer === "gold") !== goldThread) {
       imageData.data[index + 3] = 0;
       continue;
     }
     // Contemporary colour zoning follows broad motif areas, never individual random pixels.
-    const blend = clamp01((normalizedY - 0.46) / 0.3);
+    const blend = red > green * 1.35 ? 1 : 0;
     const target = goldThread ? gold : teal.map((channel, i) =>
       channel * (1 - blend) + accent[i] * blend);
     const luminanceStrength = clamp01((maximum - 40) / 168);
@@ -262,9 +259,7 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
       imageData.data[index + 3] = 0;
       continue;
     }
-    const brightness = layer === "gold"
-      ? 1.02 + threadStrength * 0.3
-      : 1.08 + threadStrength * 0.35;
+    const brightness = 0.25 + 0.9 * Math.pow(maximum / 255, 1.35);
     const edgeFade = clamp01(threadStrength / 0.18);
     const opacity = layer === "gold"
       ? (0.72 + Math.pow(threadStrength, 0.78) * 0.28) * edgeFade
@@ -289,17 +284,16 @@ function tintedMotif(atlas: HTMLImageElement, motifId: string, palette: Palette,
   const lightAcross = Array.from({ length: resolution }, (_, x) => 0.94 + 0.06 * Math.cos(x / 94));
   for (let y = 0; y < resolution; y++) {
     const row = Math.floor(y / 3);
-    const ridge = [0.78, 1.24, 1.02][y % 3];
+    const ridge = [0.97, 1.05, 1.01][y % 3];
     for (let x = 0; x < resolution; x++) {
       const i = (y * resolution + x) * 4;
       if (!threads.data[i + 3]) continue;
       const crossing = (x + row * 3) % 12 < 2;
-      const light = ridge * (crossing ? 0.82 : 1)
+      const light = ridge * (crossing ? 0.96 : 1)
         * lightAcross[x];
       for (let channel = 0; channel < 3; channel++) {
         threads.data[i + channel] *= light;
       }
-      threads.data[i + 3] *= crossing ? 0.88 : 1;
     }
   }
   textileContext.putImageData(threads, 0, 0);
@@ -515,8 +509,8 @@ function drawMotifLayer(
   height: number,
   options: { alpha: number; mirror: boolean; reveal: number; revealSeed: number; layer: ThreadLayerId },
 ): void {
-  const insetX = motif.width * 0.095;
-  const insetY = motif.height * 0.095;
+  const insetX = 0;
+  const insetY = 0;
   context.save();
   clipMotifReveal(context, x, y, width, height, options.reveal, options.revealSeed);
   context.imageSmoothingEnabled = true;

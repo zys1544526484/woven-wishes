@@ -57,7 +57,7 @@ describe("mixed-wish pattern proposals", () => {
 
     expect(proposals.every((proposal) => proposal.secondaryIntent === undefined)).toBe(true);
     expect(INTENT_MOTIFS.safety).toContain(proposals[1].recipe.primaryMotif);
-    expect(proposals[2].titleZh).toBe("安宁云环");
+    expect(proposals[2].titleZh).toBe("云结平安");
     expect(proposals).toEqual(withoutSecondary);
   });
 
