@@ -1,0 +1,15 @@
+Tool: OpenAI built-in image generation tool. Model identifier was not exposed by the tool.
+Date: 2026-09-14
+Generated original: D:/CodexHome/generated_images/01a02eea-6937-76c1-9155-0fcfe23e508e/exec-76f48676-e6b7-46d4-8fb0-e104032f8976.png
+Project copy: docs/evidence/cover/mobile-ui-concept-v1.png
+
+Exact prompt:
+
+Create a polished mobile portrait UI concept board for an interactive cultural mini-game titled "一日六厘米 · AI共织锦愿", inspired by the two-person collaboration logic of Nanjing Yunjin wooden-loom brocade weaving. This is a digital interpretation, not embroidery and not a craft simulation.
+
+Show three separate full-height portrait app screens side by side, each exactly phone-like 390:844 proportions, without phone device frames:
+1) INPUT screen: compact top bar with title and sound/language icons; one clear Chinese hook "一人提经，一人送梭，把心愿织进经纬"; a generous wish text field; six elegant motif intent choices in a 2x3 grid; one large gold-and-teal CTA; subtle animated-flow silk threads in the background.
+2) WEAVING screen: compact title bar; a small selected-pattern summary strip; a large square framed high-density silk-thread brocade artwork in the center; an upper "提经" touch area; four-stage progress; a large horizontal shuttle gesture track with a refined wooden shuttle; uncluttered, thumb-friendly, large touch targets.
+3) RESULT screen: a large cohesive finished brocade picture with connected cloud/floral/bird motifs and a continuous ornamental border; below it only a concise meaning explanation, a clear QR code area, and two large actions for weave again/save.
+
+Style: museum-grade contemporary Chinese luxury, deep indigo-black #020C18, dark surface #071729, luminous silk gold #D6A458, peacock teal #08747C, small cinnabar accents, warm ivory text. Fine visible woven silk texture, layered gold thread shimmer, exquisite continuous composition, no faded colors, no coarse pixel art. Strong hierarchy and generous spacing. Mobile-first, readable at arm's length, accessible 44px+ touch targets. Keep interface text sparse; any small text should be simple placeholders rather than gibberish. No logos, no watermarks, no people, no desktop layout, no Western fantasy ornament, no embroidery hoop, no needlework imagery.

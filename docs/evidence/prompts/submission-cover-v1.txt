@@ -1,0 +1,17 @@
+Tool: OpenAI built-in image generation tool. Model identifier was not exposed by the tool.
+Date: 2026-09-14
+Generated original: D:/CodexHome/generated_images/01a02eea-6937-76c1-9155-0fcfe23e508e/exec-887370fb-1e15-4344-9533-ddebe111dc1f.png
+Project copy: docs/evidence/cover/cover-ai-background-v1.png
+
+Exact prompt:
+
+Use case: ads-marketing
+Asset type: 16:9 competition submission cover background, no text
+Primary request: Create a premium, cohesive contemporary digital brocade artwork inspired by the two-person collaboration of Nanjing Yunjin wooden-loom brocade weaving. This is an artistic digital translation, not a historical reconstruction.
+Input images: Image 1 supplies the approved gold, peacock-teal and restrained cinnabar motif language and fine silk detailing. Image 2 supplies the approved framed, high-density woven presentation standard.
+Scene/backdrop: midnight navy-black silk field with subtle woven grain and faint flowing warp lines.
+Subject: one unified central-right roundel composition, with continuous auspicious cloud curves gathering around a refined floral centre; two luminous thread paths, one descending and one passing horizontally, meet in the design to suggest lifting warp and sending shuttle. The motifs must form one compact connected picture, not scattered stickers.
+Style/medium: museum-quality contemporary digital textile artwork, extremely fine silk-thread linework, layered metallic gold filaments, peacock teal silk, tiny cinnabar accents, realistic lustre and woven depth.
+Composition/framing: 16:9 landscape; reserve the left 42% as calm dark negative space for exact title typography added later; artwork fills the right 55%; include a thin continuous ornamental woven border around the full frame.
+Lighting/mood: soft directional gold glints across thread ridges, deep calm cinematic contrast, elegant rather than flashy.
+Constraints: no words, no letters, no numbers, no logo, no QR code, no interface panels, no embroidery hoop, no needle, no photographic people, no scattered isolated motifs, no watermark. Preserve the refined gold and teal palette from the references.
