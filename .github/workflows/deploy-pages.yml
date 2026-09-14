@@ -1,4 +1,4 @@
-name: Deploy share page to GitHub Pages
+name: Deploy experience to GitHub Pages
 
 on:
   push:
@@ -30,8 +30,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build static share page
-        run: npm run build:share
+      - name: Build experience and share page
+        run: npm run build:all
+
+      - name: Assemble Pages site
+        run: |
+          cp dist-share/share.html dist/share.html
+          mkdir -p dist/assets
+          cp -R dist-share/assets/. dist/assets/
+          touch dist/.nojekyll
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -39,7 +46,7 @@ jobs:
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist-share
+          path: dist
 
   deploy:
     environment:
