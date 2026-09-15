@@ -9,7 +9,27 @@
     <title>一日六厘米 · AI共织锦愿</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <section id="startup" aria-live="polite" style="min-height:100dvh;box-sizing:border-box;display:grid;place-content:center;gap:20px;padding:28px;background:#020c18;color:#f0dfc0;text-align:center;font:16px/1.7 system-ui,sans-serif">
+        <h1 style="margin:0;color:#f1c77d;font-size:28px">一日六厘米 · AI共织锦愿</h1>
+        <p id="startup-message" style="margin:0">正在准备丝线与花本，请稍候…</p>
+        <button type="button" onclick="location.reload()" style="justify-self:center;min-height:48px;padding:8px 28px;border:1px solid #d6a458;border-radius:12px;background:#07353e;color:#f0dfc0;font:inherit">重新加载</button>
+        <noscript>请启用浏览器的 JavaScript 后游玩。</noscript>
+      </section>
+    </div>
+    <script>
+      if (navigator.language && !navigator.language.toLowerCase().startsWith('zh')) {
+        document.querySelector('#startup h1').textContent = 'Woven Wishes with AI';
+        document.getElementById('startup-message').textContent = 'Preparing threads and pattern cues…';
+        document.querySelector('#startup button').textContent = 'Reload';
+      }
+      setTimeout(function () {
+        var message = document.getElementById('startup-message');
+        if (message) message.textContent = navigator.language.toLowerCase().startsWith('zh')
+          ? '加载时间较长，请检查网络后点击“重新加载”，也可尝试切换 Wi-Fi 或移动数据。'
+          : 'Loading is taking longer. Check your connection and reload, or try another network.';
+      }, 15000);
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

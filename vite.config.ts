@@ -38,9 +38,9 @@ function localPreviewSession(): Plugin {
   };
 }
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, mode }) => ({
   base: "./",
-  plugins: [react(), localPreviewSession(), ...(command === "build" ? [strictOfflineCsp(), viteSingleFile()] : [])],
+  plugins: [react(), localPreviewSession(), ...(command === "build" ? [strictOfflineCsp(), ...(mode === "online" ? [] : [viteSingleFile()])] : [])],
   server: {
     host: "127.0.0.1",
     port: 4173,
@@ -53,9 +53,9 @@ export default defineConfig(({ command }) => ({
     },
   },
   build: {
-    outDir: "dist",
+    outDir: mode === "online" ? "dist-web" : "dist",
     modulePreload: false,
-    assetsInlineLimit: 100_000_000,
+    assetsInlineLimit: mode === "online" ? 4096 : 100_000_000,
     cssCodeSplit: false,
     sourcemap: false,
     rollupOptions: {

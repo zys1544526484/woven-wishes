@@ -31,14 +31,14 @@ jobs:
         run: npm ci
 
       - name: Build experience and share page
-        run: npm run build:all
+        run: npm test -- --run && npm run build:online && npm run build:share
 
       - name: Assemble Pages site
         run: |
-          cp dist-share/share.html dist/share.html
-          mkdir -p dist/assets
-          cp -R dist-share/assets/. dist/assets/
-          touch dist/.nojekyll
+          cp dist-share/share.html dist-web/share.html
+          mkdir -p dist-web/assets
+          cp -R dist-share/assets/. dist-web/assets/
+          touch dist-web/.nojekyll
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -46,7 +46,7 @@ jobs:
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: dist-web
 
   deploy:
     environment:

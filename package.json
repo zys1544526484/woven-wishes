@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "tsc -b && vite build",
+    "build:online": "tsc -b && vite build --mode online",
     "build:share": "tsc -b && vite build --config vite.share.config.ts",
     "build:all": "npm run build && npm run build:share",
     "test": "vitest run",
